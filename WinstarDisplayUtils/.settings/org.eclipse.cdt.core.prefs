@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+environment/project/org.buildroot.wks.buildroot-2015.08.1.output.exe.debug.742019478/CROSS_COMPILE/delimiter=\:
+environment/project/org.buildroot.wks.buildroot-2015.08.1.output.exe.debug.742019478/CROSS_COMPILE/operation=append
+environment/project/org.buildroot.wks.buildroot-2015.08.1.output.exe.debug.742019478/CROSS_COMPILE/value=arm-buildroot-linux-gnueabihf-
+environment/project/org.buildroot.wks.buildroot-2015.08.1.output.exe.debug.742019478/append=true
+environment/project/org.buildroot.wks.buildroot-2015.08.1.output.exe.debug.742019478/appendContributed=true
