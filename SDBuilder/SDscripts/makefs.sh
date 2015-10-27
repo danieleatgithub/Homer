@@ -1,37 +1,32 @@
 #!/bin/bash
 
 BR_ROOT="/wks/buildroot-2015.08.1"
-MMC="/dev/mmcblk0"
+SDDEV="/dev/sdc"
+SDDEV1="/dev/sdc1"
+SDDEV2="/dev/sdc2"
+SDDEV3="/dev/sdc3"
+SDDEV4="/dev/sdc4"
 #MODE="uboot"
 MODE="direct"
 ROOT="/wks"
 WORKSPACE="$ROOT/workspace"
 TARGET_HOMER="$WORKSPACE/Homer/SDBuilder/target"
 
-if [ $# -ne 1 ];then
-	echo "Usage: sudo $(basename $0) Target [Homer|Margie]"
-	exit 1
-fi
-if [ ! -b $MMC ];then
-	echo "Not mmc $MMC card present"
+
+if [ ! -b $SDDEV ];then
+	echo "Not mmc $SDDEV card present"
 	exit 1
 fi
 
-CONF=$1.conf
-if [ ! -r $HOST_HOMER/$CONF ];then
-	echo "Usage: sudo $(basename $0) Target[Homer|Margie]"
-	echo "Error: Configuration file $1.conf not exists"
-	exit 1
-fi
 
 TARGET_ROOTFS_DIR=/media/rootfs
 TARGET_KERNEL_DIR=/media/kernel
 TARGET_DATA_DIR=/media/data
 
 # Umount automounted partition and remount on script mount point
-umount /dev/mmcblk0p1 &> /dev/null 
-umount /dev/mmcblk0p2 &> /dev/null
-umount /dev/mmcblk0p3 &> /dev/null
+umount $SDDEV1 &> /dev/null 
+umount $SDDEV2 &> /dev/null
+umount $SDDEV3 &> /dev/null
 
 rm -Rf $TARGET_ROOTFS_DIR &> /dev/null
 rm -Rf $TARGET_KERNEL_DIR &> /dev/null
@@ -57,9 +52,9 @@ if [[ $? !=  "0" ]];then
 	exit 1
 fi
 
-mount /dev/mmcblk0p1 $TARGET_KERNEL_DIR && \
-mount /dev/mmcblk0p2 $TARGET_ROOTFS_DIR && \
-mount /dev/mmcblk0p3 $TARGET_DATA_DIR
+mount $SDDEV1 $TARGET_KERNEL_DIR && \
+mount $SDDEV2 $TARGET_ROOTFS_DIR && \
+mount $SDDEV3 $TARGET_DATA_DIR
 if [[ $? !=  "0" ]];then
 	echo "Failed to mount points partitions"
 	exit 1
@@ -115,7 +110,7 @@ fi
 rm -f $TARGET_ROOTFS_DIR/etc/fstab.add
 
 # Copy conf file
-cp $TARGET_HOMER/$CONF $TARGET_ROOTFS_DIR/etc/system.conf
+#cp $TARGET_HOMER/$CONF $TARGET_ROOTFS_DIR/etc/system.conf
 
 echo "Unmounting FS"
 umount $TARGET_ROOTFS_DIR && \
