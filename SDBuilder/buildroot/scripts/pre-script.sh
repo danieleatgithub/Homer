@@ -13,9 +13,8 @@ DST="$TARGET_DIR/configs"
 BR_ROOT="$ROOT/buildroot-2015.08.1"
 LX_ROOT="$ROOT/linux-3.16.1"
 AT91_ROOT="$WORKSPACE/at91bootstrap"
-TARGET_HOMER="/home/daniele/target_homer"
-HOST_HOMER="/home/daniele/host_homer"
-TARGET_ROOTHOME="/home/daniele/Homer_roothome"
+TARGET_HOMER="$WORKSPACE/Homer/SDBuilder/target"
+
 
 
 #
@@ -60,14 +59,14 @@ cp $LX_ROOT/arch/arm/boot/dts/acme-acqua.dtb 	$DST/.
 #
 # Copy user utility scripts
 #
-cp 			$TARGET_HOMER/* 	$TARGET_DIR/usr/local/bin/.
-cp 			$TARGET_ROOTHOME/stored/*  $TARGET_DIR/root/.
+cp 			$TARGET_HOMER/usr/local/bin/* 	$TARGET_DIR/usr/local/bin/.
+cp 			$TARGET_HOMER/root/* 			$TARGET_DIR/root/.
 chmod 777 	$TARGET_DIR/usr/local/bin/*
 
 #
 # Add a first start init in inittab
 #
-cp $HOST_HOMER/inittab $TARGET_DIR/etc/inittab
+cp $TARGET_HOMER/etc/inittab $TARGET_DIR/etc/inittab
 echo '#! /bin/sh' 					>  $TARGET_DIR/etc/init.d/S00systeminit
 echo "/usr/local/bin/system_init" 	>> $TARGET_DIR/etc/init.d/S00systeminit
 chmod 777 $TARGET_DIR/etc/init.d/S00systeminit
@@ -83,9 +82,9 @@ EOT
 #
 # Setup networking with vlans
 #
-cp $HOST_HOMER/interfaces.template  $TARGET_DIR/usr/local/share/interfaces.template
-cp $TARGET_HOMER/vlan_pre_up   		$TARGET_DIR/etc/network/if-pre-up.d/vlan && chmod 777 $TARGET_DIR/etc/network/if-pre-up.d/vlan
-cp $TARGET_HOMER/vlan_post_down 	$TARGET_DIR/etc/network/if-post-down.d/vlan && chmod 777 $TARGET_DIR/etc/network/if-post-down.d/vlan
+cp $TARGET_HOMER/usr/local/share/interfaces.template  $TARGET_DIR/usr/local/share/interfaces.template
+cp $TARGET_HOMER/etc/network/if-pre-up.d/vlan  		$TARGET_DIR/etc/network/if-pre-up.d/vlan && chmod 777 $TARGET_DIR/etc/network/if-pre-up.d/vlan
+cp $TARGET_HOMER/etc/network/if-post-down.d/vlan 	$TARGET_DIR/etc/network/if-post-down.d/vlan && chmod 777 $TARGET_DIR/etc/network/if-post-down.d/vlan
 echo "127.0.0.1	localhost" > $TARGET_DIR/etc/hosts
 echo "127.0.1.1	__NAME__" >> $TARGET_DIR/etc/hosts
 
@@ -110,16 +109,16 @@ echo "w1_therm"		>> $TARGET_DIR/etc/modules
 #
 # BASH
 #
-cp $HOST_HOMER/profile $TARGET_DIR/etc/profile
+cp $TARGET_HOMER/etc/profile $TARGET_DIR/etc/profile
 
 #
 # HTTPD
 #
-cp $HOST_HOMER/index.php 				$TARGET_DIR/var/www/index.php
-cp $HOST_HOMER/lighttpd.conf 			$TARGET_DIR/etc/lighttpd/lighttpd.conf
-cp $HOST_HOMER/modules.conf.lighttpd 	$TARGET_DIR/etc/lighttpd/modules.conf
-cp $HOST_HOMER/fastcgi.conf 			$TARGET_DIR/etc/lighttpd/conf.d/fastcgi.conf
-chmod 777 $TARGET_DIR/var/www/index.php
+#cp $HOST_HOMER/index.php 				$TARGET_DIR/var/www/index.php
+#cp $HOST_HOMER/lighttpd.conf 			$TARGET_DIR/etc/lighttpd/lighttpd.conf
+#cp $HOST_HOMER/modules.conf.lighttpd 	$TARGET_DIR/etc/lighttpd/modules.conf
+#cp $HOST_HOMER/fastcgi.conf 			$TARGET_DIR/etc/lighttpd/conf.d/fastcgi.conf
+#chmod 777 $TARGET_DIR/var/www/index.php
 
 #
 #  DHCPD
@@ -127,12 +126,12 @@ chmod 777 $TARGET_DIR/var/www/index.php
 mkdir -p $TARGET_DIR/etc/dhcpd/
 mkdir -p $TARGET_DIR/var/lib/dhcp/
 touch 	 $TARGET_DIR/var/lib/dhcp/dhcpd.leases
-cp 		 $HOST_HOMER/dhcpd.conf 	$TARGET_DIR/etc/dhcpd/dhcpd.conf
+cp 		 $TARGET_HOMER/etc/dhcpd/dhcpd.conf 	$TARGET_DIR/etc/dhcpd/dhcpd.conf
 
 #
 # User Application
 #
-cp /home/daniele/git/homer/Homer/debug/WinstarDisplay $TARGET_DIR/usr/local/bin
+cp $WORKSPACE/Homer/WinstarDisplayUtils/debug $TARGET_DIR/usr/local/bin
 chmod 777 $TARGET_DIR/usr/local/bin/*
 
 echo "99.99-0" > $TARGET_DIR/etc/homer.version
