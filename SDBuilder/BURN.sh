@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo ./MKFS.sh Homer
+sudo /wks/workspace/Homer/SDBuilder/SDscripts/makefs.sh Homer

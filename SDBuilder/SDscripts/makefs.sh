@@ -1,11 +1,12 @@
 #!/bin/bash
-# 
-#
 
-BR_ROOT="/home/daniele/buildroot-2014.11"
+BR_ROOT="/wks/buildroot-2015.08.1"
 MMC="/dev/mmcblk0"
-MODE="uboot"
-HOST_HOMER="/home/daniele/host_homer"
+#MODE="uboot"
+MODE="direct"
+ROOT="/wks"
+WORKSPACE="$ROOT/workspace"
+TARGET_HOMER="$WORKSPACE/Homer/SDBuilder/target"
 
 if [ $# -ne 1 ];then
 	echo "Usage: sudo $(basename $0) Target [Homer|Margie]"
@@ -46,11 +47,11 @@ fi
 
 
 #Setup source stuff of my build
-SOURCE_ZIMAGE=/home/daniele/linux-3.16.1/arch/arm/boot/zImage
-SOURCE_DEVTREE=/home/daniele/linux-3.16.1/arch/arm/boot/dts/acme-acqua.dtb
+SOURCE_ZIMAGE=/wks/linux-3.16.1/arch/arm/boot/zImage
+SOURCE_DEVTREE=/wks/linux-3.16.1/arch/arm/boot/dts/acme-acqua.dtb
 SOURCE_ROOTFS=$BR_ROOT/output/images/rootfs.tar
 
-/home/daniele/MKFS/FMTMMC
+/wks/workspace/Homer/SDBuilder/SDscripts/sdformat.sh
 if [[ $? !=  "0" ]];then
 	echo "Failed to formatting MMC"
 	exit 1
@@ -67,17 +68,17 @@ fi
 
 # Primary bootloader
 # Copy at91 linux loader 
-SOURCE_BOOT=/home/daniele/git/at91bootstrap/binaries/sama5d3_acqua-sdcardboot-linux-zimage-dt-3.7.bin
+SOURCE_BOOT=/wks/workspace/at91bootstrap/binaries/sama5d3_acqua-sdcardboot-linux-zimage-dt-3.7.bin
 cp $SOURCE_BOOT $TARGET_KERNEL_DIR/linux-boot.bin
 
 # Copy at91 linux loader 
-SOURCE_BOOT=/home/daniele/git/at91bootstrap/binaries/sama5d3_acqua-sdcardboot-uboot-3.7.bin
-SOURCE_UBOOT=/home/daniele/git/u-boot-at91/
-cp $SOURCE_UBOOT/boot.bin $TARGET_KERNEL_DIR/uboot-boot.bin
-cp $SOURCE_UBOOT/u-boot.bin $TARGET_KERNEL_DIR/u-boot.bin
-cp $SOURCE_UBOOT/u-boot.img $TARGET_KERNEL_DIR/u-boot.img
-cp $SOURCE_UBOOT/u-boot.map $TARGET_KERNEL_DIR/u-boot.map
-cp ./uboot.env $TARGET_KERNEL_DIR/.
+SOURCE_BOOT=/wks/workspace/at91bootstrap/binaries/sama5d3_acqua-sdcardboot-uboot-3.7.bin
+SOURCE_UBOOT=/wks/workspace/u-boot-at91/
+#cp $SOURCE_UBOOT/boot.bin $TARGET_KERNEL_DIR/uboot-boot.bin
+#cp $SOURCE_UBOOT/u-boot.bin $TARGET_KERNEL_DIR/u-boot.bin
+#cp $SOURCE_UBOOT/u-boot.img $TARGET_KERNEL_DIR/u-boot.img
+#cp $SOURCE_UBOOT/u-boot.map $TARGET_KERNEL_DIR/u-boot.map
+#cp ./uboot.env $TARGET_KERNEL_DIR/.
 
 
 if [[ $MODE != "uboot" ]]; then
@@ -114,7 +115,7 @@ fi
 rm -f $TARGET_ROOTFS_DIR/etc/fstab.add
 
 # Copy conf file
-cp $HOST_HOMER/$CONF $TARGET_ROOTFS_DIR/etc/system.conf
+cp $TARGET_HOMER/$CONF $TARGET_ROOTFS_DIR/etc/system.conf
 
 echo "Unmounting FS"
 umount $TARGET_ROOTFS_DIR && \
