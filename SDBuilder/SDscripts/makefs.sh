@@ -67,8 +67,8 @@ SOURCE_BOOT=/wks/workspace/at91bootstrap/binaries/sama5d3_acqua-sdcardboot-linux
 cp $SOURCE_BOOT $TARGET_KERNEL_DIR/linux-boot.bin
 
 # Copy at91 linux loader 
-SOURCE_BOOT=/wks/workspace/at91bootstrap/binaries/sama5d3_acqua-sdcardboot-uboot-3.7.bin
-SOURCE_UBOOT=/wks/workspace/u-boot-at91/
+#SOURCE_BOOT=/wks/workspace/at91bootstrap/binaries/sama5d3_acqua-sdcardboot-uboot-3.7.bin
+#SOURCE_UBOOT=/wks/workspace/u-boot-at91/
 #cp $SOURCE_UBOOT/boot.bin $TARGET_KERNEL_DIR/uboot-boot.bin
 #cp $SOURCE_UBOOT/u-boot.bin $TARGET_KERNEL_DIR/u-boot.bin
 #cp $SOURCE_UBOOT/u-boot.img $TARGET_KERNEL_DIR/u-boot.img

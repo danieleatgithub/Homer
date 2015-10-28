@@ -1,4 +1,6 @@
 #!/bin/bash
+ROOT="/wks"
+WORKSPACE="$ROOT/workspace"
 
 SDDEV="/dev/sdc"
 SDDEV1="/dev/sdc1"
@@ -46,7 +48,7 @@ if [[ $? != "0" ]];then
 	exit 1
 fi
 
-RESULT=$(sudo sfdisk $SDDEV < $LAYOUT_FILE 2>&1)
+RESULT=$(sudo sfdisk $SDDEV < $WORKSPACE/Homer/SDBuilder/SDscripts/$LAYOUT_FILE 2>&1)
 if [[ $? != "0" ]];then
 	echo "Unable to format disk"
 	exit 1
