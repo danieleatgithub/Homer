@@ -134,7 +134,7 @@ cp 		 $TARGET_HOMER/etc/dhcpd/dhcpd.conf 	$TARGET_DIR/etc/dhcpd/dhcpd.conf
 cp $WORKSPACE/Homer/WinstarDisplayUtils/debug $TARGET_DIR/usr/local/bin
 chmod 777 $TARGET_DIR/usr/local/bin/*
 
-echo "99.99-0" > $TARGET_DIR/etc/homer.version
+echo "99.99-1" > $TARGET_DIR/etc/homer.version
 exit
 
 
