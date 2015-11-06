@@ -1,6 +1,9 @@
 #!/bin/bash
-# 
+#######################################################
 #
+# RESTORE configurations
+#
+#######################################################
 . ./enviroment.sh
 
 BKP_ROOT="/home/daniele/configs_backup"

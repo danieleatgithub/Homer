@@ -1,12 +1,5 @@
 #!/bin/bash
-ROOT="/wks"
-WORKSPACE="$ROOT/workspace"
 
-SDDEV="/dev/sdc"
-SDDEV1="/dev/sdc1"
-SDDEV2="/dev/sdc2"
-SDDEV3="/dev/sdc3"
-SDDEV4="/dev/sdc4"
 echo -n "Start MMC formatting ..."
 if [ $# -ne 0 ];then
 	echo "Usage: $(basename $0)"
@@ -24,7 +17,14 @@ fi
 declare -A layout
 layout[7761920]=8
 layout[7838720]=8 # 8GB Samsung
+layout[3866624]=4 # 4GB 
 
+#Disk identifier: 0xc4814c7a
+#Device     Boot   Start     End Sectors  Size Id Type
+#/dev/sdd1          2048 1021952 1019905  498M  6 FAT16
+#/dev/sdd2       1024000 3121151 2097152    1G 83 Linux
+#/dev/sdd3       3121152 7315455 4194304    2G  c W95 FAT32 (LBA)
+#/dev/sdd4       7315456 7733247  417792  204M 82 Linux swap / Solaris
 
 
 SF_SIZE=$(sudo sfdisk -s $SDDEV)

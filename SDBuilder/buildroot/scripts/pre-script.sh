@@ -9,6 +9,7 @@
 #Setting GLOBALS
 ROOT="/wks"
 WORKSPACE="$ROOT/workspace"
+
 DST="$TARGET_DIR/configs"
 BR_ROOT="$ROOT/buildroot-2015.08.1"
 LX_ROOT="$ROOT/linux-3.16.1"
