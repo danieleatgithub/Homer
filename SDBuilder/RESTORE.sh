@@ -1,6 +1,8 @@
 #!/bin/bash
 # 
 #
+. ./enviroment.sh
+
 BKP_ROOT="/home/daniele/configs_backup"
 
 if [ $# -ne 1 ];then

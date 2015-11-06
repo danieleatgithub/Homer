@@ -1,10 +1,9 @@
 #!/bin/bash
 #######################################################
 #
-# burner
+# enviroment
 #
 #######################################################
-. ./enviroment.sh
 
-sudo $SDSCRIPTS/makefs.sh Homer
-	
+SDROOT='/wks/workspace/Homer/SDBuilder'
+SDSCRIPTS=$SDROOT/SDscripts

@@ -1,6 +1,8 @@
 #!/bin/bash
 # 
 #
+. ./enviroment.sh
+
 BKP_ROOT="/wks/configs_backup"
 BBOX=busybox-1.23.2
 .  $BKP_ROOT/variables
