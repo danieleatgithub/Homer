@@ -4,7 +4,7 @@
 # MMC Formatter
 #
 #######################################################
-set -x
+
 # source build enviroment
 SPATH=$(dirname $0)
 . $SPATH/../enviroment.sh
