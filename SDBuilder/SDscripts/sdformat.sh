@@ -1,4 +1,13 @@
 #!/bin/bash
+#######################################################
+#
+# MMC Formatter
+#
+#######################################################
+set -x
+# source build enviroment
+SPATH=$(dirname $0)
+. $SPATH/../enviroment.sh
 
 echo -n "Start MMC formatting ..."
 if [ $# -ne 0 ];then
@@ -34,7 +43,11 @@ if ! [ ${layout[$SF_SIZE]+abcde} ];then
 	exit 1
 fi
 
-LAYOUT_FILE="sfdisk.${layout[$SF_SIZE]}GB.layout"
+# prepart SD layout
+LAYOUT_FILE_TEMPLATE=${SDSCRIPTS}/"sfdisk.${layout[$SF_SIZE]}GB.layout"
+LAYOUT_FILE="/tmp/layout"
+cp $LAYOUT_FILE_TEMPLATE $LAYOUT_FILE
+sed -i "s/__DEVICE__/${DEVICE}/g" $LAYOUT_FILE
 
 # mount target devices
 umount $SDDEV1 &> /dev/null
@@ -48,7 +61,7 @@ if [[ $? != "0" ]];then
 	exit 1
 fi
 
-RESULT=$(sudo sfdisk $SDDEV < $WORKSPACE/Homer/SDBuilder/SDscripts/$LAYOUT_FILE 2>&1)
+RESULT=$(sudo sfdisk --force $SDDEV < $LAYOUT_FILE_TEMPLATE 2>&1)
 if [[ $? != "0" ]];then
 	echo "Unable to format disk"
 	exit 1

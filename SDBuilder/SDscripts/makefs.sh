@@ -5,6 +5,9 @@
 #
 #######################################################
 
+# source build enviroment
+SPATH=$(dirname $0)
+. $SPATH/../enviroment.sh
 
 #MODE="uboot"
 
@@ -21,9 +24,10 @@ umount $SDDEV2 &> /dev/null
 umount $SDDEV3 &> /dev/null
 
 # clean mount point
-rm -Rf 		$TARGET_ROOTFS_DIR 	&> /dev/null && \
-rm -Rf 		$TARGET_KERNEL_DIR 	&> /dev/null && \
-rm -Rf 		$TARGET_DATA_DIR 	&> /dev/null && \
+rm -Rf 		$TARGET_ROOTFS_DIR 	&> /dev/null 
+rm -Rf 		$TARGET_KERNEL_DIR 	&> /dev/null 
+rm -Rf 		$TARGET_DATA_DIR 	&> /dev/null 
+
 mkdir -p 	$TARGET_ROOTFS_DIR 	&> /dev/null && \
 mkdir -p 	$TARGET_KERNEL_DIR 	&> /dev/null && \
 mkdir -p 	$TARGET_DATA_DIR 	&> /dev/null

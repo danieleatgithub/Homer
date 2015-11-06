@@ -1,7 +1,7 @@
-# partition table of /dev/mmcblk0
+# partition table of /dev/__DEVICE__
 unit: sectors
 
-/dev/mmcblk0p1 : start=       63, size=   208782, Id= 6
-/dev/mmcblk0p2 : start=   208845, size= 16386300, Id=83
-/dev/mmcblk0p3 : start= 16595145, size= 10233405, Id=c
-/dev/mmcblk0p4 : start= 26828800, size=  4286464, Id=82
+/dev/__DEVICE__1 : start=       63, size=   208782, Id= 6
+/dev/__DEVICE__2 : start=   208845, size= 16386300, Id=83
+/dev/__DEVICE__3 : start= 16595145, size= 10233405, Id=c
+/dev/__DEVICE__4 : start= 26828800, size=  4286464, Id=82

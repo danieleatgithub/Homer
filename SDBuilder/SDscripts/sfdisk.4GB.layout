@@ -1,7 +1,7 @@
-# partition table of /dev/sdd
+# partition table of /dev/__DEVICE__
 unit: sectors
 
-/dev/sdd1 : start=     2048, size=  1019905, Id= 6
-/dev/sdd2 : start=  1024000, size=  2097152, Id=83
-/dev/sdd3 : start=  3121152, size=  4194304, Id= c
-/dev/sdd4 : start=  7315456, size=   417792, Id=82
+/dev/__DEVICE__1 : start=       63, size=   417627, Id= 6
+/dev/__DEVICE__2 : start=   417690, size=  2040255, Id=83
+/dev/__DEVICE__3 : start=  2457945, size=  4096575, Id= c
+/dev/__DEVICE__4 : start=  6555648, size=  1177600, Id=82
