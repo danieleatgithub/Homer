@@ -37,6 +37,7 @@ mkdir -p $TARGET_DIR/usr/local/etc
 mkdir -p $TARGET_DIR/usr/local/share
 cd $TARGET_DIR
 ln -s var/run run
+chmod 700 $TARGET_DIR/empty
 cd -
 
 #
@@ -105,19 +106,27 @@ echo "8021q" 		>  $TARGET_DIR/etc/modules
 echo "w1_gpio"		>> $TARGET_DIR/etc/modules
 echo "w1_therm"		>> $TARGET_DIR/etc/modules
 
+
+#
+# SSHD
+#
+cp $TARGET_DIR/etc/ssh/sshd_config $TARGET_DIR/etc/ssh/sshd_config.org
+sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' $TARGET_DIR/etc/ssh/sshd_config
+
 #
 # BASH
 #
-cp $TARGET_HOMER/etc/profile $TARGET_DIR/etc/profile
+cp $TARGET_HOMER/etc/profile $TARGET_DIR/etc/profile.my
 
 #
 # HTTPD
 #
-#cp $HOST_HOMER/index.php 				$TARGET_DIR/var/www/index.php
 #cp $HOST_HOMER/lighttpd.conf 			$TARGET_DIR/etc/lighttpd/lighttpd.conf
-#cp $HOST_HOMER/modules.conf.lighttpd 	$TARGET_DIR/etc/lighttpd/modules.conf
-#cp $HOST_HOMER/fastcgi.conf 			$TARGET_DIR/etc/lighttpd/conf.d/fastcgi.conf
-#chmod 777 $TARGET_DIR/var/www/index.php
+cp $TARGET_HOMER/index.php 				$TARGET_DIR/var/www/index.php
+cp $TARGET_DIR/etc/lighttpd/modules.conf $TARGET_DIR/etc/lighttpd/modules.conf.org
+sed -i 's/"mod_access",/"mod_access",\n  "mod_fastcgi",/g' $TARGET_DIR/etc/lighttpd/modules.conf
+cp $TARGET_HOMER/etc/lighttpd/conf.d/fastcgi.conf 			$TARGET_DIR/etc/lighttpd/conf.d/fastcgi.conf
+chmod 777 $TARGET_DIR/var/www/index.php
 
 #
 #  DHCPD
