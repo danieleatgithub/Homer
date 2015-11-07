@@ -17,7 +17,6 @@ AT91_ROOT="$WORKSPACE/at91bootstrap"
 TARGET_HOMER="$WORKSPACE/Homer/SDBuilder/target"
 
 
-
 #
 # Modify skeleton
 #
@@ -108,7 +107,8 @@ echo "w1_therm"		>> $TARGET_DIR/etc/modules
 
 #
 # BASH
-#cp $TARGET_HOMER/etc/profile $TARGET_DIR/etc/profile
+#
+cp $TARGET_HOMER/etc/profile $TARGET_DIR/etc/profile
 
 #
 # HTTPD
