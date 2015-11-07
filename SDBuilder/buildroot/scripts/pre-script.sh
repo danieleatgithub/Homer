@@ -66,11 +66,10 @@ chmod 777 	$TARGET_DIR/usr/local/bin/*
 
 #
 # Add a first start init in inittab
-#
-cp $TARGET_HOMER/etc/inittab $TARGET_DIR/etc/inittab
-echo '#! /bin/sh' 					>  $TARGET_DIR/etc/init.d/S00systeminit
-echo "/usr/local/bin/system_init" 	>> $TARGET_DIR/etc/init.d/S00systeminit
-chmod 777 $TARGET_DIR/etc/init.d/S00systeminit
+#cp $TARGET_HOMER/etc/inittab $TARGET_DIR/etc/inittab
+#echo '#! /bin/sh' 					>  $TARGET_DIR/etc/init.d/S00systeminit
+#echo "/usr/local/bin/system_init" 	>> $TARGET_DIR/etc/init.d/S00systeminit
+#chmod 777 $TARGET_DIR/etc/init.d/S00systeminit
 
 #
 # Setup DNS 
@@ -109,8 +108,7 @@ echo "w1_therm"		>> $TARGET_DIR/etc/modules
 
 #
 # BASH
-#
-cp $TARGET_HOMER/etc/profile $TARGET_DIR/etc/profile
+#cp $TARGET_HOMER/etc/profile $TARGET_DIR/etc/profile
 
 #
 # HTTPD
