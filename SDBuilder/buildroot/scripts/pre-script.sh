@@ -37,7 +37,7 @@ mkdir -p $TARGET_DIR/usr/local/etc
 mkdir -p $TARGET_DIR/usr/local/share
 cd $TARGET_DIR
 ln -s var/run run
-chmod 700 $TARGET_DIR/empty
+chmod 700 $TARGET_DIR/var/empty
 cd -
 
 #
@@ -82,11 +82,14 @@ EOT
 #
 # Setup networking with vlans
 #
-cp $TARGET_HOMER/usr/local/share/interfaces.template  $TARGET_DIR/usr/local/share/interfaces.template
+#cp $TARGET_HOMER/usr/local/share/interfaces.template  $TARGET_DIR/usr/local/share/interfaces.template
+cp $TARGET_DIR/etc/network/interfaces $TARGET_DIR/etc/network/interfaces.org
+cp $TARGET_HOMER/etc/network/interfaces $TARGET_DIR/etc/network/interfaces
 cp $TARGET_HOMER/etc/network/if-pre-up.d/vlan  		$TARGET_DIR/etc/network/if-pre-up.d/vlan && chmod 777 $TARGET_DIR/etc/network/if-pre-up.d/vlan
 cp $TARGET_HOMER/etc/network/if-post-down.d/vlan 	$TARGET_DIR/etc/network/if-post-down.d/vlan && chmod 777 $TARGET_DIR/etc/network/if-post-down.d/vlan
 echo "127.0.0.1	localhost" > $TARGET_DIR/etc/hosts
-echo "127.0.1.1	__NAME__" >> $TARGET_DIR/etc/hosts
+#echo "127.0.1.1	__NAME__" >> $TARGET_DIR/etc/hosts
+
 
 #
 # Setup FS
@@ -122,7 +125,7 @@ cp $TARGET_HOMER/etc/profile $TARGET_DIR/etc/profile.my
 # HTTPD
 #
 #cp $HOST_HOMER/lighttpd.conf 			$TARGET_DIR/etc/lighttpd/lighttpd.conf
-cp $TARGET_HOMER/index.php 				$TARGET_DIR/var/www/index.php
+cp $TARGET_HOMER/var/www/index.php 				$TARGET_DIR/var/www/index.php
 cp $TARGET_DIR/etc/lighttpd/modules.conf $TARGET_DIR/etc/lighttpd/modules.conf.org
 sed -i 's/"mod_access",/"mod_access",\n  "mod_fastcgi",/g' $TARGET_DIR/etc/lighttpd/modules.conf
 cp $TARGET_HOMER/etc/lighttpd/conf.d/fastcgi.conf 			$TARGET_DIR/etc/lighttpd/conf.d/fastcgi.conf
@@ -132,9 +135,10 @@ chmod 777 $TARGET_DIR/var/www/index.php
 #  DHCPD
 #
 mkdir -p $TARGET_DIR/etc/dhcpd/
+rm    -f $TARGET_DIR/var/lib/dhcp
 mkdir -p $TARGET_DIR/var/lib/dhcp/
 touch 	 $TARGET_DIR/var/lib/dhcp/dhcpd.leases
-cp 		 $TARGET_HOMER/etc/dhcpd/dhcpd.conf 	$TARGET_DIR/etc/dhcpd/dhcpd.conf
+cp 		 $TARGET_HOMER/etc/dhcpd/dhcpd.conf 	$TARGET_DIR/etc/dhcp/dhcpd.conf
 
 #
 # User Application
