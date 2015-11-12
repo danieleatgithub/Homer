@@ -1,7 +1,7 @@
 
 <?php
-$hostname=gethostname();
-$uname=php_uname();
+$hostname = gethostname ();
+$uname = php_uname ();
 
 echo "<center><h1>Welcome to $hostname</h1>";
 echo "$uname<br>";

@@ -122,7 +122,7 @@ cp $TARGET_HOMER/etc/profile $TARGET_DIR/etc/profile.my
 cp $TARGET_HOMER/var/www/index.php 				$TARGET_DIR/var/www/index.php
 cp $TARGET_DIR/etc/lighttpd/modules.conf $TARGET_DIR/etc/lighttpd/modules.conf.org
 sed -i 's/"mod_access",\n[[:space:]]*#/"mod_access",\n  "mod_fastcgi",\n#/g' $TARGET_DIR/etc/lighttpd/modules.conf
-sed -i 's/#include "conf.d/fastcgi.conf"/include "conf.d/fastcgi.conf"/g' $TARGET_DIR/etc/lighttpd/modules.conf
+sed -i 's/#include "conf.d\/fastcgi.conf"/include "conf.d\/fastcgi.conf"/g' $TARGET_DIR/etc/lighttpd/modules.conf
 cp $TARGET_HOMER/etc/lighttpd/conf.d/fastcgi.conf 			$TARGET_DIR/etc/lighttpd/conf.d/fastcgi.conf
 chmod 777 $TARGET_DIR/var/www/index.php
 
