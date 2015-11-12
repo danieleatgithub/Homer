@@ -121,7 +121,7 @@ cp $TARGET_HOMER/etc/profile $TARGET_DIR/etc/profile.my
 #
 #cp $HOST_HOMER/lighttpd.conf 			$TARGET_DIR/etc/lighttpd/lighttpd.conf
 cp $TARGET_HOMER/var/www/index.php 				$TARGET_DIR/var/www/index.php
-cp $TARGET_DIR/etc/lighttpd/modules.conf $TARGET_DIR/etc/lighttpd/modules.conf
+cp $TARGET_HOMER/etc/lighttpd/modules.conf        $TARGET_DIR/etc/lighttpd/modules.conf
 cp $TARGET_HOMER/etc/lighttpd/conf.d/fastcgi.conf 			$TARGET_DIR/etc/lighttpd/conf.d/fastcgi.conf
 chmod 777 $TARGET_DIR/var/www/index.php
 
@@ -131,7 +131,6 @@ chmod 777 $TARGET_DIR/var/www/index.php
 mkdir -p $TARGET_DIR/etc/dhcpd/
 cp 		 $TARGET_HOMER/etc/dhcpd/dhcpd.conf 	$TARGET_DIR/etc/dhcp/dhcpd.conf
 cp 		 $TARGET_DIR/etc/init.d/S80dhcp-server  $TARGET_DIR/etc/org/S80dhcp-server
-chmod -x $TARGET_DIR/etc/init.d/S80dhcp-server.org
 sed -i 's/test -n "$INTERFACES" || exit 0//' $TARGET_DIR/etc/init.d/S80dhcp-server
 
 #
