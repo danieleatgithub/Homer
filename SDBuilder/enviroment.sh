@@ -5,6 +5,8 @@
 #
 #######################################################
 
+BBOX=busybox-1.23.2
+
 WKS="/wks"
 WORKSPACE="$WKS/workspace"
 HOMERROOT="$WORKSPACE/Homer"
@@ -20,7 +22,9 @@ LINUX_ROOT="$WKS/linux-3.16.1"
 
 SDFORMAT="$SDSCRIPTS/sdformat.sh"
 
-AT91BINARY="$WORKSPACE/at91bootstrap/binaries"
+AT91_ROOT="$WORKSPACE/at91bootstrap"
+AT91BINARY="$AT91_ROOT/binaries"
+BKP_ROOT="$SDROOT/config_backups"
 
 DEVICE="sdd"
 SDDEV="/dev/${DEVICE}"
