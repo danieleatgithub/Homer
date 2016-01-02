@@ -35,8 +35,29 @@ int main(int argc, char **argv, char **envp)
 	printf("WinstarDisplay tests \n\n");
 	printf("Open with Light on ... ");
 	if(display.lcd_open() < 0) 				   	printf("KO\n"); else printf("OK\n");
+
 	printf("puts Ciao on Display ... ");
 	if(display.lcd_puts((char *)"Ciao") < 0) 	printf("KO\n"); else printf("OK\n");
+
+	printf("Turn off light ... ");
+	if(display.setBacklight(STATE_OFF) < 0) 	printf("KO\n"); else printf("OK\n");
+	sleep(1);
+
+	printf("Turn on light ... ");
+	if(display.setBacklight(STATE_TOGGLE) < 0) 	printf("KO\n"); else printf("OK\n");
+
+	printf("Set Cursor ON and blinking ... ");
+	if(display.setCursor(true,true)< 0) 	printf("KO\n"); else printf("OK\n");
+	sleep(1);
+
+	printf("Set Cursor ON and not blinking ... ");
+	if(display.setCursor(true,false)< 0) 	printf("KO\n"); else printf("OK\n");
+	sleep(1);
+
+	printf("Set Cursor off and not blinking ... ");
+	if(display.setCursor(true,false)< 0) 	printf("KO\n"); else printf("OK\n");
+	sleep(1);
+
 	sleep(10);
 	printf("Close .... ");
 	if(display.lcd_close() < 0) 				printf("KO\n"); else printf("OK\n");

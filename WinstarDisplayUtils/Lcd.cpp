@@ -123,8 +123,8 @@ State_e Lcd::getStatus() {
 int Lcd::setCursor(bool state,bool blink) {
 	int ret = -1;
 	unsigned char newreg = reg_display;
-	newreg = reg_display &
-			(state ? DISPLAY_CURSOR : ~DISPLAY_CURSOR) &
+	newreg = reg_display |
+			(state ? DISPLAY_CURSOR : ~DISPLAY_CURSOR) |
 			(blink ? DISPLAY_CURSOR_BLINK : ~DISPLAY_CURSOR_BLINK);
 	ret = write_cmd(newreg);
 	if(ret>0) this->reg_display = newreg;
@@ -147,7 +147,7 @@ int Lcd::setContrast(uint8_t value) {
 	reg_contrast_set = reg;
 	reg = reg_power_icon;
 	if((reg & POWER_ICON_CONTR_MASK) != (value & POWER_ICON_CONTR_MASK)) {
-		reg &= POWER_ICON_CONTR_MASK & value;
+		reg |= POWER_ICON_CONTR_MASK | value;
 		ret = write_cmd(reg);
 		if(ret < 0) return(ret);
 		reg_contrast_set = reg;
