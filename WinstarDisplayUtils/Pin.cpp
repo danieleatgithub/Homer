@@ -90,6 +90,7 @@ int Pin::pin_export() {
 		return fd;
 	}
 	len = snprintf(buf, sizeof(buf), "%d", this->kid);
+	printf("DEBUG echo %s/export %s\n",SYSFS_GPIO_DIR,buf);
 	write(fd, buf, len);
 	close(fd);
 	this->in_use = true;
@@ -114,6 +115,7 @@ int Pin::pin_unexport() {
 	}
 
 	len = snprintf(buf, sizeof(buf), "%d", this->kid);
+	printf("DEBUG echo %s/unexport %s\n",SYSFS_GPIO_DIR,buf);
 	write(fd, buf, len);
 	close(fd);
 	this->in_use = false;
@@ -137,13 +139,15 @@ int Pin::set_direction(Direction_e dir)
 		perror("gpio/direction");
 		return fd;
 	}
-
+	printf("DEBUG echo %s %s\n",buf,Direction_s[dir]);
 	ret = write(fd, Direction_s[dir], (strlen(Direction_s[dir])+1));
 	close(fd);
 	if(ret < 0 ) {
 		return(ret);
 	}
 	this->direction = dir;
+	// Default out value is low
+	if(this->direction == OUT) this->last_value = false;
 	return 0;
 }
 int Pin::set_edge(Edge_e edge)
@@ -163,7 +167,7 @@ int Pin::set_edge(Edge_e edge)
 		perror("gpio/set-edge");
 		return fd;
 	}
-
+	printf("DEBUG echo %s/%s/edge %s\n",SYSFS_GPIO_DIR,this->kstr.c_str(),Edge_s[edge]);
 	ret = write(fd, Edge_s[edge], strlen(Edge_s[edge]) + 1);
 	close(fd);
 	if(ret < 0 ) {
@@ -191,6 +195,13 @@ int Pin::write_value(bool value)
 {
 	int fd;
 	char buf[MAX_BUF];
+	char *set="1";
+	char *unset="0";
+	char *val=unset;
+
+	if (value) 	val = set;
+	printf("DEBUG %s/%s/value %s\n",SYSFS_GPIO_DIR,this->kstr.c_str(),val);
+
 	if(kid < 0) return(-1);
 	if(!this->in_use || this->direction != OUT) {
 		perror("Not in use or input pin");
@@ -204,12 +215,10 @@ int Pin::write_value(bool value)
 			perror("gpio/set-value");
 			return fd;
 		}
-		if (value) 	write(fd, "1", 2);
-		else		write(fd, "0", 2);
+		write(fd, val, 2);
 		close(fd);
 	} else {
-		if (value)	write(this->fd, "1", 2);
-		else		write(this->fd, "0", 2);
+		write(this->fd, val, 2);
 		lseek(this->fd, 0, SEEK_SET);
 	}
 	this->last_value = value;

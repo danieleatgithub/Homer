@@ -32,24 +32,26 @@ Lcd::Lcd(const char *bus, const char *rst, const char *backlight) {
 	this->rst = string(rst);
 	this->backlight = string(backlight);
 	this->address = WINSTAR_I2C_ADD;
-	this->reg_display 			= DISPLAY_CMD_CTRL;
-	this->reg_function_set 		= FUNCTION_SET_CMD 	& FUNCTION_SET_DL & FUNCTION_SET_2LINES;
-	this->reg_bias_frequency	= BIAS_FREQ_CMD 	& BIAS_FREQ_3V_DEFAULT;
-	this->reg_contrast_set 		= CONTRAST_SET_CMD 	& CONTRAST_DEFAULT;
-	this->reg_power_icon		= POWER_ICON_CMD 	& POWER_ICON_BOOST;
-	this->reg_follower			= FOLLOWER_CMD 		& FOLLOWER_ON & FOLLOWER_DEFAULT;
+	this->reg_display 			= DISPLAY_CMD_CTRL | DISPLAY_ON;
+	this->reg_function_set 		= FUNCTION_SET_CMD 	| FUNCTION_SET_DL | FUNCTION_SET_2LINES;
+	this->reg_bias_frequency	= BIAS_FREQ_CMD 	| BIAS_FREQ_3V_DEFAULT;
+	this->reg_contrast_set 		= CONTRAST_SET_CMD 	| CONTRAST_DEFAULT;
+	this->reg_power_icon		= POWER_ICON_CMD 	| POWER_ICON_BOOST;
+	this->reg_follower			= FOLLOWER_CMD 		| FOLLOWER_ON | FOLLOWER_DEFAULT;
 	this->backlight_state 		= false;
 
 	pin = Pin::getPinDescriptor(this->rst.c_str());
 	reset_pin = new Pin(pin);
 	reset_pin->pin_export();
 	reset_pin->set_direction(OUT);
+	usleep(1000);
+	reset_pin->setState(STATE_ON); // Remove reset state after direction change
 
 	pin = Pin::getPinDescriptor(this->backlight.c_str());
 	backlight_pin = new Pin(pin);
 	backlight_pin->pin_export();
 	backlight_pin->set_direction(OUT);
-
+	backlight_pin->setState(STATE_ON); // Set default Display state
 }
 
 Lcd::~Lcd() {
@@ -70,12 +72,13 @@ int Lcd::lcd_open() {
 	}
 
 	ret = write_cmd(reg_function_set);
-	reg_function_set &= FUNCTION_SET_EXTENS;
+	reg_function_set |= FUNCTION_SET_EXTENS;
 	ret = write_cmd(reg_function_set);
 	ret = write_cmd(reg_bias_frequency);
 	ret = write_cmd(reg_contrast_set);
 	ret = write_cmd(reg_power_icon);
 	ret = write_cmd(reg_follower);
+	ret = write_cmd(reg_display);
 
 	reset_pin->pin_open();
 	backlight_pin->pin_open();
@@ -106,7 +109,7 @@ int Lcd::home(){
 
 int Lcd::setStatus(State_e state) {
 	int ret = -1;
-	unsigned char newreg = reg_display;
+	uint8_t newreg = reg_display;
 	if(state == STATE_ON || (state == STATE_TOGGLE && !(reg_display & DISPLAY_ON) )) newreg = this->reg_display & DISPLAY_ON;
 	if(state == STATE_OFF || (state == STATE_TOGGLE && (reg_display & DISPLAY_ON)))  newreg = this->reg_display & ~DISPLAY_ON;
 	ret = write_cmd(newreg);
@@ -134,7 +137,7 @@ bool Lcd::isCursorON() {
 unsigned int Lcd::getContrast() {
 	return(((reg_power_icon & POWER_ICON_CONTR_MASK) << 4) && (reg_contrast_set & CONTRAST_MAX));
 }
-int Lcd::setContrast(unsigned int value) {
+int Lcd::setContrast(uint8_t value) {
 	int ret;
 	unsigned char reg = reg_contrast_set;
 	if(value > CONTRAST_MAX) return(-1);
@@ -166,17 +169,19 @@ int Lcd::lcd_puts(char *str){
 int Lcd::write_cmd(unsigned char data){
 	return(this->lcd_write(0,data));
 }
-int Lcd::write_data(unsigned char data){
+int Lcd::write_data(uint8_t data){
 	return(this->lcd_write(0x40,data));
 }
-int Lcd::lcd_write(int type,unsigned char data) {
+int Lcd::lcd_write(int type,uint8_t data) {
 	unsigned char buffer[2];
 	buffer[0] = (unsigned char)type;
 	buffer[1] = data;
+	printf("DEBUG i2cset -y %s 0x%x 0x%x 0x%x\n",bus.c_str(),address,type,data);
 	if (write(fd,buffer,2)!=2) {
 			printf("Error writing file: %s\n", strerror(errno));
 			return -1;
 	}
+	fsync(fd);
 	usleep(1000);
 	return(0);
 }

@@ -8,6 +8,7 @@
 #ifndef LCD_H_
 #define LCD_H_
 #include <string>
+#include <stdint.h>
 #include "Pin.h"
 
 namespace std {
@@ -20,7 +21,7 @@ namespace std {
 class Lcd {
 private:
 	int fd;
-	unsigned int address;
+	uint8_t address;
 	string bus;
 	string rst;
 	string backlight;
@@ -30,17 +31,17 @@ private:
 	static const unsigned int freqency_3_volts[8];
 	static const unsigned int freqency_5_volts[8];
 
-	unsigned char reg_display; 			// Control display register
-	unsigned char reg_bias_frequency; 	// Bias Frequency
-	unsigned char reg_function_set; // Function set register
-	unsigned char reg_contrast_set; // Contrast set register
-	unsigned char reg_power_icon; 	// Power icon and contrast high bits
-	unsigned char reg_follower; 	// Follower register
+	uint8_t reg_display; 			// Control display register
+	uint8_t reg_bias_frequency; 	// Bias Frequency
+	uint8_t reg_function_set; // Function set register
+	uint8_t reg_contrast_set; // Contrast set register
+	uint8_t reg_power_icon; 	// Power icon and contrast high bits
+	uint8_t reg_follower; 	// Follower register
 	bool		  backlight_state;
 
-	int write_cmd(unsigned char data);
-	int write_data(unsigned char data);
-	int lcd_write(int type,unsigned char data);
+	int write_cmd(uint8_t data);
+	int write_data(uint8_t data);
+	int lcd_write(int type,uint8_t data);
 public:
 
 	Lcd(const char *bus, const char *rst, const char *backlight);
@@ -51,7 +52,7 @@ public:
 	State_e 	getStatus();
 	bool 			isCursorON();
 	unsigned int	getContrast();
-	int				setContrast(unsigned int value);
+	int				setContrast(uint8_t value);
 	int 			setCursor(bool state,bool blink);
 	int				lcd_putchar(unsigned char ch);
 	int 			lcd_puts(char *str);

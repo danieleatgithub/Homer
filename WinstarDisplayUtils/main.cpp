@@ -33,13 +33,13 @@ int main(int argc, char **argv, char **envp)
 		exit(-1);
 	}
 	printf("WinstarDisplay tests \n\n");
-	printf("Open .... ");
-	if(display.lcd_open() < 0) 				   	printf("KO\n"); else printf("OK");
-	printf("puts .... ");
-	if(display.lcd_puts((char *)"Ciao") < 0) 	printf("KO\n"); else printf("OK");
-	sleep(30);
+	printf("Open with Light on ... ");
+	if(display.lcd_open() < 0) 				   	printf("KO\n"); else printf("OK\n");
+	printf("puts Ciao on Display ... ");
+	if(display.lcd_puts((char *)"Ciao") < 0) 	printf("KO\n"); else printf("OK\n");
+	sleep(10);
 	printf("Close .... ");
-	if(display.lcd_close() < 0) 				printf("KO\n"); else printf("OK");
+	if(display.lcd_close() < 0) 				printf("KO\n"); else printf("OK\n");
 	printf("== END ==");
 
 }
