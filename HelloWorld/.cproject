@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+	<storageModule moduleId="org.eclipse.cdt.core.settings">
+		<cconfiguration id="org.buildroot.wks.buildroot-2015.08.1.output.exe.debug.113065698">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.buildroot.wks.buildroot-2015.08.1.output.exe.debug.113065698" moduleId="org.eclipse.cdt.core.settings" name="debug">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GNU_ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="org.buildroot.wks.buildroot-2015.08.1.output.exe.debug.113065698" name="debug" parent="org.buildroot.wks.buildroot-2015.08.1.output.exe.debug">
+					<folderInfo id="org.buildroot.wks.buildroot-2015.08.1.output.exe.debug.113065698." name="/" resourcePath="">
+						<toolChain id="org.buildroot.wks.buildroot-2015.08.1.output.exe.debug.1622292323" name="Buildroot ARM (/wks/buildroot-2015.08.1/output)" superClass="org.buildroot.wks.buildroot-2015.08.1.output.exe.debug">
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.GNU_ELF" id="org.buildroot.wks.buildroot-2015.08.1.output.platform.base.481366396" isAbstract="false" name="Buildroot ARM Platform (/wks/buildroot-2015.08.1/output)" osList="linux" superClass="org.buildroot.wks.buildroot-2015.08.1.output.platform.base"/>
+							<builder buildPath="${workspace_loc:/HelloWorld}/debug" id="org.buildroot.wks.buildroot-2015.08.1.output.builder.382917846" managedBuildOn="true" name="Buildroot ARM builder (/wks/buildroot-2015.08.1/output).debug" superClass="org.buildroot.wks.buildroot-2015.08.1.output.builder"/>
+							<tool id="org.buildroot.wks.buildroot-2015.08.1.output.assembler.904086459" name="Buildroot ARM Assembler (/wks/buildroot-2015.08.1/output)" superClass="org.buildroot.wks.buildroot-2015.08.1.output.assembler">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1268587770" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+							</tool>
+							<tool id="org.buildroot.wks.buildroot-2015.08.1.output.c.compiler.1653509542" name="Buildroot ARM C Compiler (/wks/buildroot-2015.08.1/output)" superClass="org.buildroot.wks.buildroot-2015.08.1.output.c.compiler">
+								<option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.option.optimization.level.784103857" superClass="gnu.c.compiler.option.optimization.level" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.debugging.level.1713536287" superClass="gnu.c.compiler.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
+								<inputType id="org.buildroot.wks.buildroot-2015.08.1.output.c.input.1761102700" superClass="org.buildroot.wks.buildroot-2015.08.1.output.c.input"/>
+							</tool>
+							<tool id="org.buildroot.wks.buildroot-2015.08.1.output.archiver.772419100" name="Buildroot ARM Archiver (/wks/buildroot-2015.08.1/output)" superClass="org.buildroot.wks.buildroot-2015.08.1.output.archiver"/>
+							<tool id="org.buildroot.wks.buildroot-2015.08.1.output.c.linker.463627638" name="Buildroot ARM C Linker (/wks/buildroot-2015.08.1/output)" superClass="org.buildroot.wks.buildroot-2015.08.1.output.c.linker"/>
+							<tool id="org.buildroot.wks.buildroot-2015.08.1.output.cc.compiler.883836646" name="Buildroot ARM C++ Compiler (/wks/buildroot-2015.08.1/output)" superClass="org.buildroot.wks.buildroot-2015.08.1.output.cc.compiler">
+								<option id="gnu.cpp.compiler.option.optimization.level.540908593" superClass="gnu.cpp.compiler.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
+								<option id="gnu.cpp.compiler.option.debugging.level.705357898" superClass="gnu.cpp.compiler.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
+								<inputType id="org.buildroot.wks.buildroot-2015.08.1.output.cpp.input.1916358634" superClass="org.buildroot.wks.buildroot-2015.08.1.output.cpp.input"/>
+							</tool>
+							<tool id="org.buildroot.wks.buildroot-2015.08.1.output.cc.linker.846222663" name="Buildroot ARM CC Linker (/wks/buildroot-2015.08.1/output)" superClass="org.buildroot.wks.buildroot-2015.08.1.output.cc.linker">
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.945704456" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="org.buildroot.wks.buildroot-2015.08.1.output.pkgconfig.1437225130" name="Buildroot ARM Pkg config (/wks/buildroot-2015.08.1/output)" superClass="org.buildroot.wks.buildroot-2015.08.1.output.pkgconfig"/>
+						</toolChain>
+					</folderInfo>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+		<cconfiguration id="org.buildroot.wks.buildroot-2015.08.1.output.exe.release.757294678">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.buildroot.wks.buildroot-2015.08.1.output.exe.release.757294678" moduleId="org.eclipse.cdt.core.settings" name="release">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GNU_ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="org.buildroot.wks.buildroot-2015.08.1.output.exe.release.757294678" name="release" parent="org.buildroot.wks.buildroot-2015.08.1.output.exe.release">
+					<folderInfo id="org.buildroot.wks.buildroot-2015.08.1.output.exe.release.757294678." name="/" resourcePath="">
+						<toolChain id="org.buildroot.wks.buildroot-2015.08.1.output.exe.release.1749517301" name="Buildroot ARM (/wks/buildroot-2015.08.1/output)" superClass="org.buildroot.wks.buildroot-2015.08.1.output.exe.release">
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.GNU_ELF" id="org.buildroot.wks.buildroot-2015.08.1.output.platform.base.537020367" isAbstract="false" name="Buildroot ARM Platform (/wks/buildroot-2015.08.1/output)" osList="linux" superClass="org.buildroot.wks.buildroot-2015.08.1.output.platform.base"/>
+							<builder buildPath="${workspace_loc:/HelloWorld}/release" id="org.buildroot.wks.buildroot-2015.08.1.output.builder.1707761120" managedBuildOn="true" name="Buildroot ARM builder (/wks/buildroot-2015.08.1/output).release" superClass="org.buildroot.wks.buildroot-2015.08.1.output.builder"/>
+							<tool id="org.buildroot.wks.buildroot-2015.08.1.output.assembler.1803313222" name="Buildroot ARM Assembler (/wks/buildroot-2015.08.1/output)" superClass="org.buildroot.wks.buildroot-2015.08.1.output.assembler">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.56302011" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+							</tool>
+							<tool id="org.buildroot.wks.buildroot-2015.08.1.output.c.compiler.1264549837" name="Buildroot ARM C Compiler (/wks/buildroot-2015.08.1/output)" superClass="org.buildroot.wks.buildroot-2015.08.1.output.c.compiler">
+								<option defaultValue="gnu.c.optimization.level.most" id="gnu.c.compiler.option.optimization.level.966092169" superClass="gnu.c.compiler.option.optimization.level" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.debugging.level.1581361062" superClass="gnu.c.compiler.option.debugging.level" value="gnu.c.debugging.level.none" valueType="enumerated"/>
+								<inputType id="org.buildroot.wks.buildroot-2015.08.1.output.c.input.277346028" superClass="org.buildroot.wks.buildroot-2015.08.1.output.c.input"/>
+							</tool>
+							<tool id="org.buildroot.wks.buildroot-2015.08.1.output.archiver.1724715281" name="Buildroot ARM Archiver (/wks/buildroot-2015.08.1/output)" superClass="org.buildroot.wks.buildroot-2015.08.1.output.archiver"/>
+							<tool id="org.buildroot.wks.buildroot-2015.08.1.output.c.linker.1217694422" name="Buildroot ARM C Linker (/wks/buildroot-2015.08.1/output)" superClass="org.buildroot.wks.buildroot-2015.08.1.output.c.linker"/>
+							<tool id="org.buildroot.wks.buildroot-2015.08.1.output.cc.compiler.224681879" name="Buildroot ARM C++ Compiler (/wks/buildroot-2015.08.1/output)" superClass="org.buildroot.wks.buildroot-2015.08.1.output.cc.compiler">
+								<option id="gnu.cpp.compiler.option.optimization.level.1627739189" superClass="gnu.cpp.compiler.option.optimization.level" value="gnu.cpp.compiler.optimization.level.most" valueType="enumerated"/>
+								<option id="gnu.cpp.compiler.option.debugging.level.1060394044" superClass="gnu.cpp.compiler.option.debugging.level" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
+								<inputType id="org.buildroot.wks.buildroot-2015.08.1.output.cpp.input.152216206" superClass="org.buildroot.wks.buildroot-2015.08.1.output.cpp.input"/>
+							</tool>
+							<tool id="org.buildroot.wks.buildroot-2015.08.1.output.cc.linker.819266444" name="Buildroot ARM CC Linker (/wks/buildroot-2015.08.1/output)" superClass="org.buildroot.wks.buildroot-2015.08.1.output.cc.linker">
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.2146302556" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="org.buildroot.wks.buildroot-2015.08.1.output.pkgconfig.130488950" name="Buildroot ARM Pkg config (/wks/buildroot-2015.08.1/output)" superClass="org.buildroot.wks.buildroot-2015.08.1.output.pkgconfig"/>
+						</toolChain>
+					</folderInfo>
+				</configuration>
+			</storageModule>
+		</cconfiguration>
+	</storageModule>
+	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+		<project id="HelloWorld.org.buildroot.wks.buildroot-2015.08.1.output.exe.2008075179" name="Executable" projectType="org.buildroot.wks.buildroot-2015.08.1.output.exe"/>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.08.1.output.exe.release.757294678;org.buildroot.wks.buildroot-2015.08.1.output.exe.release.757294678.;org.buildroot.wks.buildroot-2015.08.1.output.cc.compiler.224681879;org.buildroot.wks.buildroot-2015.08.1.output.cpp.input.152216206">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.08.1.output.ARM_ManagedMakePerProjectProfileCPP"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.08.1.output.exe.release.757294678;org.buildroot.wks.buildroot-2015.08.1.output.exe.release.757294678.;org.buildroot.wks.buildroot-2015.08.1.output.c.compiler.1264549837;org.buildroot.wks.buildroot-2015.08.1.output.c.input.277346028">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.08.1.output.ARM_ManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.08.1.output.exe.debug.113065698;org.buildroot.wks.buildroot-2015.08.1.output.exe.debug.113065698.;org.buildroot.wks.buildroot-2015.08.1.output.cc.compiler.883836646;org.buildroot.wks.buildroot-2015.08.1.output.cpp.input.1916358634">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.08.1.output.ARM_ManagedMakePerProjectProfileCPP"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.08.1.output.exe.debug.113065698;org.buildroot.wks.buildroot-2015.08.1.output.exe.debug.113065698.;org.buildroot.wks.buildroot-2015.08.1.output.c.compiler.1653509542;org.buildroot.wks.buildroot-2015.08.1.output.c.input.1761102700">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.08.1.output.ARM_ManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+</cproject>
