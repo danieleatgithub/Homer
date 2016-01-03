@@ -1,0 +1,1 @@
+SUBDIRS=libarmhelloworld include exampleProgram

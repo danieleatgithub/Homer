@@ -1,0 +1,1 @@
+SUBDIRS=liblcd include tools
