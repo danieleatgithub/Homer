@@ -5,20 +5,24 @@
 #
 #######################################################
 
-BBOX=busybox-1.23.2
+BBOX_VER="none"
+BUILDROOT_VER="buildroot-2015.08.1"
+LINUX_VER="linux-3.16.1"
+GLIBC_VER="glibc-2.21"
+
 
 WKS="/wks"
 WORKSPACE="$WKS/workspace"
 HOMERROOT="$WORKSPACE/Homer"
 SDROOT="$HOMERROOT/SDBuilder"
 SDSCRIPTS="$SDROOT/SDscripts"
-BR_ROOT="$WKS/buildroot-2015.08.1"
+BR_ROOT="$WKS/$BUILDROOT_VER"
 TARGET_HOMER="$SDROOT/target"
 
 TARGET_ROOTFS_DIR="/media/rootfs"
 TARGET_KERNEL_DIR="/media/kernel"
 TARGET_DATA_DIR="/media/data"
-LINUX_ROOT="$WKS/linux-3.16.1"
+LINUX_ROOT="$WKS/$LINUX_VER"
 
 SDFORMAT="$SDSCRIPTS/sdformat.sh"
 

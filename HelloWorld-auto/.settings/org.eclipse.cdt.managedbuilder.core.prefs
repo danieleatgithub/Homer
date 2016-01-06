@@ -1,9 +1,0 @@
-eclipse.preferences.version=1
-environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2015.08.1.output.autotools.default.1325637167/CPATH/delimiter=\:
-environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2015.08.1.output.autotools.default.1325637167/CPATH/operation=remove
-environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2015.08.1.output.autotools.default.1325637167/CPLUS_INCLUDE_PATH/delimiter=\:
-environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2015.08.1.output.autotools.default.1325637167/CPLUS_INCLUDE_PATH/operation=remove
-environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2015.08.1.output.autotools.default.1325637167/C_INCLUDE_PATH/delimiter=\:
-environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2015.08.1.output.autotools.default.1325637167/C_INCLUDE_PATH/operation=remove
-environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2015.08.1.output.autotools.default.1325637167/append=true
-environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2015.08.1.output.autotools.default.1325637167/appendContributed=true

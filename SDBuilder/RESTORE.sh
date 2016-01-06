@@ -23,7 +23,9 @@ DST=$BKP_ROOT/undo
 rm -Rf $DST
 mkdir -p $DST
 cp $BR_ROOT/.config $DST/buildroot_.config
-cp $BR_ROOT/output/build/$BBOX/.config $DST/buildroot_output_build_$BBOX_.config
+if [[ -e $BR_ROOT/output/build/${BBOX_VER}/.config ]]; then
+	cp $BR_ROOT/output/build/${BBOX_VER}/.config $DST/buildroot_output_build_${BBOX_VER}_.config
+fi
 cp $LINUX_ROOT/.config $DST/linux_.config
 cp $AT91_ROOT/.config $DST/at91bootstrap_.config
 cp $LINUX_ROOT/arch/arm/boot/dts/acme-acqua.dts $DST/.
@@ -32,7 +34,9 @@ cp $LINUX_ROOT/arch/arm/boot/dts/acme-acqua.dts $DST/.
 echo "cp Commands for cut & paste"
 echo "---------------------------"
 echo "cp $SRC/buildroot_.config $BR_ROOT/.config"
-echo "cp $SRC/buildroot_output_build_$BBOX_.config $BR_ROOT/output/build/$BBOX/.config"
+if [[ -e $BR_ROOT/output/build/${BBOX_VER}/.config ]]; then
+echo "cp $SRC/buildroot_output_build_${BBOX_VER}_.config $BR_ROOT/output/build/${BBOX_VER}/.config"
+fi
 echo "cp $SRC/linux_.config $LINUX_ROOT/.config"
 echo "cp $SRC/at91bootstrap_.config $AT91_ROOT/.config"
 echo "cp $SRC/acme-acqua.dts $LINUX_ROOT/arch/arm/boot/dts/acme-acqua.dts"

@@ -1,0 +1,460 @@
+HelloWorldLog4cplus.o: HelloWorldLog4cplus.cpp \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/stdc-predef.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/iostream \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/c++config.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/os_defines.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/features.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/sys/cdefs.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/wordsize.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/gnu/stubs.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/gnu/stubs-hard.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/cpu_defines.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/ostream \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/ios \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/iosfwd \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stringfwd.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/memoryfwd.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/postypes.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/cwchar \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/wchar.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/stdio.h \
+ /wks/buildroot-2015.11.1/output/host/usr/lib/gcc/arm-buildroot-linux-gnueabihf/4.9.3/include/stdarg.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/wchar.h \
+ /wks/buildroot-2015.11.1/output/host/usr/lib/gcc/arm-buildroot-linux-gnueabihf/4.9.3/include/stddef.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/xlocale.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/exception \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/atomic_lockfree_defines.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/char_traits.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_algobase.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/functexcept.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/exception_defines.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/cpp_type_traits.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/ext/type_traits.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/ext/numeric_traits.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_pair.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/move.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/concept_check.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_iterator_base_types.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_iterator_base_funcs.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/debug/debug.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_iterator.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/ptr_traits.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/predefined_ops.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/localefwd.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/c++locale.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/clocale \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/locale.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/locale.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/cctype \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/ctype.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/types.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/typesizes.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/endian.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/endian.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/byteswap.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/byteswap-16.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/ios_base.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/ext/atomicity.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/gthr.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/gthr-default.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/pthread.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/sched.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/time.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/sched.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/time.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/timex.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/pthreadtypes.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/setjmp.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/atomic_word.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/locale_classes.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/string \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/allocator.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/c++allocator.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/ext/new_allocator.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/new \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/ostream_insert.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/cxxabi_forced.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_function.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/backward/binders.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/range_access.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/basic_string.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/basic_string.tcc \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/locale_classes.tcc \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/streambuf \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/streambuf.tcc \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/basic_ios.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/locale_facets.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/cwctype \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/wctype.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/ctype_base.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/streambuf_iterator.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/ctype_inline.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/locale_facets.tcc \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/basic_ios.tcc \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/ostream.tcc \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/istream \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/istream.tcc \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/logger.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/config.hxx \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/config/defines.hxx \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/helpers/thread-config.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/loglevel.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/vector \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_construct.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/ext/alloc_traits.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_uninitialized.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_vector.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_bvector.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/vector.tcc \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/tstring.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/tchar.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/spi/appenderattachable.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/appender.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/layout.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/streams.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/helpers/pointer.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/thread/syncprims.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/algorithm \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/utility \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_relops.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_algo.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/cstdlib \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/stdlib.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/waitflags.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/waitstatus.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/sys/types.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/sys/select.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/select.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/sigset.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/sys/sysmacros.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/alloca.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/stdlib-float.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/algorithmfwd.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_heap.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_tempbuf.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/cassert \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/assert.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/spi/filter.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/helpers/lockfile.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/memory \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_raw_storage_iter.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/backward/auto_ptr.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/spi/loggerfactory.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/loggingmacros.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/helpers/snprintf.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/cstdarg \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/tracelogger.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/sstream \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/sstream.tcc \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/configurator.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/helpers/property.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/map \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_tree.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_map.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_multimap.h
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/stdc-predef.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/iostream:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/c++config.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/os_defines.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/features.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/sys/cdefs.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/wordsize.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/gnu/stubs.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/gnu/stubs-hard.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/cpu_defines.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/ostream:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/ios:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/iosfwd:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stringfwd.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/memoryfwd.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/postypes.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/cwchar:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/wchar.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/stdio.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/lib/gcc/arm-buildroot-linux-gnueabihf/4.9.3/include/stdarg.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/wchar.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/lib/gcc/arm-buildroot-linux-gnueabihf/4.9.3/include/stddef.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/xlocale.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/exception:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/atomic_lockfree_defines.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/char_traits.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_algobase.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/functexcept.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/exception_defines.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/cpp_type_traits.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/ext/type_traits.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/ext/numeric_traits.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_pair.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/move.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/concept_check.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_iterator_base_types.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_iterator_base_funcs.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/debug/debug.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_iterator.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/ptr_traits.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/predefined_ops.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/localefwd.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/c++locale.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/clocale:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/locale.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/locale.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/cctype:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/ctype.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/types.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/typesizes.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/endian.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/endian.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/byteswap.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/byteswap-16.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/ios_base.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/ext/atomicity.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/gthr.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/gthr-default.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/pthread.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/sched.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/time.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/sched.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/time.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/timex.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/pthreadtypes.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/setjmp.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/atomic_word.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/locale_classes.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/string:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/allocator.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/c++allocator.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/ext/new_allocator.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/new:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/ostream_insert.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/cxxabi_forced.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_function.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/backward/binders.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/range_access.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/basic_string.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/basic_string.tcc:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/locale_classes.tcc:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/streambuf:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/streambuf.tcc:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/basic_ios.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/locale_facets.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/cwctype:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/wctype.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/ctype_base.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/streambuf_iterator.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/arm-buildroot-linux-gnueabihf/bits/ctype_inline.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/locale_facets.tcc:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/basic_ios.tcc:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/ostream.tcc:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/istream:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/istream.tcc:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/logger.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/config.hxx:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/config/defines.hxx:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/helpers/thread-config.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/loglevel.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/vector:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_construct.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/ext/alloc_traits.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_uninitialized.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_vector.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_bvector.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/vector.tcc:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/tstring.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/tchar.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/spi/appenderattachable.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/appender.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/layout.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/streams.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/helpers/pointer.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/thread/syncprims.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/algorithm:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/utility:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_relops.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_algo.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/cstdlib:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/stdlib.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/waitflags.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/waitstatus.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/sys/types.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/sys/select.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/select.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/sigset.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/sys/sysmacros.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/alloca.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/stdlib-float.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/algorithmfwd.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_heap.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_tempbuf.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/cassert:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/assert.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/spi/filter.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/helpers/lockfile.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/memory:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_raw_storage_iter.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/backward/auto_ptr.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/spi/loggerfactory.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/loggingmacros.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/helpers/snprintf.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/cstdarg:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/tracelogger.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/sstream:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/sstream.tcc:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/configurator.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/log4cplus/helpers/property.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/map:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_tree.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_map.h:
+
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/include/c++/4.9.3/bits/stl_multimap.h:

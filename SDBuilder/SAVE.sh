@@ -21,7 +21,9 @@ fi
 DST=$BKP_ROOT/$SAVE_NAME
 mkdir $DST
 cp $BR_ROOT/.config $DST/buildroot_.config
-cp $BR_ROOT/output/build/$BBOX/.config $DST/buildroot_output_build_$BBOX_.config
+if [[ -e $BR_ROOT/output/build/${BBOX_VER}/.config ]]; then
+	cp $BR_ROOT/output/build/${BBOX_VER}/.config $DST/buildroot_output_build_${BBOX_VER}_.config
+fi
 cp $LINUX_ROOT/.config $DST/linux_.config
 cp $AT91_ROOT/.config $DST/at91bootstrap_.config
 cp $LINUX_ROOT/arch/arm/boot/dts/acme-acqua.dts $DST/.

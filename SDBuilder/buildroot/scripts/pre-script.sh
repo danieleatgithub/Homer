@@ -3,24 +3,28 @@
 #
 # Buildroot pre script
 #
+# TARGET_DIR --from buildroot
 #######################################################
 
+# Executed in buildroot enviroment (Full Path)
+. /wks/workspace/Homer/SDBuilder/enviroment.sh
 
+echo " ******************* START PRE SCRIPT ***************"
 #Setting GLOBALS
 ROOT="/wks"
-WORKSPACE="$ROOT/workspace"
+WORKSPACE="$WKS/workspace"
 
 DST="$TARGET_DIR/configs"
-BR_ROOT="$ROOT/buildroot-2015.08.1"
-LX_ROOT="$ROOT/linux-3.16.1"
+
 AT91_ROOT="$WORKSPACE/at91bootstrap"
 TARGET_HOMER="$WORKSPACE/Homer/SDBuilder/target"
-
+GLIB_BUILD="/wks/${BUILDROOT_VER}/output/build/${GLIBC_VER}/build/elf"
 
 #
 # Modify skeleton
 #
-rm -f 	 $TARGET_DIR/run
+
+rm -Rf 	 $TARGET_DIR/var
 mkdir -p $TARGET_DIR/var/cache
 mkdir -p $TARGET_DIR/var/lock
 mkdir -p $TARGET_DIR/var/log
@@ -28,6 +32,8 @@ mkdir -p $TARGET_DIR/var/pcmcia
 mkdir -p $TARGET_DIR/var/run
 mkdir -p $TARGET_DIR/var/spool
 mkdir -p $TARGET_DIR/var/tmp
+mkdir -p $TARGET_DIR/var/lib/dbus
+mkdir -p $TARGET_DIR/var/empty
 mkdir -p $TARGET_DIR/data
 mkdir -p $TARGET_DIR/boot
 mkdir -p $TARGET_DIR/configs
@@ -35,16 +41,17 @@ mkdir -p $TARGET_DIR/usr/local/bin
 mkdir -p $TARGET_DIR/usr/local/lib
 mkdir -p $TARGET_DIR/usr/local/etc
 mkdir -p $TARGET_DIR/usr/local/share
+mkdir -p $TARGET_DIR/usr/local/include
 mkdir -p $TARGET_DIR/etc/org
-cd $TARGET_DIR
-ln -s var/run run
-chmod 700 $TARGET_DIR/var/empty
+cd $TARGET_DIR/var
+ln -s ../run ./run
 cd -
+chmod 700 $TARGET_DIR/var/empty
 
 #
 # Install kernel modules
 #
-cd $LX_ROOT
+cd $LINUX_ROOT
 rm -Rf $TARGET_DIR/lib/modules
 make modules_install INSTALL_MOD_PATH=$TARGET_DIR ARCH=arm
 
@@ -53,10 +60,12 @@ make modules_install INSTALL_MOD_PATH=$TARGET_DIR ARCH=arm
 # Save build configurations on target
 #
 cp $BR_ROOT/.config 							$DST/buildroot_.config
-cp $BR_ROOT/output/build/busybox-1.22.1/.config $DST/buildroot_output_build_busybox-1.22.1_.config
-cp $LX_ROOT/.config 							$DST/linux_.config
+if [[ -e $BR_ROOT/output/build/${BBOX_VER}/.config ]]; then
+	cp $BR_ROOT/output/build/${BBOX_VER}/.config $DST/buildroot_output_build_${BBOX_VER}_.config
+fi
+cp $LINUX_ROOT/.config 							$DST/linux_.config
 cp $AT91_ROOT/.config 							$DST/at91bootstrap_.config
-cp $LX_ROOT/arch/arm/boot/dts/acme-acqua.dtb 	$DST/.
+cp $LINUX_ROOT/arch/arm/boot/dts/acme-acqua.dtb 	$DST/.
 
 #
 # Copy user utility scripts
@@ -136,11 +145,28 @@ sed -i 's/test -n "$INTERFACES" || exit 0//' $TARGET_DIR/etc/init.d/S80dhcp-serv
 #
 # User Application
 #
-cp $WORKSPACE/Homer/WinstarDisplayUtils/debug $TARGET_DIR/usr/local/bin
+#cp $WORKSPACE/Homer/WinstarDisplayUtils/debug $TARGET_DIR/usr/local/bin
+cp $TARGET_HOMER/usr/local/bin/* $TARGET_DIR/usr/local/bin/.
+cp $TARGET_HOMER/usr/local/include/* $TARGET_DIR/usr/local/include/.
+cp $TARGET_HOMER/usr/local/lib/* $TARGET_DIR/usr/local/lib/.
+cp $TARGET_HOMER/usr/local/share/* $TARGET_DIR/usr/local/share/.
+cp $TARGET_HOMER/etc/ld.so.conf $TARGET_DIR/etc/ld.so.conf
+
+
 chmod 777 $TARGET_DIR/usr/local/bin/*
+chmod 777 $TARGET_DIR/usr/local/lib/*
+
+# Force ldconfig rerun and copy
+#/sbin/ldconfig -r $TARGET_DIR -f $TARGET_DIR/etc/ld.so.conf
+cp $GLIB_BUILD/ldconfig $TARGET_DIR/sbin/. && chmod 777 $TARGET_DIR/sbin/ldconfig
+cp $GLIB_BUILD/ldd $TARGET_DIR/sbin/. && chmod 777 $TARGET_DIR/sbin/ldd
+#cp $GLIB_BUILD/ldconfig $TARGET_DIR/root/. && chmod 777 $TARGET_DIR/root/ldconfig
+#cp $GLIB_BUILD/ldd $TARGET_DIR/root/. && chmod 777 $TARGET_DIR/root/ldd
+
 
 BUILD_DATE=$(date +"%Y%m%d%H%M%S")
 echo "99.99.1-build${BUILD_DATE}" > $TARGET_DIR/etc/homer.version
+echo " ******************* END PRE SCRIPT BUILD ${BUILD_DATE} ***************"
 exit
 
 

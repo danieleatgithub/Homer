@@ -1,0 +1,3 @@
+bin_PROGRAMS=HelloWorldLog4cplus
+HelloWorldLog4cplus_SOURCES=HelloWorldLog4cplus.cpp
+HelloWorldLog4cplus_LDFLAGS = -llog4cplus
