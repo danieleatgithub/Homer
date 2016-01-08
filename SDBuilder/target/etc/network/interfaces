@@ -1,6 +1,0 @@
-auto lo eth0
-iface lo inet loopback
-allow-hotplug eth0
-iface eth0 inet static
-        address 10.99.99.1
-        netmask 255.255.255.0

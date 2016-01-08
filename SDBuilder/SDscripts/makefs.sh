@@ -10,7 +10,6 @@ SPATH=$(dirname $0)
 . $SPATH/../enviroment.sh
 
 #MODE="uboot"
-
 MODE="direct"
 
 if [ ! -b $SDDEV ];then
@@ -101,7 +100,7 @@ fi
 cd -
 echo "Done"
 
-# Setup fstab
+# Copy addons
 cat $TARGET_ROOTFS_DIR/etc/fstab.add >> $TARGET_ROOTFS_DIR/etc/fstab
 if [[ $? !=  "0" ]];then
 	echo "Failed to modify fstab"
@@ -109,8 +108,6 @@ if [[ $? !=  "0" ]];then
 fi
 rm -f $TARGET_ROOTFS_DIR/etc/fstab.add
 
-# Copy conf file
-#cp $TARGET_HOMER/$CONF $TARGET_ROOTFS_DIR/etc/system.conf
 
 echo -n "Unmounting FS ..."
 umount $TARGET_ROOTFS_DIR && \

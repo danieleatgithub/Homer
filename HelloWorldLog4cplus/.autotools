@@ -11,7 +11,7 @@
 <option id="host" value="arm-buildroot-linux-gnueabihf"/>
 <option id="build" value=""/>
 <option id="target" value=""/>
-<option id="prefix" value="/wks/workspace/Homer/SDBuilder/target/usr/local"/>
+<option id="prefix" value="/wks/workspace/Homer/root_overlay/target"/>
 <option id="exec-prefix" value=""/>
 <option id="libdir" value=""/>
 <option id="bindir" value=""/>

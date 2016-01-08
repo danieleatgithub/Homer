@@ -1,0 +1,20 @@
+#!/bin/bash
+################################################
+#
+# Read mac address from i2c and write for the DHCP
+# request
+#
+################################################
+. /etc/system.conf
+
+MACADDRESS=$(/usr/local/bin/get_mac)
+if [[ $? -ne 0 ]];then
+	logger "system_init failed reading mac"
+	exit 1
+fi
+INTERFACES="/etc/network/interfaces"
+sed -i "s/#_TAG_MAC_ADDRESS/	hwaddress ether $MACADDRESS/" $INTERFACES
+
+
+# Remove first start job
+rm /etc/init.d/S00systeminit

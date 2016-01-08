@@ -277,7 +277,7 @@ mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /wks/workspace/Homer/SDBuilder/target/usr/local
+prefix = /wks/workspace/Homer/root_overlay/target
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
@@ -295,7 +295,7 @@ top_srcdir = ..
 
 # These files will end up in the install include directory
 # For example, /usr/include
-include_HEADERS = libdpy.h
+include_HEADERS = libdpy.h pin.h winstar.h
 all: all-am
 
 .SUFFIXES:

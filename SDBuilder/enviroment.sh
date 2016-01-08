@@ -6,7 +6,7 @@
 #######################################################
 
 BBOX_VER="none"
-BUILDROOT_VER="buildroot-2015.08.1"
+BUILDROOT_VER="buildroot-2015.11.1"
 LINUX_VER="linux-3.16.1"
 GLIBC_VER="glibc-2.21"
 
