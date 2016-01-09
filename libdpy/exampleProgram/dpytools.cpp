@@ -63,7 +63,7 @@ int main(int argc, char **argv, char **envp) {
 	LOG4CPLUS_ERROR(logger, "This is a ERROR message");
 	LOG4CPLUS_FATAL(logger, "This is a FATAL message");
 
-	Lcd display(I2C_BUS, LCD_RESET_PIN, LCD_BACKLIGHT_PIN);
+	Dpy display(I2C_BUS, LCD_RESET_PIN, LCD_BACKLIGHT_PIN);
 
 	if (argc != 1) {
 		printf("no arguments needed\n");
@@ -71,78 +71,78 @@ int main(int argc, char **argv, char **envp) {
 	}
 	printf("WinstarDisplay tests .. resetting ...\n");
 
-	if(display.lcd_reset() < 0)
+	if(display.dpy_reset() < 0)
 		printf("KO\n");
 	else
 		printf("OK\n");
 
 	printf("Open with Light on ... ");
-	if (display.lcd_open() < 0)
+	if (display.dpy_open() < 0)
 		printf("KO\n");
 	else
 		printf("OK\n");
 
 	printf("puts Ciao on Display ... ");
-	if (display.lcd_puts((char *) "Ciao") < 0)
+	if (display.dpy_puts((char *) "Ciao") < 0)
 		printf("KO\n");
 	else
 		printf("OK\n");
 
 	printf("Turn off light ... ");
-	if (display.setBacklight(STATE_OFF) < 0)
+	if (display.set_backlight(STATE_OFF) < 0)
 		printf("KO\n");
 	else
 		printf("OK\n");
 	usleep(pause);
 
 	printf("Turn on light ... ");
-	if (display.setBacklight(STATE_TOGGLE) < 0)
+	if (display.set_backlight(STATE_TOGGLE) < 0)
 		printf("KO\n");
 	else
 		printf("OK\n");
 
 	printf("Set Cursor ON and blinking ... ");
 	res = "KO";
-	if (display.setCursor(true, true) == 0)
-		if(display.isCursorON()) res = "OK";
+	if (display.set_cursor(true, true) == 0)
+		if(display.is_cursor_on()) res = "OK";
 	printf("%s\n",res);
 	usleep(pause);
 
 	printf("Set Cursor ON and not blinking ... ");
 	res = "KO";
-	if (display.setCursor(true, false) == 0)
-		if(display.isCursorON()) res = "OK";
+	if (display.set_cursor(true, false) == 0)
+		if(display.is_cursor_on()) res = "OK";
 	printf("%s\n",res);
 	usleep(pause);
 
 	printf("Set Cursor off and not blinking ... ");
 	res = "KO";
-	if (display.setCursor(false, false) == 0)
-		if(!display.isCursorON()) res = "OK";
+	if (display.set_cursor(false, false) == 0)
+		if(!display.is_cursor_on()) res = "OK";
 	printf("%s\n",res);
 	usleep(pause);
 
 	printf("Set Display off  ... ");
 	res = "KO";
-	if (display.setStatus(STATE_OFF) == 0)
-		if(display.getStatus() == STATE_OFF) res = "OK";
+	if (display.set_state(STATE_OFF) == 0)
+		if(display.get_state() == STATE_OFF) res = "OK";
 	printf("%s\n",res);
 	usleep(pause);
 
 	printf("Set Display on  ... ");
 	res = "KO";
-	if (display.setStatus(STATE_ON) == 0)
-		if(display.getStatus() == STATE_ON) res = "OK";
+	if (display.set_state(STATE_ON) == 0)
+		if(display.get_state() == STATE_ON) res = "OK";
 	printf("%s\n",res);
 	usleep(pause);
 
 	printf("Set Display toggle  ... ");
 	res = "KO";
-	if (display.setStatus(STATE_TOGGLE) == 0)
-		if(display.getStatus() == STATE_OFF)  {
+	if (display.set_state(STATE_TOGGLE) == 0)
+		if(display.get_state() == STATE_OFF)  {
 			usleep(pause);
-			if (display.setStatus(STATE_TOGGLE) == 0)
-				if(display.getStatus() == STATE_ON) res = "OK";
+			if (display.set_state(STATE_TOGGLE) == 0)
+				if(display.get_state() == STATE_ON) res = "OK";
 		}
 	printf("%s\n",res);
 	usleep(pause);
@@ -158,7 +158,7 @@ int main(int argc, char **argv, char **envp) {
 
 	printf("Home ... ");
 	res = "KO";
-	if (display.setCursor(true, true) == 0)
+	if (display.set_cursor(true, true) == 0)
 		if(display.home()) res = "OK";
 	printf("%s\n",res);
 	usleep(pause);
@@ -171,7 +171,7 @@ int main(int argc, char **argv, char **envp) {
 
 	printf("Write 0123456789ABCDEFGHILMNOPQ ... ");
 	res = "KO";
-	if(display.lcd_puts("0123456789ABCDEFGHILMNOPQ")) res = "OK";
+	if(display.dpy_puts("0123456789ABCDEFGHILMNOPQ")) res = "OK";
 	printf("%s\n",res);
 	usleep(pause);
 
@@ -179,7 +179,7 @@ int main(int argc, char **argv, char **envp) {
 	res = "KO";
 	display.clear(true);
 //	if(display.set_shift(STATE_ON )) res = "OK";
-	display.lcd_puts("0123456789");
+	display.dpy_puts("0123456789");
 	printf("%s\n",res);
 
 
@@ -187,7 +187,7 @@ int main(int argc, char **argv, char **envp) {
 
 	sleep(1);
 	printf("Close .... ");
-	if (display.lcd_close() < 0)
+	if (display.dpy_close() < 0)
 		printf("KO\n");
 	else
 		printf("OK\n");

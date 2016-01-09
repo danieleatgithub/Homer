@@ -14,16 +14,18 @@ using namespace std;
 namespace dpy {
 
 enum Direction_e {
-        LEFT = 0,
-        RIGHT
+	LEFT = 0,
+	RIGHT
 };
-class Lcd {
+class Dpy {
 
 private:
 	int fd;
 	uint8_t address;
 	string bus;
 	string rst;
+	int write_usleep;
+
 	string backlight;
 	Pin* backlight_pin;
 	Pin* reset_pin;
@@ -31,35 +33,47 @@ private:
 	static const unsigned int freqency_3_volts[8];
 	static const unsigned int freqency_5_volts[8];
 
+	bool backlight_state;
+
 	uint8_t reg_display;                    // Control display register
 	uint8_t reg_bias_frequency;     // Bias Frequency
 	uint8_t reg_function_set; // Function set register
 	uint8_t reg_contrast_set; // Contrast set register
 	uint8_t reg_power_icon;         // Power icon and contrast high bits
 	uint8_t reg_follower;   // Follower register
-	bool backlight_state;
+
+
 	union entry_mode_set_u entry_mode;
+	union display_mode_set_u display_mode;
+	union cursor_display_shift_u cursor_display_shift;
+	union function_set_u function_set;
+	union bias_osc_frequency_adj_u bias_osc_frequency_adj;
+	union icon_ram_address_u icon_ram_address;
+	union pow_icon_contrast_u pow_icon_contrast;
+	union follower_u follower;
+	union contrast_set_u contrast_set;
+
 
 	int write_cmd(uint8_t data);
 	int write_data(uint8_t data);
-	int lcd_write(int type, uint8_t data);
+	int dpy_write(int type, uint8_t data);
 public:
 
-	Lcd(const char *bus, const char *rst, const char *backlight);
-	virtual ~Lcd();
-	int lcd_open();
-	int lcd_close();
-	int setStatus(State_e state);
-	State_e getStatus();
-	bool isCursorON();
-	unsigned int getContrast();
-	int setContrast(uint8_t value);
-	int setCursor(bool state, bool blink);
-	int lcd_putchar(unsigned char ch);
-	int lcd_puts(char *str);
-	int setBacklight(State_e state);
-	State_e getBacklight();
-	int lcd_reset();
+	Dpy(const char *bus, const char *rst, const char *backlight);
+	virtual ~Dpy();
+	int dpy_open();
+	int dpy_close();
+	int set_state(State_e state);
+	State_e get_state();
+	bool is_cursor_on();
+	unsigned int get_contrast();
+	int set_contrast(uint8_t value);
+	int set_cursor(bool state, bool blink);
+	int dpy_putchar(unsigned char ch);
+	int dpy_puts(char *str);
+	int set_backlight(State_e state);
+	State_e get_backlight();
+	int dpy_reset();
 	int clear();
 	int clear(bool home);
 	int home();

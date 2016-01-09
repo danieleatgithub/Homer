@@ -21,14 +21,17 @@ const unsigned int freqency_3_volts[8] = { 122, 131, 144, 161, 183, 221, 274,
 const unsigned int freqency_5_volts[8] = { 120, 133, 149, 167, 192, 227, 277,
 		347 };
 
-Lcd::Lcd(const char *bus, const char *rst, const char *backlight) {
+Dpy::Dpy(const char *bus, const char *rst, const char *backlight) {
 	struct pinmap_s *pin;
 
+	this->write_usleep = 100;
 	this->fd = -1;
 	this->bus = string(bus);
 	this->rst = string(rst);
 	this->backlight = string(backlight);
 	this->address = WINSTAR_I2C_ADD;
+	this->backlight_state = false;
+
 	this->reg_display = DISPLAY_CMD_CTRL | DISPLAY_ON;
 	this->reg_function_set = FUNCTION_SET_CMD | FUNCTION_SET_DL
 			| FUNCTION_SET_2LINES;
@@ -36,8 +39,19 @@ Lcd::Lcd(const char *bus, const char *rst, const char *backlight) {
 	this->reg_contrast_set = CONTRAST_SET_CMD | CONTRAST_DEFAULT;
 	this->reg_power_icon = POWER_ICON_CMD | POWER_ICON_BOOST;
 	this->reg_follower = FOLLOWER_CMD | FOLLOWER_ON | FOLLOWER_DEFAULT;
-	this->backlight_state = false;
+
+
+	this->display_mode.reg = { 0b0, 0b0, 0b1, 0b00001 };
+	this->function_set.reg  = { 0b0, 0b0, 0b0, 0b1, 0b1, 0b001 };
+	this->bias_osc_frequency_adj.reg = { 0b010, 0b0, 0b0001 };
+	this->contrast_set = { CONTRAST_DEFAULT, 0b0111 };
+	this->pow_icon_contrast = { 0b00, 0b1, 0b0, 0b0101 };
+	this->follower = { 0b111, 0b1, 0b0110 };
 	this->entry_mode.reg = { 0b0, 0b1,  0b000001};
+	this->cursor_display_shift.reg  = { 0b00, 0b1, 0b1, 0b0001 };
+	this->icon_ram_address.reg = { 0b0, 0b0100 };
+
+
 
 	pin = Pin::getPinDescriptor(this->rst.c_str());
 	reset_pin = new Pin(pin);
@@ -53,12 +67,12 @@ Lcd::Lcd(const char *bus, const char *rst, const char *backlight) {
 	backlight_pin->setState(STATE_ON); // Set default Display state
 }
 
-Lcd::~Lcd() {
-	lcd_close();
+Dpy::~Dpy() {
+	dpy_close();
 	delete (reset_pin);
 	delete (backlight_pin);
 }
-int Lcd::lcd_open() {
+int Dpy::dpy_open() {
 	int ret = 0;
 
 	// Open i2c
@@ -86,7 +100,7 @@ int Lcd::lcd_open() {
 	return (ret);
 }
 
-int Lcd::lcd_close() {
+int Dpy::dpy_close() {
 	int ret;
 	ret = close(this->fd);
 	ret = reset_pin->pin_close();
@@ -94,28 +108,28 @@ int Lcd::lcd_close() {
 	return (ret);
 }
 
-int Lcd::lcd_reset() {
+int Dpy::dpy_reset() {
 	return (reset_pin->flip(1000));
 }
-int Lcd::setBacklight(State_e state) {
+int Dpy::set_backlight(State_e state) {
 	return (backlight_pin->setState(state));
 }
-int Lcd::clear() {
+int Dpy::clear() {
 	return (write_cmd(CLEAR_DISPLAY_CMD));
 }
 
-int Lcd::clear(bool home) {
+int Dpy::clear(bool home) {
 	int ret;
 	ret = write_cmd(CLEAR_DISPLAY_CMD);
 	if (home) ret += write_cmd(RETURN_HOME_CMD);
 	return(ret);
 }
 
-int Lcd::home() {
+int Dpy::home() {
 	return (write_cmd(RETURN_HOME_CMD));
 }
 
-int Lcd::setStatus(State_e state) {
+int Dpy::set_state(State_e state) {
 	int ret = -1;
 	uint8_t newreg = reg_display;
 	if (state == STATE_ON
@@ -129,13 +143,13 @@ int Lcd::setStatus(State_e state) {
 		this->reg_display = newreg;
 	return (ret);
 }
-State_e Lcd::getStatus() {
+State_e Dpy::get_state() {
 	if ((reg_display & DISPLAY_ON))
 		return (STATE_ON);
 	else
 		return (STATE_OFF);
 }
-int Lcd::setCursor(bool state, bool blink) {
+int Dpy::set_cursor(bool state, bool blink) {
 	int ret = -1;
 	unsigned char newreg = reg_display;
 	if(state) newreg |= DISPLAY_CURSOR;
@@ -148,14 +162,14 @@ int Lcd::setCursor(bool state, bool blink) {
 	return (ret);
 }
 
-bool Lcd::isCursorON() {
+bool Dpy::is_cursor_on() {
 	return ((reg_display & DISPLAY_CURSOR) != 0);
 }
-unsigned int Lcd::getContrast() {
+unsigned int Dpy::get_contrast() {
 	return (((reg_power_icon & POWER_ICON_CONTR_MASK) << 4)
 			| (reg_contrast_set & CONTRAST_MAX));
 }
-int Lcd::setContrast(uint8_t value) {
+int Dpy::set_contrast(uint8_t value) {
 	int ret = -2;
 /*  FIXME verificare se compatibile con alimentazione
  * pagina 30 C5,C4,C3,C2,C1,C0 can only be set when internal follower is used (OPF1=0,OPF2=0)
@@ -179,10 +193,10 @@ int Lcd::setContrast(uint8_t value) {
 */
 	return (ret);
 }
-int Lcd::lcd_putchar(unsigned char ch) {
+int Dpy::dpy_putchar(unsigned char ch) {
 	return (write_data(ch));
 }
-int Lcd::lcd_puts(char *str) {
+int Dpy::dpy_puts(char *str) {
 	char *p = str;
 	unsigned int ret = 0;
 	while (ret == 0 && p && *p)
@@ -190,12 +204,12 @@ int Lcd::lcd_puts(char *str) {
 	return ((p ? (p - str) : -1));
 }
 
-int Lcd::set_direction(dpy::Direction_e dir) {
+int Dpy::set_direction(dpy::Direction_e dir) {
 	entry_mode.reg.versus = dir;
 	return(write_cmd(entry_mode.raw));
 }
 
-int Lcd::set_shift(State_e state) {
+int Dpy::set_shift(State_e state) {
 	if(state == STATE_TOGGLE) entry_mode.reg.shift = !entry_mode.reg.shift;
 	if(state == STATE_ON) entry_mode.reg.shift = 1;
 	if(state == STATE_OFF) entry_mode.reg.shift = 0;
@@ -204,13 +218,13 @@ int Lcd::set_shift(State_e state) {
 
 // private methods
 
-int Lcd::write_cmd(unsigned char data) {
-	return (this->lcd_write(0, data));
+int Dpy::write_cmd(unsigned char data) {
+	return (this->dpy_write(0, data));
 }
-int Lcd::write_data(uint8_t data) {
-	return (this->lcd_write(0x40, data));
+int Dpy::write_data(uint8_t data) {
+	return (this->dpy_write(0x40, data));
 }
-int Lcd::lcd_write(int type, uint8_t data) {
+int Dpy::dpy_write(int type, uint8_t data) {
 	unsigned char buffer[2];
 	buffer[0] = (unsigned char) type;
 	buffer[1] = data;
@@ -220,7 +234,7 @@ int Lcd::lcd_write(int type, uint8_t data) {
 		return -1;
 	}
 	fsync(fd);
-	usleep(1000);
+	usleep(write_usleep);
 	return (0);
 }
 
