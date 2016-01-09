@@ -33,7 +33,7 @@ PATH: /usr/bin
 PATH: /bin
 PATH: /usr/local/games
 PATH: /usr/games
-PATH: /wks/buildroot-2015.08.1/output/host/usr/bin/
+PATH: /wks/buildroot-2015.11.1/output/host/usr/bin/
 
 
 ## ----------- ##

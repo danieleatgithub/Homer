@@ -48,13 +48,14 @@ using namespace dpy;
  * Main
  ****************************************************************/
 int main(int argc, char **argv, char **envp) {
-	printf("ciao");
+	const char* res;
+    int pause = 500000;
 
 	initialize();
 	BasicConfigurator config;
 	config.configure();
 	Logger logger = Logger::getInstance(LOG4CPLUS_TEXT("main"));
-	logger.setLogLevel(DEBUG_LOG_LEVEL);
+	logger.setLogLevel(ERROR_LOG_LEVEL);
 	LOG4CPLUS_TRACE(logger, "printMessages()");
 	LOG4CPLUS_DEBUG(logger, "This is a DEBUG message");
 	LOG4CPLUS_INFO(logger, "This is a INFO message");
@@ -68,7 +69,13 @@ int main(int argc, char **argv, char **envp) {
 		printf("no arguments needed\n");
 		exit(-1);
 	}
-	printf("WinstarDisplay tests \n\n");
+	printf("WinstarDisplay tests .. resetting ...\n");
+
+	if(display.lcd_reset() < 0)
+		printf("KO\n");
+	else
+		printf("OK\n");
+
 	printf("Open with Light on ... ");
 	if (display.lcd_open() < 0)
 		printf("KO\n");
@@ -86,7 +93,7 @@ int main(int argc, char **argv, char **envp) {
 		printf("KO\n");
 	else
 		printf("OK\n");
-	sleep(1);
+	usleep(pause);
 
 	printf("Turn on light ... ");
 	if (display.setBacklight(STATE_TOGGLE) < 0)
@@ -95,25 +102,88 @@ int main(int argc, char **argv, char **envp) {
 		printf("OK\n");
 
 	printf("Set Cursor ON and blinking ... ");
-	if (display.setCursor(true, true) < 0)
-		printf("KO\n");
-	else
-		printf("OK\n");
-	sleep(1);
+	res = "KO";
+	if (display.setCursor(true, true) == 0)
+		if(display.isCursorON()) res = "OK";
+	printf("%s\n",res);
+	usleep(pause);
 
 	printf("Set Cursor ON and not blinking ... ");
-	if (display.setCursor(true, false) < 0)
-		printf("KO\n");
-	else
-		printf("OK\n");
-	sleep(1);
+	res = "KO";
+	if (display.setCursor(true, false) == 0)
+		if(display.isCursorON()) res = "OK";
+	printf("%s\n",res);
+	usleep(pause);
 
 	printf("Set Cursor off and not blinking ... ");
-	if (display.setCursor(true, false) < 0)
-		printf("KO\n");
-	else
-		printf("OK\n");
+	res = "KO";
+	if (display.setCursor(false, false) == 0)
+		if(!display.isCursorON()) res = "OK";
+	printf("%s\n",res);
+	usleep(pause);
+
+	printf("Set Display off  ... ");
+	res = "KO";
+	if (display.setStatus(STATE_OFF) == 0)
+		if(display.getStatus() == STATE_OFF) res = "OK";
+	printf("%s\n",res);
+	usleep(pause);
+
+	printf("Set Display on  ... ");
+	res = "KO";
+	if (display.setStatus(STATE_ON) == 0)
+		if(display.getStatus() == STATE_ON) res = "OK";
+	printf("%s\n",res);
+	usleep(pause);
+
+	printf("Set Display toggle  ... ");
+	res = "KO";
+	if (display.setStatus(STATE_TOGGLE) == 0)
+		if(display.getStatus() == STATE_OFF)  {
+			usleep(pause);
+			if (display.setStatus(STATE_TOGGLE) == 0)
+				if(display.getStatus() == STATE_ON) res = "OK";
+		}
+	printf("%s\n",res);
+	usleep(pause);
+
+/*
+	printf("Set Contrast on  ... ");
+	res = "KO";
+	if (display.setContrast(10) == 0)
+		if(display.getContrast() == 10) res = "OK";
+	printf("%s\n",res);
 	sleep(1);
+*/
+
+	printf("Home ... ");
+	res = "KO";
+	if (display.setCursor(true, true) == 0)
+		if(display.home()) res = "OK";
+	printf("%s\n",res);
+	usleep(pause);
+
+	printf("Clear ... ");
+	res = "KO";
+	if(display.clear()) res = "OK";
+	printf("%s\n",res);
+	usleep(pause);
+
+	printf("Write 0123456789ABCDEFGHILMNOPQ ... ");
+	res = "KO";
+	if(display.lcd_puts("0123456789ABCDEFGHILMNOPQ")) res = "OK";
+	printf("%s\n",res);
+	usleep(pause);
+
+	printf("Enable shift 0123456789 .....");
+	res = "KO";
+	display.clear(true);
+//	if(display.set_shift(STATE_ON )) res = "OK";
+	display.lcd_puts("0123456789");
+	printf("%s\n",res);
+
+
+	usleep(pause);
 
 	sleep(1);
 	printf("Close .... ");

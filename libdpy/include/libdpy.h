@@ -6,11 +6,17 @@
 #include <string>
 #include <stdint.h>
 
+#include "winstar.h"
 #include "pin.h"
 
 using namespace std;
 
 namespace dpy {
+
+enum Direction_e {
+        LEFT = 0,
+        RIGHT
+};
 class Lcd {
 
 private:
@@ -32,6 +38,7 @@ private:
 	uint8_t reg_power_icon;         // Power icon and contrast high bits
 	uint8_t reg_follower;   // Follower register
 	bool backlight_state;
+	union entry_mode_set_u entry_mode;
 
 	int write_cmd(uint8_t data);
 	int write_data(uint8_t data);
@@ -54,7 +61,11 @@ public:
 	State_e getBacklight();
 	int lcd_reset();
 	int clear();
+	int clear(bool home);
 	int home();
+	int set_direction(dpy::Direction_e dir);
+	int set_shift(State_e state);
+
 };
 }
 #endif

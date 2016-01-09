@@ -7,6 +7,7 @@
 
 #ifndef WINSTAR_H_
 #define WINSTAR_H_
+#include <stdint.h>
 
 
 #define WINSTAR_I2C_ADD                 0x3e
@@ -56,8 +57,15 @@
 #define FOLLOWER_MAX                    0x07
 
 // Set DDRAM Address
-#define DDRAM_ADD_CMD                   0x80
+#define DDRAM_ADD_CMD                  0x80
 
-
+union entry_mode_set_u {
+struct entry_mode_set_t {
+	uint8_t shift:1;
+	uint8_t versus:1;
+	uint8_t code:6;
+}reg;
+uint8_t raw;
+};
 
 #endif /* WINSTAR_H_ */

@@ -45,7 +45,9 @@
 					</sourceEntries>
 				</configuration>
 			</storageModule>
-			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
+				<externalSettings containerId="libdpy;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.467922792" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
+			</storageModule>
 			<storageModule moduleId="packages"/>
 		</cconfiguration>
 		<cconfiguration id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.467922792">
@@ -249,7 +251,23 @@
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
 	</storageModule>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Configuration_with_Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)3">
+			<resource resourceType="PROJECT" workspacePath="/libdpy"/>
+		</configuration>
+		<configuration configurationName="Configuration_with_Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)2">
+			<resource resourceType="PROJECT" workspacePath="/libdpy"/>
+		</configuration>
+		<configuration configurationName="Configuration_with_Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)1">
+			<resource resourceType="PROJECT" workspacePath="/libdpy"/>
+		</configuration>
+		<configuration configurationName="Configuration_with_Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)0">
+			<resource resourceType="PROJECT" workspacePath="/libdpy"/>
+		</configuration>
+		<configuration configurationName="Configuration_with_Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)4">
+			<resource resourceType="PROJECT" workspacePath="/libdpy"/>
+		</configuration>
+	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
 		<buildTargets>
 			<target name="all" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">

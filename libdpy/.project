@@ -3,6 +3,7 @@
 	<name>libdpy</name>
 	<comment></comment>
 	<projects>
+		<project>libdpy</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -180,7 +180,7 @@ dpytools-dpytools.o: dpytools.cpp \
  ../include/libdpy.h \
  /wks/buildroot-2015.11.1/output/host/usr/lib/gcc/arm-buildroot-linux-gnueabihf/4.9.3/include/stdint.h \
  /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/stdint.h \
- ../include/pin.h
+ ../include/winstar.h ../include/pin.h
 
 /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/stdc-predef.h:
 
@@ -543,5 +543,7 @@ dpytools-dpytools.o: dpytools.cpp \
 /wks/buildroot-2015.11.1/output/host/usr/lib/gcc/arm-buildroot-linux-gnueabihf/4.9.3/include/stdint.h:
 
 /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/stdint.h:
+
+../include/winstar.h:
 
 ../include/pin.h:
