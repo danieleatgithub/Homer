@@ -4,6 +4,10 @@ AC_PREREQ(2.59)
 AC_INIT(libdpy, 1.0)
 AC_PROG_CXX
 
+
+AC_GNU_SOURCE
+dnl AX_CXX_COMPILE_STDCXX_11(noext,mandatory)
+
 AC_CANONICAL_SYSTEM
 
 dnl Initialize automake
