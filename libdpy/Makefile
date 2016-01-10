@@ -87,7 +87,6 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = x86_64-unknown-linux-gnu
 host_triplet = arm-buildroot-linux-gnueabihf
-target_triplet = arm-buildroot-linux-gnueabihf
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -219,7 +218,7 @@ CXXCPP = arm-buildroot-linux-gnueabihf-g++ -E
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g
 CYGPATH_W = echo
-DEFS = -DPACKAGE_NAME=\"libdpy\" -DPACKAGE_TARNAME=\"libdpy\" -DPACKAGE_VERSION=\"1.0\" -DPACKAGE_STRING=\"libdpy\ 1.0\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -D__EXTENSIONS__=1 -D_ALL_SOURCE=1 -D_GNU_SOURCE=1 -D_POSIX_PTHREAD_SEMANTICS=1 -D_TANDEM_SOURCE=1 -DPACKAGE=\"libdpy\" -DVERSION=\"1.0\" -DHAVE_DLFCN_H=1 -DLT_OBJDIR=\".libs/\"
+DEFS = -DPACKAGE_NAME=\"libdpy\" -DPACKAGE_TARNAME=\"libdpy\" -DPACKAGE_VERSION=\"1.0\" -DPACKAGE_STRING=\"libdpy\ 1.0\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"libdpy\" -DVERSION=\"1.0\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_DLFCN_H=1 -DLT_OBJDIR=\".libs/\"
 DEPDIR = .deps
 DLLTOOL = false
 DSYMUTIL = 
@@ -317,11 +316,7 @@ sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 srcdir = .
 sysconfdir = ${prefix}/etc
-target = arm-buildroot-linux-gnueabihf
 target_alias = 
-target_cpu = arm
-target_os = linux-gnueabihf
-target_vendor = buildroot
 top_build_prefix = 
 top_builddir = .
 top_srcdir = .

@@ -2,16 +2,17 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
 AC_INIT(libdpy, 1.0)
-AC_PROG_CXX
 
 
-AC_GNU_SOURCE
-dnl AX_CXX_COMPILE_STDCXX_11(noext,mandatory)
+AC_CONFIG_MACRO_DIR([m4])
 
-AC_CANONICAL_SYSTEM
 
 dnl Initialize automake
 AM_INIT_AUTOMAKE
+
+AC_LANG([C++])
+AC_PROG_CXX
+dnl AX_CXX_COMPILE_STDCXX_11([noext])
 
 dnl this allows us specify individual liking flags for each target
 AM_PROG_CC_C_O 

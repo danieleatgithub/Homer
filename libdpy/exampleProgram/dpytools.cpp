@@ -125,36 +125,35 @@ int main(int argc, char **argv, char **envp) {
 	printf("Set Display off  ... ");
 	res = "KO";
 	if (display.set_state(STATE_OFF) == 0)
-		if(display.get_state() == STATE_OFF) res = "OK";
+		if(!display.is_display_on()) res = "OK";
 	printf("%s\n",res);
 	usleep(pause);
 
 	printf("Set Display on  ... ");
 	res = "KO";
 	if (display.set_state(STATE_ON) == 0)
-		if(display.get_state() == STATE_ON) res = "OK";
+		if(display.is_display_on()) res = "OK";
 	printf("%s\n",res);
 	usleep(pause);
 
 	printf("Set Display toggle  ... ");
 	res = "KO";
 	if (display.set_state(STATE_TOGGLE) == 0)
-		if(display.get_state() == STATE_OFF)  {
+		if(!display.is_display_on())  {
 			usleep(pause);
 			if (display.set_state(STATE_TOGGLE) == 0)
-				if(display.get_state() == STATE_ON) res = "OK";
+				if(display.is_display_on()) res = "OK";
 		}
 	printf("%s\n",res);
 	usleep(pause);
 
-/*
+
 	printf("Set Contrast on  ... ");
 	res = "KO";
-	if (display.setContrast(10) == 0)
-		if(display.getContrast() == 10) res = "OK";
+	if (display.set_contrast(0) == 0)
+		if(display.get_contrast() == 0) res = "OK";
 	printf("%s\n",res);
-	sleep(1);
-*/
+	usleep(pause);
 
 	printf("Home ... ");
 	res = "KO";
@@ -178,8 +177,11 @@ int main(int argc, char **argv, char **envp) {
 	printf("Enable shift 0123456789 .....");
 	res = "KO";
 	display.clear(true);
-//	if(display.set_shift(STATE_ON )) res = "OK";
-	display.dpy_puts("0123456789");
+	if(display.set_shift(STATE_ON )) res = "OK";
+	for (int i=(int)'A'; i<(int)'Q';i++) {
+		display.dpy_putchar((unsigned char)i);
+		usleep(600000);
+	}
 	printf("%s\n",res);
 
 

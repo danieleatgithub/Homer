@@ -35,14 +35,6 @@ private:
 
 	bool backlight_state;
 
-	uint8_t reg_display;                    // Control display register
-	uint8_t reg_bias_frequency;     // Bias Frequency
-	uint8_t reg_function_set; // Function set register
-	uint8_t reg_contrast_set; // Contrast set register
-	uint8_t reg_power_icon;         // Power icon and contrast high bits
-	uint8_t reg_follower;   // Follower register
-
-
 	union entry_mode_set_u entry_mode;
 	union display_mode_set_u display_mode;
 	union cursor_display_shift_u cursor_display_shift;
@@ -64,7 +56,7 @@ public:
 	int dpy_open();
 	int dpy_close();
 	int set_state(State_e state);
-	State_e get_state();
+	bool is_display_on();
 	bool is_cursor_on();
 	unsigned int get_contrast();
 	int set_contrast(uint8_t value);

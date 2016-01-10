@@ -16,10 +16,8 @@
 
 namespace dpy {
 
-const unsigned int freqency_3_volts[8] = { 122, 131, 144, 161, 183, 221, 274,
-		347 };
-const unsigned int freqency_5_volts[8] = { 120, 133, 149, 167, 192, 227, 277,
-		347 };
+const unsigned int freqency_3_volts[8] = { 122, 131, 144, 161, 183, 221, 274, 347 };
+const unsigned int freqency_5_volts[8] = { 120, 133, 149, 167, 192, 227, 277, 347 };
 
 Dpy::Dpy(const char *bus, const char *rst, const char *backlight) {
 	struct pinmap_s *pin;
@@ -32,26 +30,15 @@ Dpy::Dpy(const char *bus, const char *rst, const char *backlight) {
 	this->address = WINSTAR_I2C_ADD;
 	this->backlight_state = false;
 
-	this->reg_display = DISPLAY_CMD_CTRL | DISPLAY_ON;
-	this->reg_function_set = FUNCTION_SET_CMD | FUNCTION_SET_DL
-			| FUNCTION_SET_2LINES;
-	this->reg_bias_frequency = BIAS_FREQ_CMD | BIAS_FREQ_3V_DEFAULT;
-	this->reg_contrast_set = CONTRAST_SET_CMD | CONTRAST_DEFAULT;
-	this->reg_power_icon = POWER_ICON_CMD | POWER_ICON_BOOST;
-	this->reg_follower = FOLLOWER_CMD | FOLLOWER_ON | FOLLOWER_DEFAULT;
-
-
-	this->display_mode.reg = { 0b0, 0b0, 0b1, 0b00001 };
-	this->function_set.reg  = { 0b0, 0b0, 0b0, 0b1, 0b1, 0b001 };
-	this->bias_osc_frequency_adj.reg = { 0b010, 0b0, 0b0001 };
-	this->contrast_set = { CONTRAST_DEFAULT, 0b0111 };
-	this->pow_icon_contrast = { 0b00, 0b1, 0b0, 0b0101 };
-	this->follower = { 0b111, 0b1, 0b0110 };
-	this->entry_mode.reg = { 0b0, 0b1,  0b000001};
-	this->cursor_display_shift.reg  = { 0b00, 0b1, 0b1, 0b0001 };
-	this->icon_ram_address.reg = { 0b0, 0b0100 };
-
-
+	this->display_mode.reg 				= { 0b0, 0b0, 0b1, 0b00001 };
+	this->function_set.reg  			= { 0b0, 0b0, 0b0, 0b1, 0b1, 0b001 };
+	this->bias_osc_frequency_adj.reg 	= { 0b100, 0b0, 0b0001 };
+	this->contrast_set.reg 				= { CONTRAST_DEFAULT, 0b0111 };
+	this->pow_icon_contrast.reg 		= { 0b00, 0b1, 0b0, 0b0101 };
+	this->follower.reg 					= { FOLLOWER_DEFAULT, 0b1, 0b0110 };
+	this->entry_mode.reg 				= { 0b0, 0b1,  0b000001};
+	this->cursor_display_shift.reg  	= { 0b00, 0b1, 0b1, 0b0001 };
+	this->icon_ram_address.reg 			= { 0b0, 0b0100 };
 
 	pin = Pin::getPinDescriptor(this->rst.c_str());
 	reset_pin = new Pin(pin);
@@ -85,14 +72,14 @@ int Dpy::dpy_open() {
 		return -1;
 	}
 
-	ret = write_cmd(reg_function_set);
-	reg_function_set |= FUNCTION_SET_EXTENS;
-	ret = write_cmd(reg_function_set);
-	ret = write_cmd(reg_bias_frequency);
-	ret = write_cmd(reg_contrast_set);
-	ret = write_cmd(reg_power_icon);
-	ret = write_cmd(reg_follower);
-	ret = write_cmd(reg_display);
+	ret = write_cmd(function_set.raw);
+	function_set.reg.extended_instruction_set = 1;
+	ret = write_cmd(function_set.raw);
+	ret = write_cmd(bias_osc_frequency_adj.raw);
+	ret = write_cmd(contrast_set.raw);
+	ret = write_cmd(pow_icon_contrast.raw);
+	ret = write_cmd(follower.raw);
+	ret = write_cmd(display_mode.raw);
 
 	reset_pin->pin_open();
 	backlight_pin->pin_open();
@@ -131,66 +118,54 @@ int Dpy::home() {
 
 int Dpy::set_state(State_e state) {
 	int ret = -1;
-	uint8_t newreg = reg_display;
-	if (state == STATE_ON
-			|| (state == STATE_TOGGLE && !(reg_display & DISPLAY_ON)))
-		newreg |= DISPLAY_ON;
-	if (state == STATE_OFF
-			|| (state == STATE_TOGGLE && (reg_display & DISPLAY_ON)))
-		newreg &=  ~DISPLAY_ON;
-	ret = write_cmd(newreg);
-	if (ret >= 0)
-		this->reg_display = newreg;
+	unsigned char oldreg = display_mode.raw;
+	if (state == STATE_ON) display_mode.reg.display_on = 1;
+	if (state == STATE_OFF) display_mode.reg.display_on = 0;
+	if (state == STATE_TOGGLE) display_mode.reg.display_on = !display_mode.reg.display_on;
+	ret = write_cmd(display_mode.raw);
+	if (ret < 0) display_mode.raw = oldreg;
 	return (ret);
 }
-State_e Dpy::get_state() {
-	if ((reg_display & DISPLAY_ON))
-		return (STATE_ON);
-	else
-		return (STATE_OFF);
+bool Dpy::is_display_on() {
+	return(display_mode.reg.display_on == 1);
 }
 int Dpy::set_cursor(bool state, bool blink) {
 	int ret = -1;
-	unsigned char newreg = reg_display;
-	if(state) newreg |= DISPLAY_CURSOR;
-	else      newreg &= ~DISPLAY_CURSOR;
-	if(blink) newreg |= DISPLAY_CURSOR_BLINK;
-	else      newreg &= ~DISPLAY_CURSOR_BLINK;
-	ret = write_cmd(newreg);
-	if (ret >= 0)
-		this->reg_display = newreg;
+	unsigned char oldreg = display_mode.raw;
+	if(state) display_mode.reg.cursor_on = 1;
+	else      display_mode.reg.cursor_on = 0;
+	if(blink) display_mode.reg.blink_on  = 1;
+	else      display_mode.reg.blink_on  = 0;
+	ret = write_cmd(display_mode.raw);
+	if (ret < 0) display_mode.raw = oldreg;
 	return (ret);
 }
 
 bool Dpy::is_cursor_on() {
-	return ((reg_display & DISPLAY_CURSOR) != 0);
+	return (display_mode.reg.cursor_on == 1);
 }
 unsigned int Dpy::get_contrast() {
-	return (((reg_power_icon & POWER_ICON_CONTR_MASK) << 4)
-			| (reg_contrast_set & CONTRAST_MAX));
+	return ((unsigned int)(	pow_icon_contrast.reg.contrast_high << 4 |
+							contrast_set.reg.contrast_low));
 }
 int Dpy::set_contrast(uint8_t value) {
 	int ret = -2;
-/*  FIXME verificare se compatibile con alimentazione
- * pagina 30 C5,C4,C3,C2,C1,C0 can only be set when internal follower is used (OPF1=0,OPF2=0)
- *
-	unsigned char reg = reg_contrast_set;
-	if (value > CONTRAST_MAX)
-		return (-1);
-	reg |= (CONTRAST_MASK & value);
-	ret = write_cmd(reg);
-	if (ret < 0)
-		return (ret);
-	reg_contrast_set = reg;
-	reg = reg_power_icon;
-	if ((reg & POWER_ICON_CONTR_MASK) != (value & POWER_ICON_CONTR_MASK)) {
-		reg |= (POWER_ICON_CONTR_MASK & value);
-		ret = write_cmd(reg);
-		if (ret < 0)
-			return (ret);
-		reg_contrast_set = reg;
+	unsigned char oldreg;
+	if (value > CONTRAST_MAX) return (-2);
+	oldreg = pow_icon_contrast.raw;
+	pow_icon_contrast.reg.contrast_high = (value >> 4);
+	ret = write_cmd(pow_icon_contrast.raw);
+	if(ret < 0) {
+		pow_icon_contrast.raw = oldreg;
+		return(ret);
 	}
-*/
+	oldreg = contrast_set.raw;
+	contrast_set.reg.contrast_low = (value & 0xf0);
+	ret = write_cmd(contrast_set.raw);
+	if(ret < 0) {
+		contrast_set.raw = oldreg;
+		return(ret);
+	}
 	return (ret);
 }
 int Dpy::dpy_putchar(unsigned char ch) {
