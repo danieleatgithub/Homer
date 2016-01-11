@@ -71,7 +71,7 @@ int main(int argc, char **argv, char **envp) {
 	}
 	printf("WinstarDisplay tests .. resetting ...\n");
 
-	if(display.dpy_reset() < 0)
+	if(display.reset() < 0)
 		printf("KO\n");
 	else
 		printf("OK\n");
@@ -81,7 +81,7 @@ int main(int argc, char **argv, char **envp) {
 		printf("KO\n");
 	else
 		printf("OK\n");
-
+/*
 	printf("puts Ciao on Display ... ");
 	if (display.dpy_puts((char *) "Ciao") < 0)
 		printf("KO\n");
@@ -168,11 +168,22 @@ int main(int argc, char **argv, char **envp) {
 	printf("%s\n",res);
 	usleep(pause);
 
-	printf("Write 0123456789ABCDEFGHILMNOPQ ... ");
+	printf("Set double height ... ");
 	res = "KO";
-	if(display.dpy_puts("0123456789ABCDEFGHILMNOPQ")) res = "OK";
+	if(display.set_double_height(STATE_ON)) {
+		usleep(pause);
+		if(display.dpy_puts("012345")) {
+			if(display.set_double_height(STATE_TOGGLE)) {
+				res = "OK";
+			}
+
+		}
+	}
 	printf("%s\n",res);
 	usleep(pause);
+
+
+
 
 	printf("Enable shift 0123456789 .....");
 	res = "KO";
@@ -183,7 +194,23 @@ int main(int argc, char **argv, char **envp) {
 		usleep(600000);
 	}
 	printf("%s\n",res);
+*/
 
+	display.clear();
+	display.set_two_lines(STATE_ON);
+	display.set_shift(STATE_ON);
+	display.set_contrast(18);
+	display.puts("Daniele");
+	display.puts("Tiziana");
+	display.puts("Claudia");
+	display.puts("Luciana");
+	display.puts("Agnese");
+	display.puts("Flavia");
+	display.puts("Chiara");
+	display.puts("Laura");
+	display.puts("Katia");
+	display.set_two_lines(STATE_OFF);
+	display.set_shift(STATE_OFF);
 
 	usleep(pause);
 

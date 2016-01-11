@@ -46,31 +46,36 @@ private:
 	union contrast_set_u contrast_set;
 
 
-	int write_cmd(uint8_t data);
-	int write_data(uint8_t data);
-	int dpy_write(int type, uint8_t data);
+	int write_is0_cmd(unsigned char data);
+	int write_is1_cmd(unsigned char data);
+	int write_data(unsigned char data);
+	int dpy_write(int type, unsigned char data);
+	int init();
 public:
 
 	Dpy(const char *bus, const char *rst, const char *backlight);
 	virtual ~Dpy();
 	int dpy_open();
 	int dpy_close();
+	int putchar(unsigned char ch);
+	int puts(char *str);
+	int reset();
+
 	int set_state(State_e state);
 	bool is_display_on();
 	bool is_cursor_on();
 	unsigned int get_contrast();
-	int set_contrast(uint8_t value);
+	int set_contrast(unsigned char value);
 	int set_cursor(bool state, bool blink);
-	int dpy_putchar(unsigned char ch);
-	int dpy_puts(char *str);
 	int set_backlight(State_e state);
-	State_e get_backlight();
-	int dpy_reset();
+	bool is_backlight_on();
+	int set_two_lines(State_e state);
+	bool is_two_lines();
 	int clear();
-	int clear(bool home);
 	int home();
 	int set_direction(dpy::Direction_e dir);
 	int set_shift(State_e state);
+	int set_double_height(State_e state);
 
 };
 }

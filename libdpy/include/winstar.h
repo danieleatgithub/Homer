@@ -19,10 +19,12 @@
 #define CONTRAST_DEFAULT                0x02
 #define FOLLOWER_DEFAULT                0x07
 #define CONTRAST_MAX					0x3f
+
+
 union entry_mode_set_u {
 	struct entry_mode_set_t {
 		uint8_t shift:1;
-		uint8_t versus:1;
+		uint8_t cursor_right:1;
 		uint8_t code:6;
 	}reg;
 	unsigned char raw;
@@ -41,8 +43,8 @@ union display_mode_set_u {
 union cursor_display_shift_u {
 	struct cursor_display_shift_t {
 		uint8_t reserved:2;
-		uint8_t right_left:1;
-		uint8_t screen_cursor:1;
+		uint8_t direction_right:1;
+		uint8_t direction_screen:1;
 		uint8_t code:4;
 	}reg;
 	unsigned char raw;
