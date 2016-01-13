@@ -71,10 +71,10 @@ int main(int argc, char **argv, char **envp) {
 	}
 	printf("WinstarDisplay tests .. resetting ...\n");
 
-	if(display.reset() < 0)
-		printf("KO\n");
-	else
-		printf("OK\n");
+//	if(display.reset() < 0)
+//		printf("KO\n");
+//	else
+//		printf("OK\n");
 
 	printf("Open with Light on ... ");
 	if (display.dpy_open() < 0)
@@ -195,22 +195,46 @@ int main(int argc, char **argv, char **envp) {
 	}
 	printf("%s\n",res);
 */
-
+	printf("for gdb debugging\n");
+	display.set_backlight(false);
+	display.set_backlight(true);
+	display.reset();
 	display.clear();
-	display.set_two_lines(STATE_ON);
-	display.set_shift(STATE_ON);
-	display.set_contrast(18);
-	display.puts("Daniele");
+
+	display.set_two_lines(true);
+	display.set_two_lines(false);
+
+	display.set_shift(true,true); // screen aka insert
+	display.set_shift(true,false); // cursor aka overlay
+	display.set_shift(false,false); // disabled
+
+	display.home();
+	display.clear();
+
+	display.set_contrast(0);
+	display.set_contrast(display.get_contrast()+1);
+	display.set_contrast(display.get_contrast()-1);
+	display.set_contrast(15);
+
+	display.puts("12345678901234567890"); // 20
+	display.puts("1234567890"); // 10
+	display.puts("Daniele"); // 7
 	display.puts("Tiziana");
 	display.puts("Claudia");
 	display.puts("Luciana");
-	display.puts("Agnese");
+	display.puts("Agnese"); // 6
 	display.puts("Flavia");
 	display.puts("Chiara");
-	display.puts("Laura");
+	display.puts("Laura"); // 5
 	display.puts("Katia");
-	display.set_two_lines(STATE_OFF);
-	display.set_shift(STATE_OFF);
+	display.puts("DO"); // 2
+	display.puts("RE"); // 2
+	display.puts("MI"); // 2
+	display.puts("0"); // 1
+	display.puts("1"); // 1
+	display.puts("2"); // 1
+	display.puts("3"); // 1
+
 
 	usleep(pause);
 

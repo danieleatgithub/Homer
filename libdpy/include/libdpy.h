@@ -35,15 +35,15 @@ private:
 
 	bool backlight_state;
 
-	union entry_mode_set_u entry_mode;
-	union display_mode_set_u display_mode;
-	union cursor_display_shift_u cursor_display_shift;
-	union function_set_u function_set;
-	union bias_osc_frequency_adj_u bias_osc_frequency_adj;
-	union icon_ram_address_u icon_ram_address;
-	union pow_icon_contrast_u pow_icon_contrast;
-	union follower_u follower;
-	union contrast_set_u contrast_set;
+	unsigned char entry_mode;
+	unsigned char display_mode;
+	unsigned char cursor_display_shift;
+	unsigned char function_set;
+	unsigned char bias_osc_frequency_adj;
+	unsigned char icon_ram_address;
+	unsigned char pow_icon_contrast;
+	unsigned char follower;
+	unsigned char contrast_set;
 
 
 	int write_is0_cmd(unsigned char data);
@@ -61,21 +61,20 @@ public:
 	int puts(char *str);
 	int reset();
 
-	int set_state(State_e state);
+	int set_state(bool state);
 	bool is_display_on();
 	bool is_cursor_on();
-	unsigned int get_contrast();
-	int set_contrast(unsigned char value);
+	int get_contrast();
+	int set_contrast(int value);
 	int set_cursor(bool state, bool blink);
-	int set_backlight(State_e state);
+	int set_backlight(bool state);
 	bool is_backlight_on();
-	int set_two_lines(State_e state);
+	int set_two_lines(bool state);
 	bool is_two_lines();
 	int clear();
 	int home();
-	int set_direction(dpy::Direction_e dir);
-	int set_shift(State_e state);
-	int set_double_height(State_e state);
+	int set_shift(bool enabled, bool screen);
+	int set_double_height(bool state);
 
 };
 }
