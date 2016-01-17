@@ -41,11 +41,12 @@ Dpy::Dpy(const char *bus, const char *rst, const char *backlight) {
 	this->follower = 0;
 	this->contrast_set = 0;
 
-//	pin = Pin::getPinDescriptor(this->rst.c_str());
-//	reset_pin = new Pin(pin);
-//	reset_pin->pin_export();
-//	reset_pin->set_direction(OUT);
-//	reset_pin->pin_open();
+	pin = Pin::getPinDescriptor(this->rst.c_str());
+	reset_pin = new Pin(pin);
+	reset_pin->pin_export();
+	reset_pin->set_direction(OUT);
+	reset_pin->pin_open();
+	reset_pin->setState(STATE_ON);
 
 	pin = Pin::getPinDescriptor(this->backlight.c_str());
 	backlight_pin = new Pin(pin);
@@ -76,7 +77,6 @@ int Dpy::dpy_open() {
 	}
 
 	init();
-
 	return (ret);
 }
 
@@ -89,21 +89,22 @@ int Dpy::dpy_close() {
 int Dpy::reset() {
 	reset_pin->flip(1000); // 1 milli
 	usleep(100000); // 100 milli
+	init();
 }
 int Dpy::set_backlight(bool state) {
 	return (backlight_pin->setState((state ? STATE_ON : STATE_OFF)));
 }
 int Dpy::clear() {
-	return (write_is0_cmd(WSTAR_CLEAR_DISPLAY_CMD));
+	return (write_cmd(WSTAR_CLEAR_DISPLAY_CMD));
 }
 int Dpy::home() {
-	return (write_is0_cmd(WSTAR_RETURN_HOME_CMD));
+	return (write_cmd(WSTAR_RETURN_HOME_CMD));
 }
 int Dpy::set_state(bool state) {
 	int ret = -1;
 	unsigned char oldreg = display_mode;
 	(state ? display_mode |= WSTAR_DISPLAY_STATE : display_mode &= ~WSTAR_DISPLAY_STATE);
-	ret = write_is0_cmd(display_mode);
+	ret = write_cmd(display_mode);
 	if (ret < 0) display_mode = oldreg;
 	return (ret);
 }
@@ -115,7 +116,7 @@ int Dpy::set_cursor(bool state, bool blink) {
 	unsigned char oldreg = display_mode;
 	(state ? display_mode |= WSTAR_DISPLAY_CURSOR : display_mode &= ~WSTAR_DISPLAY_CURSOR);
 	(blink ? display_mode |= WSTAR_DISPLAY_BLINK : display_mode &= ~WSTAR_DISPLAY_BLINK);
-	ret = write_is0_cmd(display_mode);
+	ret = write_cmd(display_mode);
 	if (ret < 0) display_mode = oldreg;
 	return (ret);
 }
@@ -128,17 +129,18 @@ int Dpy::get_contrast() {
 int Dpy::set_contrast(int value) {
 	int ret = -2;
 	unsigned char oldreg;
+	set_extended_mode();
 	if (value > CONTRAST_MAX || value < 0 ) return (-2);
 	oldreg = contrast_set;
 	contrast_set = (value & WSTAR_CONTRAST_LOW_MASK);
-	ret = write_is1_cmd(contrast_set);
+	ret = write_cmd(contrast_set);
 	if(ret < 0) {
 		contrast_set = oldreg;
 		return(ret);
 	}
 	oldreg = pow_icon_contrast;
 	pow_icon_contrast |= ((value >> 4) & WSTAR_POW_ICON_CONTRAST_CNTH_MASK);
-	ret = write_is1_cmd(pow_icon_contrast);
+	ret = write_cmd(pow_icon_contrast);
 	if(ret < 0) {
 		pow_icon_contrast = oldreg;
 		return(ret);
@@ -161,18 +163,20 @@ bool Dpy::is_backlight_on() {
 int Dpy::set_shift(bool enabled, bool screen) {
 	int ret = 0;
 	(enabled ? entry_mode |= WSTAR_ENTRY_MODE_SHIFT_ON : entry_mode &= ~WSTAR_ENTRY_MODE_SHIFT_ON);
-	ret = write_is0_cmd(entry_mode);
+	ret = write_cmd(entry_mode);
+	ret += set_normal_mode();
 	(screen ? cursor_display_shift |= WSTAR_CUR_DPY_SHIFT_SCREEN  : cursor_display_shift &= ~WSTAR_CUR_DPY_SHIFT_SCREEN);
-	ret += write_is0_cmd(entry_mode);
+	ret += write_cmd(cursor_display_shift);
 	return(ret);
 }
 int Dpy::set_double_height(bool state) {
 	function_set |= WSTAR_FUNCTION_ONE_LINE_5X16;
-	return(write_is0_cmd(function_set));
+	return(write_cmd(function_set));
 }
 int Dpy::set_two_lines(bool state) {
+	function_set &= ~WSTAR_FUNCTION_ONE_LINE_5X8_MASK;
 	function_set |= WSTAR_FUNCTION_TWO_LINE_5X8;
-	return(write_is0_cmd(function_set));
+	return(write_cmd(function_set));
 }
 
 bool Dpy::is_two_lines() {
@@ -195,36 +199,24 @@ int Dpy::init() {
 	this->follower = FOLLOWER_DEFAULT | WSTAR_FOLLOWER_ON | WSTAR_FOLLOWER_CMD;
 	this->contrast_set = CONTRAST_DEFAULT | WSTAR_CONTRAST_LOW_CMD;
 	set_backlight(backlight_state);
-	ret = write_is0_cmd(function_set);
-	ret = write_is1_cmd(bias_osc_frequency_adj);
-	ret = write_is1_cmd(contrast_set);
-	ret = write_is1_cmd(pow_icon_contrast);
-	ret = write_is1_cmd(follower);
-	ret = write_is0_cmd(display_mode);
-	ret = write_is0_cmd(entry_mode);
-	ret = write_is0_cmd(cursor_display_shift);
+	ret = write_cmd(function_set);
+	ret = set_extended_mode();
+	ret = write_cmd(bias_osc_frequency_adj);
+	ret = write_cmd(contrast_set);
+	ret = write_cmd(pow_icon_contrast);
+	ret = write_cmd(follower);
+	ret = write_cmd(display_mode);
 	return(ret);
 }
-int Dpy::write_is0_cmd(unsigned char data) {
-	int ret;
-	if(function_set & WSTAR_FUNCTION_EXTENDED) {
-		function_set &=  ~WSTAR_FUNCTION_EXTENDED;
-		if((ret = dpy_write(0,function_set)) < 0) {
-			function_set |= WSTAR_FUNCTION_EXTENDED;
-			return(-2);
-		}
-	}
-	return (this->dpy_write(0, data));
+int Dpy::set_normal_mode() {
+	function_set &=  ~WSTAR_FUNCTION_EXTENDED;
+	return(dpy_write(0,function_set));
 }
-int Dpy::write_is1_cmd(unsigned char data) {
-	int ret;
-	if((function_set & WSTAR_FUNCTION_EXTENDED) == 0) {
-		function_set |= WSTAR_FUNCTION_EXTENDED;
-		if((ret = dpy_write(0,function_set)) < 0) {
-			function_set &=  ~WSTAR_FUNCTION_EXTENDED;
-			return(-2);
-		}
-	}
+int Dpy::set_extended_mode() {
+	function_set |= WSTAR_FUNCTION_EXTENDED;
+	return(dpy_write(0,function_set));
+}
+int Dpy::write_cmd(unsigned char data) {
 	return (this->dpy_write(0, data));
 }
 int Dpy::write_data(uint8_t data) {

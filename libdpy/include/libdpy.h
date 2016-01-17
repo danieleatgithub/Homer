@@ -46,8 +46,10 @@ private:
 	unsigned char contrast_set;
 
 
-	int write_is0_cmd(unsigned char data);
-	int write_is1_cmd(unsigned char data);
+
+	int set_extended_mode();
+	int set_normal_mode();
+	int write_cmd(unsigned char data);
 	int write_data(unsigned char data);
 	int dpy_write(int type, unsigned char data);
 	int init();
