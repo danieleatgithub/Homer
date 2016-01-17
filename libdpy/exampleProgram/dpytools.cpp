@@ -15,6 +15,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <getopt.h>
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
@@ -26,6 +27,7 @@
 #include <log4cplus/loggingmacros.h>
 #include <log4cplus/configurator.h>
 #include <iomanip>
+
 #include "libdpy.h"
 
 #define ONEWIRE_0_PIN   "PA01"
@@ -40,6 +42,9 @@
 #define BUT_RIGHT_PIN   ""
 #define BUT_LEFT_PIN    ""
 #define BUT_ENTER_PIN   ""
+#define no_argument 0
+#define required_argument 1
+#define optional_argument 2
 
 using namespace log4cplus;
 using namespace dpy;
@@ -50,6 +55,7 @@ using namespace dpy;
 int main(int argc, char **argv, char **envp) {
 	const char* res;
     int pause = 500000;
+
 
 	initialize();
 	BasicConfigurator config;
@@ -69,147 +75,30 @@ int main(int argc, char **argv, char **envp) {
 		printf("no arguments needed\n");
 		exit(-1);
 	}
+
 	printf("WinstarDisplay tests .. resetting ...\n");
+	display.dpy_open();
 
-//	if(display.reset() < 0)
-//		printf("KO\n");
-//	else
-//		printf("OK\n");
-
-	printf("Open with Light on ... ");
-	if (display.dpy_open() < 0)
-		printf("KO\n");
-	else
-		printf("OK\n");
-/*
-	printf("puts Ciao on Display ... ");
-	if (display.dpy_puts((char *) "Ciao") < 0)
-		printf("KO\n");
-	else
-		printf("OK\n");
-
-	printf("Turn off light ... ");
-	if (display.set_backlight(STATE_OFF) < 0)
-		printf("KO\n");
-	else
-		printf("OK\n");
-	usleep(pause);
-
-	printf("Turn on light ... ");
-	if (display.set_backlight(STATE_TOGGLE) < 0)
-		printf("KO\n");
-	else
-		printf("OK\n");
-
-	printf("Set Cursor ON and blinking ... ");
-	res = "KO";
-	if (display.set_cursor(true, true) == 0)
-		if(display.is_cursor_on()) res = "OK";
-	printf("%s\n",res);
-	usleep(pause);
-
-	printf("Set Cursor ON and not blinking ... ");
-	res = "KO";
-	if (display.set_cursor(true, false) == 0)
-		if(display.is_cursor_on()) res = "OK";
-	printf("%s\n",res);
-	usleep(pause);
-
-	printf("Set Cursor off and not blinking ... ");
-	res = "KO";
-	if (display.set_cursor(false, false) == 0)
-		if(!display.is_cursor_on()) res = "OK";
-	printf("%s\n",res);
-	usleep(pause);
-
-	printf("Set Display off  ... ");
-	res = "KO";
-	if (display.set_state(STATE_OFF) == 0)
-		if(!display.is_display_on()) res = "OK";
-	printf("%s\n",res);
-	usleep(pause);
-
-	printf("Set Display on  ... ");
-	res = "KO";
-	if (display.set_state(STATE_ON) == 0)
-		if(display.is_display_on()) res = "OK";
-	printf("%s\n",res);
-	usleep(pause);
-
-	printf("Set Display toggle  ... ");
-	res = "KO";
-	if (display.set_state(STATE_TOGGLE) == 0)
-		if(!display.is_display_on())  {
-			usleep(pause);
-			if (display.set_state(STATE_TOGGLE) == 0)
-				if(display.is_display_on()) res = "OK";
-		}
-	printf("%s\n",res);
-	usleep(pause);
-
-
-	printf("Set Contrast on  ... ");
-	res = "KO";
-	if (display.set_contrast(0) == 0)
-		if(display.get_contrast() == 0) res = "OK";
-	printf("%s\n",res);
-	usleep(pause);
-
-	printf("Home ... ");
-	res = "KO";
-	if (display.set_cursor(true, true) == 0)
-		if(display.home()) res = "OK";
-	printf("%s\n",res);
-	usleep(pause);
-
-	printf("Clear ... ");
-	res = "KO";
-	if(display.clear()) res = "OK";
-	printf("%s\n",res);
-	usleep(pause);
-
-	printf("Set double height ... ");
-	res = "KO";
-	if(display.set_double_height(STATE_ON)) {
-		usleep(pause);
-		if(display.dpy_puts("012345")) {
-			if(display.set_double_height(STATE_TOGGLE)) {
-				res = "OK";
-			}
-
-		}
-	}
-	printf("%s\n",res);
-	usleep(pause);
-
-
-
-
-	printf("Enable shift 0123456789 .....");
-	res = "KO";
-	display.clear(true);
-	if(display.set_shift(STATE_ON )) res = "OK";
-	for (int i=(int)'A'; i<(int)'Q';i++) {
-		display.dpy_putchar((unsigned char)i);
-		usleep(600000);
-	}
-	printf("%s\n",res);
-*/
-	printf("for gdb debugging\n");
 	display.set_backlight(false);
 	display.set_backlight(true);
 	display.reset();
 	display.clear();
 
-	display.set_two_lines(true);
-	display.set_two_lines(false);
+	display.set_two_lines();
+	display.set_one_line();
+	display.set_double_height();
 
-	display.set_shift(true,true); // screen aka insert
-	display.set_shift(true,false); // cursor aka overlay
-	display.set_shift(false,false); // disabled
+	display.set_cursor_on(true);
+	display.set_cursor_blink(true);
+	display.set_cursor_on(false);
+	display.set_cursor_blink(false);
+
+	display.shift_line();
+	display.shift_cursor();
 
 	display.home();
 	display.clear();
+	display.line2_home();
 
 	display.set_contrast(0);
 	display.set_contrast(display.get_contrast()+1);
@@ -236,14 +125,9 @@ int main(int argc, char **argv, char **envp) {
 	display.puts("3"); // 1
 
 
-	usleep(pause);
 
-	sleep(1);
-	printf("Close .... ");
-	if (display.dpy_close() < 0)
-		printf("KO\n");
-	else
-		printf("OK\n");
+	display.dpy_close();
+
 	printf("== END ==");
 
 }

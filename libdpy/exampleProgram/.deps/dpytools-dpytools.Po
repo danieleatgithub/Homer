@@ -33,6 +33,7 @@ dpytools-dpytools.o: dpytools.cpp \
  /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/pthreadtypes.h \
  /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/alloca.h \
  /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/stdlib-float.h \
+ /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/getopt.h \
  /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/string.h \
  /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/errno.h \
  /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/errno.h \
@@ -44,7 +45,6 @@ dpytools-dpytools.o: dpytools.cpp \
  /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/posix_opt.h \
  /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/environments.h \
  /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/confname.h \
- /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/getopt.h \
  /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/fcntl.h \
  /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/fcntl.h \
  /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/fcntl-linux.h \
@@ -250,6 +250,8 @@ dpytools-dpytools.o: dpytools.cpp \
 
 /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/stdlib-float.h:
 
+/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/getopt.h:
+
 /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/string.h:
 
 /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/errno.h:
@@ -271,8 +273,6 @@ dpytools-dpytools.o: dpytools.cpp \
 /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/environments.h:
 
 /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/confname.h:
-
-/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/getopt.h:
 
 /wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr/include/fcntl.h:
 

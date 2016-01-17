@@ -29,10 +29,13 @@ Dpy::Dpy(const char *bus, const char *rst, const char *backlight) {
 	this->backlight = string(backlight);
 	this->address = WINSTAR_I2C_ADD;
 	this->backlight_state = true;
-	// Normal instruction set (IS=0)
+
+
+	this->entry_mode = 0;
 	this->display_mode = 0;
 	this->function_set = 0;
-	this->entry_mode = 0;
+	this->ddram_addr = 0;
+	// Normal instruction set (IS=0)
 	this->cursor_display_shift = 0;
 	// Extended instruction set (IS=1)
 	this->bias_osc_frequency_adj = 0;
@@ -111,14 +114,13 @@ int Dpy::set_state(bool state) {
 bool Dpy::is_display_on() {
 	return((display_mode  & WSTAR_DISPLAY_STATE) != 0);
 }
-int Dpy::set_cursor(bool state, bool blink) {
-	int ret = -1;
-	unsigned char oldreg = display_mode;
+int Dpy::set_cursor_on(bool state) {
 	(state ? display_mode |= WSTAR_DISPLAY_CURSOR : display_mode &= ~WSTAR_DISPLAY_CURSOR);
-	(blink ? display_mode |= WSTAR_DISPLAY_BLINK : display_mode &= ~WSTAR_DISPLAY_BLINK);
-	ret = write_cmd(display_mode);
-	if (ret < 0) display_mode = oldreg;
-	return (ret);
+	return(write_cmd(display_mode));
+}
+int Dpy::set_cursor_blink(bool state) {
+	(state ? display_mode |= WSTAR_DISPLAY_BLINK : display_mode &= ~WSTAR_DISPLAY_BLINK);
+	return(write_cmd(display_mode));
 }
 bool Dpy::is_cursor_on() {
 	return ((display_mode & WSTAR_DISPLAY_CURSOR ) != 0);
@@ -160,29 +162,47 @@ int Dpy::puts(char *str) {
 bool Dpy::is_backlight_on() {
 	return(backlight_state);
 }
-int Dpy::set_shift(bool enabled, bool screen) {
-	int ret = 0;
-	(enabled ? entry_mode |= WSTAR_ENTRY_MODE_SHIFT_ON : entry_mode &= ~WSTAR_ENTRY_MODE_SHIFT_ON);
-	ret = write_cmd(entry_mode);
-	ret += set_normal_mode();
-	(screen ? cursor_display_shift |= WSTAR_CUR_DPY_SHIFT_SCREEN  : cursor_display_shift &= ~WSTAR_CUR_DPY_SHIFT_SCREEN);
-	ret += write_cmd(cursor_display_shift);
-	return(ret);
+int Dpy::set_insert_mode() {
+	entry_mode |= WSTAR_ENTRY_MODE_SHIFT_ON;
+	return(write_cmd(entry_mode));
 }
-int Dpy::set_double_height(bool state) {
+int Dpy::set_overwrite_mode() {
+	entry_mode &= ~WSTAR_ENTRY_MODE_SHIFT_ON;
+	return(write_cmd(entry_mode));
+}
+int Dpy::shift_line() {
+	set_normal_mode();
+	cursor_display_shift |= WSTAR_CUR_DPY_SHIFT_SCREEN;
+	return(write_cmd(cursor_display_shift));
+}
+int Dpy::shift_cursor() {
+	set_normal_mode();
+	cursor_display_shift &= ~WSTAR_CUR_DPY_SHIFT_SCREEN;
+	return(write_cmd(cursor_display_shift));
+}
+int Dpy::set_double_height() {
+	function_set &= ~WSTAR_FUNCTION_ONE_LINE_5X8_MASK;
 	function_set |= WSTAR_FUNCTION_ONE_LINE_5X16;
 	return(write_cmd(function_set));
 }
-int Dpy::set_two_lines(bool state) {
+int Dpy::set_two_lines() {
 	function_set &= ~WSTAR_FUNCTION_ONE_LINE_5X8_MASK;
+	function_set &= ~WSTAR_FUNCTION_ONE_LINE_5X16;
 	function_set |= WSTAR_FUNCTION_TWO_LINE_5X8;
 	return(write_cmd(function_set));
 }
-
+int Dpy::set_one_line() {
+	function_set &= ~WSTAR_FUNCTION_ONE_LINE_5X8_MASK;
+	function_set &= ~WSTAR_FUNCTION_ONE_LINE_5X16;
+	return(write_cmd(function_set));
+}
 bool Dpy::is_two_lines() {
 	return((function_set  & WSTAR_FUNCTION_TWO_LINE_5X8) != 0);
 }
-
+int Dpy::line2_home() {
+	ddram_addr = WSTAR_DDRAM_CMD | WSTAR_DDRAM_LINE2;
+	return(write_cmd(ddram_addr));
+}
 // private methods
 
 int Dpy::init() {
@@ -190,8 +210,9 @@ int Dpy::init() {
 	this->backlight_state = true;
 	this->display_mode = WSTAR_DISPLAY_STATE | WSTAR_DISPLAY_CMD;
 	this->function_set = WSTAR_FUNCTION_8BIT | WSTAR_FUNCTION_TWO_LINE_5X8 | WSTAR_FUNCTION_CMD;
-	this->entry_mode = WSTAR_ENTRY_MODE_RIGHT | WSTAR_ENTRY_MODE_CMD;
+	this->entry_mode = WSTAR_ENTRY_MODE_CMD;
 	this->cursor_display_shift = WSTAR_CUR_DPY_SHIFT_RIGHT | WSTAR_CUR_DPY_SHIFT_SCREEN | WSTAR_CUR_DPY_SHIFT_CMD;
+	this->ddram_addr = WSTAR_DDRAM_CMD;
 	// Extended instruction set (IS=1)
 	this->bias_osc_frequency_adj = 0x04 | WSTAR_BIAS_OSC_CMD;
 	this->icon_ram_address = WSTAR_ICON_RAM_ADD_CMD;

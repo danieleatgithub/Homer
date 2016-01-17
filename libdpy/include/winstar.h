@@ -38,8 +38,10 @@
 
 #define WSTAR_CGRAM_ADD_MASK				0x3F
 #define WSTAR_CGRAM_CMD						0x40
+
 #define WSTAR_DDRAM_ADD_MASK				0x7F
 #define WSTAR_DDRAM_CMD						0x80
+#define WSTAR_DDRAM_LINE2					0x40
 
 #define WSTAR_BIAS_OSC_FREQ_MASK			0x07
 #define WSTAR_BIAS_OSC_BIAS_1_4				0x08

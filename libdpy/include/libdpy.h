@@ -44,6 +44,7 @@ private:
 	unsigned char pow_icon_contrast;
 	unsigned char follower;
 	unsigned char contrast_set;
+	unsigned char ddram_addr;
 
 
 
@@ -68,15 +69,23 @@ public:
 	bool is_cursor_on();
 	int get_contrast();
 	int set_contrast(int value);
-	int set_cursor(bool state, bool blink);
+	int set_cursor_on(bool state);
+	int set_cursor_blink(bool state);
 	int set_backlight(bool state);
 	bool is_backlight_on();
-	int set_two_lines(bool state);
+	int set_two_lines();
+	int set_one_line();
+	int set_double_height();
 	bool is_two_lines();
 	int clear();
 	int home();
-	int set_shift(bool enabled, bool screen);
-	int set_double_height(bool state);
+	int line2_home();
+
+	int shift_line();
+	int shift_cursor();
+	int set_insert_mode();
+	int set_overwrite_mode();
+
 
 };
 }
