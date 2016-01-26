@@ -8,10 +8,13 @@
 #ifndef WINSTAR_H_
 #define WINSTAR_H_
 #include <stdint.h>
+#include "display.h"
 
+namespace homerio {
 
 #define WINSTAR_I2C_ADD                 0x3e
-
+#define WSTAR_CMD						0
+#define WSTAR_DATA						0x40
 
 #define WSTAR_CLEAR_DISPLAY_CMD             0x01
 #define WSTAR_RETURN_HOME_CMD               0x02
@@ -68,6 +71,62 @@
 #define CONTRAST_DEFAULT                0x04
 #define FOLLOWER_DEFAULT                0x07
 #define CONTRAST_MAX					0x3f
+
+class Winstar: public Display {
+
+private:
+	static const unsigned int freqency_3_volts[8];
+	static const unsigned int freqency_5_volts[8];
+
+	unsigned char entry_mode;
+	unsigned char display_mode;
+	unsigned char cursor_display_shift;
+	unsigned char function_set;
+	unsigned char bias_osc_frequency_adj;
+	unsigned char icon_ram_address;
+	unsigned char pow_icon_contrast;
+	unsigned char follower;
+	unsigned char contrast_set;
+	unsigned char ddram_addr;
+
+	void init();
+
+public:
+	Winstar(const char *bus);
+	Winstar(const char *bus, const char *rst, const char *backlight);
+	virtual ~Winstar();
+
+	int set_state(bool state);
+	bool is_display_on();
+	bool is_cursor_on();
+	int get_contrast();
+	int set_contrast(int value);
+	int set_cursor_on(bool state);
+	int set_cursor_blink(bool state);
+	int set_backlight(bool state){ return(0); };
+	bool is_backlight_on(){ return(true); };
+	int set_two_lines();
+	int set_one_line();
+	int set_double_height();
+	bool is_two_lines();
+	int clear();
+	int home();
+	int line2_home();
+
+	int shift_line();
+	int shift_cursor();
+	int set_insert_mode();
+	int set_overwrite_mode();
+
+	int set_extended_mode();
+	int set_normal_mode();
+	int write_cmd(unsigned char data);
+	virtual int dpy_write(int type, unsigned char data);
+	virtual int device_init();
+	virtual int write_data(unsigned char data);
+};
+
+}
 
 
 #endif /* WINSTAR_H_ */

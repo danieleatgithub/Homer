@@ -1,15 +1,20 @@
 CXXFLAGS =	-O2 -g -Wall -fmessage-length=0
 
-OBJS =		root_overlay.o
-
+OBJS =	
 LIBS =
 
 TARGET =	root_overlay
 
-$(TARGET):	$(OBJS)
-	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
+.PHONY: root_overlay clean
+
+#$(TARGET):	$(OBJS)
+#	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
 
 all:	$(TARGET)
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	
+
+
+root_overlay:
+	

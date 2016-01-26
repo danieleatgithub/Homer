@@ -6,18 +6,26 @@
 #include <string>
 #include <stdint.h>
 
+#include "winstar.h"
 #include "pin.h"
 
 using namespace std;
 
 namespace dpy {
-class Lcd {
+
+enum Direction_e {
+	LEFT = 0,
+	RIGHT
+};
+class Dpy {
 
 private:
 	int fd;
 	uint8_t address;
 	string bus;
 	string rst;
+	int write_usleep;
+
 	string backlight;
 	Pin* backlight_pin;
 	Pin* reset_pin;
@@ -25,36 +33,60 @@ private:
 	static const unsigned int freqency_3_volts[8];
 	static const unsigned int freqency_5_volts[8];
 
-	uint8_t reg_display;                    // Control display register
-	uint8_t reg_bias_frequency;     // Bias Frequency
-	uint8_t reg_function_set; // Function set register
-	uint8_t reg_contrast_set; // Contrast set register
-	uint8_t reg_power_icon;         // Power icon and contrast high bits
-	uint8_t reg_follower;   // Follower register
 	bool backlight_state;
 
-	int write_cmd(uint8_t data);
-	int write_data(uint8_t data);
-	int lcd_write(int type, uint8_t data);
+	unsigned char entry_mode;
+	unsigned char display_mode;
+	unsigned char cursor_display_shift;
+	unsigned char function_set;
+	unsigned char bias_osc_frequency_adj;
+	unsigned char icon_ram_address;
+	unsigned char pow_icon_contrast;
+	unsigned char follower;
+	unsigned char contrast_set;
+	unsigned char ddram_addr;
+
+
+
+	int set_extended_mode();
+	int set_normal_mode();
+	int write_cmd(unsigned char data);
+	int write_data(unsigned char data);
+	int dpy_write(int type, unsigned char data);
+	int init();
 public:
 
-	Lcd(const char *bus, const char *rst, const char *backlight);
-	virtual ~Lcd();
-	int lcd_open();
-	int lcd_close();
-	int setStatus(State_e state);
-	State_e getStatus();
-	bool isCursorON();
-	unsigned int getContrast();
-	int setContrast(uint8_t value);
-	int setCursor(bool state, bool blink);
-	int lcd_putchar(unsigned char ch);
-	int lcd_puts(char *str);
-	int setBacklight(State_e state);
-	State_e getBacklight();
-	int lcd_reset();
+	Dpy(const char *bus, const char *rst, const char *backlight);
+	virtual ~Dpy();
+	int dpy_open();
+	int dpy_close();
+	int putchar(unsigned char ch);
+	int puts(char *str);
+	int reset();
+
+	int set_state(bool state);
+	bool is_display_on();
+	bool is_cursor_on();
+	int get_contrast();
+	int set_contrast(int value);
+	int set_cursor_on(bool state);
+	int set_cursor_blink(bool state);
+	int set_backlight(bool state);
+	bool is_backlight_on();
+	int set_two_lines();
+	int set_one_line();
+	int set_double_height();
+	bool is_two_lines();
 	int clear();
 	int home();
+	int line2_home();
+
+	int shift_line();
+	int shift_cursor();
+	int set_insert_mode();
+	int set_overwrite_mode();
+
+
 };
 }
 #endif

@@ -5,7 +5,6 @@
 # request
 #
 ################################################
-. /etc/system.conf
 
 MACADDRESS=$(/usr/local/bin/get_mac)
 if [[ $? -ne 0 ]];then
