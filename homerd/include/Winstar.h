@@ -7,8 +7,8 @@
 
 #ifndef WINSTAR_H_
 #define WINSTAR_H_
-#include <stdint.h>
-#include "display.h"
+
+#include "Display.h"
 
 namespace homerio {
 
@@ -65,9 +65,6 @@ namespace homerio {
 #define WSTAR_CONTRAST_LOW_MASK				0x0F
 #define WSTAR_CONTRAST_LOW_CMD				0x70
 
-
-
-
 #define CONTRAST_DEFAULT                0x04
 #define FOLLOWER_DEFAULT                0x07
 #define CONTRAST_MAX					0x3f
@@ -103,8 +100,14 @@ public:
 	int set_contrast(int value);
 	int set_cursor_on(bool state);
 	int set_cursor_blink(bool state);
-	int set_backlight(bool state){ return(0); };
-	bool is_backlight_on(){ return(true); };
+	int set_backlight(bool state) {
+		return (0);
+	}
+	;
+	bool is_backlight_on() {
+		return (true);
+	}
+	;
 	int set_two_lines();
 	int set_one_line();
 	int set_double_height();
@@ -127,6 +130,5 @@ public:
 };
 
 }
-
 
 #endif /* WINSTAR_H_ */

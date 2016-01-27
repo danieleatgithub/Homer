@@ -1,21 +1,22 @@
-#include <stdio.h>
+#include <Display.h>
+
 #include <errno.h>
 #include <fcntl.h>
-#include <unistd.h>
+#include <linux/i2c-dev.h>
 #include <string.h>
 #include <sys/ioctl.h>
-#include <linux/i2c-dev.h>
-#include <string>
-#include <log4cplus/logger.h>
-#include <log4cplus/loggingmacros.h>
-#include <log4cplus/configurator.h>
-#include <iomanip>
-#include "display.h"
+#include <unistd.h>
+#include <cstdio>
+
+#include <GpioPin.h>
+
+namespace homerio {
+struct pinmap_s;
+} /* namespace homerio */
 
 using namespace std;
 
 namespace homerio {
-
 
 Display::Display(const char *bus) {
 	init();
@@ -90,7 +91,7 @@ int Display::dpy_close() {
 int Display::reset() {
 	reset_pin->flip(1000); // 1 milli
 	usleep(100000); // 100 milli
-	return(device_init());
+	return (device_init());
 
 }
 int Display::set_backlight(bool state) {
@@ -107,7 +108,7 @@ int Display::dpy_puts(const char *str) {
 	return ((p ? (p - str) : -1));
 }
 bool Display::is_backlight_on() {
-	return(backlight_state);
+	return (backlight_state);
 }
 }
 

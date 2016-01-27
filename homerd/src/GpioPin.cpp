@@ -5,16 +5,12 @@
  *      Author: daniele
  */
 
-#include <string>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
-#include <unistd.h>
 #include <fcntl.h>
-#include <poll.h>
-
-#include "gpiopin.h"
+#include <GpioPin.h>
+#include <string.h>
+#include <unistd.h>
+#include <cstdio>
+#include <string>
 
 const char *Direction_s[2] = { "out", "in" };
 const char *Edge_s[4] = { "rising", "falling", "none", "both" };
@@ -22,7 +18,6 @@ const char *Edge_s[4] = { "rising", "falling", "none", "both" };
 using namespace std;
 
 namespace homerio {
-
 
 static struct pinmap_s {
 	unsigned int kernel_id;
@@ -208,8 +203,10 @@ int GpioPin::write_value(bool value) {
 	char buf[MAX_BUF];
 	const char *val;
 
-	if (value) val = "1";
-	else 	   val = "0";
+	if (value)
+		val = "1";
+	else
+		val = "0";
 
 	printf("DEBUG %s/%s/value %s\n", SYSFS_GPIO_DIR, this->kstr.c_str(), val);
 

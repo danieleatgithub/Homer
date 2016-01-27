@@ -1,5 +1,5 @@
 bin_PROGRAMS=homerd
-homerd_SOURCES= winstar.cpp display.cpp  homerd.cpp gpiopin.cpp fakedisplay.cpp
+homerd_SOURCES= homerd.cpp Winstar.cpp Display.cpp GpioPin.cpp FakeDisplay.cpp Sysinfo.cpp
 
 # Linker options for a.out
 homerd_LDFLAGS =  -llog4cplus
