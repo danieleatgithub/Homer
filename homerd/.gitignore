@@ -1,2 +1,8 @@
 /Local Debug/
 /autom4te.cache/
+/config.log
+/config.status
+/gmon.out
+/Makefile
+/perf.data
+/perf.data.old
