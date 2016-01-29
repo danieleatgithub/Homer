@@ -97,7 +97,7 @@
 								<option id="gnu.c.compiler.option.debugging.level.31653699" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.dialect.std.624660756" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.1227176823" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/homerd/homerd/src/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/homerd/include}&quot;"/>
 									<listOptionValue builtIn="false" value="/wks/local/include"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.2053493375" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -120,7 +120,7 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.base.1749682827" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base">
 								<option id="gnu.both.asm.option.include.paths.1990946831" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/homerd/homerd/src/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/homerd/include}&quot;"/>
 									<listOptionValue builtIn="false" value="/wks/local/include"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.405792687" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
