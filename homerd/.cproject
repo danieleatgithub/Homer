@@ -90,6 +90,9 @@
 								<option id="gnu.cpp.compiler.option.debugging.prof.1553573920" name="Generate prof information (-p)" superClass="gnu.cpp.compiler.option.debugging.prof" value="true" valueType="boolean"/>
 								<option id="gnu.cpp.compiler.option.debugging.gprof.932115811" name="Generate gprof information (-pg)" superClass="gnu.cpp.compiler.option.debugging.gprof" value="true" valueType="boolean"/>
 								<option id="gnu.cpp.compiler.option.debugging.codecov.1059642818" name="Generate gcov information (-ftest-coverage -fprofile-arcs)" superClass="gnu.cpp.compiler.option.debugging.codecov" value="true" valueType="boolean"/>
+								<option id="gnu.cpp.compiler.option.preprocessor.def.464682438" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="OFF_LINE_TARGET"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.484921921" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.939344812" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">

@@ -16,6 +16,7 @@
 #include <log4cplus/loglevel.h>
 #include <log4cplus/tchar.h>
 #include <string>
+#include <unistd.h>
 
 #include "Display.h"
 #include "Fakedisplay.h"
@@ -45,6 +46,7 @@ using namespace homerio;
 int main(void) {
 	Display *display;
 	string ip;
+	bool run = true;
 
 	Sysinfo sysinfo = Sysinfo::get_instance();
 
@@ -56,8 +58,11 @@ int main(void) {
 	LOG4CPLUS_INFO(logger, "homerd starting");
 	logger.setLogLevel(INFO_LOG_LEVEL);
 
+#if defined OFF_LINE_TARGET
 	display = new FakeDisplay(I2C_BUS, LCD_RESET_PIN, LCD_BACKLIGHT_PIN);
-//	display = new Winstar(I2C_BUS, LCD_RESET_PIN, LCD_BACKLIGHT_PIN);
+#else
+	display = new Winstar(I2C_BUS, LCD_RESET_PIN, LCD_BACKLIGHT_PIN);
+#endif
 
 	ip = sysinfo.get_local_ip("eth0");
 
@@ -65,10 +70,14 @@ int main(void) {
 	display->set_backlight(false);
 	display->dpy_puts("Homer"); // 7
 	display->line2_home();
-	display->dpy_puts("Homer"); // 7
+	display->dpy_puts("IP:");
 	display->dpy_puts(ip.c_str());
-	display->dpy_close();
+	while(run) {
+		sleep(5000);
+	}
 
+
+	display->dpy_close();
 	delete(display);
 	return 0;
 }
