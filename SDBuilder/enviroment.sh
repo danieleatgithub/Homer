@@ -30,7 +30,7 @@ AT91_ROOT="$WORKSPACE/at91bootstrap"
 AT91BINARY="$AT91_ROOT/binaries"
 BKP_ROOT="$SDROOT/config_backups"
 
-DEVICE="sdd"
+DEVICE="sdc"
 SDDEV="/dev/${DEVICE}"
 SDDEV1="/dev/${DEVICE}1" # /boot (FAT16)
 SDDEV2="/dev/${DEVICE}2" # /root (ext4)

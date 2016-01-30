@@ -33,13 +33,7 @@ nodev 			/sys/kernel/debug	debugfs   	defaults   		0	0
 EOT1
 
 
-#
-# Add a first start init
-#
-echo '#!/bin/sh' 					>  $TARGET_DIR/etc/init.d/S00systeminit
-echo "/usr/local/bin/system_init" 	>> $TARGET_DIR/etc/init.d/S00systeminit
-chmod 777 $TARGET_DIR/etc/init.d/S00systeminit
-chmd 700 $TARGET_DIR/var/empty
+chmod 700 $TARGET_DIR/var/empty
 
 
 #

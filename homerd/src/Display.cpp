@@ -78,8 +78,7 @@ int Display::dpy_open() {
 		close(fd);
 		return -1;
 	}
-	init();
-	return (ret);
+	return (device_init());
 }
 
 int Display::dpy_close() {

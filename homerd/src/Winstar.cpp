@@ -173,11 +173,11 @@ int Winstar::device_init() {
 }
 int Winstar::set_normal_mode() {
 	function_set &= ~WSTAR_FUNCTION_EXTENDED;
-	return (dpy_write(0, function_set));
+	return (write_cmd(function_set));
 }
 int Winstar::set_extended_mode() {
 	function_set |= WSTAR_FUNCTION_EXTENDED;
-	return (dpy_write(0, function_set));
+	return (write_cmd(function_set));
 }
 int Winstar::write_cmd(unsigned char data) {
 	return (this->dpy_write(WSTAR_CMD, data));
@@ -189,7 +189,7 @@ int Winstar::dpy_write(int type, uint8_t data) {
 	unsigned char buffer[2];
 	buffer[0] = (unsigned char) type;
 	buffer[1] = data;
-	printf("DEBUG i2cset -y 0x%x 0x%x 0x%x\n", address, type, data);
+	printf("DEBUG i2cset -y 0 0x%x 0x%x 0x%x\n", address, type, data);
 	// FIXME: wait ready from device (blocking and no blocking)
 	if (write(fd, buffer, 2) != 2) {
 		printf("Error writing file: %s\n", strerror(errno));
