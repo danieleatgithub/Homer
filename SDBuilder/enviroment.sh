@@ -5,15 +5,9 @@
 #
 #######################################################
 
-BBOX_VER="none"
-BUILDROOT_VER="buildroot-2015.11.1"
-LINUX_VER="linux-3.16.1"
-GLIBC_VER="glibc-2.21"
+. /wks/workspace/Homer/root_overlay/enviroment.sh
 
 
-WKS="/wks"
-WORKSPACE="$WKS/workspace"
-HOMERROOT="$WORKSPACE/Homer"
 SDROOT="$HOMERROOT/SDBuilder"
 SDSCRIPTS="$SDROOT/SDscripts"
 BR_ROOT="$WKS/$BUILDROOT_VER"

@@ -34,7 +34,7 @@ EOT1
 
 
 chmod 700 $TARGET_DIR/var/empty
-
+chmod 777 $TARGET_DIR/root/*
 
 #
 # SSHD Enable root on ssh

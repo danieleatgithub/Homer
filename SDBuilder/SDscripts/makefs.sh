@@ -37,7 +37,7 @@ echo "Done"
 
 #Setup source stuff of my build
 SOURCE_ZIMAGE="$LINUX_ROOT/arch/arm/boot/zImage"
-SOURCE_DEVTREE="$LINUX_ROOT/arch/arm/boot/dts/acme-acqua.dtb"
+SOURCE_DEVTREE="$LINUX_ROOT/arch/arm/boot/dts/$DTB"
 SOURCE_ROOTFS=$BR_ROOT/output/images/rootfs.tar
 
 echo "Start formatting"

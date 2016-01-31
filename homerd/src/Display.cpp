@@ -1,22 +1,21 @@
 #include <Display.h>
-
 #include <errno.h>
 #include <fcntl.h>
+#include <GpioPin.h>
 #include <linux/i2c-dev.h>
 #include <string.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include <cstdio>
-
-#include <GpioPin.h>
-
-namespace homerio {
-struct pinmap_s;
-} /* namespace homerio */
+#include <iostream>
+#include <chrono>
+#include <thread>
+#include <future>
 
 using namespace std;
 
 namespace homerio {
+struct pinmap_s;
 
 Display::Display(const char *bus) {
 	init();
@@ -67,7 +66,6 @@ void Display::init() {
 }
 
 int Display::dpy_open() {
-	int ret = 0;
 
 	// Open i2c
 	fd = open(bus.c_str(), O_RDWR);
@@ -96,6 +94,15 @@ int Display::reset() {
 int Display::set_backlight(bool state) {
 	return (backlight_pin->setState((state ? STATE_ON : STATE_OFF)));
 }
+
+int Display::set_backlight(bool state, unsigned int delay_ms) {
+	std::thread([this, state, delay_ms] {
+		std::this_thread::sleep_for( std::chrono::milliseconds{delay_ms});
+		set_backlight(state);
+	}).detach();
+ 	return(0);
+}
+
 int Display::dpy_putchar(unsigned char ch) {
 	return (this->write_data(ch));
 }

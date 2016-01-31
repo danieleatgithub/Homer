@@ -72,8 +72,9 @@ public:
 		return (0);
 	}
 	;
-	virtual int set_backlight(bool state);
-	virtual bool is_backlight_on();
+	int set_backlight(bool state);
+	int set_backlight(bool state, unsigned int delay_ms);
+	bool is_backlight_on();
 	virtual int set_two_lines() {
 		return (0);
 	}

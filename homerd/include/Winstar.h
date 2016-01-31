@@ -100,14 +100,8 @@ public:
 	int set_contrast(int value);
 	int set_cursor_on(bool state);
 	int set_cursor_blink(bool state);
-	int set_backlight(bool state) {
-		return (0);
-	}
-	;
-	bool is_backlight_on() {
-		return (true);
-	}
-	;
+	int set_backlight(bool state);
+	bool is_backlight_on();
 	int set_two_lines();
 	int set_one_line();
 	int set_double_height();
