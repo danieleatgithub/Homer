@@ -2,18 +2,22 @@
 #include <stdio.h>
 #include <cstdint>
 #include <iostream>
+#include <log4cplus/logger.h>
+#include <log4cplus/loggingmacros.h>
+#include <log4cplus/loglevel.h>
 
 using namespace std;
+using namespace log4cplus;
 
 namespace homerio {
 
 FakeDisplay::FakeDisplay(const char *bus) :
-		Winstar(bus) {
+    Winstar(bus) {
 
 }
 FakeDisplay::FakeDisplay(const char *bus, const char *rst,
-		const char *backlight) :
-		Winstar(bus) {
+                         const char *backlight) :
+    Winstar(bus) {
 
 }
 
@@ -21,22 +25,21 @@ FakeDisplay::~FakeDisplay() {
 }
 
 int FakeDisplay::dpy_open() {
-
-	return (device_init());
+    return (device_init());
 }
 
 int FakeDisplay::dpy_close() {
-
-	return (0);
+    return (0);
 }
 
 int FakeDisplay::dpy_write(int type, uint8_t data) {
-	if (type == WSTAR_CMD) {
-		printf("DEBUG i2cset -y 0x%x 0x%x 0x%x\n", address, type, data);
-	} else {
-		cout << data;
-	}
-	return (0);
+    Logger logdev = Logger::getInstance("homerd.device");
+    if (type == WSTAR_CMD) {
+        LOG4CPLUS_DEBUG(logdev,"FakeDisplay i2cset -y 0 0x " << std::hex << address << " 0x" <<  std::hex << type << " 0x" << std::hex << data);
+     } else {
+    	 LOG4CPLUS_TRACE(logdev,data);
+    }
+    return (0);
 }
 
 }

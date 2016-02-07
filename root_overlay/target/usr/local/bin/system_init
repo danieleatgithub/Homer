@@ -14,6 +14,8 @@ fi
 INTERFACES="/etc/network/interfaces"
 sed -i "s/#_TAG_MAC_ADDRESS/	hwaddress ether $MACADDRESS/" $INTERFACES
 
+# Update data filesystem
+mkdir /data/logs
 
 # Remove first start job
 rm /etc/init.d/S00systeminit

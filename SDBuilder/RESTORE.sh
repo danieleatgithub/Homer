@@ -29,6 +29,7 @@ fi
 cp $LINUX_ROOT/.config $DST/linux_.config
 cp $AT91_ROOT/.config $DST/at91bootstrap_.config
 cp $LINUX_ROOT/arch/arm/boot/dts/acme-acqua.dts $DST/.
+cp $LINUX_ROOT/arch/arm/boot/dts/at91-sama5d3_acquaa5.dts $DST/.
 
 # echo command
 echo "cp Commands for cut & paste"
@@ -39,4 +40,4 @@ echo "cp $SRC/buildroot_output_build_${BBOX_VER}_.config $BR_ROOT/output/build/$
 fi
 echo "cp $SRC/linux_.config $LINUX_ROOT/.config"
 echo "cp $SRC/at91bootstrap_.config $AT91_ROOT/.config"
-echo "cp $SRC/acme-acqua.dts $LINUX_ROOT/arch/arm/boot/dts/acme-acqua.dts"
+echo "cp $SRC/at91-sama5d3_acquaa5.dts $LINUX_ROOT/arch/arm/boot/dts/at91-sama5d3_acquaa5.dts"

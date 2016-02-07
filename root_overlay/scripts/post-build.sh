@@ -28,7 +28,7 @@ echo "***Linux installed"
 cat <<EOT1 > $TARGET_DIR/etc/fstab.add
 /dev/mmcblk0p1	/boot  				vfat   		rw,defaults     0	1
 /dev/mmcblk0p3	/data  				vfat   		rw,defaults     0	1
-/dev/mmcblk0p4	none   				swap   		defaults        0	0
+/dev/mmcblk0p4	none   				swap   		sw        0	0
 nodev 			/sys/kernel/debug	debugfs   	defaults   		0	0
 EOT1
 

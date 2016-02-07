@@ -26,7 +26,8 @@ if [[ -e $BR_ROOT/output/build/${BBOX_VER}/.config ]]; then
 fi
 cp $LINUX_ROOT/.config $DST/linux_.config
 cp $AT91_ROOT/.config $DST/at91bootstrap_.config
-cp $LINUX_ROOT/arch/arm/boot/dts/acme-acqua.dts $DST/.
+#cp $LINUX_ROOT/arch/arm/boot/dts/acme-acqua.dts $DST/.
+cp $LINUX_ROOT/arch/arm/boot/dts/at91-sama5d3_acquaa5.dts $DST/.
 
 echo '#!/bin/bash' >  $BKP_ROOT/variables
 echo "CURRENT=$CURRENT" >> $BKP_ROOT/variables
