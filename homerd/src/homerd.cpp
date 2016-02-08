@@ -25,6 +25,7 @@
 #include <cstdlib>
 #include <string>
 #include <iostream>
+#include "homerd.h"
 
 using option::Option;
 using option::Descriptor;
@@ -185,22 +186,12 @@ int main(int argc, char *argv[]) {
     bool run = true;
     Sysinfo sysinfo = Sysinfo::get_instance();
     initialize();
-
-#if defined OFF_LINE_TARGET
-    /*
-     * Overwrite setting for emulation target
-     */
-    log4cplus::helpers::Properties props;
-    PropertyConfigurator target_config(props_file);
-    props = target_config.getProperties();
-    props.setProperty("appender.ONFILE1.File","/wks/" + props.getProperty("appender.ONFILE1.File"));
-    props.setProperty("appender.ONFILE2.File","/wks/" + props.getProperty("appender.ONFILE2.File"));
-    PropertyConfigurator config(props);
-    config.configure();
-    display = new FakeDisplay(I2C_BUS, LCD_RESET_PIN, LCD_BACKLIGHT_PIN);
-#else
     PropertyConfigurator config(props_file);
     config.configure();
+
+#if defined OFF_LINE_TARGET
+    display = new FakeDisplay(I2C_BUS, LCD_RESET_PIN, LCD_BACKLIGHT_PIN);
+#else
     display = new Winstar(I2C_BUS, LCD_RESET_PIN, LCD_BACKLIGHT_PIN);
 #endif
 

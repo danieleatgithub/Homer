@@ -14,6 +14,7 @@
 #include <log4cplus/logger.h>
 #include <log4cplus/loggingmacros.h>
 #include <log4cplus/loglevel.h>
+#include "homerd.h"
 
 using namespace std;
 using namespace log4cplus;
@@ -70,7 +71,7 @@ void Display::init() {
 int Display::dpy_open() {
 
     // Open i2c
-	Logger logdev = Logger::getInstance("logger.homerd.device");
+	Logger logdev = Logger::getInstance(LOGDEVICE);
     fd = open(bus.c_str(), O_RDWR);
     if (fd < 0) return (fd);
     if (ioctl(fd, I2C_SLAVE, this->address) < 0) {

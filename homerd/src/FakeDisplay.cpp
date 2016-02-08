@@ -5,6 +5,7 @@
 #include <log4cplus/logger.h>
 #include <log4cplus/loggingmacros.h>
 #include <log4cplus/loglevel.h>
+#include "homerd.h"
 
 using namespace std;
 using namespace log4cplus;
@@ -33,7 +34,7 @@ int FakeDisplay::dpy_close() {
 }
 
 int FakeDisplay::dpy_write(int type, uint8_t data) {
-    Logger logdev = Logger::getInstance("homerd.device");
+    Logger logdev = Logger::getInstance(LOGDEVICE);
     if (type == WSTAR_CMD) {
         LOG4CPLUS_DEBUG(logdev,"FakeDisplay i2cset -y 0 0x " << std::hex << address << " 0x" <<  std::hex << type << " 0x" << std::hex << data);
      } else {

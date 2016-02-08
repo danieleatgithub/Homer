@@ -14,6 +14,7 @@
 #include <log4cplus/logger.h>
 #include <log4cplus/loggingmacros.h>
 #include <log4cplus/loglevel.h>
+#include "homerd.h"
 
 const char *Direction_s[2] = { "out", "in" };
 const char *Edge_s[4] = { "rising", "falling", "none", "both" };
@@ -81,7 +82,7 @@ int GpioPin::get_pin() {
 int GpioPin::pin_export() {
     int fd, len;
     char buf[MAX_BUF];
-    Logger logdev = Logger::getInstance("homerd.device");
+    Logger logdev = Logger::getInstance(LOGDEVICE);
     if (kid < 0)
         return (-1);
     if (this->in_use) {
@@ -104,7 +105,7 @@ int GpioPin::pin_export() {
 int GpioPin::pin_unexport() {
     int fd, len;
     char buf[MAX_BUF];
-    Logger logdev = Logger::getInstance("homerd.device");
+    Logger logdev = Logger::getInstance(LOGDEVICE);
     if (kid < 0)
         return (-1);
     if (!this->in_use) {
@@ -131,7 +132,7 @@ int GpioPin::pin_unexport() {
 int GpioPin::set_direction(Direction_e dir) {
     int fd, ret;
     char buf[MAX_BUF];
-    Logger logdev = Logger::getInstance("homerd.device");
+    Logger logdev = Logger::getInstance(LOGDEVICE);
     if (kid < 0)
         return (-1);
     if (!this->in_use) {
@@ -164,7 +165,7 @@ int GpioPin::set_direction(Direction_e dir) {
 int GpioPin::set_edge(Edge_e edge) {
     int fd, ret;
     char buf[MAX_BUF];
-    Logger logdev = Logger::getInstance("homerd.device");
+    Logger logdev = Logger::getInstance(LOGDEVICE);
     if (kid < 0)
         return (-1);
     if (!this->in_use) {
@@ -213,7 +214,7 @@ int GpioPin::write_value(bool value) {
     int fd;
     char buf[MAX_BUF];
     const char *val;
-    Logger logdev = Logger::getInstance("homerd.device");
+    Logger logdev = Logger::getInstance(LOGDEVICE);
 
     if (value) val = "1";
     else       val = "0";
@@ -253,7 +254,7 @@ int GpioPin::get(bool *value) {
     int fd;
     char buf[MAX_BUF];
     char ch;
-    Logger logdev = Logger::getInstance("homerd.device");
+    Logger logdev = Logger::getInstance(LOGDEVICE);
 
     if (kid < 0)
         return (-1);
@@ -278,7 +279,7 @@ int GpioPin::get(bool *value) {
 }
 int GpioPin::pin_open() {
     char buf[MAX_BUF];
-    Logger logdev = Logger::getInstance("homerd.device");
+    Logger logdev = Logger::getInstance(LOGDEVICE);
 
     if (kid < 0)
         return (-1);

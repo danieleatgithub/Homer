@@ -6,6 +6,7 @@
 #include <log4cplus/logger.h>
 #include <log4cplus/loggingmacros.h>
 #include <log4cplus/loglevel.h>
+#include "homerd.h"
 
 using namespace std;
 using namespace log4cplus;
@@ -195,7 +196,7 @@ int Winstar::dpy_write(int type, uint8_t data) {
     unsigned char buffer[2];
     buffer[0] = (unsigned char) type;
     buffer[1] = data;
-    Logger logdev = Logger::getInstance("homerd.device");
+    Logger logdev = Logger::getInstance(LOGDEVICE);
     LOG4CPLUS_DEBUG(logdev,"Winstar i2cset -y 0 0x " << std::hex << address << " 0x" <<  std::hex << type << " 0x" << std::hex << data);
 
     // FIXME: wait ready from device (blocking and no blocking)
