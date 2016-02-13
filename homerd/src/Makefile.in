@@ -101,13 +101,11 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_homerd_OBJECTS = homerd-homerd.$(OBJEXT) homerd-Winstar.$(OBJEXT) \
-	homerd-Display.$(OBJEXT) homerd-GpioPin.$(OBJEXT) \
-	homerd-FakeDisplay.$(OBJEXT) homerd-Sysinfo.$(OBJEXT)
+am_homerd_OBJECTS = homerd.$(OBJEXT) Winstar.$(OBJEXT) \
+	Display.$(OBJEXT) GpioPin.$(OBJEXT) FakeDisplay.$(OBJEXT) \
+	Sysinfo.$(OBJEXT)
 homerd_OBJECTS = $(am_homerd_OBJECTS)
 homerd_LDADD = $(LDADD)
-homerd_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(homerd_LDFLAGS) \
-	$(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -124,10 +122,6 @@ DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 am__mv = mv -f
-AM_V_lt = $(am__v_lt_@AM_V@)
-am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
-am__v_lt_0 = --silent
-am__v_lt_1 = 
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 AM_V_CXX = $(am__v_CXX_@AM_V@)
@@ -265,13 +259,9 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
+AM_LDFLAGS = -llog4cplus -lpthread
+AM_CPPFLAGS = -std=c++11 -I$(top_srcdir)/include
 homerd_SOURCES = homerd.cpp Winstar.cpp Display.cpp GpioPin.cpp FakeDisplay.cpp Sysinfo.cpp
-
-# Linker options for a.out
-homerd_LDFLAGS = -llog4cplus -lpthread
-
-# Compiler options for a.out
-homerd_CPPFLAGS = -std=c++11 -I$(top_srcdir)/include
 all: all-am
 
 .SUFFIXES:
@@ -350,7 +340,7 @@ clean-binPROGRAMS:
 
 homerd$(EXEEXT): $(homerd_OBJECTS) $(homerd_DEPENDENCIES) $(EXTRA_homerd_DEPENDENCIES) 
 	@rm -f homerd$(EXEEXT)
-	$(AM_V_CXXLD)$(homerd_LINK) $(homerd_OBJECTS) $(homerd_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(CXXLINK) $(homerd_OBJECTS) $(homerd_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -358,12 +348,12 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/homerd-Display.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/homerd-FakeDisplay.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/homerd-GpioPin.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/homerd-Sysinfo.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/homerd-Winstar.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/homerd-homerd.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Display.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/FakeDisplay.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/GpioPin.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Sysinfo.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Winstar.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/homerd.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -378,90 +368,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
-
-homerd-homerd.o: homerd.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT homerd-homerd.o -MD -MP -MF $(DEPDIR)/homerd-homerd.Tpo -c -o homerd-homerd.o `test -f 'homerd.cpp' || echo '$(srcdir)/'`homerd.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/homerd-homerd.Tpo $(DEPDIR)/homerd-homerd.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='homerd.cpp' object='homerd-homerd.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o homerd-homerd.o `test -f 'homerd.cpp' || echo '$(srcdir)/'`homerd.cpp
-
-homerd-homerd.obj: homerd.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT homerd-homerd.obj -MD -MP -MF $(DEPDIR)/homerd-homerd.Tpo -c -o homerd-homerd.obj `if test -f 'homerd.cpp'; then $(CYGPATH_W) 'homerd.cpp'; else $(CYGPATH_W) '$(srcdir)/homerd.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/homerd-homerd.Tpo $(DEPDIR)/homerd-homerd.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='homerd.cpp' object='homerd-homerd.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o homerd-homerd.obj `if test -f 'homerd.cpp'; then $(CYGPATH_W) 'homerd.cpp'; else $(CYGPATH_W) '$(srcdir)/homerd.cpp'; fi`
-
-homerd-Winstar.o: Winstar.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT homerd-Winstar.o -MD -MP -MF $(DEPDIR)/homerd-Winstar.Tpo -c -o homerd-Winstar.o `test -f 'Winstar.cpp' || echo '$(srcdir)/'`Winstar.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/homerd-Winstar.Tpo $(DEPDIR)/homerd-Winstar.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Winstar.cpp' object='homerd-Winstar.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o homerd-Winstar.o `test -f 'Winstar.cpp' || echo '$(srcdir)/'`Winstar.cpp
-
-homerd-Winstar.obj: Winstar.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT homerd-Winstar.obj -MD -MP -MF $(DEPDIR)/homerd-Winstar.Tpo -c -o homerd-Winstar.obj `if test -f 'Winstar.cpp'; then $(CYGPATH_W) 'Winstar.cpp'; else $(CYGPATH_W) '$(srcdir)/Winstar.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/homerd-Winstar.Tpo $(DEPDIR)/homerd-Winstar.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Winstar.cpp' object='homerd-Winstar.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o homerd-Winstar.obj `if test -f 'Winstar.cpp'; then $(CYGPATH_W) 'Winstar.cpp'; else $(CYGPATH_W) '$(srcdir)/Winstar.cpp'; fi`
-
-homerd-Display.o: Display.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT homerd-Display.o -MD -MP -MF $(DEPDIR)/homerd-Display.Tpo -c -o homerd-Display.o `test -f 'Display.cpp' || echo '$(srcdir)/'`Display.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/homerd-Display.Tpo $(DEPDIR)/homerd-Display.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Display.cpp' object='homerd-Display.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o homerd-Display.o `test -f 'Display.cpp' || echo '$(srcdir)/'`Display.cpp
-
-homerd-Display.obj: Display.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT homerd-Display.obj -MD -MP -MF $(DEPDIR)/homerd-Display.Tpo -c -o homerd-Display.obj `if test -f 'Display.cpp'; then $(CYGPATH_W) 'Display.cpp'; else $(CYGPATH_W) '$(srcdir)/Display.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/homerd-Display.Tpo $(DEPDIR)/homerd-Display.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Display.cpp' object='homerd-Display.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o homerd-Display.obj `if test -f 'Display.cpp'; then $(CYGPATH_W) 'Display.cpp'; else $(CYGPATH_W) '$(srcdir)/Display.cpp'; fi`
-
-homerd-GpioPin.o: GpioPin.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT homerd-GpioPin.o -MD -MP -MF $(DEPDIR)/homerd-GpioPin.Tpo -c -o homerd-GpioPin.o `test -f 'GpioPin.cpp' || echo '$(srcdir)/'`GpioPin.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/homerd-GpioPin.Tpo $(DEPDIR)/homerd-GpioPin.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='GpioPin.cpp' object='homerd-GpioPin.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o homerd-GpioPin.o `test -f 'GpioPin.cpp' || echo '$(srcdir)/'`GpioPin.cpp
-
-homerd-GpioPin.obj: GpioPin.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT homerd-GpioPin.obj -MD -MP -MF $(DEPDIR)/homerd-GpioPin.Tpo -c -o homerd-GpioPin.obj `if test -f 'GpioPin.cpp'; then $(CYGPATH_W) 'GpioPin.cpp'; else $(CYGPATH_W) '$(srcdir)/GpioPin.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/homerd-GpioPin.Tpo $(DEPDIR)/homerd-GpioPin.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='GpioPin.cpp' object='homerd-GpioPin.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o homerd-GpioPin.obj `if test -f 'GpioPin.cpp'; then $(CYGPATH_W) 'GpioPin.cpp'; else $(CYGPATH_W) '$(srcdir)/GpioPin.cpp'; fi`
-
-homerd-FakeDisplay.o: FakeDisplay.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT homerd-FakeDisplay.o -MD -MP -MF $(DEPDIR)/homerd-FakeDisplay.Tpo -c -o homerd-FakeDisplay.o `test -f 'FakeDisplay.cpp' || echo '$(srcdir)/'`FakeDisplay.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/homerd-FakeDisplay.Tpo $(DEPDIR)/homerd-FakeDisplay.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='FakeDisplay.cpp' object='homerd-FakeDisplay.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o homerd-FakeDisplay.o `test -f 'FakeDisplay.cpp' || echo '$(srcdir)/'`FakeDisplay.cpp
-
-homerd-FakeDisplay.obj: FakeDisplay.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT homerd-FakeDisplay.obj -MD -MP -MF $(DEPDIR)/homerd-FakeDisplay.Tpo -c -o homerd-FakeDisplay.obj `if test -f 'FakeDisplay.cpp'; then $(CYGPATH_W) 'FakeDisplay.cpp'; else $(CYGPATH_W) '$(srcdir)/FakeDisplay.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/homerd-FakeDisplay.Tpo $(DEPDIR)/homerd-FakeDisplay.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='FakeDisplay.cpp' object='homerd-FakeDisplay.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o homerd-FakeDisplay.obj `if test -f 'FakeDisplay.cpp'; then $(CYGPATH_W) 'FakeDisplay.cpp'; else $(CYGPATH_W) '$(srcdir)/FakeDisplay.cpp'; fi`
-
-homerd-Sysinfo.o: Sysinfo.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT homerd-Sysinfo.o -MD -MP -MF $(DEPDIR)/homerd-Sysinfo.Tpo -c -o homerd-Sysinfo.o `test -f 'Sysinfo.cpp' || echo '$(srcdir)/'`Sysinfo.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/homerd-Sysinfo.Tpo $(DEPDIR)/homerd-Sysinfo.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Sysinfo.cpp' object='homerd-Sysinfo.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o homerd-Sysinfo.o `test -f 'Sysinfo.cpp' || echo '$(srcdir)/'`Sysinfo.cpp
-
-homerd-Sysinfo.obj: Sysinfo.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT homerd-Sysinfo.obj -MD -MP -MF $(DEPDIR)/homerd-Sysinfo.Tpo -c -o homerd-Sysinfo.obj `if test -f 'Sysinfo.cpp'; then $(CYGPATH_W) 'Sysinfo.cpp'; else $(CYGPATH_W) '$(srcdir)/Sysinfo.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/homerd-Sysinfo.Tpo $(DEPDIR)/homerd-Sysinfo.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Sysinfo.cpp' object='homerd-Sysinfo.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(homerd_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o homerd-Sysinfo.obj `if test -f 'Sysinfo.cpp'; then $(CYGPATH_W) 'Sysinfo.cpp'; else $(CYGPATH_W) '$(srcdir)/Sysinfo.cpp'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique

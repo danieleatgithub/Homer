@@ -1,4 +1,5 @@
 #!/bin/bash
+
 i2cset -y 0 0x3e 0 0x38;sleep 0.1
 i2cset -y 0 0x3e 0 0x39;sleep 0.1
 i2cset -y 0 0x3e 0 0x14;sleep 0.1

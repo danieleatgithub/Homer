@@ -49,7 +49,7 @@ using namespace homerio;
 #define BUT_DOWN_PIN ""
 #define BUT_RIGHT_PIN ""
 #define BUT_LEFT_PIN ""
-#define BUT_ENTER_PIN ""
+#define BUT_ENTER_PIN "PA06"
 
 #define no_argument 0
 #define required_argument 1
@@ -67,7 +67,7 @@ enum optionIndex {
 // *INDENT-OFF*
 const option::Descriptor usage[] = {
     { UNKNOWN, 0, "",        "", option::Arg::None, "USAGE: homerd [options]\n\nOptions:" },
-    {    HELP, 0, "",    "help", option::Arg::None, "  --help  \tPrint usage and exit."   },
+    {    HELP, 0, "h",    "help", option::Arg::None, "  --help  \tPrint usage and exit."   },
     {  DAEMON, 0, "d", "daemon", option::Arg::None, "  --daemon  \tStart as daemon."      },
     { RSTDERR, 0, "e", "err", option::Arg::Optional,"  --err, -e  \tredirect stderr to file." },
     { RSTDOUT, 0, "o", "out",  option::Arg::Optional, "  --out, -o  \tredirect stdout to file."},

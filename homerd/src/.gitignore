@@ -8,3 +8,9 @@
 /homerd-homerd.o
 /homerd-Sysinfo.o
 /homerd-Winstar.o
+/Display.o
+/FakeDisplay.o
+/GpioPin.o
+/homerd.o
+/Sysinfo.o
+/Winstar.o

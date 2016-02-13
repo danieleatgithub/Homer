@@ -32,11 +32,14 @@
 							</tool>
 							<tool id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen.29483565" name="autogen.sh" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen"/>
 							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler.732873608" name="Autotools Buildroot ARM C Compiler (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler">
+								<option id="gnu.c.compiler.option.include.paths.990017437" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/homerd/homerd/include}&quot;"/>
+								</option>
 								<inputType id="org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input.760752831" superClass="org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input"/>
 							</tool>
 							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.892434267" name="Autotools Buildroot ARM C++ Compiler (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler">
 								<option id="gnu.cpp.compiler.option.include.paths.1610241023" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/homerd/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/homerd/homerd/include}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.202236487" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 								<inputType id="org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input.75704251" superClass="org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input"/>
@@ -47,8 +50,8 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="test" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="test"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="tool"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -56,11 +59,9 @@
 			<storageModule moduleId="packages"/>
 		</cconfiguration>
 		<cconfiguration id="cdt.managedbuild.config.gnu.cross.exe.debug.1882377809">
-			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.cross.exe.debug.1882377809" moduleId="org.eclipse.cdt.core.settings" name="Local Debug">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.cross.exe.debug.1882377809" moduleId="org.eclipse.cdt.core.settings" name="Local homerd">
 				<externalSettings/>
 				<extensions>
-					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
@@ -68,16 +69,11 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.cross.exe.debug.1882377809" name="Local Debug" parent="cdt.managedbuild.config.gnu.cross.exe.debug">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.cross.exe.debug.1882377809" name="Local homerd" parent="cdt.managedbuild.config.gnu.cross.exe.debug">
 					<folderInfo id="cdt.managedbuild.config.gnu.cross.exe.debug.1882377809." name="/" resourcePath="">
-						<toolChain id="cdt.managedbuild.toolchain.gnu.base.1906404666" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.base">
+						<toolChain id="cdt.managedbuild.toolchain.gnu.base.1906404666" name="Linux GCC" nonInternalBuilderId="org.eclipse.linuxtools.cdt.autotools.core.toolchain.builder" superClass="cdt.managedbuild.toolchain.gnu.base">
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.gnu.platform.base.1947596662" name="Debug Platform" osList="linux,hpux,aix,qnx" superClass="cdt.managedbuild.target.gnu.platform.base"/>
-							<builder buildPath="${workspace_loc:/homerd}/Local Debug" id="cdt.managedbuild.target.gnu.builder.base.901617160" keepEnvironmentInBuildfile="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.base">
-								<outputEntries>
-									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name=""/>
-									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Local Debug"/>
-								</outputEntries>
-							</builder>
+							<builder buildPath="${workspace_loc:/homerd}/Local Debug" id="org.eclipse.cdt.build.core.internal.builder.1962363094" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="org.eclipse.cdt.build.core.internal.builder"/>
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.1366157220" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.255293648" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
 								<option id="gnu.cpp.compiler.option.optimization.level.1918871249" name="Optimization Level" superClass="gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
@@ -133,7 +129,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="test|src/test" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -154,6 +150,9 @@
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.1051227896;cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.1051227896.;cdt.managedbuild.tool.gnu.cpp.compiler.base.768181042;cdt.managedbuild.tool.gnu.cpp.compiler.input.79596821">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.1882377809;cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.;cdt.managedbuild.tool.gnu.c.compiler.base.939344812;cdt.managedbuild.tool.gnu.c.compiler.input.2053493375">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
@@ -165,6 +164,9 @@
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler.732873608;org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input.760752831">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.1051227896;cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.1051227896.;cdt.managedbuild.tool.gnu.c.compiler.base.1361402147;cdt.managedbuild.tool.gnu.c.compiler.input.2104255054">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.892434267;org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input.75704251">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileCPP"/>
@@ -420,6 +422,14 @@
 				<useDefaultCommand>true</useDefaultCommand>
 				<runAllBuilders>false</runAllBuilders>
 			</target>
+			<target name="install-homerd.propertiesDATA" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+				<buildCommand>make</buildCommand>
+				<buildArguments/>
+				<buildTarget>install-homerd.propertiesDATA</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>true</useDefaultCommand>
+				<runAllBuilders>false</runAllBuilders>
+			</target>
 			<target name="install-html" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 				<buildCommand>make</buildCommand>
 				<buildArguments/>
@@ -536,6 +546,14 @@
 				<buildCommand>make</buildCommand>
 				<buildArguments/>
 				<buildTarget>uninstall</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>true</useDefaultCommand>
+				<runAllBuilders>false</runAllBuilders>
+			</target>
+			<target name="uninstall-homerd.propertiesDATA" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+				<buildCommand>make</buildCommand>
+				<buildArguments/>
+				<buildTarget>uninstall-homerd.propertiesDATA</buildTarget>
 				<stopOnError>true</stopOnError>
 				<useDefaultCommand>true</useDefaultCommand>
 				<runAllBuilders>false</runAllBuilders>

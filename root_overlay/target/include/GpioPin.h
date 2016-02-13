@@ -56,6 +56,7 @@ public:
 	int get(bool *value);
 	int pin_open();
 	int pin_close();
+	int getfd();
 
 };
 

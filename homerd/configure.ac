@@ -9,7 +9,7 @@ AM_INIT_AUTOMAKE()
 AC_LANG([C++])
 AC_PROG_CXX
 
-AC_CONFIG_FILES(Makefile src/Makefile
+AC_CONFIG_FILES(Makefile src/Makefile tool/Makefile
 				include/Makefile)
 AC_OUTPUT
 

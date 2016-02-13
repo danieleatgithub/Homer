@@ -6,3 +6,6 @@
 /Makefile
 /perf.data
 /perf.data.old
+/Local homerd/
+/Local homertool/
+/.deps/

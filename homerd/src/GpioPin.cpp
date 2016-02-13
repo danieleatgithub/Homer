@@ -28,8 +28,12 @@ static struct pinmap_s {
     unsigned int kernel_id;
     const char *kernel_string;
     const char *name;
-} pinmap[] = { 0, "pioA0", "PA00", 1, "pioA1", "PA01", 2, "pioA2", "PA02", 3,
-               "pioA3", "PA03", 77, "pioC13", "PC13"
+} pinmap[] = { 0, "pioA0", "PA00",
+				1, "pioA1", "PA01",
+				2, "pioA2", "PA02",
+				3, "pioA3", "PA03",
+				6, "pioA6", "PA06",
+				77, "pioC13", "PC13"
              };
 
 GpioPin::~GpioPin() {
@@ -202,6 +206,9 @@ int GpioPin::setState(State_e state) {
         return (-1);
     last_value = newval;
     return (0);
+}
+int GpioPin::getfd() {
+	return(this->fd);
 }
 int GpioPin::flip(unsigned int us) {
     if (kid < 0)
