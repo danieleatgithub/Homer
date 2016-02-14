@@ -9,6 +9,8 @@
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.MachO64" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
@@ -21,36 +23,25 @@
 					<folderInfo id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924." name="/" resourcePath="">
 						<toolChain id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1468161574" name="Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default">
 							<targetPlatform id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform.407979702" isAbstract="false" name="GNU Autotools Target Platform" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform"/>
-							<builder id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.builder.1034650761" keepEnvironmentInBuildfile="false" managedBuildOn="true" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.builder">
-								<outputEntries>
-									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name=""/>
-									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Local Debug"/>
-								</outputEntries>
-							</builder>
+							<builder id="org.buildroot.wks.buildroot-2015.11.1.output.builder.4859312" keepEnvironmentInBuildfile="false" name="Buildroot ARM builder (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.builder"/>
+							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler.834712627" name="Autotools Buildroot ARM C Compiler (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler">
+								<inputType id="org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input.588770453" superClass="org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input"/>
+							</tool>
+							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.352886473" name="Autotools Buildroot ARM C++ Compiler (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler">
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.746087443" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+								<inputType id="org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input.1618470790" superClass="org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input"/>
+							</tool>
 							<tool id="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure.1538618" name="configure" superClass="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure">
 								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.1157070438" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924" valueType="string"/>
 							</tool>
 							<tool id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen.29483565" name="autogen.sh" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen"/>
-							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler.732873608" name="Autotools Buildroot ARM C Compiler (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler">
-								<option id="gnu.c.compiler.option.include.paths.990017437" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/homerd/homerd/include}&quot;"/>
-								</option>
-								<inputType id="org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input.760752831" superClass="org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input"/>
-							</tool>
-							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.892434267" name="Autotools Buildroot ARM C++ Compiler (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler">
-								<option id="gnu.cpp.compiler.option.include.paths.1610241023" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/homerd/homerd/include}&quot;"/>
-								</option>
-								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.202236487" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
-								<inputType id="org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input.75704251" superClass="org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input"/>
-							</tool>
-							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.tool.configure.1701142313" name="configure" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.tool.configure">
-								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.1629535235" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924" valueType="string"/>
+							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.tool.configure.113351823" name="configure" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.tool.configure">
+								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.1443820152" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924" valueType="string"/>
 							</tool>
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="include"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="include"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="tool"/>
 					</sourceEntries>
@@ -80,7 +71,6 @@
 								<option id="gnu.cpp.compiler.option.optimization.level.1918871249" name="Optimization Level" superClass="gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.debugging.level.418636294" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.1356540035" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/homerd/include}&quot;"/>
 									<listOptionValue builtIn="false" value="/wks/local/include"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.dialect.std.242187779" name="Language standard" superClass="gnu.cpp.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.cpp.compiler.dialect.c++11" valueType="enumerated"/>
@@ -98,7 +88,6 @@
 								<option id="gnu.c.compiler.option.debugging.level.31653699" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.dialect.std.624660756" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.1227176823" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/homerd/include}&quot;"/>
 									<listOptionValue builtIn="false" value="/wks/local/include"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.2053493375" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -122,7 +111,6 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.base.1749682827" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base">
 								<option id="gnu.both.asm.option.include.paths.1990946831" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/homerd/include}&quot;"/>
 									<listOptionValue builtIn="false" value="/wks/local/include"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.405792687" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
@@ -130,6 +118,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="include"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
@@ -147,10 +136,14 @@
 		<configuration configurationName="Configuration_with_Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)1">
 			<resource resourceType="PROJECT" workspacePath="/homerd"/>
 		</configuration>
+		<configuration configurationName="Local homerd"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.352886473;cdt.managedbuild.tool.gnu.cpp.compiler.input.746087443">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.1051227896;cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.1051227896.;cdt.managedbuild.tool.gnu.cpp.compiler.base.768181042;cdt.managedbuild.tool.gnu.cpp.compiler.input.79596821">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
@@ -160,8 +153,14 @@
 		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.892434267;cdt.managedbuild.tool.gnu.cpp.compiler.input.202236487">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.352886473;org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input.1618470790">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileCPP"/>
+		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.1882377809;cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.;cdt.managedbuild.tool.gnu.cpp.compiler.base.255293648;cdt.managedbuild.tool.gnu.cpp.compiler.input.484921921">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler.834712627;org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input.588770453">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler.732873608;org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input.760752831">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileC"/>

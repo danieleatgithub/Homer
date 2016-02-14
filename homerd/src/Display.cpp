@@ -15,6 +15,7 @@
 #include <log4cplus/loggingmacros.h>
 #include <log4cplus/loglevel.h>
 #include "homerd.h"
+#include <errno.h>
 
 using namespace std;
 using namespace log4cplus;

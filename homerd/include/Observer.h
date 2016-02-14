@@ -62,10 +62,10 @@ namespace detail
 
   // Slap the baby's bottom. This functions creates a complete no-op shared_ptr
   // which we use as the 'heartbeat' for the Subject
-  UniversalPtr createHeartBeat()
-  {
-    return createEmptyPtr([] (void*) {});
-  }
+  UniversalPtr createHeartBeat();
+//  {
+//    return createEmptyPtr([] (void*) {});
+//  }
 
   // A base class for handling common code in all Subjects. Normally using
   // inheritance for code reuse is bad but in this case it is a common idiom

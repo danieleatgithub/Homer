@@ -15,7 +15,6 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <thread>
-#include "Observer.h"
 
 namespace homerio {
 
