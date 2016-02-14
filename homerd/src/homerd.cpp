@@ -26,6 +26,7 @@
 #include <string>
 #include <iostream>
 #include "homerd.h"
+#include "KeyPanel.h"
 
 using option::Option;
 using option::Descriptor;
@@ -36,20 +37,8 @@ using namespace std;
 using namespace log4cplus;
 using namespace homerio;
 
-// FIXME get from properties
-#define DAEMON_NAME "homerd"
-#define ONEWIRE_0_PIN "PA01"
-#define I2C_0_DAT_PIN "PA30"
-#define I2C_0_CLK_PIN "PA31"
-#define I2C_BUS "/dev/i2c-0"
-#define SYSFS_GPIO_DIR "/sys/class/gpio"
-#define LCD_BACKLIGHT_PIN "PA03"
-#define LCD_RESET_PIN "PA02"
-#define BUT_UP_PIN ""
-#define BUT_DOWN_PIN ""
-#define BUT_RIGHT_PIN ""
-#define BUT_LEFT_PIN ""
-#define BUT_ENTER_PIN "PA06"
+
+
 
 #define no_argument 0
 #define required_argument 1
@@ -182,6 +171,7 @@ int main(int argc, char *argv[]) {
     }
 
     Display *display;
+    KeyPanel *keypanel;
     string ip;
     bool run = true;
     Sysinfo sysinfo = Sysinfo::get_instance();
@@ -193,9 +183,11 @@ int main(int argc, char *argv[]) {
     display = new FakeDisplay(I2C_BUS, LCD_RESET_PIN, LCD_BACKLIGHT_PIN);
 #else
     display = new Winstar(I2C_BUS, LCD_RESET_PIN, LCD_BACKLIGHT_PIN);
+    keypanel = new KeyPanel(KEY_EVENT_DEVICE);
 #endif
 
     Logger logger = Logger::getRoot();
+
 
     ip = sysinfo.get_local_ip("eth0");
     display->dpy_open();
@@ -205,14 +197,16 @@ int main(int argc, char *argv[]) {
     display->dpy_puts(ip.c_str());
     display->set_backlight(false, 10000);
     LOG4CPLUS_INFO(logger, "homerd started");
+    keypanel->start();
 
-    for (int i = 0; i < 300; i++) {
-        printf("xxx %d\n", i);
-        sleep(1);
+    while(true) {
+    	if(keypanel->get_key_counter() > 10) break;
     }
 
+    keypanel->stop();
     display->dpy_close();
     delete (display);
+    delete (keypanel);
     LOG4CPLUS_INFO(logger, "homerd stopped");
     return 0;
 }

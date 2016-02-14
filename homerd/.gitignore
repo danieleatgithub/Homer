@@ -4,8 +4,9 @@
 /config.status
 /gmon.out
 /Makefile
-/perf.data
-/perf.data.old
+/perf.*
 /Local homerd/
 /Local homertool/
 /.deps/
+*.orig
+*.o

@@ -103,7 +103,7 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_homerd_OBJECTS = homerd.$(OBJEXT) Winstar.$(OBJEXT) \
 	Display.$(OBJEXT) GpioPin.$(OBJEXT) FakeDisplay.$(OBJEXT) \
-	Sysinfo.$(OBJEXT)
+	Sysinfo.$(OBJEXT) KeyPanel.$(OBJEXT)
 homerd_OBJECTS = $(am_homerd_OBJECTS)
 homerd_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -261,7 +261,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_LDFLAGS = -llog4cplus -lpthread
 AM_CPPFLAGS = -std=c++11 -I$(top_srcdir)/include
-homerd_SOURCES = homerd.cpp Winstar.cpp Display.cpp GpioPin.cpp FakeDisplay.cpp Sysinfo.cpp
+homerd_SOURCES = homerd.cpp Winstar.cpp Display.cpp GpioPin.cpp FakeDisplay.cpp Sysinfo.cpp KeyPanel.cpp
 all: all-am
 
 .SUFFIXES:
@@ -351,6 +351,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Display.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/FakeDisplay.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/GpioPin.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/KeyPanel.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Sysinfo.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Winstar.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/homerd.Po@am__quote@
