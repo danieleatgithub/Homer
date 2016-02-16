@@ -15,13 +15,54 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <thread>
+#include "Observer.h"
+#include <linux/input.h>
+
+
+using namespace obs;
 
 namespace homerio {
+
+
+enum Button_e {
+	BUTTON_ENTER = KEY_ENTER,
+	BUTTON_UP = KEY_UP,
+	BUTTON_DOWN = KEY_DOWN,
+	BUTTON_LEFT = KEY_LEFT,
+	BUTTON_RIGHT = KEY_RIGHT
+};
+class KeyButton {
+private:
+	struct input_event key;
+	std::chrono::milliseconds press_time;
+	bool valid;
+
+public:
+	KeyButton() { valid = false; }
+	void load_event(struct input_event &ev) {
+		key = ev;
+		valid = false;
+	};
+	void validate_event(struct input_event &ev) {
+		valid = true;
+		if(key.code == 0) {
+//			press_time = std::chrono::duration_cast<std::chrono::milliseconds>((long long)(ev.time.tv_sec - key.time.tv_sec) * 1000 + (ev.time.tv_usec - key.time.tv_usec)/1000));
+		}
+	}
+	const Button_e get_key() { return ((Button_e) key.code); }
+	std::chrono::milliseconds get_press_ms() { return(press_time); }
+
+
+};
 
 class KeyPanel {
 
   private:
     const char * dev;
+    KeyButton key;
+    obs::Subject<void (KeyButton& k )> key_obs;
+    Registration reg_obs;
+
     bool running;
     std::thread key_thread;
     void key_thread_reader();
@@ -32,6 +73,8 @@ class KeyPanel {
   public:
     KeyPanel(const char *dev);
     ~KeyPanel();
+    void key_attach(std::function<void (KeyButton& k)>);
+
     int start();
     int stop();
     unsigned int get_key_counter() { return(key_counter); }

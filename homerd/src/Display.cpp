@@ -16,6 +16,8 @@
 #include <log4cplus/loglevel.h>
 #include "homerd.h"
 #include <errno.h>
+#include "Observer.h"
+#include "KeyPanel.h"
 
 using namespace std;
 using namespace log4cplus;
@@ -31,6 +33,7 @@ Display::Display(const char *bus) {
     this->backlight_state = false;
     this->reset_pin = new GpioPin();
     this->backlight_pin = new GpioPin();
+    this->key_light_delay = 1000;
 }
 
 Display::Display(const char *bus, const char *rst, const char *backlight) {
@@ -40,6 +43,7 @@ Display::Display(const char *bus, const char *rst, const char *backlight) {
     this->rst = string(rst);
     this->backlight = string(backlight);
     this->backlight_state = true;
+    this->key_light_delay = 1000;
 
     pin = GpioPin::getPinDescriptor(this->rst.c_str());
     reset_pin = new GpioPin(pin);
@@ -107,6 +111,19 @@ int Display::set_backlight(bool state, unsigned int delay_ms) {
     return (0);
 }
 
+
+void Display::key_attach(KeyPanel &key_panel) {
+	 key_panel.key_attach([this] ( KeyButton& k ) {
+		set_backlight(true);
+		if(k.get_key() == Button_e::BUTTON_ENTER) {
+			set_backlight(false,this->key_light_delay*5);
+		} else {
+			set_backlight(false,this->key_light_delay);
+		}
+	});
+
+
+}
 int Display::dpy_putchar(unsigned char ch) {
     return (this->write_data(ch));
 }

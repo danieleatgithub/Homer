@@ -201,7 +201,7 @@ int Winstar::dpy_write(int type, uint8_t data) {
 
     // FIXME: wait ready from device (blocking and no blocking)
     if (write(fd, buffer, 2) != 2) {
-        printf("Error writing file: %s\n", strerror(errno));
+        LOG4CPLUS_ERROR(logdev,"Winstar write error  " << strerror(errno));
         return -1;
     }
     fsync(fd);

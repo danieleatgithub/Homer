@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <string>
+#include "KeyPanel.h"
 
 namespace homerio {
 class GpioPin;
@@ -16,7 +17,7 @@ class Display {
 
   private:
     virtual void init();
-
+    unsigned int key_light_delay;
   protected:
     int fd;
     uint8_t address;
@@ -43,6 +44,7 @@ class Display {
     int dpy_putchar(unsigned char ch);
     int dpy_puts(const char *str);
     int reset();
+    void key_attach(KeyPanel &key_panel);
 
     virtual int set_state(bool state) {
         return (0);

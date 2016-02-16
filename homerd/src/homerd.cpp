@@ -27,6 +27,7 @@
 #include <iostream>
 #include "homerd.h"
 #include "KeyPanel.h"
+#include "Observer.h"
 
 using option::Option;
 using option::Descriptor;
@@ -36,7 +37,7 @@ using option::ArgStatus;
 using namespace std;
 using namespace log4cplus;
 using namespace homerio;
-
+using namespace obs;
 
 
 
@@ -70,6 +71,7 @@ const char *std_err = 0;
 const char *std_out = 0;
 const char *props_file = HOMERD_DEF_PROPS;
 bool daemon_mode = false;
+
 
 int main(int argc, char *argv[]) {
 
@@ -171,7 +173,6 @@ int main(int argc, char *argv[]) {
     }
 
     Display *display;
-    KeyPanel *keypanel;
     string ip;
     bool run = true;
     Sysinfo sysinfo = Sysinfo::get_instance();
@@ -183,7 +184,8 @@ int main(int argc, char *argv[]) {
     display = new FakeDisplay(I2C_BUS, LCD_RESET_PIN, LCD_BACKLIGHT_PIN);
 #else
     display = new Winstar(I2C_BUS, LCD_RESET_PIN, LCD_BACKLIGHT_PIN);
-    keypanel = new KeyPanel(KEY_EVENT_DEVICE);
+    KeyPanel keypanel(KEY_EVENT_DEVICE);
+
 #endif
 
     Logger logger = Logger::getRoot();
@@ -195,18 +197,20 @@ int main(int argc, char *argv[]) {
     display->dpy_puts("Homer");  // 7
     display->line2_home();
     display->dpy_puts(ip.c_str());
-    display->set_backlight(false, 10000);
+    display->set_backlight(false, 1000);
+    display->key_attach(keypanel);
+
     LOG4CPLUS_INFO(logger, "homerd started");
-    keypanel->start();
+    keypanel.start();
+
 
     while(true) {
-    	if(keypanel->get_key_counter() > 10) break;
+    	if(keypanel.get_key_counter() > 10) break;
     }
 
-    keypanel->stop();
+    keypanel.stop();
     display->dpy_close();
     delete (display);
-    delete (keypanel);
     LOG4CPLUS_INFO(logger, "homerd stopped");
     return 0;
 }

@@ -33,6 +33,10 @@ KeyPanel::KeyPanel(const char *dev) {
 KeyPanel::~KeyPanel() {
 	this->dev = 0;
 }
+
+void KeyPanel::key_attach(std::function<void (KeyButton& k)> f) {
+	reg_obs = key_obs.registerObserver(f);
+}
 void KeyPanel::key_thread_reader() {
 	Logger logdev = Logger::getInstance(LOGDEVICE);
 	this->running = true;
@@ -56,9 +60,18 @@ void KeyPanel::key_thread_reader() {
 									"value="<< ev.value <<
 									"s=" << ev.time.tv_sec <<
 									"u=" << ev.time.tv_usec);
-	    	if(ev.value != 0) {
-	    		this->key_counter++;
+
+	    	switch(ev.type){
+			case EV_SYN:
+	    		this->key.validate_event(ev);
+	    		key_counter++;
+		    	key_obs(this->key);
+		    	break;
+			case EV_KEY:
+	    		this->key.load_event(ev);
+	    		break;
 	    	}
+
 	    } else {
 	    	// timeout
 	    }
