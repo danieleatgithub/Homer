@@ -154,11 +154,10 @@ int main(int argc, char *argv[]) {
         cout << "start";
         ip = sysinfo.get_local_ip("eth0");
         display->dpy_open();
-        display->set_backlight(true);
+        display->set_backlight(false);
         display->dpy_puts("Homer");  // 7
         display->line2_home();
         display->dpy_puts(ip.c_str());
-        display->set_backlight(false, 10000);
         LOG4CPLUS_INFO(logger, "homerd started");
         display->dpy_close();
         delete (display);

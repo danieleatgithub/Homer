@@ -18,9 +18,11 @@
 #include <errno.h>
 #include "Observer.h"
 #include "KeyPanel.h"
+#include "Calendar.h"
 
 using namespace std;
 using namespace log4cplus;
+using namespace calendar;
 
 namespace homerio {
 struct pinmap_s;
@@ -34,6 +36,7 @@ Display::Display(const char *bus) {
     this->reset_pin = new GpioPin();
     this->backlight_pin = new GpioPin();
     this->key_light_delay = 1000;
+    this->light_remain_ms = 0;
 }
 
 Display::Display(const char *bus, const char *rst, const char *backlight) {
@@ -102,28 +105,40 @@ int Display::set_backlight(bool state) {
     return (backlight_pin->setState((state ? STATE_ON : STATE_OFF)));
 }
 
-int Display::set_backlight(bool state, unsigned int delay_ms) {
-    std::thread([this, state, delay_ms] {
-        std::this_thread::sleep_for(
-        std::chrono::milliseconds{delay_ms});
-        set_backlight(state);
-    }).detach();
-    return (0);
-}
+//int Display::set_backlight(bool state, unsigned int delay_ms) {
+//		std::thread([this, state, delay_ms] {
+//			std::this_thread::sleep_for(
+//			std::chrono::milliseconds{delay_ms});
+//			set_backlight(state);
+//		}).detach();
+//    return (0);
+//}
+
+
+//void Display::key_attach(KeyPanel &key_panel) {
+//	 key_panel.key_attach([this] ( KeyButton& k ) {
+//		if(this->light_remain_ms == 0) {
+//			this->light_remain_ms = this->key_light_delay;
+//			set_backlight(true);
+//			std::thread([this] {
+//				std::this_thread::sleep_for(std::chrono::milliseconds{this->light_remain_ms});
+//				set_backlight(false);
+//				this->light_remain_ms = 0;
+//			}).detach();
+//		}
+//	});
+//}
 
 
 void Display::key_attach(KeyPanel &key_panel) {
 	 key_panel.key_attach([this] ( KeyButton& k ) {
-		set_backlight(true);
-		if(k.get_key() == Button_e::BUTTON_ENTER) {
-			set_backlight(false,this->key_light_delay*5);
-		} else {
-			set_backlight(false,this->key_light_delay);
-		}
+		 Calendar calendar = Calendar::get_instance();
+		 timedLightOff.after(std::chrono::seconds(10));
+		 calendar.add(timedLightOff);
 	});
-
-
 }
+
+
 int Display::dpy_putchar(unsigned char ch) {
     return (this->write_data(ch));
 }

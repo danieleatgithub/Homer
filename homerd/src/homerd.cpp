@@ -193,11 +193,10 @@ int main(int argc, char *argv[]) {
 
     ip = sysinfo.get_local_ip("eth0");
     display->dpy_open();
-    display->set_backlight(true);
+    display->set_backlight(false);
     display->dpy_puts("Homer");  // 7
     display->line2_home();
     display->dpy_puts(ip.c_str());
-    display->set_backlight(false, 1000);
     display->key_attach(keypanel);
 
     LOG4CPLUS_INFO(logger, "homerd started");

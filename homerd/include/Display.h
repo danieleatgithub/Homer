@@ -4,12 +4,14 @@
 #include <stdint.h>
 #include <string>
 #include "KeyPanel.h"
+#include "Calendar.h"
 
 namespace homerio {
 class GpioPin;
 } /* namespace homerio */
 
 using namespace std;
+using namespace calendar;
 
 namespace homerio {
 
@@ -18,6 +20,9 @@ class Display {
   private:
     virtual void init();
     unsigned int key_light_delay;
+    unsigned int light_remain_ms;
+    CalendarEvent timedLightOff;
+
   protected:
     int fd;
     uint8_t address;
@@ -75,7 +80,7 @@ class Display {
     }
     ;
     int set_backlight(bool state);
-    int set_backlight(bool state, unsigned int delay_ms);
+//    int set_backlight(bool state, unsigned int delay_ms);
     bool is_backlight_on();
     virtual int set_two_lines() {
         return (0);
