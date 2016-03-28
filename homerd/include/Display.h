@@ -4,14 +4,14 @@
 #include <stdint.h>
 #include <string>
 #include "KeyPanel.h"
-#include "Calendar.h"
+#include "Scheduler.hpp"
 
 namespace homerio {
 class GpioPin;
 } /* namespace homerio */
 
 using namespace std;
-using namespace calendar;
+using namespace shd;
 
 namespace homerio {
 
@@ -21,7 +21,7 @@ class Display {
     virtual void init();
     unsigned int key_light_delay;
     unsigned int light_remain_ms;
-    CalendarEvent timedLightOff;
+    Event timedLightOff;
 
   protected:
     int fd;
@@ -49,7 +49,7 @@ class Display {
     int dpy_putchar(unsigned char ch);
     int dpy_puts(const char *str);
     int reset();
-    void key_attach(KeyPanel &key_panel);
+    void key_attach(KeyPanel &key_panel, Scheduler &calendar);
 
     virtual int set_state(bool state) {
         return (0);

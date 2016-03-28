@@ -28,6 +28,7 @@
 #include "homerd.h"
 #include "KeyPanel.h"
 #include "Observer.h"
+#include "Scheduler.hpp"
 
 using option::Option;
 using option::Descriptor;
@@ -38,7 +39,7 @@ using namespace std;
 using namespace log4cplus;
 using namespace homerio;
 using namespace obs;
-
+using namespace shd;
 
 
 #define no_argument 0
@@ -185,22 +186,22 @@ int main(int argc, char *argv[]) {
 #else
     display = new Winstar(I2C_BUS, LCD_RESET_PIN, LCD_BACKLIGHT_PIN);
     KeyPanel keypanel(KEY_EVENT_DEVICE);
-
 #endif
-
     Logger logger = Logger::getRoot();
-
+    Scheduler scheduler;
 
     ip = sysinfo.get_local_ip("eth0");
     display->dpy_open();
-    display->set_backlight(false);
+    display->set_backlight(true);
+
     display->dpy_puts("Homer");  // 7
     display->line2_home();
     display->dpy_puts(ip.c_str());
-    display->key_attach(keypanel);
+    display->key_attach(keypanel,scheduler);
 
     LOG4CPLUS_INFO(logger, "homerd started");
     keypanel.start();
+
 
 
     while(true) {

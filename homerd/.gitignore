@@ -10,3 +10,4 @@
 /.deps/
 *.orig
 *.o
+/Makefile.in

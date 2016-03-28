@@ -18,11 +18,11 @@
 #include <errno.h>
 #include "Observer.h"
 #include "KeyPanel.h"
-#include "Calendar.h"
+#include "Scheduler.hpp"
 
 using namespace std;
 using namespace log4cplus;
-using namespace calendar;
+using namespace shd;
 
 namespace homerio {
 struct pinmap_s;
@@ -74,6 +74,8 @@ void Display::init() {
     this->write_usleep = 100;
     this->fd = -1;
     this->address = 0xff;
+    timedLightOff.setCallback([&] () { this->dpy_puts("timedLightOff");});
+
 }
 
 int Display::dpy_open() {
@@ -130,11 +132,9 @@ int Display::set_backlight(bool state) {
 //}
 
 
-void Display::key_attach(KeyPanel &key_panel) {
-	 key_panel.key_attach([this] ( KeyButton& k ) {
-		 Calendar calendar = Calendar::get_instance();
-		 timedLightOff.after(std::chrono::seconds(10));
-		 calendar.add(timedLightOff);
+void Display::key_attach(KeyPanel &key_panel, Scheduler& sch) {
+	 key_panel.key_attach([&] ( KeyButton& k ) {
+		 sch.ScheduleAfter(std::chrono::seconds(10),timedLightOff);
 	});
 }
 
