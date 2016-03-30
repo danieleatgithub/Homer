@@ -28,6 +28,7 @@
 								<inputType id="org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input.588770453" superClass="org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input"/>
 							</tool>
 							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.352886473" name="Autotools Buildroot ARM C++ Compiler (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler">
+								<option id="gnu.cpp.compiler.option.preprocessor.def.1602517877" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.746087443" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 								<inputType id="org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input.1618470790" superClass="org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input"/>
 							</tool>

@@ -21,7 +21,7 @@ class Display {
     virtual void init();
     unsigned int key_light_delay;
     unsigned int light_remain_ms;
-    Event timedLightOff;
+    Task timedLightOff;
 
   protected:
     int fd;
