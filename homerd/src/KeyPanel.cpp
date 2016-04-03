@@ -17,17 +17,18 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <iostream>
 
 using namespace std;
 using namespace log4cplus;
 
 namespace homerio {
 
+
 KeyPanel::KeyPanel(const char *dev) {
 	this->dev = dev;
 	this->running = false;
 	this->fd = -1;
-	this->select_to = 40 * 1000;
 	this->key_counter = 0;
 }
 KeyPanel::~KeyPanel() {
@@ -42,19 +43,11 @@ void KeyPanel::key_thread_reader() {
 	this->running = true;
 	struct input_event ev;
 	struct input_id eii;
-    struct timeval *tm;
     int key_code;
     int size = sizeof(ev);
-    int rt;
-    fd_set rfs;
-    struct timeval tout;
-    tout.tv_sec = 0;
-    tout.tv_usec = (this->select_to);
+
 	while(running) {
-	    FD_ZERO(&rfs);
-	    FD_SET(this->fd,&rfs);
-	    if(select(this->fd + 1, &rfs, NULL, NULL, &tout)) {
-	    	rt = read(this->fd, &ev, size);
+	    	read(this->fd, &ev, size);
 	    	LOG4CPLUS_DEBUG(logdev, "code=" << ev.code <<
 	    							"type=" <<  ev.type <<
 									"value="<< ev.value <<
@@ -71,10 +64,6 @@ void KeyPanel::key_thread_reader() {
 	    		this->key.load_event(ev);
 	    		break;
 	    	}
-
-	    } else {
-	    	// timeout
-	    }
 
 	}
 	LOG4CPLUS_DEBUG(logdev, "KeyPanel thread exit\n");

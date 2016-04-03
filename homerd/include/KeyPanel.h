@@ -63,12 +63,12 @@ class KeyPanel {
     KeyButton key;
     obs::Subject<void (KeyButton& k )> key_obs;
     Registration reg_obs;
+    struct timeval tout;
 
     bool running;
     std::thread key_thread;
     void key_thread_reader();
     unsigned int fd;
-    unsigned int select_to;
     unsigned int key_counter;
 
   public:
