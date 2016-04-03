@@ -74,7 +74,7 @@ void Display::init() {
     this->write_usleep = 100;
     this->fd = -1;
     this->address = 0xff;
-    timedLightOff.setCallback([&] () { this->dpy_puts("timedLightOff");});
+    timedLightOff.setCallback([&] () { this->set_backlight(false);});
 
 }
 
@@ -107,34 +107,15 @@ int Display::set_backlight(bool state) {
     return (backlight_pin->setState((state ? STATE_ON : STATE_OFF)));
 }
 
-//int Display::set_backlight(bool state, unsigned int delay_ms) {
-//		std::thread([this, state, delay_ms] {
-//			std::this_thread::sleep_for(
-//			std::chrono::milliseconds{delay_ms});
-//			set_backlight(state);
-//		}).detach();
-//    return (0);
-//}
-
-
-//void Display::key_attach(KeyPanel &key_panel) {
-//	 key_panel.key_attach([this] ( KeyButton& k ) {
-//		if(this->light_remain_ms == 0) {
-//			this->light_remain_ms = this->key_light_delay;
-//			set_backlight(true);
-//			std::thread([this] {
-//				std::this_thread::sleep_for(std::chrono::milliseconds{this->light_remain_ms});
-//				set_backlight(false);
-//				this->light_remain_ms = 0;
-//			}).detach();
-//		}
-//	});
-//}
-
 
 void Display::key_attach(KeyPanel &key_panel, Scheduler& sch) {
 	 key_panel.key_attach([&] ( KeyButton& k ) {
-		 sch.ScheduleAfter(std::chrono::seconds(10),timedLightOff);
+		 if(k.isPressEvent()) {
+			 sch.ScheduleCancel(timedLightOff);
+			 set_backlight(true);
+		 } else {
+			 sch.ScheduleAfter(std::chrono::seconds(10),timedLightOff);
+		 }
 	});
 }
 

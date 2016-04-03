@@ -276,11 +276,12 @@ class Scheduler {
         }
     }
     void ScheduleAfter(chrono::system_clock::duration interval, Task& task) {
-    	this->ScheduleAt(chrono::system_clock::now(),task);
+    	task.setCancelled(false);
+    	this->ScheduleAt(chrono::system_clock::now() + interval,task);
     }
     void ScheduleAfter(chrono::system_clock::duration interval, cb_t callback) {
     	Task e(callback);
-    	this->ScheduleAt(chrono::system_clock::now(),e);
+    	this->ScheduleAt(chrono::system_clock::now() + interval,e);
     }
 
   private:
@@ -304,6 +305,7 @@ class Scheduler {
                 	(*cur).go();
                 	running_tasks.erase(*cur);
                  }
+
 //                cout << "LOOP " << tasks.size() << " SCHEDULER " << *this << endl;
 //                cout << "LOOP" << waiting_tasks.size() << "-" << running_tasks.size() << endl;
                 if (waiting_tasks.empty())
