@@ -205,7 +205,8 @@ int main(int argc, char *argv[]) {
 
 
     while(true) {
-    	if(keypanel.get_key_counter() > 10) break;
+    	this_thread::sleep_for(std::chrono::seconds(10));
+    	if(keypanel.get_key_counter() > 20) break;
     }
 
     keypanel.stop();

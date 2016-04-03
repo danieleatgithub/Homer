@@ -109,6 +109,7 @@ int Display::set_backlight(bool state) {
 
 
 void Display::key_attach(KeyPanel &key_panel, Scheduler& sch) {
+	 sch.ScheduleAfter(std::chrono::seconds(10),timedLightOff);
 	 key_panel.key_attach([&] ( KeyButton& k ) {
 		 if(k.isPressEvent()) {
 			 sch.ScheduleCancel(timedLightOff);
