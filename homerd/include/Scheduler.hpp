@@ -92,8 +92,8 @@ class Task {
     }
     /**
     *
-    * Default constructor with a disabled task available only
-    * for friends class
+    * Default constructor with a disabled task
+    *
     */
     Task() { init(); }
     /**
@@ -157,7 +157,7 @@ class Task {
     void init() {
         this->id =  IDGenerator::get_istance().getId();
         this->time =  chrono::system_clock::now();
-        this->callback = 0;
+        this->callback = nullptr;
         this->interval = chrono::seconds(0);;
         this->cancelled = false;
     }
