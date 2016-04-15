@@ -24,7 +24,7 @@ string Sysinfo::get_local_ip(const char *ifname) {
  void * tmpAddrPtr=NULL;
 
 
- ip = "";
+ ip = "No IP available";
 
  getifaddrs(&ifAddrStruct);
 
