@@ -124,7 +124,39 @@
 				#address-cells = <1>;
 				#size-cells = <0>;
 			};
-
+			
+			
+			gpio_keys {
+					compatible = "gpio-keys";
+					#address-cells = <1>;
+					#size-cells = <0>;
+					#autorepeat;
+					button@21 {
+						label = "GPIO Key UP";
+						linux,code = <103>;
+						gpios = <&pioA 4 GPIO_ACTIVE_LOW>;
+					};
+					button@22 {
+						label = "GPIO Key DOWN";
+						linux,code = <108>;
+						gpios = <&pioA 8 GPIO_ACTIVE_LOW>;
+					};
+					button@23 {
+						label = "GPIO Key LEFT";
+						linux,code = <105>;
+						gpios = <&pioA 7 GPIO_ACTIVE_LOW>;
+					};
+					button@24 {
+						label = "GPIO Key RIGHT";
+						linux,code = <106>;
+						gpios = <&pioA 5 GPIO_ACTIVE_LOW>;
+					};
+					button@25 {
+						label = "GPIO Key ENTER";
+						linux,code = <28>;
+						gpios = <&pioA 6 GPIO_ACTIVE_LOW>;
+					};
+			};
 
 			/* Giga Ethernet */
 			macb0: ethernet@f0028000 {
@@ -132,6 +164,7 @@
 				status = "disabled";
 
 			};
+
 
 			/* 10/100 Ethernet */
 			macb1: ethernet@f802c000 {
@@ -144,7 +177,8 @@
 					interrupt-parent = <&pioE>;
 					interrupts = <30 IRQ_TYPE_EDGE_FALLING>;
 					reg = <1>;
-				};
+				}; 
+				
 			};
 			
 			pwm0: pwm@f002c000 {
@@ -192,6 +226,7 @@
 					&pinctrl_adc0_ad9
 					>;
 			};
+
 
 			pinctrl@fffff200 {
 				board {
@@ -282,7 +317,6 @@
 			status = "okay";
 		};
 	};
-
 	leds {
 		compatible = "gpio-leds";
 

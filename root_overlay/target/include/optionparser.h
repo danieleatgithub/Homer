@@ -1957,7 +1957,7 @@ struct PrintUsageImplementation
     //! @brief Creates an iterator for @c usage.
     LinePartIterator(const Descriptor usage[]) :
         tablestart(usage), rowdesc(0), rowstart(0), ptr(0), col(-1), len(0), max_line_in_block(0), line_in_block(0),
-        target_line_in_block(0), hit_target_line(true)
+        target_line_in_block(0), hit_target_line(true), screenlen(0)
     {
     }
 
@@ -2395,7 +2395,7 @@ struct PrintUsageImplementation
      * @c x1 gives the indentation LineWrapper uses if it needs to indent.
      */
     LineWrapper(int x1, int x2) :
-        x(x1), width(x2 - x1), head(0), tail(bufmask)
+        x(x1), width(x2 - x1), head(0), tail(bufmask), wrote_something(false)
     {
       if (width < 2) // because of wide characters we need at least width 2 or the code breaks
         width = 2;

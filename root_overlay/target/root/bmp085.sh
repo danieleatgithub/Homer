@@ -3,7 +3,7 @@ modprobe bmp085_i2c
 
 # Local pressure is 12 mbar each 100 mt altitude
 # ----------------------------------------------
-ALTITUDE=345
+ALTITUDE=305
 # ----------------------------------------------
 
 DEV="/sys/class/i2c-adapter/i2c-0/0-0077"

@@ -14,7 +14,7 @@ hostname = debian64-devel
 uname -m = x86_64
 uname -r = 3.16.0-4-amd64
 uname -s = Linux
-uname -v = #1 SMP Debian 3.16.7-ckt20-1+deb8u1 (2015-12-14)
+uname -v = #1 SMP Debian 3.16.7-ckt25-2+deb8u3 (2016-07-02)
 
 /usr/bin/uname -p = unknown
 /bin/uname -X     = unknown
@@ -27,13 +27,13 @@ uname -v = #1 SMP Debian 3.16.7-ckt20-1+deb8u1 (2015-12-14)
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
 
-PATH: /wks/buildroot-2015.11.1/output/host/usr/bin
+PATH: /wks/buildroot-2016.05/output/host/usr/bin
 PATH: /usr/local/bin
 PATH: /usr/bin
 PATH: /bin
 PATH: /usr/local/games
 PATH: /usr/games
-PATH: /wks/buildroot-2015.11.1/output/host/usr/bin/
+PATH: /wks/buildroot-2016.05/output/host/usr/bin/
 
 
 ## ----------- ##
@@ -45,125 +45,127 @@ configure:2371: result: /usr/bin/install -c
 configure:2382: checking whether build environment is sane
 configure:2437: result: yes
 configure:2496: checking for arm-buildroot-linux-gnueabihf-strip
-configure:2512: found /wks/buildroot-2015.11.1/output/host/usr/bin/arm-buildroot-linux-gnueabihf-strip
-configure:2523: result: arm-buildroot-linux-gnueabihf-strip
+configure:2526: result: no
+configure:2536: checking for strip
+configure:2552: found /usr/bin/strip
+configure:2563: result: strip
 configure:2588: checking for a thread-safe mkdir -p
 configure:2627: result: /bin/mkdir -p
 configure:2634: checking for gawk
-configure:2650: found /wks/buildroot-2015.11.1/output/host/usr/bin/gawk
+configure:2650: found /wks/buildroot-2016.05/output/host/usr/bin/gawk
 configure:2661: result: gawk
 configure:2672: checking whether make sets $(MAKE)
 configure:2694: result: yes
 configure:2723: checking whether make supports nested variables
 configure:2740: result: yes
 configure:2985: checking for C++ compiler version
-configure:2994: arm-buildroot-linux-gnueabihf-g++ --version >&5
-arm-buildroot-linux-gnueabihf-g++.br_real (Buildroot 2015.11.1) 4.9.3
+configure:2994: arm-buildroot-linux-gnueabi-g++ --version >&5
+arm-buildroot-linux-gnueabi-g++.br_real (Buildroot 2016.05) 4.9.3
 Copyright (C) 2015 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 configure:3005: $? = 0
-configure:2994: arm-buildroot-linux-gnueabihf-g++ -v >&5
+configure:2994: arm-buildroot-linux-gnueabi-g++ -v >&5
 Using built-in specs.
-COLLECT_GCC=/wks/buildroot-2015.11.1/output/host/usr/bin/arm-buildroot-linux-gnueabihf-g++.br_real
-COLLECT_LTO_WRAPPER=/wks/buildroot-2015.11.1/output/host/usr/libexec/gcc/arm-buildroot-linux-gnueabihf/4.9.3/lto-wrapper
-Target: arm-buildroot-linux-gnueabihf
-Configured with: ./configure --prefix=/wks/buildroot-2015.11.1/output/host/usr --sysconfdir=/wks/buildroot-2015.11.1/output/host/etc --enable-static --target=arm-buildroot-linux-gnueabihf --with-sysroot=/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot --disable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib --with-gmp=/wks/buildroot-2015.11.1/output/host/usr --with-mpfr=/wks/buildroot-2015.11.1/output/host/usr --with-pkgversion='Buildroot 2015.11.1' --with-bugurl=http://bugs.buildroot.net/ --disable-libquadmath --enable-tls --disable-libmudflap --enable-threads --with-mpc=/wks/buildroot-2015.11.1/output/host/usr --without-isl --without-cloog --disable-decimal-float --with-abi=aapcs-linux --with-cpu=cortex-a5 --with-fpu=vfpv4-d16 --with-float=hard --with-mode=thumb --enable-languages=c,c++ --with-build-time-tools=/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/bin --enable-shared --disable-libgomp
+COLLECT_GCC=/wks/buildroot-2016.05/output/host/usr/bin/arm-buildroot-linux-gnueabi-g++.br_real
+COLLECT_LTO_WRAPPER=/wks/buildroot-2016.05/output/host/usr/libexec/gcc/arm-buildroot-linux-gnueabi/4.9.3/lto-wrapper
+Target: arm-buildroot-linux-gnueabi
+Configured with: ./configure --prefix=/wks/buildroot-2016.05/output/host/usr --sysconfdir=/wks/buildroot-2016.05/output/host/etc --enable-static --target=arm-buildroot-linux-gnueabi --with-sysroot=/wks/buildroot-2016.05/output/host/usr/arm-buildroot-linux-gnueabi/sysroot --disable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib --with-gmp=/wks/buildroot-2016.05/output/host/usr --with-mpfr=/wks/buildroot-2016.05/output/host/usr --with-pkgversion='Buildroot 2016.05' --with-bugurl=http://bugs.buildroot.net/ --disable-libquadmath --enable-tls --disable-libmudflap --enable-threads --with-mpc=/wks/buildroot-2016.05/output/host/usr --without-isl --without-cloog --with-float=soft --disable-decimal-float --with-abi=aapcs-linux --with-cpu=cortex-a5 --with-float=soft --with-mode=thumb --enable-languages=c,c++ --with-build-time-tools=/wks/buildroot-2016.05/output/host/usr/arm-buildroot-linux-gnueabi/bin --enable-shared --disable-libgomp
 Thread model: posix
-gcc version 4.9.3 (Buildroot 2015.11.1) 
+gcc version 4.9.3 (Buildroot 2016.05) 
 configure:3005: $? = 0
-configure:2994: arm-buildroot-linux-gnueabihf-g++ -V >&5
-arm-buildroot-linux-gnueabihf-g++.br_real: error: unrecognized command line option '-V'
-arm-buildroot-linux-gnueabihf-g++.br_real: fatal error: no input files
+configure:2994: arm-buildroot-linux-gnueabi-g++ -V >&5
+arm-buildroot-linux-gnueabi-g++.br_real: error: unrecognized command line option '-V'
+arm-buildroot-linux-gnueabi-g++.br_real: fatal error: no input files
 compilation terminated.
 configure:3005: $? = 1
-configure:2994: arm-buildroot-linux-gnueabihf-g++ -qversion >&5
-arm-buildroot-linux-gnueabihf-g++.br_real: error: unrecognized command line option '-qversion'
-arm-buildroot-linux-gnueabihf-g++.br_real: fatal error: no input files
+configure:2994: arm-buildroot-linux-gnueabi-g++ -qversion >&5
+arm-buildroot-linux-gnueabi-g++.br_real: error: unrecognized command line option '-qversion'
+arm-buildroot-linux-gnueabi-g++.br_real: fatal error: no input files
 compilation terminated.
 configure:3005: $? = 1
 configure:3025: checking whether the C++ compiler works
-configure:3047: arm-buildroot-linux-gnueabihf-g++ -g   conftest.cpp  >&5
+configure:3047: arm-buildroot-linux-gnueabi-g++ -g   conftest.cpp  >&5
 configure:3051: $? = 0
 configure:3099: result: yes
 configure:3102: checking for C++ compiler default output file name
 configure:3104: result: a.out
 configure:3110: checking for suffix of executables
-configure:3117: arm-buildroot-linux-gnueabihf-g++ -o conftest -g   conftest.cpp  >&5
+configure:3117: arm-buildroot-linux-gnueabi-g++ -o conftest -g   conftest.cpp  >&5
 configure:3121: $? = 0
 configure:3143: result: 
 configure:3165: checking whether we are cross compiling
-configure:3173: arm-buildroot-linux-gnueabihf-g++ -o conftest -g   conftest.cpp  >&5
+configure:3173: arm-buildroot-linux-gnueabi-g++ -o conftest -g   conftest.cpp  >&5
 configure:3177: $? = 0
 configure:3184: ./conftest
 /wks/workspace/Homer/libdpy/configure: line 3186: ./conftest: cannot execute binary file: Exec format error
 configure:3188: $? = 126
 configure:3203: result: yes
 configure:3208: checking for suffix of object files
-configure:3230: arm-buildroot-linux-gnueabihf-g++ -c -g  conftest.cpp >&5
+configure:3230: arm-buildroot-linux-gnueabi-g++ -c -g  conftest.cpp >&5
 configure:3234: $? = 0
 configure:3255: result: o
 configure:3259: checking whether we are using the GNU C++ compiler
-configure:3278: arm-buildroot-linux-gnueabihf-g++ -c -g  conftest.cpp >&5
+configure:3278: arm-buildroot-linux-gnueabi-g++ -c -g  conftest.cpp >&5
 configure:3278: $? = 0
 configure:3287: result: yes
-configure:3296: checking whether arm-buildroot-linux-gnueabihf-g++ accepts -g
-configure:3316: arm-buildroot-linux-gnueabihf-g++ -c -g  conftest.cpp >&5
+configure:3296: checking whether arm-buildroot-linux-gnueabi-g++ accepts -g
+configure:3316: arm-buildroot-linux-gnueabi-g++ -c -g  conftest.cpp >&5
 configure:3316: $? = 0
 configure:3357: result: yes
 configure:3391: checking for style of include used by make
 configure:3419: result: GNU
-configure:3445: checking dependency style of arm-buildroot-linux-gnueabihf-g++
+configure:3445: checking dependency style of arm-buildroot-linux-gnueabi-g++
 configure:3556: result: gcc3
 configure:3580: checking for arm-buildroot-linux-gnueabihf-gcc
-configure:3607: result: arm-buildroot-linux-gnueabihf-gcc
+configure:3607: result: arm-buildroot-linux-gnueabi-gcc
 configure:3876: checking for C compiler version
-configure:3885: arm-buildroot-linux-gnueabihf-gcc --version >&5
-arm-buildroot-linux-gnueabihf-gcc.br_real (Buildroot 2015.11.1) 4.9.3
+configure:3885: arm-buildroot-linux-gnueabi-gcc --version >&5
+arm-buildroot-linux-gnueabi-gcc.br_real (Buildroot 2016.05) 4.9.3
 Copyright (C) 2015 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 configure:3896: $? = 0
-configure:3885: arm-buildroot-linux-gnueabihf-gcc -v >&5
+configure:3885: arm-buildroot-linux-gnueabi-gcc -v >&5
 Using built-in specs.
-COLLECT_GCC=/wks/buildroot-2015.11.1/output/host/usr/bin/arm-buildroot-linux-gnueabihf-gcc.br_real
-COLLECT_LTO_WRAPPER=/wks/buildroot-2015.11.1/output/host/usr/libexec/gcc/arm-buildroot-linux-gnueabihf/4.9.3/lto-wrapper
-Target: arm-buildroot-linux-gnueabihf
-Configured with: ./configure --prefix=/wks/buildroot-2015.11.1/output/host/usr --sysconfdir=/wks/buildroot-2015.11.1/output/host/etc --enable-static --target=arm-buildroot-linux-gnueabihf --with-sysroot=/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot --disable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib --with-gmp=/wks/buildroot-2015.11.1/output/host/usr --with-mpfr=/wks/buildroot-2015.11.1/output/host/usr --with-pkgversion='Buildroot 2015.11.1' --with-bugurl=http://bugs.buildroot.net/ --disable-libquadmath --enable-tls --disable-libmudflap --enable-threads --with-mpc=/wks/buildroot-2015.11.1/output/host/usr --without-isl --without-cloog --disable-decimal-float --with-abi=aapcs-linux --with-cpu=cortex-a5 --with-fpu=vfpv4-d16 --with-float=hard --with-mode=thumb --enable-languages=c,c++ --with-build-time-tools=/wks/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/bin --enable-shared --disable-libgomp
+COLLECT_GCC=/wks/buildroot-2016.05/output/host/usr/bin/arm-buildroot-linux-gnueabi-gcc.br_real
+COLLECT_LTO_WRAPPER=/wks/buildroot-2016.05/output/host/usr/libexec/gcc/arm-buildroot-linux-gnueabi/4.9.3/lto-wrapper
+Target: arm-buildroot-linux-gnueabi
+Configured with: ./configure --prefix=/wks/buildroot-2016.05/output/host/usr --sysconfdir=/wks/buildroot-2016.05/output/host/etc --enable-static --target=arm-buildroot-linux-gnueabi --with-sysroot=/wks/buildroot-2016.05/output/host/usr/arm-buildroot-linux-gnueabi/sysroot --disable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib --with-gmp=/wks/buildroot-2016.05/output/host/usr --with-mpfr=/wks/buildroot-2016.05/output/host/usr --with-pkgversion='Buildroot 2016.05' --with-bugurl=http://bugs.buildroot.net/ --disable-libquadmath --enable-tls --disable-libmudflap --enable-threads --with-mpc=/wks/buildroot-2016.05/output/host/usr --without-isl --without-cloog --with-float=soft --disable-decimal-float --with-abi=aapcs-linux --with-cpu=cortex-a5 --with-float=soft --with-mode=thumb --enable-languages=c,c++ --with-build-time-tools=/wks/buildroot-2016.05/output/host/usr/arm-buildroot-linux-gnueabi/bin --enable-shared --disable-libgomp
 Thread model: posix
-gcc version 4.9.3 (Buildroot 2015.11.1) 
+gcc version 4.9.3 (Buildroot 2016.05) 
 configure:3896: $? = 0
-configure:3885: arm-buildroot-linux-gnueabihf-gcc -V >&5
-arm-buildroot-linux-gnueabihf-gcc.br_real: error: unrecognized command line option '-V'
-arm-buildroot-linux-gnueabihf-gcc.br_real: fatal error: no input files
+configure:3885: arm-buildroot-linux-gnueabi-gcc -V >&5
+arm-buildroot-linux-gnueabi-gcc.br_real: error: unrecognized command line option '-V'
+arm-buildroot-linux-gnueabi-gcc.br_real: fatal error: no input files
 compilation terminated.
 configure:3896: $? = 1
-configure:3885: arm-buildroot-linux-gnueabihf-gcc -qversion >&5
-arm-buildroot-linux-gnueabihf-gcc.br_real: error: unrecognized command line option '-qversion'
-arm-buildroot-linux-gnueabihf-gcc.br_real: fatal error: no input files
+configure:3885: arm-buildroot-linux-gnueabi-gcc -qversion >&5
+arm-buildroot-linux-gnueabi-gcc.br_real: error: unrecognized command line option '-qversion'
+arm-buildroot-linux-gnueabi-gcc.br_real: fatal error: no input files
 compilation terminated.
 configure:3896: $? = 1
 configure:3900: checking whether we are using the GNU C compiler
-configure:3919: arm-buildroot-linux-gnueabihf-gcc -c -g  conftest.c >&5
+configure:3919: arm-buildroot-linux-gnueabi-gcc -c -g  conftest.c >&5
 configure:3919: $? = 0
 configure:3928: result: yes
-configure:3937: checking whether arm-buildroot-linux-gnueabihf-gcc accepts -g
-configure:3957: arm-buildroot-linux-gnueabihf-gcc -c -g  conftest.c >&5
+configure:3937: checking whether arm-buildroot-linux-gnueabi-gcc accepts -g
+configure:3957: arm-buildroot-linux-gnueabi-gcc -c -g  conftest.c >&5
 configure:3957: $? = 0
 configure:3998: result: yes
-configure:4015: checking for arm-buildroot-linux-gnueabihf-gcc option to accept ISO C89
-configure:4078: arm-buildroot-linux-gnueabihf-gcc  -c -g  conftest.c >&5
+configure:4015: checking for arm-buildroot-linux-gnueabi-gcc option to accept ISO C89
+configure:4078: arm-buildroot-linux-gnueabi-gcc  -c -g  conftest.c >&5
 configure:4078: $? = 0
 configure:4091: result: none needed
-configure:4116: checking whether arm-buildroot-linux-gnueabihf-gcc understands -c and -o together
-configure:4138: arm-buildroot-linux-gnueabihf-gcc -c conftest.c -o conftest2.o
+configure:4116: checking whether arm-buildroot-linux-gnueabi-gcc understands -c and -o together
+configure:4138: arm-buildroot-linux-gnueabi-gcc -c conftest.c -o conftest2.o
 configure:4141: $? = 0
-configure:4138: arm-buildroot-linux-gnueabihf-gcc -c conftest.c -o conftest2.o
+configure:4138: arm-buildroot-linux-gnueabi-gcc -c conftest.c -o conftest2.o
 configure:4141: $? = 0
 configure:4153: result: yes
-configure:4172: checking dependency style of arm-buildroot-linux-gnueabihf-gcc
+configure:4172: checking dependency style of arm-buildroot-linux-gnueabi-gcc
 configure:4283: result: gcc3
 configure:4329: checking build system type
 configure:4343: result: x86_64-unknown-linux-gnu
@@ -179,16 +181,27 @@ configure:4610: checking for egrep
 configure:4672: result: /bin/grep -E
 configure:4677: checking for fgrep
 configure:4739: result: /bin/grep -F
-configure:4774: checking for ld used by arm-buildroot-linux-gnueabihf-gcc
-configure:4841: result: arm-buildroot-linux-gnueabihf-ld
-configure:4848: checking if the linker (arm-buildroot-linux-gnueabihf-ld) is GNU ld
+configure:4774: checking for ld used by arm-buildroot-linux-gnueabi-gcc
+configure:4841: result: arm-buildroot-linux-gnueabi-ld
+configure:4848: checking if the linker (arm-buildroot-linux-gnueabi-ld) is GNU ld
 configure:4863: result: yes
 configure:4875: checking for BSD- or MS-compatible name lister (nm)
-configure:4929: result: /wks/buildroot-2015.11.1/output/host/usr/bin/arm-buildroot-linux-gnueabihf-nm -B
-configure:5059: checking the name lister (/wks/buildroot-2015.11.1/output/host/usr/bin/arm-buildroot-linux-gnueabihf-nm -B) interface
-configure:5066: arm-buildroot-linux-gnueabihf-g++ -c -g  conftest.cpp >&5
-configure:5069: /wks/buildroot-2015.11.1/output/host/usr/bin/arm-buildroot-linux-gnueabihf-nm -B "conftest.o"
+configure:4929: result: no
+configure:4943: checking for arm-buildroot-linux-gnueabihf-dumpbin
+configure:4973: result: no
+configure:4943: checking for arm-buildroot-linux-gnueabihf-link
+configure:4973: result: no
+configure:4987: checking for dumpbin
+configure:5017: result: no
+configure:4987: checking for link
+configure:5003: found /usr/bin/link
+configure:5014: result: link -dump
+configure:5030: WARNING: using cross tools not prefixed with host triplet
+configure:5059: checking the name lister (nm) interface
+configure:5066: arm-buildroot-linux-gnueabi-g++ -c -g  conftest.cpp >&5
+configure:5069: nm "conftest.o"
 configure:5072: output
+00000000 b $d
 00000000 B some_variable
 configure:5079: result: BSD nm
 configure:5082: checking whether ln -s works
@@ -199,11 +212,13 @@ configure:5273: checking how to convert x86_64-unknown-linux-gnu file names to a
 configure:5313: result: func_convert_file_noop
 configure:5320: checking how to convert x86_64-unknown-linux-gnu file names to toolchain format
 configure:5340: result: func_convert_file_noop
-configure:5347: checking for arm-buildroot-linux-gnueabihf-ld option to reload object files
+configure:5347: checking for arm-buildroot-linux-gnueabi-ld option to reload object files
 configure:5354: result: -r
 configure:5388: checking for arm-buildroot-linux-gnueabihf-objdump
-configure:5404: found /wks/buildroot-2015.11.1/output/host/usr/bin/arm-buildroot-linux-gnueabihf-objdump
-configure:5415: result: arm-buildroot-linux-gnueabihf-objdump
+configure:5418: result: no
+configure:5428: checking for objdump
+configure:5444: found /usr/bin/objdump
+configure:5455: result: objdump
 configure:5487: checking how to recognize dependent libraries
 configure:5687: result: pass_all
 configure:5732: checking for arm-buildroot-linux-gnueabihf-dlltool
@@ -213,28 +228,32 @@ configure:5802: result: no
 configure:5832: checking how to associate runtime and link libraries
 configure:5859: result: printf %s\n
 configure:5876: checking for arm-buildroot-linux-gnueabihf-ar
-configure:5892: found /wks/buildroot-2015.11.1/output/host/usr/bin/arm-buildroot-linux-gnueabihf-ar
-configure:5903: result: arm-buildroot-linux-gnueabihf-ar
+configure:5906: result: no
+configure:5920: checking for ar
+configure:5936: found /usr/bin/ar
+configure:5947: result: ar
 configure:5984: checking for archiver @FILE support
-configure:6001: arm-buildroot-linux-gnueabihf-g++ -c -g  conftest.cpp >&5
+configure:6001: arm-buildroot-linux-gnueabi-g++ -c -g  conftest.cpp >&5
 configure:6001: $? = 0
-configure:6004: arm-buildroot-linux-gnueabihf-ar cru libconftest.a @conftest.lst >&5
+configure:6004: ar cru libconftest.a @conftest.lst >&5
 configure:6007: $? = 0
-configure:6012: arm-buildroot-linux-gnueabihf-ar cru libconftest.a @conftest.lst >&5
-arm-buildroot-linux-gnueabihf-ar: conftest.o: No such file or directory
+configure:6012: ar cru libconftest.a @conftest.lst >&5
+ar: conftest.o: No such file or directory
 configure:6015: $? = 1
 configure:6027: result: @
 configure:6045: checking for arm-buildroot-linux-gnueabihf-strip
-configure:6072: result: arm-buildroot-linux-gnueabihf-strip
+configure:6072: result: strip
 configure:6144: checking for arm-buildroot-linux-gnueabihf-ranlib
-configure:6160: found /wks/buildroot-2015.11.1/output/host/usr/bin/arm-buildroot-linux-gnueabihf-ranlib
-configure:6171: result: arm-buildroot-linux-gnueabihf-ranlib
-configure:6313: checking command to parse /wks/buildroot-2015.11.1/output/host/usr/bin/arm-buildroot-linux-gnueabihf-nm -B output from arm-buildroot-linux-gnueabihf-gcc object
-configure:6466: arm-buildroot-linux-gnueabihf-g++ -c -g  conftest.cpp >&5
+configure:6174: result: no
+configure:6184: checking for ranlib
+configure:6200: found /usr/bin/ranlib
+configure:6211: result: ranlib
+configure:6313: checking command to parse nm output from arm-buildroot-linux-gnueabi-gcc object
+configure:6466: arm-buildroot-linux-gnueabi-g++ -c -g  conftest.cpp >&5
 configure:6469: $? = 0
-configure:6473: /wks/buildroot-2015.11.1/output/host/usr/bin/arm-buildroot-linux-gnueabihf-nm -B conftest.o \| sed -n -e 's/^.*[ ]\([ABCDGIRSTW][ABCDGIRSTW]*\)[ ][ ]*\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2 \2/p' | sed '/ __gnu_lto/d' \> conftest.nm
+configure:6473: nm conftest.o \| sed -n -e 's/^.*[ ]\([ABCDGIRSTW][ABCDGIRSTW]*\)[ ][ ]*\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2 \2/p' | sed '/ __gnu_lto/d' \> conftest.nm
 configure:6476: $? = 0
-configure:6542: arm-buildroot-linux-gnueabihf-g++ -o conftest -g   conftest.cpp conftstm.o >&5
+configure:6542: arm-buildroot-linux-gnueabi-g++ -o conftest -g   conftest.cpp conftstm.o >&5
 configure:6545: $? = 0
 configure:6583: result: ok
 configure:6630: checking for sysroot
@@ -248,14 +267,13 @@ configure:7044: result: no
 configure:7054: checking for mt
 configure:7070: found /bin/mt
 configure:7081: result: mt
-configure:7093: WARNING: using cross tools not prefixed with host triplet
 configure:7104: checking if mt is a manifest tool
 configure:7110: mt '-?'
 configure:7118: result: no
 configure:7795: checking how to run the C preprocessor
-configure:7826: arm-buildroot-linux-gnueabihf-gcc -E  conftest.c
+configure:7826: arm-buildroot-linux-gnueabi-gcc -E  conftest.c
 configure:7826: $? = 0
-configure:7840: arm-buildroot-linux-gnueabihf-gcc -E  conftest.c
+configure:7840: arm-buildroot-linux-gnueabi-gcc -E  conftest.c
 conftest.c:11:28: fatal error: ac_nonexistent.h: No such file or directory
  #include <ac_nonexistent.h>
                             ^
@@ -273,10 +291,10 @@ configure: failed program was:
 | #define VERSION "1.0"
 | /* end confdefs.h.  */
 | #include <ac_nonexistent.h>
-configure:7865: result: arm-buildroot-linux-gnueabihf-gcc -E
-configure:7885: arm-buildroot-linux-gnueabihf-gcc -E  conftest.c
+configure:7865: result: arm-buildroot-linux-gnueabi-gcc -E
+configure:7885: arm-buildroot-linux-gnueabi-gcc -E  conftest.c
 configure:7885: $? = 0
-configure:7899: arm-buildroot-linux-gnueabihf-gcc -E  conftest.c
+configure:7899: arm-buildroot-linux-gnueabi-gcc -E  conftest.c
 conftest.c:11:28: fatal error: ac_nonexistent.h: No such file or directory
  #include <ac_nonexistent.h>
                             ^
@@ -295,80 +313,80 @@ configure: failed program was:
 | /* end confdefs.h.  */
 | #include <ac_nonexistent.h>
 configure:7928: checking for ANSI C header files
-configure:7948: arm-buildroot-linux-gnueabihf-gcc -c -g  conftest.c >&5
+configure:7948: arm-buildroot-linux-gnueabi-gcc -c -g  conftest.c >&5
 configure:7948: $? = 0
 configure:8032: result: yes
 configure:8045: checking for sys/types.h
-configure:8045: arm-buildroot-linux-gnueabihf-gcc -c -g  conftest.c >&5
+configure:8045: arm-buildroot-linux-gnueabi-gcc -c -g  conftest.c >&5
 configure:8045: $? = 0
 configure:8045: result: yes
 configure:8045: checking for sys/stat.h
-configure:8045: arm-buildroot-linux-gnueabihf-gcc -c -g  conftest.c >&5
+configure:8045: arm-buildroot-linux-gnueabi-gcc -c -g  conftest.c >&5
 configure:8045: $? = 0
 configure:8045: result: yes
 configure:8045: checking for stdlib.h
-configure:8045: arm-buildroot-linux-gnueabihf-gcc -c -g  conftest.c >&5
+configure:8045: arm-buildroot-linux-gnueabi-gcc -c -g  conftest.c >&5
 configure:8045: $? = 0
 configure:8045: result: yes
 configure:8045: checking for string.h
-configure:8045: arm-buildroot-linux-gnueabihf-gcc -c -g  conftest.c >&5
+configure:8045: arm-buildroot-linux-gnueabi-gcc -c -g  conftest.c >&5
 configure:8045: $? = 0
 configure:8045: result: yes
 configure:8045: checking for memory.h
-configure:8045: arm-buildroot-linux-gnueabihf-gcc -c -g  conftest.c >&5
+configure:8045: arm-buildroot-linux-gnueabi-gcc -c -g  conftest.c >&5
 configure:8045: $? = 0
 configure:8045: result: yes
 configure:8045: checking for strings.h
-configure:8045: arm-buildroot-linux-gnueabihf-gcc -c -g  conftest.c >&5
+configure:8045: arm-buildroot-linux-gnueabi-gcc -c -g  conftest.c >&5
 configure:8045: $? = 0
 configure:8045: result: yes
 configure:8045: checking for inttypes.h
-configure:8045: arm-buildroot-linux-gnueabihf-gcc -c -g  conftest.c >&5
+configure:8045: arm-buildroot-linux-gnueabi-gcc -c -g  conftest.c >&5
 configure:8045: $? = 0
 configure:8045: result: yes
 configure:8045: checking for stdint.h
-configure:8045: arm-buildroot-linux-gnueabihf-gcc -c -g  conftest.c >&5
+configure:8045: arm-buildroot-linux-gnueabi-gcc -c -g  conftest.c >&5
 configure:8045: $? = 0
 configure:8045: result: yes
 configure:8045: checking for unistd.h
-configure:8045: arm-buildroot-linux-gnueabihf-gcc -c -g  conftest.c >&5
+configure:8045: arm-buildroot-linux-gnueabi-gcc -c -g  conftest.c >&5
 configure:8045: $? = 0
 configure:8045: result: yes
 configure:8059: checking for dlfcn.h
-configure:8059: arm-buildroot-linux-gnueabihf-gcc -c -g  conftest.c >&5
+configure:8059: arm-buildroot-linux-gnueabi-gcc -c -g  conftest.c >&5
 configure:8059: $? = 0
 configure:8059: result: yes
 configure:8325: checking for objdir
 configure:8340: result: .libs
-configure:8600: checking if arm-buildroot-linux-gnueabihf-gcc supports -fno-rtti -fno-exceptions
-configure:8618: arm-buildroot-linux-gnueabihf-gcc -c -g  -fno-rtti -fno-exceptions conftest.c >&5
+configure:8600: checking if arm-buildroot-linux-gnueabi-gcc supports -fno-rtti -fno-exceptions
+configure:8618: arm-buildroot-linux-gnueabi-gcc -c -g  -fno-rtti -fno-exceptions conftest.c >&5
 cc1: warning: command line option '-fno-rtti' is valid for C++/ObjC++ but not for C
 configure:8622: $? = 0
 configure:8635: result: no
-configure:8993: checking for arm-buildroot-linux-gnueabihf-gcc option to produce PIC
+configure:8993: checking for arm-buildroot-linux-gnueabi-gcc option to produce PIC
 configure:9000: result: -fPIC -DPIC
-configure:9008: checking if arm-buildroot-linux-gnueabihf-gcc PIC flag -fPIC -DPIC works
-configure:9026: arm-buildroot-linux-gnueabihf-gcc -c -g  -fPIC -DPIC -DPIC conftest.c >&5
+configure:9008: checking if arm-buildroot-linux-gnueabi-gcc PIC flag -fPIC -DPIC works
+configure:9026: arm-buildroot-linux-gnueabi-gcc -c -g  -fPIC -DPIC -DPIC conftest.c >&5
 configure:9030: $? = 0
 configure:9043: result: yes
-configure:9072: checking if arm-buildroot-linux-gnueabihf-gcc static flag -static works
+configure:9072: checking if arm-buildroot-linux-gnueabi-gcc static flag -static works
 configure:9100: result: yes
-configure:9115: checking if arm-buildroot-linux-gnueabihf-gcc supports -c -o file.o
-configure:9136: arm-buildroot-linux-gnueabihf-gcc -c -g  -o out/conftest2.o conftest.c >&5
+configure:9115: checking if arm-buildroot-linux-gnueabi-gcc supports -c -o file.o
+configure:9136: arm-buildroot-linux-gnueabi-gcc -c -g  -o out/conftest2.o conftest.c >&5
 configure:9140: $? = 0
 configure:9162: result: yes
-configure:9170: checking if arm-buildroot-linux-gnueabihf-gcc supports -c -o file.o
+configure:9170: checking if arm-buildroot-linux-gnueabi-gcc supports -c -o file.o
 configure:9217: result: yes
-configure:9250: checking whether the arm-buildroot-linux-gnueabihf-gcc linker (arm-buildroot-linux-gnueabihf-ld) supports shared libraries
+configure:9250: checking whether the arm-buildroot-linux-gnueabi-gcc linker (arm-buildroot-linux-gnueabi-ld) supports shared libraries
 configure:10509: result: yes
 configure:10546: checking whether -lc should be explicitly linked in
-configure:10554: arm-buildroot-linux-gnueabihf-gcc -c -g  conftest.c >&5
+configure:10554: arm-buildroot-linux-gnueabi-gcc -c -g  conftest.c >&5
 configure:10557: $? = 0
-configure:10572: arm-buildroot-linux-gnueabihf-gcc -shared  -fPIC -DPIC conftest.o  -v -Wl,-soname -Wl,conftest -o conftest 2\>\&1 \| /bin/grep  -lc  \>/dev/null 2\>\&1
+configure:10572: arm-buildroot-linux-gnueabi-gcc -shared  -fPIC -DPIC conftest.o  -v -Wl,-soname -Wl,conftest -o conftest 2\>\&1 \| /bin/grep  -lc  \>/dev/null 2\>\&1
 configure:10575: $? = 0
 configure:10589: result: no
 configure:10749: checking dynamic linker characteristics
-configure:11330: arm-buildroot-linux-gnueabihf-gcc -o conftest -g   -Wl,-rpath -Wl,/foo conftest.c  >&5
+configure:11330: arm-buildroot-linux-gnueabi-gcc -o conftest -g   -Wl,-rpath -Wl,/foo conftest.c  >&5
 configure:11330: $? = 0
 configure:11567: result: GNU/Linux ld.so
 configure:11689: checking how to hardcode library paths into programs
@@ -382,9 +400,9 @@ configure:12332: result: yes
 configure:12335: checking whether to build static libraries
 configure:12339: result: yes
 configure:12362: checking how to run the C++ preprocessor
-configure:12389: arm-buildroot-linux-gnueabihf-g++ -E  conftest.cpp
+configure:12389: arm-buildroot-linux-gnueabi-g++ -E  conftest.cpp
 configure:12389: $? = 0
-configure:12403: arm-buildroot-linux-gnueabihf-g++ -E  conftest.cpp
+configure:12403: arm-buildroot-linux-gnueabi-g++ -E  conftest.cpp
 conftest.cpp:23:28: fatal error: ac_nonexistent.h: No such file or directory
  #include <ac_nonexistent.h>
                             ^
@@ -414,10 +432,10 @@ configure: failed program was:
 | #define LT_OBJDIR ".libs/"
 | /* end confdefs.h.  */
 | #include <ac_nonexistent.h>
-configure:12428: result: arm-buildroot-linux-gnueabihf-g++ -E
-configure:12448: arm-buildroot-linux-gnueabihf-g++ -E  conftest.cpp
+configure:12428: result: arm-buildroot-linux-gnueabi-g++ -E
+configure:12448: arm-buildroot-linux-gnueabi-g++ -E  conftest.cpp
 configure:12448: $? = 0
-configure:12462: arm-buildroot-linux-gnueabihf-g++ -E  conftest.cpp
+configure:12462: arm-buildroot-linux-gnueabi-g++ -E  conftest.cpp
 conftest.cpp:23:28: fatal error: ac_nonexistent.h: No such file or directory
  #include <ac_nonexistent.h>
                             ^
@@ -447,29 +465,29 @@ configure: failed program was:
 | #define LT_OBJDIR ".libs/"
 | /* end confdefs.h.  */
 | #include <ac_nonexistent.h>
-configure:12624: checking for ld used by arm-buildroot-linux-gnueabihf-g++
-configure:12691: result: arm-buildroot-linux-gnueabihf-ld
-configure:12698: checking if the linker (arm-buildroot-linux-gnueabihf-ld) is GNU ld
+configure:12624: checking for ld used by arm-buildroot-linux-gnueabi-g++
+configure:12691: result: arm-buildroot-linux-gnueabi-ld
+configure:12698: checking if the linker (arm-buildroot-linux-gnueabi-ld) is GNU ld
 configure:12713: result: yes
-configure:12768: checking whether the arm-buildroot-linux-gnueabihf-g++ linker (arm-buildroot-linux-gnueabihf-ld) supports shared libraries
+configure:12768: checking whether the arm-buildroot-linux-gnueabi-g++ linker (arm-buildroot-linux-gnueabi-ld) supports shared libraries
 configure:13841: result: yes
-configure:13877: arm-buildroot-linux-gnueabihf-g++ -c -g  conftest.cpp >&5
+configure:13877: arm-buildroot-linux-gnueabi-g++ -c -g  conftest.cpp >&5
 configure:13880: $? = 0
-configure:14361: checking for arm-buildroot-linux-gnueabihf-g++ option to produce PIC
+configure:14361: checking for arm-buildroot-linux-gnueabi-g++ option to produce PIC
 configure:14368: result: -fPIC -DPIC
-configure:14376: checking if arm-buildroot-linux-gnueabihf-g++ PIC flag -fPIC -DPIC works
-configure:14394: arm-buildroot-linux-gnueabihf-g++ -c -g  -fPIC -DPIC -DPIC conftest.cpp >&5
+configure:14376: checking if arm-buildroot-linux-gnueabi-g++ PIC flag -fPIC -DPIC works
+configure:14394: arm-buildroot-linux-gnueabi-g++ -c -g  -fPIC -DPIC -DPIC conftest.cpp >&5
 configure:14398: $? = 0
 configure:14411: result: yes
-configure:14434: checking if arm-buildroot-linux-gnueabihf-g++ static flag -static works
+configure:14434: checking if arm-buildroot-linux-gnueabi-g++ static flag -static works
 configure:14462: result: yes
-configure:14474: checking if arm-buildroot-linux-gnueabihf-g++ supports -c -o file.o
-configure:14495: arm-buildroot-linux-gnueabihf-g++ -c -g  -o out/conftest2.o conftest.cpp >&5
+configure:14474: checking if arm-buildroot-linux-gnueabi-g++ supports -c -o file.o
+configure:14495: arm-buildroot-linux-gnueabi-g++ -c -g  -o out/conftest2.o conftest.cpp >&5
 configure:14499: $? = 0
 configure:14521: result: yes
-configure:14526: checking if arm-buildroot-linux-gnueabihf-g++ supports -c -o file.o
+configure:14526: checking if arm-buildroot-linux-gnueabi-g++ supports -c -o file.o
 configure:14573: result: yes
-configure:14603: checking whether the arm-buildroot-linux-gnueabihf-g++ linker (arm-buildroot-linux-gnueabihf-ld) supports shared libraries
+configure:14603: checking whether the arm-buildroot-linux-gnueabi-g++ linker (arm-buildroot-linux-gnueabi-ld) supports shared libraries
 configure:14643: result: yes
 configure:14784: checking dynamic linker characteristics
 configure:15529: result: GNU/Linux ld.so
@@ -511,7 +529,7 @@ ac_cv_cxx_compiler_gnu=yes
 ac_cv_env_CCC_set=
 ac_cv_env_CCC_value=
 ac_cv_env_CC_set=set
-ac_cv_env_CC_value=arm-buildroot-linux-gnueabihf-gcc
+ac_cv_env_CC_value=arm-buildroot-linux-gnueabi-gcc
 ac_cv_env_CFLAGS_set=set
 ac_cv_env_CFLAGS_value=-g
 ac_cv_env_CPPFLAGS_set=
@@ -523,7 +541,7 @@ ac_cv_env_CXXCPP_value=
 ac_cv_env_CXXFLAGS_set=set
 ac_cv_env_CXXFLAGS_value=-g
 ac_cv_env_CXX_set=set
-ac_cv_env_CXX_value=arm-buildroot-linux-gnueabihf-g++
+ac_cv_env_CXX_value=arm-buildroot-linux-gnueabi-g++
 ac_cv_env_LDFLAGS_set=
 ac_cv_env_LDFLAGS_value=
 ac_cv_env_LIBS_set=
@@ -556,15 +574,17 @@ ac_cv_path_SED=/bin/sed
 ac_cv_path_install='/usr/bin/install -c'
 ac_cv_path_lt_DD=/bin/dd
 ac_cv_path_mkdir=/bin/mkdir
-ac_cv_prog_AR=arm-buildroot-linux-gnueabihf-ar
 ac_cv_prog_AWK=gawk
-ac_cv_prog_CC=arm-buildroot-linux-gnueabihf-gcc
-ac_cv_prog_CPP='arm-buildroot-linux-gnueabihf-gcc -E'
-ac_cv_prog_CXXCPP='arm-buildroot-linux-gnueabihf-g++ -E'
-ac_cv_prog_OBJDUMP=arm-buildroot-linux-gnueabihf-objdump
-ac_cv_prog_RANLIB=arm-buildroot-linux-gnueabihf-ranlib
-ac_cv_prog_STRIP=arm-buildroot-linux-gnueabihf-strip
+ac_cv_prog_CC=arm-buildroot-linux-gnueabi-gcc
+ac_cv_prog_CPP='arm-buildroot-linux-gnueabi-gcc -E'
+ac_cv_prog_CXXCPP='arm-buildroot-linux-gnueabi-g++ -E'
+ac_cv_prog_STRIP=strip
+ac_cv_prog_ac_ct_AR=ar
+ac_cv_prog_ac_ct_DUMPBIN='link -dump'
 ac_cv_prog_ac_ct_MANIFEST_TOOL=mt
+ac_cv_prog_ac_ct_OBJDUMP=objdump
+ac_cv_prog_ac_ct_RANLIB=ranlib
+ac_cv_prog_ac_ct_STRIP=strip
 ac_cv_prog_cc_c89=
 ac_cv_prog_cc_g=yes
 ac_cv_prog_cxx_g=yes
@@ -581,9 +601,9 @@ lt_cv_file_magic_test_file=
 lt_cv_ld_reload_flag=-r
 lt_cv_nm_interface='BSD nm'
 lt_cv_objdir=.libs
-lt_cv_path_LD=arm-buildroot-linux-gnueabihf-ld
-lt_cv_path_LDCXX=arm-buildroot-linux-gnueabihf-ld
-lt_cv_path_NM='/wks/buildroot-2015.11.1/output/host/usr/bin/arm-buildroot-linux-gnueabihf-nm -B'
+lt_cv_path_LD=arm-buildroot-linux-gnueabi-ld
+lt_cv_path_LDCXX=arm-buildroot-linux-gnueabi-ld
+lt_cv_path_NM=no
 lt_cv_path_mainfest_tool=no
 lt_cv_prog_compiler_c_o=yes
 lt_cv_prog_compiler_c_o_CXX=yes
@@ -621,18 +641,18 @@ AM_BACKSLASH='\'
 AM_DEFAULT_V='$(AM_DEFAULT_VERBOSITY)'
 AM_DEFAULT_VERBOSITY='1'
 AM_V='$(V)'
-AR='arm-buildroot-linux-gnueabihf-ar'
+AR='ar'
 AUTOCONF='${SHELL} /wks/workspace/Homer/libdpy/missing autoconf'
 AUTOHEADER='${SHELL} /wks/workspace/Homer/libdpy/missing autoheader'
 AUTOMAKE='${SHELL} /wks/workspace/Homer/libdpy/missing automake-1.15'
 AWK='gawk'
-CC='arm-buildroot-linux-gnueabihf-gcc'
+CC='arm-buildroot-linux-gnueabi-gcc'
 CCDEPMODE='depmode=gcc3'
 CFLAGS='-g'
-CPP='arm-buildroot-linux-gnueabihf-gcc -E'
+CPP='arm-buildroot-linux-gnueabi-gcc -E'
 CPPFLAGS=''
-CXX='arm-buildroot-linux-gnueabihf-g++'
-CXXCPP='arm-buildroot-linux-gnueabihf-g++ -E'
+CXX='arm-buildroot-linux-gnueabi-g++'
+CXXCPP='arm-buildroot-linux-gnueabi-g++ -E'
 CXXDEPMODE='depmode=gcc3'
 CXXFLAGS='-g'
 CYGPATH_W='echo'
@@ -640,7 +660,7 @@ DEFS='-DPACKAGE_NAME=\"libdpy\" -DPACKAGE_TARNAME=\"libdpy\" -DPACKAGE_VERSION=\
 DEPDIR='.deps'
 DLLTOOL='false'
 DSYMUTIL=''
-DUMPBIN=''
+DUMPBIN=':'
 ECHO_C=''
 ECHO_N='-n'
 ECHO_T=''
@@ -652,7 +672,7 @@ INSTALL_DATA='${INSTALL} -m 644'
 INSTALL_PROGRAM='${INSTALL}'
 INSTALL_SCRIPT='${INSTALL}'
 INSTALL_STRIP_PROGRAM='$(install_sh) -c -s'
-LD='arm-buildroot-linux-gnueabihf-ld'
+LD='arm-buildroot-linux-gnueabi-ld'
 LDFLAGS=''
 LIBOBJS=''
 LIBS=''
@@ -664,9 +684,9 @@ LT_SYS_LIBRARY_PATH=''
 MAKEINFO='${SHELL} /wks/workspace/Homer/libdpy/missing makeinfo'
 MANIFEST_TOOL=':'
 MKDIR_P='/bin/mkdir -p'
-NM='/wks/buildroot-2015.11.1/output/host/usr/bin/arm-buildroot-linux-gnueabihf-nm -B'
+NM='nm'
 NMEDIT=''
-OBJDUMP='arm-buildroot-linux-gnueabihf-objdump'
+OBJDUMP='objdump'
 OBJEXT='o'
 OTOOL64=''
 OTOOL=''
@@ -678,16 +698,16 @@ PACKAGE_TARNAME='libdpy'
 PACKAGE_URL=''
 PACKAGE_VERSION='1.0'
 PATH_SEPARATOR=':'
-RANLIB='arm-buildroot-linux-gnueabihf-ranlib'
+RANLIB='ranlib'
 SED='/bin/sed'
 SET_MAKE=''
 SHELL='/bin/bash'
-STRIP='arm-buildroot-linux-gnueabihf-strip'
+STRIP='strip'
 VERSION='1.0'
-ac_ct_AR=''
+ac_ct_AR='ar'
 ac_ct_CC=''
 ac_ct_CXX=''
-ac_ct_DUMPBIN=''
+ac_ct_DUMPBIN='link -dump'
 am__EXEEXT_FALSE=''
 am__EXEEXT_TRUE='#'
 am__fastdepCC_FALSE='#'

@@ -2,13 +2,15 @@
 <?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
 		<cconfiguration id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064">
-			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064" moduleId="org.eclipse.cdt.core.settings" name="Configuration_with_Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)0">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064" moduleId="org.eclipse.cdt.core.settings" name="Configuration_with_Autotools Buildroot ARM">
 				<externalSettings/>
 				<extensions>
 					<extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.MachO64" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
@@ -17,24 +19,26 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" description="" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064" name="Configuration_with_Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)0" parent="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" description="" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064" name="Configuration_with_Autotools Buildroot ARM" parent="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default">
 					<folderInfo id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064." name="/" resourcePath="">
-						<toolChain id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.542378250" name="Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default">
-							<targetPlatform id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform.679026944" isAbstract="false" name="GNU Autotools Target Platform" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform"/>
-							<builder id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.builder.1138330090" keepEnvironmentInBuildfile="false" managedBuildOn="true" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.builder"/>
-							<tool id="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure.2082245654" name="configure" superClass="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure">
-								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.225084" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064" valueType="string"/>
+						<toolChain id="org.buildroot.wks.buildroot-2016.05.output..autotools.toolchain.base.1796175507" name="Autotools Buildroot ARM (/wks/buildroot-2016.05/output)" superClass="org.buildroot.wks.buildroot-2016.05.output..autotools.toolchain.base">
+							<option id="org.buildroot.wks.buildroot-2016.05.output..autotools.toolchain.base.option.path.1676019379" name="Path" superClass="org.buildroot.wks.buildroot-2016.05.output..autotools.toolchain.base.option.path"/>
+							<option id="org.buildroot.wks.buildroot-2016.05.output..autotools.toolchain.base.option.prefix.683241562" name="Prefix" superClass="org.buildroot.wks.buildroot-2016.05.output..autotools.toolchain.base.option.prefix"/>
+							<targetPlatform id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform.1622656392" isAbstract="false" name="GNU Autotools Target Platform" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform"/>
+							<builder id="org.buildroot.wks.buildroot-2016.05.output.builder.547937615" superClass="org.buildroot.wks.buildroot-2016.05.output.builder"/>
+							<tool id="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure.1776103460" name="configure" superClass="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure">
+								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.575759448" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064" valueType="string"/>
 							</tool>
-							<tool id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen.740252714" name="autogen.sh" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen"/>
-							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler.2027131734" name="Autotools Buildroot ARM C Compiler (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler">
-								<inputType id="org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input.945613654" superClass="org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input"/>
+							<tool id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen.1934881502" name="autogen.sh" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen"/>
+							<tool id="org.buildroot.wks.buildroot-2016.05.output.autotools.c.compiler.2018518422" name="Autotools Buildroot ARM C Compiler (/wks/buildroot-2016.05/output)" superClass="org.buildroot.wks.buildroot-2016.05.output.autotools.c.compiler">
+								<inputType id="org.buildroot.wks.buildroot-2016.05.output.c_compiler.input.1303130979" superClass="org.buildroot.wks.buildroot-2016.05.output.c_compiler.input"/>
 							</tool>
-							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.1632526709" name="Autotools Buildroot ARM C++ Compiler (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler">
-								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.776925349" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
-								<inputType id="org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input.2092304755" superClass="org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input"/>
+							<tool id="org.buildroot.wks.buildroot-2016.05.output.autotools.cc.compiler.2133552327" name="Autotools Buildroot ARM C++ Compiler (/wks/buildroot-2016.05/output)" superClass="org.buildroot.wks.buildroot-2016.05.output.autotools.cc.compiler">
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1850438294" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+								<inputType id="org.buildroot.wks.buildroot-2016.05.output.cc_compiler.input.1578962075" superClass="org.buildroot.wks.buildroot-2016.05.output.cc_compiler.input"/>
 							</tool>
-							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.tool.configure.1403691108" name="configure" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.tool.configure">
-								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.392753013" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064" valueType="string"/>
+							<tool id="org.buildroot.wks.buildroot-2016.05.output.autotools.tool.configure.1280657143" name="configure" superClass="org.buildroot.wks.buildroot-2016.05.output.autotools.tool.configure">
+								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.1207059578" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064" valueType="string"/>
 							</tool>
 						</toolChain>
 					</folderInfo>
@@ -50,207 +54,11 @@
 			</storageModule>
 			<storageModule moduleId="packages"/>
 		</cconfiguration>
-		<cconfiguration id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.467922792">
-			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.467922792" moduleId="org.eclipse.cdt.core.settings" name="Configuration_with_Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)1">
-				<externalSettings/>
-				<extensions>
-					<extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.MachO64" point="org.eclipse.cdt.core.BinaryParser"/>
-					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
-					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
-					<extension id="org.eclipse.cdt.core.Cygwin_PE" point="org.eclipse.cdt.core.BinaryParser"/>
-					<extension id="org.eclipse.cdt.core.GNU_ELF" point="org.eclipse.cdt.core.BinaryParser"/>
-				</extensions>
-			</storageModule>
-			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" description="" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.467922792" name="Configuration_with_Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)1" parent="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default">
-					<folderInfo id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.467922792." name="/" resourcePath="">
-						<toolChain id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1104530438" name="Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default">
-							<targetPlatform id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform.386979401" isAbstract="false" name="GNU Autotools Target Platform" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform"/>
-							<builder id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.builder.154297143" keepEnvironmentInBuildfile="false" managedBuildOn="true" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.builder"/>
-							<tool id="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure.1410373056" name="configure" superClass="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure">
-								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.295276106" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.467922792" valueType="string"/>
-							</tool>
-							<tool id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen.591380560" name="autogen.sh" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen"/>
-							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler.587476205" name="Autotools Buildroot ARM C Compiler (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler">
-								<inputType id="org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input.236656130" superClass="org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input"/>
-							</tool>
-							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.45075527" name="Autotools Buildroot ARM C++ Compiler (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler">
-								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.2091516654" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
-								<inputType id="org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input.1674005425" superClass="org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input"/>
-							</tool>
-							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.tool.configure.1393063449" name="configure" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.tool.configure">
-								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.677389876" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.467922792" valueType="string"/>
-							</tool>
-						</toolChain>
-					</folderInfo>
-					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="TestProgram"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="include"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="libdpy"/>
-					</sourceEntries>
-				</configuration>
-			</storageModule>
-			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
-		</cconfiguration>
-		<cconfiguration id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.2056598902">
-			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.2056598902" moduleId="org.eclipse.cdt.core.settings" name="Configuration_with_Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)2">
-				<externalSettings/>
-				<extensions>
-					<extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.MachO64" point="org.eclipse.cdt.core.BinaryParser"/>
-					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
-					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
-					<extension id="org.eclipse.cdt.core.Cygwin_PE" point="org.eclipse.cdt.core.BinaryParser"/>
-					<extension id="org.eclipse.cdt.core.GNU_ELF" point="org.eclipse.cdt.core.BinaryParser"/>
-				</extensions>
-			</storageModule>
-			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" description="" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.2056598902" name="Configuration_with_Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)2" parent="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default">
-					<folderInfo id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.2056598902." name="/" resourcePath="">
-						<toolChain id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.144414861" name="Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default">
-							<targetPlatform id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform.933950805" isAbstract="false" name="GNU Autotools Target Platform" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform"/>
-							<builder id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.builder.700536756" keepEnvironmentInBuildfile="false" managedBuildOn="true" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.builder"/>
-							<tool id="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure.329639479" name="configure" superClass="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure">
-								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.2097885459" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.2056598902" valueType="string"/>
-							</tool>
-							<tool id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen.122049406" name="autogen.sh" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen"/>
-							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler.1527991403" name="Autotools Buildroot ARM C Compiler (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler">
-								<inputType id="org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input.904147944" superClass="org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input"/>
-							</tool>
-							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.1645561037" name="Autotools Buildroot ARM C++ Compiler (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler">
-								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.758278302" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
-								<inputType id="org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input.262276642" superClass="org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input"/>
-							</tool>
-							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.tool.configure.1825906077" name="configure" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.tool.configure">
-								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.719437271" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.2056598902" valueType="string"/>
-							</tool>
-						</toolChain>
-					</folderInfo>
-					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="TestProgram"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="include"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="libdpy"/>
-					</sourceEntries>
-				</configuration>
-			</storageModule>
-			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
-		</cconfiguration>
-		<cconfiguration id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.2144656963">
-			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.2144656963" moduleId="org.eclipse.cdt.core.settings" name="Configuration_with_Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)3">
-				<externalSettings/>
-				<extensions>
-					<extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.MachO64" point="org.eclipse.cdt.core.BinaryParser"/>
-					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
-					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
-					<extension id="org.eclipse.cdt.core.Cygwin_PE" point="org.eclipse.cdt.core.BinaryParser"/>
-					<extension id="org.eclipse.cdt.core.GNU_ELF" point="org.eclipse.cdt.core.BinaryParser"/>
-				</extensions>
-			</storageModule>
-			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" description="" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.2144656963" name="Configuration_with_Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)3" parent="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default">
-					<folderInfo id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.2144656963." name="/" resourcePath="">
-						<toolChain id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1955994574" name="Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default">
-							<targetPlatform id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform.1413879177" isAbstract="false" name="GNU Autotools Target Platform" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform"/>
-							<builder id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.builder.1051098853" keepEnvironmentInBuildfile="false" managedBuildOn="true" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.builder"/>
-							<tool id="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure.324028590" name="configure" superClass="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure">
-								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.1032771474" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.2144656963" valueType="string"/>
-							</tool>
-							<tool id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen.1214676178" name="autogen.sh" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen"/>
-							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler.104313158" name="Autotools Buildroot ARM C Compiler (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler">
-								<inputType id="org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input.2135127898" superClass="org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input"/>
-							</tool>
-							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.73418090" name="Autotools Buildroot ARM C++ Compiler (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler">
-								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1440318204" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
-								<inputType id="org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input.1975702192" superClass="org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input"/>
-							</tool>
-							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.tool.configure.336598379" name="configure" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.tool.configure">
-								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.1434290512" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.2144656963" valueType="string"/>
-							</tool>
-						</toolChain>
-					</folderInfo>
-					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="TestProgram"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="include"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="libdpy"/>
-					</sourceEntries>
-				</configuration>
-			</storageModule>
-			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
-		</cconfiguration>
-		<cconfiguration id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1603900473">
-			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1603900473" moduleId="org.eclipse.cdt.core.settings" name="Configuration_with_Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)4">
-				<externalSettings/>
-				<extensions>
-					<extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.MachO64" point="org.eclipse.cdt.core.BinaryParser"/>
-					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
-					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
-					<extension id="org.eclipse.cdt.core.Cygwin_PE" point="org.eclipse.cdt.core.BinaryParser"/>
-					<extension id="org.eclipse.cdt.core.GNU_ELF" point="org.eclipse.cdt.core.BinaryParser"/>
-				</extensions>
-			</storageModule>
-			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" description="" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1603900473" name="Configuration_with_Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)4" parent="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default">
-					<folderInfo id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1603900473." name="/" resourcePath="">
-						<toolChain id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1751509361" name="Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default">
-							<targetPlatform id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform.229751795" isAbstract="false" name="GNU Autotools Target Platform" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform"/>
-							<builder id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.builder.1038359731" keepEnvironmentInBuildfile="false" managedBuildOn="true" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.builder"/>
-							<tool id="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure.1537498647" name="configure" superClass="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure">
-								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.930513725" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1603900473" valueType="string"/>
-							</tool>
-							<tool id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen.1651636388" name="autogen.sh" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen"/>
-							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler.480666061" name="Autotools Buildroot ARM C Compiler (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler">
-								<inputType id="org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input.95204818" superClass="org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input"/>
-							</tool>
-							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.139468255" name="Autotools Buildroot ARM C++ Compiler (/wks/buildroot-2015.11.1/output)" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler">
-								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.2036037304" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
-								<inputType id="org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input.332397127" superClass="org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input"/>
-							</tool>
-							<tool id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.tool.configure.691392365" name="configure" superClass="org.buildroot.wks.buildroot-2015.11.1.output.autotools.tool.configure">
-								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.1298116345" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1603900473" valueType="string"/>
-							</tool>
-						</toolChain>
-					</folderInfo>
-					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="TestProgram"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="include"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="libdpy"/>
-					</sourceEntries>
-				</configuration>
-			</storageModule>
-			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
-		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="libdpy.org.buildroot.wks.buildroot-2015.11.1.output.autotools.1179162434" name="GNU Autotools" projectType="org.buildroot.wks.buildroot-2015.11.1.output.autotools"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.1632526709;org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input.2092304755">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileCPP"/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.1632526709;cdt.managedbuild.tool.gnu.cpp.compiler.input.776925349">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileC"/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler.2027131734;org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input.945613654">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileC"/>
-		</scannerConfigBuildInfo>
-	</storageModule>
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="Configuration_with_Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)3">
 			<resource resourceType="PROJECT" workspacePath="/libdpy"/>
@@ -267,6 +75,27 @@
 		<configuration configurationName="Configuration_with_Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)4">
 			<resource resourceType="PROJECT" workspacePath="/libdpy"/>
 		</configuration>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064.;org.buildroot.wks.buildroot-2016.05.output.autotools.cc.compiler.2133552327;org.buildroot.wks.buildroot-2016.05.output.cc_compiler.input.1578962075">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2016.05.output.ARM_ManagedMakePerProjectProfileCPP"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064.;org.buildroot.wks.buildroot-2016.05.output.autotools.c.compiler.2018518422;org.buildroot.wks.buildroot-2016.05.output.c_compiler.input.1303130979">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2016.05.output.ARM_ManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064.;org.buildroot.wks.buildroot-2016.05.output.autotools.cc.compiler.2133552327;cdt.managedbuild.tool.gnu.cpp.compiler.input.1850438294">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2016.05.output.ARM_ManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.1632526709;org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input.2092304755">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileCPP"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler.2027131734;org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input.945613654">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1495796064.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.1632526709;cdt.managedbuild.tool.gnu.cpp.compiler.input.776925349">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
 		<buildTargets>

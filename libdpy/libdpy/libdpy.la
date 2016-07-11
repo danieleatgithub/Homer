@@ -17,7 +17,7 @@ old_library='libdpy.a'
 inherited_linker_flags=''
 
 # Libraries that this one depends upon.
-dependency_libs=' /wks/buildroot-2015.11.1/output/host/usr/lib/gcc/arm-buildroot-linux-gnueabihf/4.9.3/../../../../arm-buildroot-linux-gnueabihf/lib/libstdc++.la'
+dependency_libs=' /wks/buildroot-2016.05/output/host/usr/lib/gcc/arm-buildroot-linux-gnueabi/4.9.3/../../../../arm-buildroot-linux-gnueabi/lib/libstdc++.la'
 
 # Names of additional weak libraries provided by this library
 weak_library_names=''

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project>
-	<configuration id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924" name="Configuration_with_Autotools Buildroot ARM (/wks/buildroot-2015.11.1/output)1">
+	<configuration id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924" name="Configuration_with_Autotools Buildroot ARM">
 		<extension point="org.eclipse.cdt.core.LanguageSettingsProvider">
 			<provider copy-of="extension" id="org.eclipse.cdt.ui.UserLanguageSettingsProvider"/>
 			<provider-reference id="org.eclipse.cdt.core.ReferencedProjectsLanguageSettingsProvider" ref="shared-provider"/>

@@ -108,6 +108,8 @@ if [[ $? !=  "0" ]];then
 fi
 rm -f $TARGET_ROOTFS_DIR/etc/fstab.add
 
+echo "Root Home"
+ls $TARGET_ROOTFS_DIR/root
 
 echo -n "Unmounting FS ..."
 umount $TARGET_ROOTFS_DIR && \
