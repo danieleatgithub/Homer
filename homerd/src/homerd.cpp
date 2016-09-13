@@ -10,7 +10,6 @@
 
 #include <Display.h>
 #include <fcntl.h>
-#include <Fakedisplay.h>
 #include <log4cplus/config.hxx>
 #include <log4cplus/configurator.h>
 #include <log4cplus/logger.h>
@@ -26,9 +25,15 @@
 #include <string>
 #include <iostream>
 #include "homerd.h"
-#include "KeyPanel.h"
+#include "KeyPanel.hpp"
 #include "Observer.h"
 #include "Scheduler.hpp"
+#include <DisplayVisitor.hpp>
+#include <MoveVisitor.hpp>
+#include <HomerMenu.hpp>
+#include <HwLayer.hpp>
+#include <Winstar.h>
+#include <HwAcquaA5.hpp>
 
 using option::Option;
 using option::Descriptor;
@@ -173,7 +178,6 @@ int main(int argc, char *argv[]) {
             dup(0);
     }
 
-    Display *display;
     string ip;
     bool run = true;
     Sysinfo sysinfo = Sysinfo::get_instance();
@@ -181,37 +185,51 @@ int main(int argc, char *argv[]) {
     PropertyConfigurator config(props_file);
     config.configure();
 
-#if defined OFF_LINE_TARGET
-    display = new FakeDisplay(I2C_BUS, LCD_RESET_PIN, LCD_BACKLIGHT_PIN);
-#else
-    display = new Winstar(I2C_BUS, LCD_RESET_PIN, LCD_BACKLIGHT_PIN);
-    KeyPanel keypanel(KEY_EVENT_DEVICE);
-#endif
     Logger logger = Logger::getRoot();
-    Scheduler scheduler;
 
-    ip = sysinfo.get_local_ip("eth0");
-    display->dpy_open();
-    display->set_backlight(true);
+    Display 			*display;
+	Scheduler			*scheduler;
+	KeyPanel			*keyPanel;
+	HomerMenu			*menu;
+	DisplayVisitor		*displayVisitor;
+	BoardAcquaA5   		*acquaA5;
 
-    display->dpy_puts("Homer");  // 7
-    display->line2_home();
-    display->dpy_puts(ip.c_str());
-    display->key_attach(keypanel,scheduler);
+	keyPanel  = new KeyPanel();
+	scheduler = new Scheduler();
+	acquaA5   = new BoardAcquaA5();
+	display	  = new Winstar(*keyPanel,*scheduler,*acquaA5);
 
-    LOG4CPLUS_INFO(logger, "homerd started");
-    keypanel.start();
+	keyPanel->set_event_filename(KEY_EVENT_DEVICE);
 
+	displayVisitor = new DisplayVisitor(*display);
+	shared_ptr<MenuActionVisitor> dw(displayVisitor);
 
+	display->reset();
+	keyPanel->start();
+
+	menu 	  = new HomerMenu(*keyPanel,*scheduler);
+	menu->addActionVisitor(dw);
+
+	LOG4CPLUS_INFO(logger, "homerd started");
+	keyPanel->start();
 
     while(true) {
     	this_thread::sleep_for(std::chrono::seconds(10));
-    	if(keypanel.get_key_counter() > 20) break;
+    	// FIXME: condwait in sysinfo per exit
+    	if(keyPanel->get_key_counter() > 20) break;
     }
 
-    keypanel.stop();
-    display->dpy_close();
-    delete (display);
+    keyPanel->stop();
+
+    sleep(1);
+
+    delete(displayVisitor);
+    delete(menu);
+    delete(display);
+    delete(acquaA5);
+    delete(scheduler);
+    delete(keyPanel);
+
     LOG4CPLUS_INFO(logger, "homerd stopped");
     return 0;
 }

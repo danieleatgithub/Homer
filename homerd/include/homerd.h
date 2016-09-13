@@ -18,4 +18,4 @@
 #define SYSFS_GPIO_DIR "/sys/class/gpio"
 #define LCD_BACKLIGHT_PIN "PA03"
 #define LCD_RESET_PIN "PA02"
-#define KEY_EVENT_DEVICE "/dev/input/event0"
+#define KEY_EVENT_DEVICE "/dev/input/event1"

@@ -27,6 +27,8 @@
 #include <memory>
 #include <functional>
 #include <algorithm>
+#include <iostream>
+using namespace std;
 
 namespace obs
 {
@@ -79,8 +81,9 @@ namespace detail
 
     Registration registerObserver(UniversalPtr fptr)
     {
-      observers_.push_back(fptr);
-      std::weak_ptr<UniversalPtr::element_type> weakHeartBeat(heartBeat_);
+//       cerr << "registerObserver-" << observers_.size() << " WHO " << hex << this << " f=" << hex << fptr << endl;
+       observers_.push_back(fptr);
+       std::weak_ptr<UniversalPtr::element_type> weakHeartBeat(heartBeat_);
 
       // we pass the function pointer and a weak_ptr into this lambda by
       // value. This is important because it lets the observer know if the
@@ -91,8 +94,9 @@ namespace detail
       {
         if (auto isBeating = weakHeartBeat.lock())
         {
-          observers_.erase(std::remove(begin(observers_), end(observers_), fptr),
+         observers_.erase(std::remove(begin(observers_), end(observers_), fptr),
                            end(observers_));
+//         cerr << "ERASE-" << observers_.size() << " ADEL " << hex << this << "f=" << fptr << endl;
         }
       });
     }
@@ -126,6 +130,7 @@ struct Subject<Return (Params...)> : detail::SubjectBase
     for (const auto& observer : observers_)
     {
       const FPtr fptr = std::static_pointer_cast<F>(observer);
+//      cerr << "GO(" << hex << fptr << ")" << endl;
       (*fptr)(params...);
     }
   }

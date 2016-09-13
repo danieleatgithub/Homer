@@ -9,6 +9,7 @@
 #define GPIOPIN_H_
 
 #include <string>
+#include <HwLayer.hpp>
 
 using namespace std;
 
@@ -38,13 +39,13 @@ private:
 	Edge_e edge;
 	Direction_e direction;
 	bool last_value;
-	void init();
 	int write_value(bool value);
+	GpioPort& gpioPort;
+
 public:
 	static struct pinmap_s* getPinDescriptor(const char *name);
-	GpioPin();
-	GpioPin(struct pinmap_s *pin_desc);
-	GpioPin(int kid, string kstr, string name);
+	GpioPin(GpioPort& port);
+
 	virtual ~GpioPin();
 	int get_pin();
 	int pin_export();
