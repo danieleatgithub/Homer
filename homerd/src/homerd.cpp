@@ -191,7 +191,6 @@ int main(int argc, char *argv[]) {
 	Scheduler			*scheduler;
 	KeyPanel			*keyPanel;
 	HomerMenu			*menu;
-	DisplayVisitor		*displayVisitor;
 	BoardAcquaA5   		*acquaA5;
 
 	keyPanel  = new KeyPanel();
@@ -201,18 +200,19 @@ int main(int argc, char *argv[]) {
 
 	keyPanel->set_event_filename(KEY_EVENT_DEVICE);
 
-	displayVisitor = new DisplayVisitor(*display);
-	shared_ptr<MenuActionVisitor> dw(displayVisitor);
+	shared_ptr<MenuActionVisitor> dw(new DisplayVisitor(*display));
 
 	display->reset();
 	keyPanel->start();
 
+	sleep(1);
+
 	menu 	  = new HomerMenu(*keyPanel,*scheduler);
 	menu->addActionVisitor(dw);
 
-	LOG4CPLUS_INFO(logger, "homerd started");
 	keyPanel->start();
 
+	LOG4CPLUS_INFO(logger, "homerd started");
     while(true) {
     	this_thread::sleep_for(std::chrono::seconds(10));
     	// FIXME: condwait in sysinfo per exit
@@ -220,16 +220,14 @@ int main(int argc, char *argv[]) {
     }
 
     keyPanel->stop();
-
     sleep(1);
 
-    delete(displayVisitor);
     delete(menu);
     delete(display);
     delete(acquaA5);
     delete(scheduler);
     delete(keyPanel);
 
-    LOG4CPLUS_INFO(logger, "homerd stopped");
+    LOG4CPLUS_INFO(logger, "homerd exit");
     return 0;
 }

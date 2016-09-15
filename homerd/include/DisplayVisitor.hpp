@@ -16,9 +16,7 @@
 	cout << __PRETTY_FUNCTION__ << l.get_label() << "" << endl; \
 } while(0)
 
-#define TRACE_TMP2 do { \
-	cout << __PRETTY_FUNCTION__ << l.get_label() << ">" << endl; \
-} while(0)
+
 
 namespace homerio {
 
@@ -32,11 +30,9 @@ public:
 		dp.dpy_puts(l.get_label().c_str());
 		dp.line2_home();
 		dp.dpy_puts(l.getValue().c_str());
-		TRACE_TMP;
 	}
 	virtual void leave(MenuLeaf&  l,KeyButton& k) {
 		dp.clear();
-		TRACE_TMP;
 	}
 	virtual void click(MenuLeaf& l,KeyButton& k) {
 		TRACE_TMP;
@@ -46,14 +42,12 @@ public:
 	virtual void enter(SubMenu& l,KeyButton& k) 	{
 		dp.dpy_puts(l.get_label().c_str());
 		dp.dpy_puts(">");
-		TRACE_TMP2;
 	}
 	virtual void leave(SubMenu& l,KeyButton& k) {
 		dp.clear();
-		TRACE_TMP2;
 	}
 	virtual void click(SubMenu& l,KeyButton& k) {
-		TRACE_TMP2;
+		TRACE_TMP;
 	}
 
 };
