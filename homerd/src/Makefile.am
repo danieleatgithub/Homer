@@ -1,7 +1,9 @@
 AM_LDFLAGS =  -llog4cplus -lpthread
 AM_CPPFLAGS = -std=c++11 -I$(top_srcdir)/include
 
-bin_PROGRAMS=homerd
-homerd_SOURCES= homerd.cpp Winstar.cpp Display.cpp GpioPin.cpp Sysinfo.cpp Observer.cpp HwAcquaA5.cpp
-
+homerd_SOURCES= Winstar.cpp \
+				Display.cpp \
+				GpioPin.cpp \
+				Sysinfo.cpp \
+				Observer.cpp
 

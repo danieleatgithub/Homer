@@ -87,10 +87,22 @@ class Task {
      *
      * @param interval
      */
-    void setInterval(const chrono::system_clock::duration& interval) {
+    void setInterval(const chrono::system_clock::duration interval) {
         this->interval = interval;
     }
+    void setInterval(unsigned int interval) {
+    	setInterval(std::chrono::seconds(interval));
+     }
+
+
     /**
+     * is task cancelled
+     * @return
+     */
+    bool isCancelled() const {
+        return cancelled;
+    }
+   /**
     *
     * Default constructor with a disabled task
     *
@@ -141,7 +153,9 @@ class Task {
      * @return
      */
     friend std::ostream& operator<<(std::ostream &strm, const Task &task) {
-        return strm << "ID=" << task.id << ",TIME=" << chrono::system_clock::to_time_t(task.time);
+         return strm << "ID=" << task.id <<
+        		",TIME=" << chrono::system_clock::to_time_t(task.time) <<
+        		",INTERVAL=" << dec << task.getInterval().count();
     }
 
   private:
@@ -162,13 +176,6 @@ class Task {
         this->cancelled = false;
     }
     /**
-     * is task cancelled
-     * @return
-     */
-    bool isCancelled() const {
-        return cancelled;
-    }
-    /**
      * Cancel task
      * @param cancelled
      */
@@ -181,6 +188,7 @@ class Task {
      */
     void go() const {
         if(callback && !cancelled) {
+        	// TODO: Valgrind complains leaks on detached threads change to joinable
             std::thread( callback ).detach();
         }
     }
@@ -275,6 +283,7 @@ class Scheduler {
     /**
      * Schedule a task at specific time, if the task is already present in waiting queue
      * the task will be rescheduled at the new time point
+     * primary schedule method
      * FIXME: if is in running queue
      * @param time
      * @param task
@@ -373,6 +382,14 @@ class Scheduler {
         this->ScheduleAt(chrono::system_clock::now() + interval,task);
     }
     /**
+     * Schedule a task
+     * @param task
+     */
+    void ScheduleAfter(Task& task) {
+        task.setCancelled(false);
+        this->ScheduleAt(chrono::system_clock::now() + task.getInterval(),task);
+    }
+    /**
      * Schedule an anonymous task after a specific interval
      * @param interval
      * @param callback
@@ -381,6 +398,17 @@ class Scheduler {
         Task e(callback);
         this->ScheduleAt(chrono::system_clock::now() + interval,e);
     }
+    /**
+     * Restart a task with the same interval
+     * @param task
+     */
+    void ScheduleRestart(Task& task) {
+    	this->ScheduleCancel(task);
+        task.setCancelled(false);
+         this->ScheduleAt(chrono::system_clock::now() + task.getInterval(),task);
+    }
+
+
 
   private:
     std::set<Task> waiting_tasks;
@@ -405,10 +433,20 @@ class Scheduler {
                     running_tasks.erase(*cur);
                 }
                 // waiting for the next event
-                if (waiting_tasks.empty())
+                if (waiting_tasks.empty()) {
                     blocker.wait(lock);
-                else
-                    blocker.wait_until(lock, (*cur).getTime());
+                } else {
+/*
+ * 	Bad: Valgrind complains "invalid read of size 8"
+ * 	http://stackoverflow.com/questions/9891767/valgrind-debug-log-invalid-read-of-size-8
+ *
+                	blocker.wait_until(lock, (*cur).getTime());
+  *
+ */
+                	auto nxt = waiting_tasks.begin();
+                	auto nxttime = (*nxt).getTime();
+                    blocker.wait_until(lock, nxttime);
+                }
             }
         }
     }
