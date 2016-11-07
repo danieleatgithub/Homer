@@ -93,16 +93,31 @@ public:
 	}
 
 	void draw() {
-		GLfloat left = 280.0f;
-		GLfloat size = 230.0f;
-		GLfloat top = 90.0f;
-		GLfloat height = 50.0f;
+		GLfloat left;
+		GLfloat right;
+		GLfloat up;
+		GLfloat down;
 		glColor3fv(bg);
-		glRects(left, top, left + size, top + height);
+		glBegin (GL_POLYGON);
+		left = -0.1f;
+		right = 0.28f;
+		up = 0.7f;
+		down = 0.2f;
+		glTexCoord2f(0.0f, 0.0f); //Texture co-ordinate origin or lower left corner
+		glVertex3f(left, down, 0.0f); // v1 low-sx
+		glTexCoord2f(1.0f, 0.0f); //Texture co-ordinate for repeating image ten times form			      //origin to lower right corner
+		glVertex3f(right, down, 0.0f); // v2 low-dx
+		glTexCoord2f(1.0f, 1.0f); //repeat texture ten times form lower to top right corner.
+		glVertex3f(right, up, 0.0f); // v3 up-dx
+		glTexCoord2f(0.0f, 1.0f); //repeat texture ten time form top right to top left corner.
+		glVertex3f(left, up, 0.0f); // up-sx
+		glEnd();
 		glColor3fv(fg);
-		glRasterPos2f(left + 10.0, top + 30.0f);
+//		sprintf(line1, "Homer Emulator");
+//		sprintf(line2, "1234567890123456");
+		glRasterPos2f(-0.09, 0.5f);
 		printString(line1);
-		glRasterPos2f(left + 10.0, top + 10.0f);
+		glRasterPos2f(-0.09, 0.28f);
 		printString(line2);
 	}
 

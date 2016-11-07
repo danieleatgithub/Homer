@@ -15,6 +15,7 @@
 #include <HwEmulated.hpp>
 #include <Scheduler.hpp>
 #include <WinstarEmulator.hpp>
+#include "GLUTUtilities.h"
 
 #define HEMUL_REFRESHRATE 250 // milliseconds
 

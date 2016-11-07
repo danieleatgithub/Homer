@@ -55,11 +55,6 @@ GLuint GL_callbacks::LoadBMPTexture(const char *filename, unsigned int width,
 
 }
 void GL_callbacks::reshape(int w, int h) {
-	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
-	glMatrixMode (GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(0.0, w, 0.0, h, -1.0, 1.0);
-	glMatrixMode (GL_MODELVIEW);
 }
 
 void GL_callbacks::keypress(unsigned char key, int x, int y) {
@@ -70,40 +65,38 @@ void GL_callbacks::keyrelease(unsigned char key, int x, int y) {
 }
 
 void GL_callbacks::display(void) {
+	GLUTUtilities::LoadBMPTexture(
+			"/wks/workspace/sandbox/GLUT-examples/resource/fpanel800x129x24b.bmp",
+			800, 129);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	/*
-	 glEnable (GL_TEXTURE_2D);
-	 texture =
-	 GL_callbacks::LoadBMPTexture(
-	 "/wks/workspace/sandbox/GLUT-examples/resource/fpanel800x129x24b.bmp",
-	 800, 129);
-	 glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-	 glTranslatef(0.0, 0.0, 0.0);
-	 glColor3f(0.0, 0.0, 0.0);
+	glEnable (GL_TEXTURE_2D);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	glTranslatef(0.0, 0.0, 0.0);
+	glColor3f(0.0, 0.0, 0.0);
 
-	 glBegin (GL_POLYGON);
+	GLfloat left;
+	GLfloat right;
+	GLfloat up;
+	GLfloat down;
 
-	 GLfloat left = -1.0f;
-	 GLfloat right = 1.0f;
-	 GLfloat up = 1.0f;
-	 GLfloat down = -1.0f;
-	 GLfloat z = 0.0f;
-	 glTexCoord2f(0.0f, 0.0f); //Texture co-ordinate origin or lower left corner
-	 glVertex3f(left, down, z); // v1 low-sx
-	 glTexCoord2f(1.0f, 0.0f); //Texture co-ordinate for repeating image ten times form			      //origin to lower right corner
-	 glVertex3f(right, down, z); // v2 low-dx
-	 glTexCoord2f(1.0f, 1.0f); //repeat texture ten times form lower to top right corner.
-	 glVertex3f(right, up, z); // v3 up-dx
-	 glTexCoord2f(0.0f, 1.0f); //repeat texture ten time form top right to top left corner.
-	 glVertex3f(left, up, z); // up-sx
-
-	 glEnd();
-	 */
-
+	glBegin (GL_POLYGON);
+	left = -1.0f;
+	right = 1.0f;
+	up = 1.0f;
+	down = -1.0f;
+	glTexCoord2f(0.0f, 0.0f); //Texture co-ordinate origin or lower left corner
+	glVertex3f(left, down, 0.0f); // v1 low-sx
+	glTexCoord2f(1.0f, 0.0f); //Texture co-ordinate for repeating image ten times form			      //origin to lower right corner
+	glVertex3f(right, down, 0.0f); // v2 low-dx
+	glTexCoord2f(1.0f, 1.0f); //repeat texture ten times form lower to top right corner.
+	glVertex3f(right, up, 0.0f); // v3 up-dx
+	glTexCoord2f(0.0f, 1.0f); //repeat texture ten time form top right to top left corner.
+	glVertex3f(left, up, 0.0f); // up-sx
+	glEnd();
+	glDisable(GL_TEXTURE_2D); //Disable the texture
 	displayEmulator->draw();
-	glDisable (GL_TEXTURE_2D); //Disable the texture
-	glutSwapBuffers();
+	glFlush();
 
 }
 
