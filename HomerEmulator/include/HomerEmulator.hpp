@@ -24,13 +24,21 @@ namespace homeremulator {
 class HomerEmulator;
 
 struct GL_callbacks {
-	static void  reshape(int w, int h);
-	static void  keypress(unsigned char key, int x, int y);
-	static void  keyrelease(unsigned char key, int x, int y);
-	static void  display();
-	static void  timer(int value);
-	static void  idle();
-
+	static void
+	reshape(int w, int h);
+	static void
+	keypress(unsigned char key, int x, int y);
+	static void
+	keyrelease(unsigned char key, int x, int y);
+	static void
+	display();
+	static void
+	timer(int value);
+	static void
+	idle();
+	static GLuint
+	LoadBMPTexture(const char *filename, unsigned int width,
+			unsigned int height);
 
 	void setHomerEmulator(HomerEmulator* e) {
 		GL_callbacks::homerEmulator = e;
@@ -39,35 +47,40 @@ struct GL_callbacks {
 		GL_callbacks::displayEmulator = d;
 	}
 
-	static HomerEmulator 	*homerEmulator;
-	static WinstarEmulator	*displayEmulator;
-
+	static HomerEmulator *homerEmulator;
+	static WinstarEmulator *displayEmulator;
 
 };
 
-
 class HomerEmulator {
 private:
-	char *myargv [1];
+	char *myargv[1];
 	int myargc;
 
-	unsigned int		refreshRate;
+	unsigned int refreshRate;
 public:
 	KeyEmulator keyEmulator;
 	GL_callbacks callbacks;
 
-	void makeRasterFont(void);
-	const string &getKeyEventFilename() {
+	void
+	makeRasterFont(void);
+	const string &
+	getKeyEventFilename() {
 		return keyEmulator.getEvent();
 	}
 
 public:
 
 	HomerEmulator(WinstarEmulator *emulatedDisplay);
-	virtual ~HomerEmulator() {};
-	int start();
-	int stop();
-	void mainLoop();
+	virtual ~HomerEmulator() {
+	}
+	;
+	int
+	start();
+	int
+	stop();
+	void
+	mainLoop();
 
 	unsigned int getRefreshRate() const {
 		return refreshRate;
@@ -78,6 +91,5 @@ public:
 };
 
 }
-
 
 #endif /* HOMEREMULATOR_HPP_ */
