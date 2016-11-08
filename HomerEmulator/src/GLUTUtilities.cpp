@@ -4,7 +4,7 @@
  *  Created on: 07/nov/2016
  *      Author: daniele
  */
-#include "GLUTUtilities.h"
+#include <GLUTUtilities.h>
 #include <iostream>
 #include <stdexcept>
 

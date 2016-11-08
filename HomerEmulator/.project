@@ -3,7 +3,6 @@
 	<name>HomerEmulator</name>
 	<comment></comment>
 	<projects>
-		<project>homerd</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -25,11 +24,4 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>homerd</name>
-			<type>2</type>
-			<location>/wks/workspace/Homer/homerd/src</location>
-		</link>
-	</linkedResources>
 </projectDescription>
