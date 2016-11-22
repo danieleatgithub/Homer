@@ -98,11 +98,10 @@ class HomerMenu {
       try {
         active_element = mv.home();
       } catch (MenuEmptyException& e) {
-        cerr <<"§§§§§§§§§§§Home a" << e.what() << endl;
+        cerr <<"timedHome MenuEmptyException " << e.what() << endl;  // FIXME: on logger
 
       } catch (MenuException& e) {
-        cerr <<"§§§§§§§§§§Home b" << e.what() << endl;
-
+        cerr <<"timedHome MenuException " << e.what() << endl;  // FIXME: on logger
       }
       mutex.unlock();
       enter(nokey);
@@ -120,19 +119,17 @@ class HomerMenu {
         try {
           active_element = active_element->exe_move(mv,k);
         } catch (MenuEmptyException& e) {
-          cerr <<"***********Catch a" << e.what() << endl;
-          cerr << "<<<<NOW" << active_element.get()->get_label();
+          cerr <<"key_attach MenuEmptyException " << e.what() << endl;  // FIXME: on logger
 
-        } catch (MenuException& e) {
-          cerr <<"*********Catch b" << e.what() << endl;
-
-        }
-
-        mutex.unlock();
-        enter(k);
+                      } catch (MenuException& e) {
+                        cerr <<"key_attach MenuException " << e.what() << endl;  // FIXME: on logger
       }
-      scheduler.ScheduleAfter(std::chrono::seconds(30),timedHome);
-    });
+
+      mutex.unlock();
+      enter(k);
+    }
+    scheduler.ScheduleAfter(std::chrono::seconds(30),timedHome);
+  });
     // Display welcome immediatly
     scheduler.ScheduleAfter(std::chrono::milliseconds(100), timedHome);
 
