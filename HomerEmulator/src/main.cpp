@@ -35,56 +35,60 @@ using namespace homeremulator;
 
 struct termios t;
 
-
 int main(int argc, char** argv) {
 
-	// Poperties load and init
-	initialize();
-    PropertyConfigurator config("/wks/workspace/sandbox/Menu/src/homerd.properties");
-    config.configure();
+  // Poperties load and init
+  initialize();
+  PropertyConfigurator config(
+      "/wks/workspace/Homer/HomerEmulator/resources/homerd.properties");
+  cout << "HomerEmulator starting ..." << endl;
+  config.configure();
 
-	Logger logger = Logger::getRoot();
+  Logger logger = Logger::getRoot();
 
-	// Real stuff
-	Scheduler			*scheduler;
-	KeyPanel			*keyPanel;
-	HomerMenu			*menu;
+  // Real stuff
+  Scheduler *scheduler;
+  KeyPanel *keyPanel;
+  HomerMenu *menu;
 
-	// Emulated stuff
-	BoardEmulated   	*acquaA5;
-	WinstarEmulator		*display;
-	HomerEmulator       *emulator;
+  // Emulated stuff
+  BoardEmulated *acquaA5;
+  WinstarEmulator *display;
+  HomerEmulator *emulator;
 
-	keyPanel  = new KeyPanel();
-	scheduler = new Scheduler();
-	acquaA5   = new BoardEmulated();
-	display	  = new WinstarEmulator(*keyPanel,*scheduler,*acquaA5);
-	emulator  = new HomerEmulator(display);
+  keyPanel = new KeyPanel();
+  scheduler = new Scheduler();
+  acquaA5 = new BoardEmulated();
+  display = new WinstarEmulator(*keyPanel, *scheduler, *acquaA5);
+  emulator = new HomerEmulator(display);
 
-	shared_ptr<MenuActionVisitor> dw(new DisplayVisitor(*display));
+  shared_ptr < MenuActionVisitor > dw(new DisplayVisitor(*display));
 
-	emulator->start();
-	display->reset();
-	keyPanel->set_event_filename(emulator->getKeyEventFilename().c_str());
-	keyPanel->start();
+  emulator->start();
+  display->reset();
+  keyPanel->set_event_filename(emulator->getKeyEventFilename().c_str());
+  keyPanel->start();
 
-	menu 	  = new HomerMenu(*keyPanel,*scheduler);
-	menu->addActionVisitor(dw);
+  menu = new HomerMenu(*keyPanel, *scheduler);
+  menu->addActionVisitor(dw);
 
-    display->set_backlight(true);
-    emulator->mainLoop();
+  display->set_backlight(true);
 
-    keyPanel->stop();
-    emulator->stop();
+  cout << "HomerEmulator ready ..." << endl;
 
-    sleep(1);
+  emulator->mainLoop();
 
-    delete(emulator);
-    delete(menu);
-    delete(display);
-    delete(acquaA5);
-    delete(scheduler);
-    delete(keyPanel);
+  keyPanel->stop();
+  emulator->stop();
 
-	return 0;
+  sleep(1);
+
+  delete (emulator);
+  delete (menu);
+  delete (display);
+  delete (acquaA5);
+  delete (scheduler);
+  delete (keyPanel);
+
+  return 0;
 }
