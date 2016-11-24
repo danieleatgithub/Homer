@@ -41,7 +41,6 @@ int main(int argc, char** argv) {
   initialize();
   PropertyConfigurator config(
       "/wks/workspace/Homer/HomerEmulator/resources/homerd.properties");
-
   config.configure();
 
   Logger logemu = Logger::getInstance(LOGEMULATOR);
@@ -57,33 +56,36 @@ int main(int argc, char** argv) {
   WinstarEmulator *display;
   HomerEmulator *emulator;
 
+  // Create Universe
   keyPanel = new KeyPanel();
   scheduler = new Scheduler();
   acquaA5 = new BoardEmulated();
   display = new WinstarEmulator(*keyPanel, *scheduler, *acquaA5);
   emulator = new HomerEmulator(display);
-
   shared_ptr < MenuActionVisitor > dw(new DisplayVisitor(*display));
 
+  // life spark ignition
   emulator->start();
   display->reset();
   keyPanel->set_event_filename(emulator->getKeyEventFilename().c_str());
   keyPanel->start();
-
   menu = new HomerMenu(*keyPanel, *scheduler);
   menu->addActionVisitor(dw);
-
   display->set_backlight(true);
 
   LOG4CPLUS_INFO(logemu, "HomerEmulator ready ...");
 
+  // wait for armageddon
   emulator->mainLoop();
 
+  // end of life
   keyPanel->stop();
   emulator->stop();
 
+  // one second silence for our threads
   sleep(1);
 
+  // keep clear empty space
   delete (emulator);
   delete (menu);
   delete (display);
@@ -91,5 +93,6 @@ int main(int argc, char** argv) {
   delete (scheduler);
   delete (keyPanel);
 
+  // give back power
   return 0;
 }
