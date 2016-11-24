@@ -41,10 +41,11 @@ int main(int argc, char** argv) {
   initialize();
   PropertyConfigurator config(
       "/wks/workspace/Homer/HomerEmulator/resources/homerd.properties");
-  cout << "HomerEmulator starting ..." << endl;
+
   config.configure();
 
-  Logger logger = Logger::getRoot();
+  Logger logemu = Logger::getInstance(LOGEMULATOR);
+  LOG4CPLUS_INFO(logemu, "HomerEmulator starting ...");
 
   // Real stuff
   Scheduler *scheduler;
@@ -74,7 +75,7 @@ int main(int argc, char** argv) {
 
   display->set_backlight(true);
 
-  cout << "HomerEmulator ready ..." << endl;
+  LOG4CPLUS_INFO(logemu, "HomerEmulator ready ...");
 
   emulator->mainLoop();
 
