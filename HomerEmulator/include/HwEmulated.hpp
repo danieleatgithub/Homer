@@ -25,94 +25,162 @@ using namespace obs;
 namespace homerio {
 
 class I2cBusEmulated : public I2cBus {
-private:
-	unsigned int active_device;
-	map<int,string> filedescriptors;
-    // Observers
-	using WriteObserver = Subject<void (int filedes, const void *buffer, size_t size)>;
+ private:
+  unsigned int active_device;
+  map<int, string> filedescriptors;
+  // Observers
+  using WriteObserver = Subject<void (int filedes, const void *buffer, size_t size)>;
 
-	map<unsigned int,WriteObserver> write_obs_map; // Write Observer Map by device address
+  map<unsigned int, WriteObserver> write_obs_map;  // Write Observer Map by device address
 
-public:
+ public:
 
-	I2cBusEmulated(const char *bus) : I2cBus(bus) {
-		active_device = 0;
-	};
-	 ~I2cBusEmulated() {};
+  I2cBusEmulated(const char *bus)
+      : I2cBus(bus) {
+    active_device = 0;
+  }
+  ;
+  ~I2cBusEmulated() {
+  }
+  ;
 
-	int open(const char *file, int flag);
-	int read(int fd, void *buf, size_t nbyte);
-	int write(int filedes, const void *buffer, size_t size);
-	int ioctl(int fd, unsigned long int __request, ...);
-	__off_t lseek (int fd, __off_t __offset, int __whence);
-	int close(int fd);
+  int open(const char *file, int flag);
+  int read(int fd, void *buf, size_t nbyte);
+  int write(int filedes, const void *buffer, size_t size);
+  int ioctl(int fd, unsigned long int __request, ...);
+  __off_t lseek(int fd, __off_t                                    __offset, int __whence);
+  int close(int fd);
 
-	void reg_write(Registration& reg, unsigned int address, std::function<void (int filedes, const void *buffer, size_t size)> f) {
-		reg = write_obs_map[address].registerObserver(f);
-	}
-
-};
-
-class GpioPortEmulated : public GpioPort  {
-private:
-    // Observers
-    Subject<void (int filedes, const void *buffer, size_t size)> write_obs; // Triggered on key released
-
-
-public:
-	 GpioPortEmulated(const char *name) : GpioPort(name) {};
-	 ~GpioPortEmulated() {};
-
-		int open(const char *file, int flag);
-		int read(int fd, void *buf, size_t nbyte);
-		int write(int filedes, const void *buffer, size_t size);
-		int ioctl(int fd, unsigned long int __request, ...);
-		__off_t lseek (int fd, __off_t __offset, int __whence);
-		int close(int fd);
-
-		void reg_write(Registration& reg, std::function<void (int filedes, const void *buffer, size_t size)> f) {
-	    	reg = write_obs.registerObserver(f);
-		}
+  void reg_write(
+      Registration& reg, unsigned int address,
+      std::function<void(int filedes, const void *buffer, size_t size)> f) {
+    reg = write_obs_map[address].registerObserver(f);
+  }
 
 };
 
+class SysFsEmulated : public SysFs {
+ private:
+  unsigned int active_device;
+  map<int, string> filedescriptors;
 
+  // Observers
+  using WriteObserver = Subject<void (int filedes, const void *buffer, size_t size)>;
+  using ReadObserver = Subject<void (int filedes, void *buffer, size_t size, const char *fname, int *ret)>;
+
+  map<unsigned int, WriteObserver> write_obs_map;  // Write Observer Map by fd
+  map<string, ReadObserver> read_obs_map;  // Read Observer Map by fd
+
+ public:
+
+  SysFsEmulated(const char *root)
+      : SysFs(root) {
+    active_device = 0;
+  }
+  ;
+  ~SysFsEmulated() {
+  }
+  ;
+
+  int open(const char *file, int flag);
+  int read(int fd, void *buf, size_t nbyte);
+  int write(int filedes, const void *buffer, size_t size);
+  int ioctl(int fd, unsigned long int __request, ...);
+  __off_t lseek(int fd, __off_t                                    __offset, int __whence);
+  int close(int fd);
+
+  void reg_write(
+      Registration& reg, unsigned int address,
+      std::function<void(int filedes, const void *buffer, size_t size)> f) {
+    reg = write_obs_map[address].registerObserver(f);
+  }
+  void reg_read(
+      Registration& reg,
+      string filePattern,
+      std::function<
+          void(int filedes, void *buffer, size_t size, const char *fname,
+               int *ret)> f) {
+    reg = read_obs_map[filePattern].registerObserver(f);
+  }
+
+};
+
+class GpioPortEmulated : public GpioPort {
+ private:
+  // Observers
+  Subject<void(int filedes, const void *buffer, size_t size)> write_obs;  // Triggered on key released
+
+ public:
+  GpioPortEmulated(const char *name)
+      : GpioPort(name) {
+  }
+  ;
+  ~GpioPortEmulated() {
+  }
+  ;
+
+  int open(const char *file, int flag);
+  int read(int fd, void *buf, size_t nbyte);
+  int write(int filedes, const void *buffer, size_t size);
+  int ioctl(int fd, unsigned long int __request, ...);
+  __off_t lseek(int fd, __off_t                                    __offset, int __whence);
+  int close(int fd);
+
+  void reg_write(
+      Registration& reg,
+      std::function<void(int filedes, const void *buffer, size_t size)> f) {
+    reg = write_obs.registerObserver(f);
+  }
+
+};
 
 class BoardEmulated : public Board {
-	I2cBusEmulated    i2c_0;
-	GpioPortEmulated  lcd_backlight;
-	GpioPortEmulated  lcd_reset;
+  I2cBusEmulated i2c_0;
+  GpioPortEmulated lcd_backlight;
+  GpioPortEmulated lcd_reset;
+  SysFsEmulated sysFs;
 
-public:
-	BoardEmulated() : Board(),
-		i2c_0(I2C_BUS), lcd_backlight(LCD_BACKLIGHT_PIN), lcd_reset(LCD_RESET_PIN)  {
+ public:
+  BoardEmulated()
+      : Board(),
+        i2c_0(I2C_BUS),
+        lcd_backlight(LCD_BACKLIGHT_PIN),
+        lcd_reset(LCD_RESET_PIN),
+        sysFs(SYSFS_ROOT) {
 
-	};
-	~BoardEmulated() {
-	}
-	I2cBus& getI2c0() {
-		return i2c_0;
-	}
+  }
+  ;
+  ~BoardEmulated() {
+  }
+  I2cBus& getI2c0() {
+    return i2c_0;
+  }
 
-	GpioPort& getLcdBacklight() {
-		return lcd_backlight;
-	}
+  GpioPort& getLcdBacklight() {
+    return lcd_backlight;
+  }
 
-	GpioPort& getLcdReset() {
-		return lcd_reset;
-	}
+  GpioPort& getLcdReset() {
+    return lcd_reset;
+  }
 
+  I2cBusEmulated& getEmulatedI2c0() {
+    return i2c_0;
+  }
+  GpioPortEmulated& getEmulatedLcdBacklight() {
+    return lcd_backlight;
+  }
 
-	I2cBusEmulated& getEmulatedI2c0() {
-		return i2c_0;
-	}
-	GpioPortEmulated& getEmulatedLcdBacklight() {
-		return lcd_backlight;
-	}
+  GpioPortEmulated& getEmulatedLcdReset() {
+    return lcd_reset;
+  }
 
-	GpioPortEmulated& getEmulatedLcdReset() {
-		return lcd_reset;
-	}
+  SysFsEmulated& getEmulatedSysFs() {
+    return sysFs;
+  }
+  SysFs& getSysFs() {
+    return sysFs;
+  }
 
 };
 

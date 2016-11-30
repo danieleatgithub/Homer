@@ -8,8 +8,7 @@
 #define LOGDEVICE 	"homerd.device"
 #define LOGHOMERD 	"homerd"
 
-
-// FIXME get from properties
+// TODO get from properties
 #define DAEMON_NAME "homerd"
 #define ONEWIRE_0_PIN "PA01"
 #define I2C_0_DAT_PIN "PA30"
@@ -19,3 +18,4 @@
 #define LCD_BACKLIGHT_PIN "PA03"
 #define LCD_RESET_PIN "PA02"
 #define KEY_EVENT_DEVICE "/dev/input/event0"
+#define SYSFS_ROOT "/sys"

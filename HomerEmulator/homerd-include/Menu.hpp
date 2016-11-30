@@ -28,7 +28,50 @@ using namespace homerio;
 using namespace shd;
 
 namespace homerio {
+class MenuAble {
+ public:
+  virtual ~MenuAble() {
+  }
+  ;
+  virtual const string getLabel() const = 0;
+  virtual const string getValue() const = 0;
+  virtual void update() = 0;
+};
 
+class SimpleMenuElement : public MenuAble {
+ private:
+  string label;
+  string value;
+ public:
+  SimpleMenuElement(string _label) {
+    this->label = _label;
+    this->value = "";
+  }
+  SimpleMenuElement(string _label, string _value) {
+    this->label = _label;
+    this->value = _value;
+  }
+  ~SimpleMenuElement() {
+  }
+
+  const string getLabel() const {
+    return label;
+  }
+  const string getValue() const {
+    return value;
+  }
+
+  void setLabel(const string& label) {
+    this->label = label;
+  }
+
+  void setValue(const string& value) {
+    this->value = value;
+  }
+  void update() {
+    return;
+  }
+};
 class MenuActionVisitor;
 
 /**
@@ -36,26 +79,16 @@ class MenuActionVisitor;
  *
  */
 class MenuComponent {
- protected:
-  string label;
 
  public:
-  MenuComponent(string label) {
-    this->label = label;
-  }
   virtual ~MenuComponent() {
   }
   ;
-
-  string get_label() {
-    return label;
-  }
-
+  virtual MenuAble& getElement() = 0;
   // Visitors interface
   virtual void exe_enter(MenuActionVisitor& m, KeyButton& k) = 0;
   virtual void exe_leave(MenuActionVisitor& m, KeyButton& k) = 0;
   virtual void exe_click(MenuActionVisitor& m, KeyButton& k) = 0;
-
   virtual shared_ptr<MenuComponent> exe_move(MenuNavigatorVisitor& m,
                                              KeyButton& k) = 0;
 };
@@ -67,13 +100,15 @@ class MenuComponent {
  *
  */
 class SubMenu : public MenuComponent {
+
  protected:
   vector<shared_ptr<MenuComponent>> children;
   vector<shared_ptr<MenuComponent>>::iterator cursor;
+  MenuAble& element;
 
  public:
-  SubMenu(string label)
-      : MenuComponent(label) {
+  SubMenu(MenuAble& mable)
+      : element(mable) {
     children.clear();
     cursor = children.begin();
   }
@@ -96,7 +131,7 @@ class SubMenu : public MenuComponent {
   shared_ptr<MenuComponent> get_active_element() throw (MenuEmptyException) {
     if (children.empty())
       throw MenuEmptyException(
-          (string("Empty Menu ") + this->get_label()).c_str());
+          (string("Empty Menu ") + element.getLabel()).c_str());
     return (*cursor);
   }
 
@@ -131,6 +166,9 @@ class SubMenu : public MenuComponent {
     return (get_active_element());
   }
 
+  virtual MenuAble& getElement() {
+    return element;
+  }
   // Visitor Interfaces
   virtual void exe_click(MenuActionVisitor& m, KeyButton& k) {
     m.click(*this, k);
@@ -156,17 +194,15 @@ class SubMenu : public MenuComponent {
  * Terminal passive Menu element
  */
 class MenuLeaf : public MenuComponent {
-  string value;
- public:
-  MenuLeaf(string label)
-      : MenuComponent(label) {
-    this->value = string("");
-  }
-  MenuLeaf(string label, string value)
-      : MenuComponent(label) {
-    this->value = value;
-  }
+  MenuAble& element;
 
+ public:
+  MenuLeaf(MenuAble& mable)
+      : element(mable) {
+  }
+  virtual MenuAble& getElement() {
+    return element;
+  }
   // Visitor Interfaces
   virtual void exe_click(MenuActionVisitor& m, KeyButton& k) {
     m.click(*this, k);
@@ -182,9 +218,6 @@ class MenuLeaf : public MenuComponent {
     return (m.move(*this, k));
   }
 
-  const string& getValue() const {
-    return value;
-  }
 };
 
 }

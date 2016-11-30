@@ -13,7 +13,7 @@
 #include <Sysinfo.h>
 #include <iostream>
 #include <string>
-
+#include <Sensor.hpp>
 using namespace std;
 
 namespace homerio {
@@ -22,6 +22,7 @@ namespace homerio {
  * Homer Menu
  *
  */
+
 class HomerMenu {
  private:
 
@@ -29,28 +30,30 @@ class HomerMenu {
   shared_ptr<MenuComponent> active_element;
   KeyPanel &keyPanel;
   Scheduler& scheduler;
+  TemperatureSensor& tsens;
+  PressureSensor& psens;
   Registration rkeyPanel, rWrDisplay;
   Sysinfo sysinfo = Sysinfo::get_instance();
 
   KeyButton nokey;
   std::mutex mutex;
 
-  shared_ptr<SubMenu> root = std::make_shared < SubMenu > (string("root"));
-  shared_ptr<MenuLeaf> welcome = std::make_shared < MenuLeaf
-      > (string("Homer"), "IP:" + sysinfo.get_local_ip("eth0"));
-  shared_ptr<MenuLeaf> ciao = std::make_shared < MenuLeaf > (string("ciao"));
-  shared_ptr<MenuLeaf> dany = std::make_shared < MenuLeaf > (string("dany"));
-  shared_ptr<SubMenu> system = std::make_shared < SubMenu > (string("system"));
-  shared_ptr<MenuLeaf> network = std::make_shared < MenuLeaf
-      > (string("network"));
-  shared_ptr<MenuLeaf> cpu = std::make_shared < MenuLeaf > (string("cpu"));
-  shared_ptr<SubMenu> sensors = std::make_shared < SubMenu
-      > (string("sensors"));
-  shared_ptr<MenuLeaf> temperature = std::make_shared < MenuLeaf
-      > (string("temperature"));
-  shared_ptr<MenuLeaf> pressure = std::make_shared < MenuLeaf
-      > (string("pressure"));
-  shared_ptr<SubMenu> alarms = std::make_shared < SubMenu > (string("alarms"));
+  SimpleMenuElement menuIP = SimpleMenuElement(
+      "Homer", "IP:" + sysinfo.get_local_ip("eth0"));
+  SimpleMenuElement menuCpu = SimpleMenuElement("cpu");
+  SimpleMenuElement subRoot = SimpleMenuElement("root");
+  SimpleMenuElement subSys = SimpleMenuElement("system");
+  SimpleMenuElement subAlarm = SimpleMenuElement("alarms");
+  SimpleMenuElement subSens = SimpleMenuElement("sensors");
+
+  shared_ptr<SubMenu> root = std::make_shared < SubMenu > (subRoot);
+  shared_ptr<MenuLeaf> welcome = std::make_shared < MenuLeaf > (menuIP);
+  shared_ptr<SubMenu> system = std::make_shared < SubMenu > (subSys);
+  shared_ptr<MenuLeaf> cpu = std::make_shared < MenuLeaf > (menuCpu);
+  shared_ptr<SubMenu> sensors = std::make_shared < SubMenu > (subSens);
+  shared_ptr<MenuLeaf> temperature;
+  shared_ptr<MenuLeaf> pressure;
+  shared_ptr<SubMenu> alarms = std::make_shared < SubMenu > (subAlarm);
 
   MoveVisitor mv;
   vector<shared_ptr<MenuActionVisitor>> visitors;
@@ -72,21 +75,25 @@ class HomerMenu {
   }
 
  public:
-  HomerMenu(KeyPanel& kpl, Scheduler& sch)
+  HomerMenu(KeyPanel& kpl, Scheduler& sch, TemperatureSensor& _tsens,
+            PressureSensor& _psens)
       : keyPanel(kpl),
         scheduler(sch),
+        tsens(_tsens),
+        psens(_psens),
         mv(root) {
+    Logger loghomer = Logger::getInstance(LOGHOMERD);
+
+    temperature = std::make_shared < MenuLeaf > (tsens);
+    pressure = std::make_shared < MenuLeaf > (psens);
 
     root->add(welcome);
-    root->add(ciao);
     sensors->add(temperature);
     sensors->add(pressure);
-    system->add(network);
     system->add(cpu);
-    system->add(sensors);
     system->add(alarms);
+    root->add(sensors);
     root->add(system);
-    root->add(dany);
 
     root->home();
     active_element = root->get_active_element();
@@ -98,10 +105,9 @@ class HomerMenu {
       try {
         active_element = mv.home();
       } catch (MenuEmptyException& e) {
-        cerr <<"timedHome MenuEmptyException " << e.what() << endl;  // FIXME: on logger
-
+        LOG4CPLUS_WARN(loghomer, "timedHome MenuEmptyException " << e.what());
       } catch (MenuException& e) {
-        cerr <<"timedHome MenuException " << e.what() << endl;  // FIXME: on logger
+        LOG4CPLUS_ERROR(loghomer, "timedHome MenuException " << e.what());
       }
       mutex.unlock();
       enter(nokey);
@@ -119,17 +125,16 @@ class HomerMenu {
         try {
           active_element = active_element->exe_move(mv,k);
         } catch (MenuEmptyException& e) {
-          cerr <<"key_attach MenuEmptyException " << e.what() << endl;  // FIXME: on logger
+          LOG4CPLUS_WARN(loghomer, "timedHome MenuEmptyException " << e.what());
+        } catch (MenuException& e) {
+          LOG4CPLUS_ERROR(loghomer, "timedHome MenuException " << e.what());
+        }
 
-                      } catch (MenuException& e) {
-                        cerr <<"key_attach MenuException " << e.what() << endl;  // FIXME: on logger
+        mutex.unlock();
+        enter(k);
       }
-
-      mutex.unlock();
-      enter(k);
-    }
-    scheduler.ScheduleAfter(std::chrono::seconds(30),timedHome);
-  });
+      scheduler.ScheduleAfter(std::chrono::seconds(30),timedHome);
+    });
     // Display welcome immediatly
     scheduler.ScheduleAfter(std::chrono::milliseconds(100), timedHome);
 
@@ -140,6 +145,7 @@ class HomerMenu {
   void addActionVisitor(const shared_ptr<MenuActionVisitor>& visitor) {
     visitors.push_back(visitor);
   }
+
 };
 
 } /* namespace homerio */

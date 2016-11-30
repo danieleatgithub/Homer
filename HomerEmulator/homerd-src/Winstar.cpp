@@ -66,7 +66,7 @@ int Winstar::dpy_write(int type, uint8_t data) {
   buffer[1] = data;
   Logger logdev = Logger::getInstance(LOGDEVICE);
 
-  // FIXME: Change to singleton and add a semaphore on i2cbus usage
+  // TODO: Change to singleton and add a semaphore on i2cbus usage
   int fd = i2cBus.open(bus.c_str(), O_RDWR);
   if (fd < 0)
     return (fd);

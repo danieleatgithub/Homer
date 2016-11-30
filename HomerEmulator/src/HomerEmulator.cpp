@@ -120,6 +120,7 @@ HomerEmulator::HomerEmulator(WinstarEmulator * emulatedDisplay) {
 
 int HomerEmulator::start() {
   keyEmulator.gl_start();
+
   glutInit(&myargc, &myargv[0]);
   glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 

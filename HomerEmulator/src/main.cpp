@@ -1,10 +1,17 @@
-//============================================================================
-// Name        : Menu.cpp
-// Author      : Daniele Colombo
-// Version     :
-// Copyright   : GPL 2
-// Description : Hello World in C++, Ansi-style
-//============================================================================
+/*
+ * main.cpp
+ *
+ *  Created on: 07/nov/2016
+ *      Author: daniele
+ *
+ * FIXME: File Header refactoring (import new template )
+ * FIXME: Comment and other style decoration
+ * FIXME: Sensor and menu refactoring
+ * FIXME: Decorator pattern for Menu ?
+ * FIXME: Factory pattern for creation ?
+ *
+ *
+ */
 
 #include <Menu.hpp>
 #include <iostream>
@@ -12,6 +19,7 @@
 #include <KeyPanel.hpp>
 #include <termios.h>
 #include <unistd.h>
+#include <string.h>
 #include "Scheduler.hpp"
 #include <log4cplus/logger.h>
 #include <log4cplus/config.hxx>
@@ -25,6 +33,7 @@
 #include <HomerMenu.hpp>
 #include <HwLayer.hpp>
 #include <HwEmulated.hpp>
+#include <Sensor.hpp>
 #include <WinstarEmulator.hpp>
 
 using namespace std;
@@ -50,6 +59,9 @@ int main(int argc, char** argv) {
   Scheduler *scheduler;
   KeyPanel *keyPanel;
   HomerMenu *menu;
+  Bmp085Device *bmp085Device;
+  TemperatureSensor *tSens;
+  PressureSensor *pSens;
 
   // Emulated stuff
   BoardEmulated *acquaA5;
@@ -63,13 +75,39 @@ int main(int argc, char** argv) {
   display = new WinstarEmulator(*keyPanel, *scheduler, *acquaA5);
   emulator = new HomerEmulator(display);
   shared_ptr < MenuActionVisitor > dw(new DisplayVisitor(*display));
+  Registration preg, treg;
+  static int vt = -84;
+  static int vp = 42356;
+  acquaA5->getEmulatedSysFs().reg_read(
+      treg, string("/class/i2c-adapter/i2c-0/0-([0-9]+)/temp0_input"),
+      [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
+        vt+=5;
+        sprintf((char *)buffer,"%d",vt);
+        *ret = (int)strlen((char *)buffer);
+      });
+
+  acquaA5->getEmulatedSysFs().reg_read(
+      preg, string("/class/i2c-adapter/i2c-0/0-([0-9]+)/pressure0_input"),
+      [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
+        vp+=50;
+        sprintf((char *)buffer,"%d",vp);
+        *ret = (int)strlen((char *)buffer);
+      });
+
+  bmp085Device = new Bmp085Device(*acquaA5);
+  tSens = new TemperatureSensor(*bmp085Device, string("Temperature"));
+  pSens = new PressureSensor(*bmp085Device, string("Pressure"));
+  tSens->update();
+  pSens->update();
 
   // life spark ignition
   emulator->start();
   display->reset();
   keyPanel->set_event_filename(emulator->getKeyEventFilename().c_str());
   keyPanel->start();
-  menu = new HomerMenu(*keyPanel, *scheduler);
+
+  // Populating universe
+  menu = new HomerMenu(*keyPanel, *scheduler, *tSens, *pSens);
   menu->addActionVisitor(dw);
   display->set_backlight(true);
 

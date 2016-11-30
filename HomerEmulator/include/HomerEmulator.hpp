@@ -25,70 +25,69 @@ namespace homeremulator {
 class HomerEmulator;
 
 struct GL_callbacks {
-	static void
-	reshape(int w, int h);
-	static void
-	keypress(unsigned char key, int x, int y);
-	static void
-	keyrelease(unsigned char key, int x, int y);
-	static void
-	display();
-	static void
-	timer(int value);
-	static void
-	idle();
-	static GLuint
-	LoadBMPTexture(const char *filename, unsigned int width,
-			unsigned int height);
+  static void
+  reshape(int w, int h);
+  static void
+  keypress(unsigned char key, int x, int y);
+  static void
+  keyrelease(unsigned char key, int x, int y);
+  static void
+  display();
+  static void
+  timer(int value);
+  static void
+  idle();
+  static GLuint
+  LoadBMPTexture(const char *filename, unsigned int width, unsigned int height);
 
-	void setHomerEmulator(HomerEmulator* e) {
-		GL_callbacks::homerEmulator = e;
-	}
-	void setDisplayEmulator(WinstarEmulator* d) {
-		GL_callbacks::displayEmulator = d;
-	}
+  void setHomerEmulator(HomerEmulator* e) {
+    GL_callbacks::homerEmulator = e;
+  }
+  void setDisplayEmulator(WinstarEmulator* d) {
+    GL_callbacks::displayEmulator = d;
+  }
 
-	static HomerEmulator *homerEmulator;
-	static WinstarEmulator *displayEmulator;
+  static HomerEmulator *homerEmulator;
+  static WinstarEmulator *displayEmulator;
 
 };
 
 class HomerEmulator {
-private:
-	char *myargv[1];
-	int myargc;
+ private:
+  char *myargv[1];
+  int myargc;
 
-	unsigned int refreshRate;
-public:
-	KeyEmulator keyEmulator;
-	GL_callbacks callbacks;
+  unsigned int refreshRate;
+ public:
+  KeyEmulator keyEmulator;
+  GL_callbacks callbacks;
 
-	void
-	makeRasterFont(void);
-	const string &
-	getKeyEventFilename() {
-		return keyEmulator.getEvent();
-	}
+  void
+  makeRasterFont(void);
+  const string &
+  getKeyEventFilename() {
+    return keyEmulator.getEvent();
+  }
 
-public:
+ public:
 
-	HomerEmulator(WinstarEmulator *emulatedDisplay);
-	virtual ~HomerEmulator() {
-	}
-	;
-	int
-	start();
-	int
-	stop();
-	void
-	mainLoop();
+  HomerEmulator(WinstarEmulator *emulatedDisplay);
+  virtual ~HomerEmulator() {
+  }
 
-	unsigned int getRefreshRate() const {
-		return refreshRate;
-	}
-	void setRefreshRate(unsigned int refreshRate) {
-		this->refreshRate = refreshRate;
-	}
+  int
+  start();
+  int
+  stop();
+  void
+  mainLoop();
+
+  unsigned int getRefreshRate() const {
+    return refreshRate;
+  }
+  void setRefreshRate(unsigned int refreshRate) {
+    this->refreshRate = refreshRate;
+  }
 };
 
 }

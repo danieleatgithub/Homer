@@ -64,7 +64,7 @@ class WinstarEmulator : public Winstar {
         i2cwr_reg, WINSTAR_I2C_ADD,
         [&] (int fd, const void *buffer, size_t size) {
           const unsigned char *p = (const unsigned char *)buffer;
-          // FIXME: change GL init dependency logic
+          // FIXME: change GL init dependency logic ?????
         if(!ready) return;
         Logger logemu = Logger::getInstance(LOGEMULATOR);
         if(size == 2) {
