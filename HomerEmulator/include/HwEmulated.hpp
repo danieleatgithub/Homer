@@ -48,7 +48,7 @@ class I2cBusEmulated : public I2cBus {
   int read(int fd, void *buf, size_t nbyte);
   int write(int filedes, const void *buffer, size_t size);
   int ioctl(int fd, unsigned long int __request, ...);
-  __off_t lseek(int fd, __off_t                                    __offset, int __whence);
+  __off_t lseek(int fd, __off_t    __offset, int __whence);
   int close(int fd);
 
   void reg_write(
@@ -65,10 +65,10 @@ class SysFsEmulated : public SysFs {
   map<int, string> filedescriptors;
 
   // Observers
-  using WriteObserver = Subject<void (int filedes, const void *buffer, size_t size)>;
   using ReadObserver = Subject<void (int filedes, void *buffer, size_t size, const char *fname, int *ret)>;
+  using WriteObserver = Subject<void (int filedes, const void *buffer, size_t size, const char *fname, int *ret)>;
 
-  map<unsigned int, WriteObserver> write_obs_map;  // Write Observer Map by fd
+  map<string, WriteObserver> write_obs_map;  // Write Observer Map by fd
   map<string, ReadObserver> read_obs_map;  // Read Observer Map by fd
 
  public:
@@ -86,14 +86,18 @@ class SysFsEmulated : public SysFs {
   int read(int fd, void *buf, size_t nbyte);
   int write(int filedes, const void *buffer, size_t size);
   int ioctl(int fd, unsigned long int __request, ...);
-  __off_t lseek(int fd, __off_t                                    __offset, int __whence);
+  __off_t lseek(int fd, __off_t    __offset, int __whence);
   int close(int fd);
 
   void reg_write(
-      Registration& reg, unsigned int address,
-      std::function<void(int filedes, const void *buffer, size_t size)> f) {
-    reg = write_obs_map[address].registerObserver(f);
+      Registration& reg,
+      string filePattern,
+      std::function<
+          void(int filedes, const void *buffer, size_t size, const char *fname,
+               int *ret)> f) {
+    reg = write_obs_map[filePattern].registerObserver(f);
   }
+
   void reg_read(
       Registration& reg,
       string filePattern,
@@ -102,7 +106,6 @@ class SysFsEmulated : public SysFs {
                int *ret)> f) {
     reg = read_obs_map[filePattern].registerObserver(f);
   }
-
 };
 
 class GpioPortEmulated : public GpioPort {
@@ -123,7 +126,7 @@ class GpioPortEmulated : public GpioPort {
   int read(int fd, void *buf, size_t nbyte);
   int write(int filedes, const void *buffer, size_t size);
   int ioctl(int fd, unsigned long int __request, ...);
-  __off_t lseek(int fd, __off_t                                    __offset, int __whence);
+  __off_t lseek(int fd, __off_t                                            __offset, int __whence);
   int close(int fd);
 
   void reg_write(

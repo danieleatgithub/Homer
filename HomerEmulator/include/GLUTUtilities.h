@@ -9,11 +9,11 @@
 #define GLUTUTILITIES_H_
 #include <GL/freeglut.h>
 
+namespace homeremulator {
 class GLUTUtilities {
-public:
-	static GLuint
-	LoadBMPTexture(const char *filename, unsigned int width,
-			unsigned int height);
+ public:
+  static GLuint
+  LoadBMPTexture(const char *filename, unsigned int width, unsigned int height);
 };
-
+}
 #endif /* GLUTUTILITIES_H_ */

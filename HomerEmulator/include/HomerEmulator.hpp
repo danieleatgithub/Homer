@@ -24,29 +24,22 @@ using namespace homerio;
 namespace homeremulator {
 class HomerEmulator;
 
-struct GL_callbacks {
-  static void
-  reshape(int w, int h);
-  static void
-  keypress(unsigned char key, int x, int y);
-  static void
-  keyrelease(unsigned char key, int x, int y);
-  static void
-  display();
-  static void
-  timer(int value);
-  static void
-  idle();
-  static GLuint
-  LoadBMPTexture(const char *filename, unsigned int width, unsigned int height);
+struct GL_staticCall {
+  static void reshape(int w, int h);
+  static void keypress(unsigned char key, int x, int y);
+  static void keyrelease(unsigned char key, int x, int y);
+  static void display();
+  static void timer(int value);
+  static void idle();
 
+  static GLuint LoadBMPTexture(const char *filename, unsigned int width,
+                               unsigned int height);
   void setHomerEmulator(HomerEmulator* e) {
-    GL_callbacks::homerEmulator = e;
+    GL_staticCall::homerEmulator = e;
   }
   void setDisplayEmulator(WinstarEmulator* d) {
-    GL_callbacks::displayEmulator = d;
+    GL_staticCall::displayEmulator = d;
   }
-
   static HomerEmulator *homerEmulator;
   static WinstarEmulator *displayEmulator;
 
@@ -56,16 +49,14 @@ class HomerEmulator {
  private:
   char *myargv[1];
   int myargc;
-
   unsigned int refreshRate;
+
  public:
   KeyEmulator keyEmulator;
-  GL_callbacks callbacks;
+  GL_staticCall GL_calls;
+  void makeRasterFont(void);
 
-  void
-  makeRasterFont(void);
-  const string &
-  getKeyEventFilename() {
+  const string & getKeyEventFilename() {
     return keyEmulator.getEvent();
   }
 
@@ -75,12 +66,9 @@ class HomerEmulator {
   virtual ~HomerEmulator() {
   }
 
-  int
-  start();
-  int
-  stop();
-  void
-  mainLoop();
+  int start();
+  int stop();
+  void mainLoop();
 
   unsigned int getRefreshRate() const {
     return refreshRate;

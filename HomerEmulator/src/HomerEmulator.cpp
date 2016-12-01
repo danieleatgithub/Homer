@@ -24,55 +24,25 @@ namespace homeremulator {
 
 GLuint fontOffset;
 GLuint texture;
-
 GLfloat white[3] = { 1.0, 1.0, 1.0 };
 GLfloat green[3] = { 0.0, 1.0, 0.0 };
 GLfloat black[3] = { 0.0, 0.0, 0.0 };
 GLfloat grey[3] = { 0.5, 0.5, 0.5 };
 GLfloat lightgrey[3] = { 0.9, 0.9, 0.9 };
+HomerEmulator* GL_staticCall::homerEmulator = nullptr;
+WinstarEmulator* GL_staticCall::displayEmulator = nullptr;
 
-HomerEmulator* GL_callbacks::homerEmulator = nullptr;
-WinstarEmulator* GL_callbacks::displayEmulator = nullptr;
-
-GLuint GL_callbacks::LoadBMPTexture(const char *filename, unsigned int width,
-                                    unsigned int height) {
-  GLuint texture;
-  Logger logemu = Logger::getInstance(LOGEMULATOR);
-  void *buf;
-  FILE* fp = fopen(filename, "r");
-  buf = malloc(3 * sizeof(char) * width * height);
-  fread(buf, 1, 54, fp);
-  unsigned int xy = fread(buf, 3 * sizeof(char), width * height, fp);
-  if (xy != width * height) {
-    LOG4CPLUS_ERROR(logemu, "Wrong size " << xy);
-    free(buf);
-    exit(1);
-  }
-  fclose(fp);
-  glGenTextures(1, &texture);
-  glBindTexture(GL_TEXTURE_2D, texture);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB,
-               GL_UNSIGNED_BYTE, buf);
-  free(buf);
-  return (texture);
-
-}
-void GL_callbacks::reshape(int w, int h) {
+void GL_staticCall::reshape(int w, int h) {
 }
 
-void GL_callbacks::keypress(unsigned char key, int x, int y) {
+void GL_staticCall::keypress(unsigned char key, int x, int y) {
   homerEmulator->keyEmulator.gl_key_press(key, x, y);
 }
-void GL_callbacks::keyrelease(unsigned char key, int x, int y) {
+void GL_staticCall::keyrelease(unsigned char key, int x, int y) {
   homerEmulator->keyEmulator.gl_key_release(key, x, y);
 }
 
-void GL_callbacks::display(void) {
-  GLUTUtilities::LoadBMPTexture(
-      "/wks/workspace/sandbox/GLUT-examples/resource/fpanel800x129x24b.bmp",
-      800, 129);
+void GL_staticCall::display(void) {
 
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glEnable (GL_TEXTURE_2D);
@@ -105,17 +75,17 @@ void GL_callbacks::display(void) {
 
 }
 
-void GL_callbacks::timer(int value) {
+void GL_staticCall::timer(int value) {
   glutPostRedisplay();
-  glutTimerFunc(homerEmulator->getRefreshRate(), GL_callbacks::timer, value);
+  glutTimerFunc(homerEmulator->getRefreshRate(), GL_staticCall::timer, value);
 }
 
 HomerEmulator::HomerEmulator(WinstarEmulator * emulatedDisplay) {
   myargc = 1;
   myargv[0] = strdup("Homer Emulator");
   this->refreshRate = HEMUL_REFRESHRATE;
-  callbacks.setHomerEmulator(this);
-  callbacks.setDisplayEmulator(emulatedDisplay);
+  GL_calls.setHomerEmulator(this);
+  GL_calls.setDisplayEmulator(emulatedDisplay);
 }
 
 int HomerEmulator::start() {
@@ -132,12 +102,17 @@ int HomerEmulator::start() {
   glDepthFunc (GL_LEQUAL);
   glShadeModel (GL_SMOOTH);
   glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
-  glutReshapeFunc(GL_callbacks::reshape);
+
+  GLUTUtilities::LoadBMPTexture(
+      "/wks/workspace/sandbox/GLUT-examples/resource/fpanel800x129x24b.bmp",
+      800, 129);
+
+  glutReshapeFunc(GL_staticCall::reshape);
   glutSetKeyRepeat (GLUT_KEY_REPEAT_OFF);
-  glutKeyboardFunc(GL_callbacks::keypress);
-  glutKeyboardUpFunc(GL_callbacks::keyrelease);
-  glutDisplayFunc(GL_callbacks::display);
-  glutTimerFunc(0, GL_callbacks::timer, 0);
+  glutKeyboardFunc(GL_staticCall::keypress);
+  glutKeyboardUpFunc(GL_staticCall::keyrelease);
+  glutDisplayFunc(GL_staticCall::display);
+  glutTimerFunc(0, GL_staticCall::timer, 0);
 
   return 0;
 }

@@ -18,6 +18,7 @@
 #include <iostream>
 #include <fstream>
 #include <HomerMenu.hpp>
+#include <iomanip>
 
 #define BMP085_TEMPERATURE "/class/i2c-adapter/i2c-0/0-0077/temp0_input"
 #define BMP085_PRESSURE "/class/i2c-adapter/i2c-0/0-0077/pressure0_input"
@@ -81,7 +82,8 @@ class PressureDevice {
    */
 
   double getPressure() const {
-    return pressure / 100 + localAltitude / 100.0 * 12.0;
+    double ret = pressure / 100 + localAltitude / 100.0 * 12.0;
+    return ret;
   }
   void update() {
     readPressure();
@@ -178,7 +180,7 @@ class TemperatureSensor : public Sensor {
   }
   const string getValue() const {
     ostringstream ostr;
-    ostr << device.getTemperature() << " °C";
+    ostr << std::setprecision(2) << device.getTemperature() << " C";
     return ostr.str();
   }
   const string getLabel() const {
@@ -210,7 +212,7 @@ class PressureSensor : public Sensor {
   }
   const string getValue() const {
     ostringstream ostr;
-    ostr << device.getPressure() << " mBar";
+    ostr << std::setprecision(2) << device.getPressure() << " mBar";
     return ostr.str();
   }
 

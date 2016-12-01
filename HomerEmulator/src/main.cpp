@@ -9,6 +9,7 @@
  * FIXME: Sensor and menu refactoring
  * FIXME: Decorator pattern for Menu ?
  * FIXME: Factory pattern for creation ?
+ * FiXME: getter with const getXxxx const
  *
  *
  */
