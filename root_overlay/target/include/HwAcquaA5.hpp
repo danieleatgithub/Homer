@@ -25,72 +25,110 @@ using namespace obs;
 namespace homerio {
 
 class I2cBusAcquaA5 : public I2cBus {
-private:
-	unsigned int active_device;
-	map<int,string> filedescriptors;
-    // Observers
-	using WriteObserver = Subject<void (int filedes, const void *buffer, size_t size)>;
+ private:
+  unsigned int active_device;
+  map<int, string> filedescriptors;
+  // Observers
+  using WriteObserver = Subject<void (int filedes, const void *buffer, size_t size)>;
 
-	map<unsigned int,WriteObserver> write_obs_map; // Write Observer Map by device address
+  map<unsigned int, WriteObserver> write_obs_map;  // Write Observer Map by device address
 
-public:
+ public:
 
-	I2cBusAcquaA5(const char *bus) : I2cBus(bus) {
-		active_device = 0;
-	};
-	 ~I2cBusAcquaA5() {};
+  I2cBusAcquaA5(const char *bus)
+      : I2cBus(bus) {
+    active_device = 0;
+  }
+  ;
+  ~I2cBusAcquaA5() {
+  }
+  ;
 
-	int open(const char *file, int flag);
-	int read(int fd, void *buf, size_t nbyte);
-	int write(int filedes, const void *buffer, size_t size);
-	int ioctl(int fd, unsigned long int __request, ...);
-	__off_t lseek (int fd, __off_t __offset, int __whence);
-	int close(int fd);
-
-};
-
-class GpioPortAcquaA5 : public GpioPort  {
-private:
-
-public:
-    GpioPortAcquaA5(const char *name) : GpioPort(name) {};
-	 ~GpioPortAcquaA5() {};
-
-		int open(const char *file, int flag);
-		int read(int fd, void *buf, size_t nbyte);
-		int write(int filedes, const void *buffer, size_t size);
-		int ioctl(int fd, unsigned long int __request, ...);
-		__off_t lseek (int fd, __off_t __offset, int __whence);
-		int close(int fd);
+  int open(const char *file, int flag);
+  int read(int fd, void *buf, size_t nbyte);
+  int write(int filedes, const void *buffer, size_t size);
+  int ioctl(int fd, unsigned long int __request, ...);
+  __off_t lseek(int fd, __off_t      __offset, int __whence);
+  int close(int fd);
 
 };
 
+class SysFsAcquaA5 : public SysFs {
+ private:
 
+ public:
+
+  SysFsAcquaA5(const char *root)
+      : SysFs(root) {
+  }
+  ;
+  ~SysFsAcquaA5() {
+  }
+  ;
+
+  int open(const char *file, int flag);
+  int read(int fd, void *buf, size_t nbyte);
+  int write(int filedes, const void *buffer, size_t size);
+  int ioctl(int fd, unsigned long int __request, ...);
+  __off_t lseek(int fd, __off_t      __offset, int __whence);
+  int close(int fd);
+
+};
+
+class GpioPortAcquaA5 : public GpioPort {
+ private:
+
+ public:
+  GpioPortAcquaA5(const char *name)
+      : GpioPort(name) {
+  }
+  ;
+  ~GpioPortAcquaA5() {
+  }
+  ;
+
+  int open(const char *file, int flag);
+  int read(int fd, void *buf, size_t nbyte);
+  int write(int filedes, const void *buffer, size_t size);
+  int ioctl(int fd, unsigned long int __request, ...);
+  __off_t lseek(int fd, __off_t      __offset, int __whence);
+  int close(int fd);
+
+};
 
 class BoardAcquaA5 : public Board {
-	I2cBusAcquaA5    i2c_0;
-	GpioPortAcquaA5  lcd_backlight;
-	GpioPortAcquaA5  lcd_reset;
+  I2cBusAcquaA5 i2c_0;
+  GpioPortAcquaA5 lcd_backlight;
+  GpioPortAcquaA5 lcd_reset;
+  SysFsAcquaA5 sysFs;
 
-public:
-	BoardAcquaA5() : Board(),
-		i2c_0(I2C_BUS), lcd_backlight(LCD_BACKLIGHT_PIN), lcd_reset(LCD_RESET_PIN)  {
+ public:
+  BoardAcquaA5()
+      : Board(),
+        i2c_0(I2C_BUS),
+        lcd_backlight(LCD_BACKLIGHT_PIN),
+        lcd_reset(LCD_RESET_PIN),
+        sysFs(SYSFS_ROOT) {
 
-	};
-	~BoardAcquaA5() {
-	}
-	I2cBusAcquaA5& getI2c0() {
-		return i2c_0;
-	}
+  }
+  ;
+  ~BoardAcquaA5() {
+  }
+  I2cBusAcquaA5& getI2c0() {
+    return i2c_0;
+  }
 
-	GpioPortAcquaA5& getLcdBacklight() {
-		return lcd_backlight;
-	}
+  GpioPortAcquaA5& getLcdBacklight() {
+    return lcd_backlight;
+  }
 
-	GpioPortAcquaA5& getLcdReset() {
-		return lcd_reset;
-	}
+  GpioPortAcquaA5& getLcdReset() {
+    return lcd_reset;
+  }
 
+  SysFsAcquaA5& getSysFs() {
+    return sysFs;
+  }
 };
 
 }

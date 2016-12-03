@@ -1,6 +1,6 @@
 #!/bin/bash
-I2CGET=/usr/bin/i2cget
-I2CDUMP=/usr/bin/i2cdump
+I2CGET=/usr/sbin/i2cget
+I2CDUMP=/usr/sbin/i2cdump
 X=$($I2CDUMP -y -r 0x80-0x8f 3 0x58 2>&1 | tail -n 1)
 
 #80: 0a 70 08 00 64 10 08 41 70 76 a0 00 a0 00 01 00 ?p?.d??Apv?.?.?.

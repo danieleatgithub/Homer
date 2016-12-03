@@ -1,6 +1,6 @@
 #!/bin/bash
-I2CGET=/usr/bin/i2cget
-I2CDUMP=/usr/bin/i2cdump
+I2CGET=/usr/sbin/i2cget
+I2CDUMP=/usr/sbin/i2cdump
 X=$($I2CDUMP -y -r 0x9a-0x9f 3 0x58 2>&1 | tail -n 1 )
 A=${X:30:24}
 B=$(echo $A | tr ' ' ':')
