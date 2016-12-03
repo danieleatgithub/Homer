@@ -21,24 +21,24 @@
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" description="" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924" name="Configuration_with_Autotools Buildroot ARM" parent="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default">
 					<folderInfo id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924." name="/" resourcePath="">
-						<toolChain id="org.buildroot.wks.buildroot-2016.05.output..autotools.toolchain.base.934049637" name="Autotools Buildroot ARM (/wks/buildroot-2016.05/output)" superClass="org.buildroot.wks.buildroot-2016.05.output..autotools.toolchain.base">
-							<option id="org.buildroot.wks.buildroot-2016.05.output..autotools.toolchain.base.option.path.43972070" name="Path" superClass="org.buildroot.wks.buildroot-2016.05.output..autotools.toolchain.base.option.path"/>
-							<option id="org.buildroot.wks.buildroot-2016.05.output..autotools.toolchain.base.option.prefix.609625225" name="Prefix" superClass="org.buildroot.wks.buildroot-2016.05.output..autotools.toolchain.base.option.prefix"/>
-							<targetPlatform id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform.229583993" isAbstract="false" name="GNU Autotools Target Platform" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform"/>
-							<builder id="org.buildroot.wks.buildroot-2016.05.output.builder.1071046954" keepEnvironmentInBuildfile="false" name="Buildroot ARM builder (/wks/buildroot-2016.05/output)" superClass="org.buildroot.wks.buildroot-2016.05.output.builder"/>
-							<tool id="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure.227818432" name="configure" superClass="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure">
-								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.260236827" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924" valueType="string"/>
+						<toolChain id="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base.1728649084" name="Autotools Buildroot ARM (/wks/buildroot-2016.11/output)" superClass="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base">
+							<option id="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base.option.path.1889508747" name="Path" superClass="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base.option.path"/>
+							<option id="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base.option.prefix.495989075" name="Prefix" superClass="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base.option.prefix"/>
+							<targetPlatform id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform.2104030810" isAbstract="false" name="GNU Autotools Target Platform" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform"/>
+							<builder id="org.buildroot.wks.buildroot-2016.11.output.builder.1080218155" keepEnvironmentInBuildfile="false" name="Buildroot ARM builder (/wks/buildroot-2016.11/output)" superClass="org.buildroot.wks.buildroot-2016.11.output.builder"/>
+							<tool id="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure.1437054248" name="configure" superClass="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure">
+								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.54606953" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924" valueType="string"/>
 							</tool>
-							<tool id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen.1230147814" name="autogen.sh" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen"/>
-							<tool id="org.buildroot.wks.buildroot-2016.05.output.autotools.c.compiler.1514122561" name="Autotools Buildroot ARM C Compiler (/wks/buildroot-2016.05/output)" superClass="org.buildroot.wks.buildroot-2016.05.output.autotools.c.compiler">
-								<inputType id="org.buildroot.wks.buildroot-2016.05.output.c_compiler.input.415107831" superClass="org.buildroot.wks.buildroot-2016.05.output.c_compiler.input"/>
+							<tool id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen.1590674669" name="autogen.sh" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen"/>
+							<tool id="org.buildroot.wks.buildroot-2016.11.output.autotools.c.compiler.1886199495" name="Autotools Buildroot ARM C Compiler (/wks/buildroot-2016.11/output)" superClass="org.buildroot.wks.buildroot-2016.11.output.autotools.c.compiler">
+								<inputType id="org.buildroot.wks.buildroot-2016.11.output.c_compiler.input.1725800262" superClass="org.buildroot.wks.buildroot-2016.11.output.c_compiler.input"/>
 							</tool>
-							<tool id="org.buildroot.wks.buildroot-2016.05.output.autotools.cc.compiler.1534290810" name="Autotools Buildroot ARM C++ Compiler (/wks/buildroot-2016.05/output)" superClass="org.buildroot.wks.buildroot-2016.05.output.autotools.cc.compiler">
-								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1380828356" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
-								<inputType id="org.buildroot.wks.buildroot-2016.05.output.cc_compiler.input.920722959" superClass="org.buildroot.wks.buildroot-2016.05.output.cc_compiler.input"/>
+							<tool id="org.buildroot.wks.buildroot-2016.11.output.autotools.cc.compiler.45730999" name="Autotools Buildroot ARM C++ Compiler (/wks/buildroot-2016.11/output)" superClass="org.buildroot.wks.buildroot-2016.11.output.autotools.cc.compiler">
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.531111805" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+								<inputType id="org.buildroot.wks.buildroot-2016.11.output.cc_compiler.input.1637234805" superClass="org.buildroot.wks.buildroot-2016.11.output.cc_compiler.input"/>
 							</tool>
-							<tool id="org.buildroot.wks.buildroot-2016.05.output.autotools.tool.configure.483669890" name="configure" superClass="org.buildroot.wks.buildroot-2016.05.output.autotools.tool.configure">
-								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.655931818" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924" valueType="string"/>
+							<tool id="org.buildroot.wks.buildroot-2016.11.output.autotools.tool.configure.1577790917" name="configure" superClass="org.buildroot.wks.buildroot-2016.11.output.autotools.tool.configure">
+								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.1819168360" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924" valueType="string"/>
 							</tool>
 						</toolChain>
 					</folderInfo>
@@ -143,48 +143,6 @@
 		<configuration configurationName="Local homerd"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.352886473;cdt.managedbuild.tool.gnu.cpp.compiler.input.746087443">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileC"/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.1051227896;cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.1051227896.;cdt.managedbuild.tool.gnu.cpp.compiler.base.768181042;cdt.managedbuild.tool.gnu.cpp.compiler.input.79596821">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.892434267;cdt.managedbuild.tool.gnu.cpp.compiler.input.202236487">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileC"/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.1882377809;cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.;cdt.managedbuild.tool.gnu.cpp.compiler.base.255293648;cdt.managedbuild.tool.gnu.cpp.compiler.input.484921921">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2016.05.output.autotools.cc.compiler.1534290810;cdt.managedbuild.tool.gnu.cpp.compiler.input.1380828356">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2016.05.output.ARM_ManagedMakePerProjectProfileC"/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2016.05.output.autotools.c.compiler.1514122561;org.buildroot.wks.buildroot-2016.05.output.c_compiler.input.415107831">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2016.05.output.ARM_ManagedMakePerProjectProfileC"/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler.732873608;org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input.760752831">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileC"/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.1051227896;cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.1051227896.;cdt.managedbuild.tool.gnu.c.compiler.base.1361402147;cdt.managedbuild.tool.gnu.c.compiler.input.2104255054">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.1882377809;cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.;cdt.managedbuild.tool.gnu.c.compiler.base.939344812;cdt.managedbuild.tool.gnu.c.compiler.input.2053493375">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2016.05.output.autotools.cc.compiler.1534290810;org.buildroot.wks.buildroot-2016.05.output.cc_compiler.input.920722959">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2016.05.output.ARM_ManagedMakePerProjectProfileCPP"/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.352886473;org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input.1618470790">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileCPP"/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler.834712627;org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input.588770453">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileC"/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.892434267;org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input.75704251">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileCPP"/>
-		</scannerConfigBuildInfo>
-	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
 		<buildTargets>
 			<target name="all" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
@@ -572,5 +530,56 @@
 				<runAllBuilders>false</runAllBuilders>
 			</target>
 		</buildTargets>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.352886473;cdt.managedbuild.tool.gnu.cpp.compiler.input.746087443">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.1051227896;cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.1051227896.;cdt.managedbuild.tool.gnu.cpp.compiler.base.768181042;cdt.managedbuild.tool.gnu.cpp.compiler.input.79596821">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.892434267;cdt.managedbuild.tool.gnu.cpp.compiler.input.202236487">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.1882377809;cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.;cdt.managedbuild.tool.gnu.cpp.compiler.base.255293648;cdt.managedbuild.tool.gnu.cpp.compiler.input.484921921">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2016.05.output.autotools.cc.compiler.1534290810;cdt.managedbuild.tool.gnu.cpp.compiler.input.1380828356">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2016.05.output.ARM_ManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2016.05.output.autotools.c.compiler.1514122561;org.buildroot.wks.buildroot-2016.05.output.c_compiler.input.415107831">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2016.05.output.ARM_ManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler.732873608;org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input.760752831">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.1051227896;cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.1051227896.;cdt.managedbuild.tool.gnu.c.compiler.base.1361402147;cdt.managedbuild.tool.gnu.c.compiler.input.2104255054">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2016.11.output.autotools.cc.compiler.45730999;org.buildroot.wks.buildroot-2016.11.output.cc_compiler.input.1637234805">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2016.11.output.ARM_ManagedMakePerProjectProfileCPP"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2016.11.output.autotools.cc.compiler.45730999;cdt.managedbuild.tool.gnu.cpp.compiler.input.531111805">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2016.11.output.ARM_ManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.1882377809;cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.;cdt.managedbuild.tool.gnu.c.compiler.base.939344812;cdt.managedbuild.tool.gnu.c.compiler.input.2053493375">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2016.05.output.autotools.cc.compiler.1534290810;org.buildroot.wks.buildroot-2016.05.output.cc_compiler.input.920722959">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2016.05.output.ARM_ManagedMakePerProjectProfileCPP"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.352886473;org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input.1618470790">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileCPP"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.c.compiler.834712627;org.buildroot.wks.buildroot-2015.11.1.output.c_compiler.input.588770453">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2015.11.1.output.autotools.cc.compiler.892434267;org.buildroot.wks.buildroot-2015.11.1.output.cc_compiler.input.75704251">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2015.11.1.output.ARM_ManagedMakePerProjectProfileCPP"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924;org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924.;org.buildroot.wks.buildroot-2016.11.output.autotools.c.compiler.1886199495;org.buildroot.wks.buildroot-2016.11.output.c_compiler.input.1725800262">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.buildroot.wks.buildroot-2016.11.output.ARM_ManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
 	</storageModule>
 </cproject>
