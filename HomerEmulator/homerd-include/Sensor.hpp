@@ -53,16 +53,16 @@ class TemperatureDevice {
   }
 };
 
-class PressureDevice {
+class BarometricDevice {
  public:
   double pressure;
   double localAltitude;
 
-  PressureDevice() {
+  BarometricDevice() {
     pressure = 0;
     localAltitude = 0;
   }
-  virtual ~PressureDevice() {
+  virtual ~BarometricDevice() {
   }
   ;
   virtual void readPressure() = 0;
@@ -110,7 +110,7 @@ class PressureDevice {
   }
 };
 
-class Bmp085Device : public TemperatureDevice, public PressureDevice {
+class Bmp085Device : public TemperatureDevice, public BarometricDevice {
  private:
   string sysPath;
   SysFs& sysFs;
@@ -212,18 +212,18 @@ class TemperatureSensor : public Sensor {
 
 };
 
-class PressureSensor : public Sensor {
+class BarometricSensor : public Sensor {
  public:
-  PressureSensor(PressureDevice& _device, string _label)
+  BarometricSensor(BarometricDevice& _device, string _label)
       : Sensor(),
         device(_device),
         label(_label) {
 
   }
-  ~PressureSensor() {
+  ~BarometricSensor() {
   }
   ;
-  PressureDevice& getDevice() const {
+  BarometricDevice& getDevice() const {
     return device;
   }
 
@@ -248,7 +248,7 @@ class PressureSensor : public Sensor {
     return label;
   }
  private:
-  PressureDevice& device;
+  BarometricDevice& device;
   string label;
 };
 

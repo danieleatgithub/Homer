@@ -7,12 +7,12 @@
 
 #ifndef HOMEREMULATOR_HPP_
 #define HOMEREMULATOR_HPP_
+#include <EmulatedHw.hpp>
 #include <GL/glut.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 #include <KeyEmulator.hpp>
-#include <HwEmulated.hpp>
 #include <Scheduler.hpp>
 #include <WinstarEmulator.hpp>
 #include "GLUTUtilities.h"

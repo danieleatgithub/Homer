@@ -5,7 +5,6 @@
  *      Author: daniele
  */
 
-#include <HwEmulated.hpp>
 #include <Winstar.h>
 #include <linux/i2c-dev.h>
 #include <stdarg.h>
@@ -17,6 +16,7 @@
 #include <stdio.h>
 #include <IDGenerator.h>
 #include <EmuGlobals.h>
+#include <EmulatedHw.hpp>
 #include <log4cplus/logger.h>
 #include <log4cplus/loggingmacros.h>
 #include <log4cplus/loglevel.h>

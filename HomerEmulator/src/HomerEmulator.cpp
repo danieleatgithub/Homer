@@ -9,12 +9,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include <HomerEmulator.hpp>
 #include <memory>
-#include <HwEmulated.hpp>
 #include <log4cplus/logger.h>
 #include <log4cplus/loggingmacros.h>
 #include <log4cplus/loglevel.h>
+#include <HomerEmulator.hpp>
+#include <EmulatedHw.hpp>
 
 using namespace std;
 using namespace homerio;

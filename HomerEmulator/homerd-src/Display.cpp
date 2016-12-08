@@ -52,7 +52,7 @@ Display::Display(KeyPanel &kpnl, Scheduler &shd,I2cBus& bus, GpioPort& rst, Gpio
     backlight_pin->set_direction(homerio::OUT);
     backlight_pin->pin_open();
 	scheduler.ScheduleAfter(timedLightOff);
-	keyPanel.key_attach(keyPanel_reg, [&] ( KeyButton& k ) {
+	keyPanel.keyAttach(keyPanel_reg, [&] ( KeyButton& k ) {
 		if(!is_backlight_on()) {
 			 set_backlight(true);
 		}
