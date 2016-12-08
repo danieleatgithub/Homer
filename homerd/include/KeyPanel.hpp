@@ -24,6 +24,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <pthread.h>
+#include <map>
 
 using namespace obs;
 using namespace std;
@@ -42,6 +43,12 @@ enum Button_e {
   BUTTON_RIGHT = KEY_RIGHT,  //!< BUTTON_RIGHT
   BUTTON_NULL = KEY_RESERVED  //!< no button
 };
+
+static std::map<__u16, string> keycode2string = {
+    { BUTTON_ENTER, "BUTTON_ENTER" }, { BUTTON_UP, "BUTTON_UP" }, { BUTTON_DOWN,
+        "BUTTON_DOWN" }, { BUTTON_LEFT, "BUTTON_LEFT" }, { BUTTON_RIGHT,
+        "BUTTON_RIGHT" }, { BUTTON_NULL, "BUTTON_NULL" } };
+;
 
 class KeyButton {
  private:
@@ -105,9 +112,10 @@ class KeyButton {
     long_threshold = longThreshold;
   }
   operator std::string() const {
-    // TODO: Add press_time
-    return (string("Key=") + std::to_string(key.code)
-        + string(pressed ? "PRESSED" : "RELEASED") + string("isLong=")
+    return (string("Key=") + std::to_string(key.code) + string(" (")
+        + keycode2string[key.code]
+        + string(pressed ? ") PRESSED ms=" : ") RELEASED ms=")
+        + std::to_string(this->press_time.count()) + string(" isLong=")
         + string(this->press_time >= long_threshold ? "Y" : "N"));
   }
 
@@ -120,7 +128,7 @@ class KeyPanel {
   // Observers
   obs::Subject<void(KeyButton& k)> key_press_obs;  // Triggered on key press
   obs::Subject<void(KeyButton& k)> key_release_obs;  // Triggered on key released
-  obs::Subject<void(KeyButton& k)> key_long_obs;	// Triggered on long time duration
+  obs::Subject<void(KeyButton& k)> key_long_obs;  // Triggered on long time duration
 
   struct timeval tout;
   string event_dev;
@@ -163,8 +171,10 @@ class KeyPanel {
         case EV_SYN:
           this->key.validate_event(ev);
           key_counter++;
-          //TODO: overload operator << for keybutton
-          LOG4CPLUS_DEBUG(logdev, "EV_SYN " << string(this->key));
+          LOG4CPLUS_DEBUG(
+              logdev,
+              "EV_SYN (" << std::to_string(key_counter) << string(") ")
+                  << string(this->key));
           if (this->key.isPressEvent()) {
             key_press_obs(this->key);
           } else {

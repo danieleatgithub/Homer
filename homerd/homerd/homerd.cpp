@@ -215,7 +215,6 @@ int main(int argc, char *argv[]) {
   shared_ptr < MenuActionVisitor > dw(new DisplayVisitor(*display));
 
   display->reset();
-  keyPanel->start();
 
   bmp085Device = new Bmp085Device(*acquaA5);
   tSens = new TemperatureSensor(*bmp085Device, string("Temperature"));
