@@ -18,7 +18,6 @@
 #include <iostream>
 #include <fstream>
 #include <HomerMenu.hpp>
-#include <iomanip>
 
 #define BMP085_TEMPERATURE "/class/i2c-adapter/i2c-0/0-0077/temp0_input"
 #define BMP085_PRESSURE "/class/i2c-adapter/i2c-0/0-0077/pressure0_input"
@@ -79,11 +78,32 @@ class PressureDevice {
    P=$(cat $DEV/pressure0_input)
    PRESSURE=$(echo "scale=2;$P/100+$LOCALPA" | bc)
    echo "Temp=$TEMP Pressure=$PRESSURE"
+
+   [root@homer ~]# bash -x ./bmp085.sh
+   + modprobe bmp085_i2c
+   + ALTITUDE=354
+   + DEV=/sys/class/i2c-adapter/i2c-0/0-0077
+   ++ cat /sys/class/i2c-adapter/i2c-0/0-0077/temp0_input
+   + T=205
+   ++ bc
+   ++ echo 'scale=2;205/10'
+   + TEMP=20.50
+   ++ echo 'scale=2;354/100*12'
+   ++ bc
+   + LOCALPA=42.48
+   ++ cat /sys/class/i2c-adapter/i2c-0/0-0077/pressure0_input
+   + P=99614
+   ++ bc
+   ++ echo 'scale=2;99614/100+42.48'
+   + PRESSURE=1038.628
+   + echo 'Temp=20.50 Pressure=1038.62'
+   Temp=20.50 Pressure=1038.62
+
    */
 
   double getPressure() const {
-    double ret = pressure / 100 + localAltitude / 100.0 * 12.0;
-    return ret;
+    // Add 12 mBar each 100mt of altitude
+    return pressure + (localAltitude / 100.0) * 12.0;
   }
   void update() {
     readPressure();
@@ -105,7 +125,7 @@ class Bmp085Device : public TemperatureDevice, public PressureDevice {
   virtual ~Bmp085Device() {
 
   }
-
+// FIXME: test file not found
   void readTemperature() {
     int nread;
     Logger logdev = Logger::getInstance(LOGDEVICE);
@@ -123,7 +143,7 @@ class Bmp085Device : public TemperatureDevice, public PressureDevice {
     nread = sysFs.readBuffer(BMP085_PRESSURE, pressureBuffer,
                              (sizeof(pressureBuffer) - 1));
 
-    pressure = atoi(pressureBuffer) / 100;
+    pressure = atol(pressureBuffer) / 100.0;
     LOG4CPLUS_TRACE(
         logdev,
         "Read " << BMP085_PRESSURE << " string(" << nread << ") ["
@@ -180,7 +200,7 @@ class TemperatureSensor : public Sensor {
   }
   const string getValue() const {
     ostringstream ostr;
-    ostr << std::setprecision(2) << device.getTemperature() << " C";
+    ostr << device.getTemperature() << " C";
     return ostr.str();
   }
   const string getLabel() const {
@@ -212,10 +232,15 @@ class PressureSensor : public Sensor {
   }
   const string getValue() const {
     ostringstream ostr;
-    ostr << std::setprecision(2) << device.getPressure() << " mBar";
+    ostr << device.getPressure() << " mBar";
     return ostr.str();
   }
-
+  const double getAltitudeCalibration() const {
+    return (device.getAltituteCalibration());
+  }
+  void setAltituteCalibration(double localAltitude) {
+    device.setAltituteCalibration(localAltitude);
+  }
   void update() {
     device.update();
   }

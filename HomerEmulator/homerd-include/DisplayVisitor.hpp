@@ -12,10 +12,6 @@
 #include <MenuVisitors.hpp>
 #include <Display.h>
 
-#define TRACE_TMP do { \
-	cout << __PRETTY_FUNCTION__ << l.getElement().getLabel().c_str() << ":" << l.getElement().getValue().c_str() << endl; \
-} while(0)
-
 namespace homerio {
 
 class DisplayVisitor : public MenuActionVisitor {
@@ -33,8 +29,6 @@ class DisplayVisitor : public MenuActionVisitor {
     dp.dpy_puts(l.getElement().getLabel().c_str());
     dp.line2_home();
     dp.dpy_puts(l.getElement().getValue().c_str());
-    TRACE_TMP
-    ;
   }
   virtual void leave(MenuLeaf& l, KeyButton& k) {
     dp.clear();
@@ -45,8 +39,6 @@ class DisplayVisitor : public MenuActionVisitor {
     dp.dpy_puts(l.getElement().getLabel().c_str());
     dp.line2_home();
     dp.dpy_puts(l.getElement().getValue().c_str());
-    TRACE_TMP
-    ;
   }
 
   virtual void enter(SubMenu& l, KeyButton& k) {
@@ -57,8 +49,7 @@ class DisplayVisitor : public MenuActionVisitor {
     dp.clear();
   }
   virtual void click(SubMenu& l, KeyButton& k) {
-    TRACE_TMP
-    ;
+
   }
 
 };

@@ -15,6 +15,14 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include <errno.h>
+#include <string>
+#include <log4cplus/logger.h>
+#include <log4cplus/loggingmacros.h>
+#include <log4cplus/loglevel.h>
+#include "homerd.h"
+
+using namespace std;
+using namespace log4cplus;
 
 namespace homerio {
 
@@ -37,7 +45,7 @@ class I2cBus {
   virtual int write(int filedes, const void *buffer, size_t size) = 0;
   virtual int close(int fd) = 0;
   virtual int ioctl(int fd, unsigned long int __request, ...) = 0;
-  virtual __off_t lseek(int fd, __off_t                    __offset, int __whence) = 0;
+  virtual __off_t lseek(int fd, __off_t                                         __offset, int __whence) = 0;
 
   const char* getBus() const {
     return bus;
@@ -63,7 +71,7 @@ class SysFs {
   virtual int write(int filedes, const void *buffer, size_t size) = 0;
   virtual int close(int fd) = 0;
   virtual int ioctl(int fd, unsigned long int __request, ...) = 0;
-  virtual __off_t lseek(int fd, __off_t                    __offset, int __whence) = 0;
+  virtual __off_t lseek(int fd, __off_t                                         __offset, int __whence) = 0;
   const char* getRoot() {
     return root;
   }
@@ -71,17 +79,27 @@ class SysFs {
   int readBuffer(const char *fn, char *buf, int nbytes) {
     int fd;
     int nread, ret;
-    fd = this->open(fn, O_RDONLY);
+    string fqfn(string(root) + string(fn));
+
+    Logger logdev = Logger::getInstance(LOGDEVICE);
+
+    fd = this->open(fqfn.c_str(), O_RDONLY);
     if (fd < 0) {
+      LOG4CPLUS_ERROR(logdev,
+                      "open error " << fqfn << " errno:" << strerror(errno));
       return (fd);
     }
     nread = this->read(fd, buf, nbytes);
     if (nread < 0) {
+      LOG4CPLUS_ERROR(logdev,
+                      "read error " << fqfn << " errno:" << strerror(errno));
       return (nread);
     }
     buf[nread] = '\0';
     ret = this->close(fd);
     if (ret < 0) {
+      LOG4CPLUS_ERROR(logdev,
+                      "close error " << fqfn << " errno:" << strerror(errno));
       return (ret);
     } else {
       return (nread);
@@ -107,7 +125,7 @@ class GpioPort {
   virtual int write(int filedes, const void *buffer, size_t size) = 0;
   virtual int close(int fd) = 0;
   virtual int ioctl(int fd, unsigned long int __request, ...) = 0;
-  virtual __off_t lseek(int fd, __off_t                    __offset, int __whence) = 0;
+  virtual __off_t lseek(int fd, __off_t                                         __offset, int __whence) = 0;
   const char* getName() const {
     return name;
   }

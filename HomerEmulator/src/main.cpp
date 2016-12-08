@@ -77,19 +77,19 @@ int main(int argc, char** argv) {
   emulator = new HomerEmulator(display);
   shared_ptr < MenuActionVisitor > dw(new DisplayVisitor(*display));
   Registration preg, treg;
-  static int vt = -84;
-  static int vp = 42356;
   acquaA5->getEmulatedSysFs().reg_read(
-      treg, string("/class/i2c-adapter/i2c-0/0-([0-9]+)/temp0_input"),
+      treg, string("/sys/class/i2c-adapter/i2c-0/0-([0-9]+)/temp0_input"),
       [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
+        static int vt = 200;
         vt+=5;
         sprintf((char *)buffer,"%d",vt);
         *ret = (int)strlen((char *)buffer);
       });
 
   acquaA5->getEmulatedSysFs().reg_read(
-      preg, string("/class/i2c-adapter/i2c-0/0-([0-9]+)/pressure0_input"),
+      preg, string("/sys/class/i2c-adapter/i2c-0/0-([0-9]+)/pressure0_input"),
       [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
+        static int vp = 99614-50;
         vp+=50;
         sprintf((char *)buffer,"%d",vp);
         *ret = (int)strlen((char *)buffer);
@@ -98,14 +98,16 @@ int main(int argc, char** argv) {
   bmp085Device = new Bmp085Device(*acquaA5);
   tSens = new TemperatureSensor(*bmp085Device, string("Temperature"));
   pSens = new PressureSensor(*bmp085Device, string("Pressure"));
-  tSens->update();
-  pSens->update();
+  pSens->setAltituteCalibration(354.0);
 
   // life spark ignition
   emulator->start();
   display->reset();
   keyPanel->set_event_filename(emulator->getKeyEventFilename().c_str());
   keyPanel->start();
+
+  tSens->update();
+  pSens->update();
 
   // Populating universe
   menu = new HomerMenu(*keyPanel, *scheduler, *tSens, *pSens);
