@@ -8,7 +8,7 @@
 
 MACADDRESS=$(/usr/local/bin/get_mac)
 if [[ $? -ne 0 ]];then
-	logger "system_init failed reading mac"
+	logger "firststart failed reading mac"
 	exit 1
 fi
 INTERFACES="/etc/network/interfaces"
@@ -38,4 +38,4 @@ fi
 
 
 # Remove first start job
-rm /etc/init.d/S00systeminit
+rm /etc/init.d/S00firststart
