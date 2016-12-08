@@ -31,8 +31,8 @@ class HomerMenu {
   KeyPanel &keyPanel;
   Scheduler& scheduler;
   TemperatureSensor& tsens;
-  PressureSensor& psens;
-  Registration rkeyPanel, rWrDisplay;
+  BarometricSensor& psens;
+  obs::Registration rkeyPanel, rWrDisplay;
   Sysinfo sysinfo = Sysinfo::get_instance();
 
   KeyButton nokey;
@@ -55,28 +55,28 @@ class HomerMenu {
   shared_ptr<MenuLeaf> pressure;
   shared_ptr<SubMenu> alarms = std::make_shared < SubMenu > (subAlarm);
 
-  MoveVisitor mv;
+  MenuMoveVisitor mv;
   vector<shared_ptr<MenuActionVisitor>> visitors;
 
   void leave(KeyButton& k) {
     for (auto v : visitors) {
-      active_element->exe_leave(*v, k);
+      active_element->execLeave(*v, k);
     }
   }
   void enter(KeyButton& k) {
     for (auto v : visitors) {
-      active_element->exe_enter(*v, k);
+      active_element->execEnter(*v, k);
     }
   }
   void click(KeyButton& k) {
     for (auto v : visitors) {
-      active_element->exe_click(*v, k);
+      active_element->execClick(*v, k);
     }
   }
 
  public:
   HomerMenu(KeyPanel& kpl, Scheduler& sch, TemperatureSensor& _tsens,
-            PressureSensor& _psens)
+            BarometricSensor& _psens)
       : keyPanel(kpl),
         scheduler(sch),
         tsens(_tsens),
@@ -96,7 +96,7 @@ class HomerMenu {
     root->add(system);
 
     root->home();
-    active_element = root->get_active_element();
+    active_element = root->getActiveElement();
 
     // Timer on no key press reset menu to Home
     timedHome.setCallback([&] () {
@@ -114,16 +114,16 @@ class HomerMenu {
     });
 
     // Attach key handler
-    keyPanel.key_attach(rkeyPanel, [&] ( KeyButton& k ) {
+    keyPanel.keyAttach(rkeyPanel, [&] ( KeyButton& k ) {
       shared_ptr<MenuComponent> temp;
       scheduler.ScheduleCancel(timedHome);
-      if(k.get_key() == BUTTON_ENTER) {
+      if(k.getKey() == BUTTON_ENTER) {
         click(k);
       } else {
         leave(k);
         mutex.lock();
         try {
-          active_element = active_element->exe_move(mv,k);
+          active_element = active_element->execMove(mv,k);
         } catch (MenuEmptyException& e) {
           LOG4CPLUS_WARN(loghomer, "timedHome MenuEmptyException " << e.what());
         } catch (MenuException& e) {

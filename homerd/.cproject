@@ -5,10 +5,7 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924" moduleId="org.eclipse.cdt.core.settings" name="Configuration_with_Autotools Buildroot ARM">
 				<externalSettings/>
 				<extensions>
-					<extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.MachO64" point="org.eclipse.cdt.core.BinaryParser"/>
@@ -19,7 +16,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" description="" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924" name="Configuration_with_Autotools Buildroot ARM" parent="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" description="" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924" name="Configuration_with_Autotools Buildroot ARM">
 					<folderInfo id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924." name="/" resourcePath="">
 						<toolChain id="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base.1728649084" name="Autotools Buildroot ARM (/wks/buildroot-2016.11/output)" superClass="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base">
 							<option id="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base.option.path.1889508747" name="Path" superClass="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base.option.path"/>
@@ -132,7 +129,7 @@
 		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-		<project id="homerd.org.buildroot.wks.buildroot-2015.11.1.output.autotools.803509268" name="GNU Autotools" projectType="org.buildroot.wks.buildroot-2015.11.1.output.autotools"/>
+		<project id="homerd.org.buildroot.wks.buildroot-2015.11.1.output.autotools.803509268" name="GNU Autotools"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">

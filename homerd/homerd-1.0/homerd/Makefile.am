@@ -5,16 +5,9 @@ bin_PROGRAMS=homerd
 
 homerd_SOURCES= homerd.cpp \
 				HwAcquaA5.cpp \
+				 ../src/Winstar.cpp \
 				../src/Display.cpp \
 				../src/GpioPin.cpp \
-				../src/KeyButton.cpp \
-				../src/KeyPanel.cpp \
-				../src/MenuDisplayVisitor.cpp \
-				../src/MenuLeaf.cpp \
-				../src/MenuMoveVisitor.cpp \
-				../src/Observer.cpp \
-				../src/SubMenu.cpp \
 				../src/Sysinfo.cpp \
-				../src/Winstar.cpp
-
+				../src/Observer.cpp
 
