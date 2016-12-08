@@ -206,11 +206,11 @@ Winstar.o: ../src/Winstar.cpp \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/istream.tcc \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/sstream.tcc \
  ../include/homerd.h \
- /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/thread \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/chrono \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/ratio \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/ctime \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/parse_numbers.h \
+ /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/thread \
  ../include/Observer.h \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/iostream \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/sysroot/usr/include/linux/input.h \
@@ -673,8 +673,6 @@ Winstar.o: ../src/Winstar.cpp \
 
 ../include/homerd.h:
 
-/wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/thread:
-
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/chrono:
 
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/ratio:
@@ -682,6 +680,8 @@ Winstar.o: ../src/Winstar.cpp \
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/ctime:
 
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/parse_numbers.h:
+
+/wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/thread:
 
 ../include/Observer.h:
 

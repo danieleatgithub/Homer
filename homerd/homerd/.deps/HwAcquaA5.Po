@@ -205,11 +205,11 @@ HwAcquaA5.o: HwAcquaA5.cpp \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/sysroot/usr/include/bits/environments.h \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/sysroot/usr/include/bits/confname.h \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/sysroot/usr/include/getopt.h \
- /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/thread \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/chrono \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/ratio \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/ctime \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/parse_numbers.h \
+ /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/thread \
  ../include/Observer.h \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/iostream \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/sysroot/usr/include/linux/input.h \
@@ -671,8 +671,6 @@ HwAcquaA5.o: HwAcquaA5.cpp \
 
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/sysroot/usr/include/getopt.h:
 
-/wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/thread:
-
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/chrono:
 
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/ratio:
@@ -680,6 +678,8 @@ HwAcquaA5.o: HwAcquaA5.cpp \
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/ctime:
 
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/parse_numbers.h:
+
+/wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/thread:
 
 ../include/Observer.h:
 

@@ -14,6 +14,7 @@
 #include "homerd.h"
 #include <stdio.h>
 #include <unistd.h>
+#include <chrono>
 #include <thread>
 #include <string>
 #include "Observer.h"
@@ -104,8 +105,12 @@ class KeyButton {
     long_threshold = longThreshold;
   }
   operator std::string() const {
-    return (string("Key=") + std::to_string(key.code));
+    // TODO: Add press_time
+    return (string("Key=") + std::to_string(key.code)
+        + string(pressed ? "PRESSED" : "RELEASED") + string("isLong=")
+        + string(this->press_time >= long_threshold ? "Y" : "N"));
   }
+
 };
 
 class KeyPanel {
@@ -144,7 +149,7 @@ class KeyPanel {
       }
       if (!running)
         break;
-      LOG4CPLUS_DEBUG(
+      LOG4CPLUS_TRACE(
           logdev,
           "(" << key_counter << ") code=" << ev.code << " type=" << ev.type
               << " value=" << ev.value << " s=" << ev.time.tv_sec << " u="
@@ -153,10 +158,13 @@ class KeyPanel {
       switch (ev.type) {
         case EV_KEY:
           this->key.load_event(ev);
+          LOG4CPLUS_DEBUG(logdev, "EV_KEY " << string(this->key));
           break;
         case EV_SYN:
           this->key.validate_event(ev);
           key_counter++;
+          //TODO: overload operator << for keybutton
+          LOG4CPLUS_DEBUG(logdev, "EV_SYN " << string(this->key));
           if (this->key.isPressEvent()) {
             key_press_obs(this->key);
           } else {

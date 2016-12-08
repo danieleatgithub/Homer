@@ -220,9 +220,9 @@ int main(int argc, char *argv[]) {
   bmp085Device = new Bmp085Device(*acquaA5);
   tSens = new TemperatureSensor(*bmp085Device, string("Temperature"));
   pSens = new PressureSensor(*bmp085Device, string("Pressure"));
-  pSens->setAltituteCalibration(305.0);
+  pSens->setAltituteCalibration(354.0);
 
-  pSens->update();
+  tSens->update();
   pSens->update();
 
   sleep(1);
@@ -236,7 +236,7 @@ int main(int argc, char *argv[]) {
   while (true) {
     this_thread::sleep_for(std::chrono::seconds(10));
     // FIXME: condwait in sysinfo per exit
-    if (keyPanel->get_key_counter() > 20)
+    if (keyPanel->get_key_counter() > 999999999)
       break;
   }
 
