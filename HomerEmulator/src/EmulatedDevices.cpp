@@ -61,7 +61,6 @@ void EmulatedDevices::temp_panel_register() {
         *ret = (int)strlen((char *)buffer);
       });
 }
-
 void EmulatedDevices::bar_panel_register() {
   board.getEmulatedSysFs().reg_read(
       bar_panel_reg,
