@@ -1,9 +1,3 @@
-/*
- * HwEmulated.cpp
- *
- *  Created on: 22/ago/2016
- *      Author: daniele
- */
 
 #include <Winstar.h>
 #include <linux/i2c-dev.h>
@@ -42,7 +36,7 @@ int I2cBusAcquaA5::ioctl(int fd, unsigned long int request, ...) {
 return (-1);
 }
 
-__off_t I2cBusAcquaA5::lseek(int fd, __off_t  __offset, int __whence) {
+__off_t I2cBusAcquaA5::lseek(int fd, __off_t   __offset, int __whence) {
 return (::lseek(fd, __offset, __whence));
 }
 
@@ -61,7 +55,7 @@ return (::write(fd, buffer, size));
 int GpioPortAcquaA5::ioctl(int fd, unsigned long int request, ...) {
 return (-1);
 }
-__off_t GpioPortAcquaA5::lseek(int fd, __off_t  __offset, int __whence) {
+__off_t GpioPortAcquaA5::lseek(int fd, __off_t   __offset, int __whence) {
 return (::lseek(fd, __offset, __whence));
 }
 
@@ -82,7 +76,7 @@ int SysFsAcquaA5::ioctl(int fd, unsigned long int request, ...) {
 return (-1);
 }
 
-__off_t SysFsAcquaA5::lseek(int fd, __off_t       __offset, int __whence) {
+__off_t SysFsAcquaA5::lseek(int fd, __off_t        __offset, int __whence) {
 return (::lseek(fd, __offset, __whence));
 }
 

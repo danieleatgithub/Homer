@@ -16,13 +16,18 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" description="" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924" name="Configuration_with_Autotools Buildroot ARM">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" description="" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924" name="Configuration_with_Autotools Buildroot ARM" parent="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924">
 					<folderInfo id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924." name="/" resourcePath="">
 						<toolChain id="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base.1728649084" name="Autotools Buildroot ARM (/wks/buildroot-2016.11/output)" superClass="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base">
 							<option id="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base.option.path.1889508747" name="Path" superClass="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base.option.path"/>
 							<option id="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base.option.prefix.495989075" name="Prefix" superClass="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base.option.prefix"/>
 							<targetPlatform id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform.2104030810" isAbstract="false" name="GNU Autotools Target Platform" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform"/>
-							<builder id="org.buildroot.wks.buildroot-2016.11.output.builder.1080218155" keepEnvironmentInBuildfile="false" name="Buildroot ARM builder (/wks/buildroot-2016.11/output)" superClass="org.buildroot.wks.buildroot-2016.11.output.builder"/>
+							<builder id="org.buildroot.wks.buildroot-2016.11.output.builder.1080218155" keepEnvironmentInBuildfile="false" name="Buildroot ARM builder (/wks/buildroot-2016.11/output)" superClass="org.buildroot.wks.buildroot-2016.11.output.builder">
+								<outputEntries>
+									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name=""/>
+									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Local homerd"/>
+								</outputEntries>
+							</builder>
 							<tool id="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure.1437054248" name="configure" superClass="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure">
 								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.54606953" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924" valueType="string"/>
 							</tool>
@@ -42,8 +47,7 @@
 					<sourceEntries>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="homerd"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="include"/>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="tool"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

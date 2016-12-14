@@ -1,9 +1,20 @@
-/*
- * GLUTutilities.cpp
+/*******************************************************************************
+ * Copyright (C) 2016  Daniele Colombo
  *
- *  Created on: 07/nov/2016
- *      Author: daniele
- */
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *******************************************************************************/
 #include <GLUTUtilities.h>
 #include <iostream>
 #include <log4cplus/logger.h>
@@ -39,7 +50,7 @@ GLuint GLUTUtilities::LoadBMPTexture(const char *filename, unsigned int width,
   fread(buf, 1, 54, fp); /* Skip first 54 bytes maybe an header :) */
 
   if ((area = fread(buf, 3 * sizeof(char), width * height, fp))
-      != width * height) {
+      != (int) (width * height)) {
     LOG4CPLUS_FATAL(
         logemu,
         "Wrong size Not enough data in bitmap " << area << " expected:"

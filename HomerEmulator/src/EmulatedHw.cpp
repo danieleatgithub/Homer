@@ -1,10 +1,20 @@
-/*
- * HwEmulated.cpp
+/*******************************************************************************
+ * Copyright (C) 2016  Daniele Colombo
  *
- *  Created on: 22/ago/2016
- *      Author: daniele
- */
-
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *******************************************************************************/
 #include <Winstar.h>
 #include <linux/i2c-dev.h>
 #include <stdarg.h>
@@ -83,7 +93,7 @@ int I2cBusEmulated::ioctl(int fd, unsigned long int request, ...) {
   return (0);
 }
 
-__off_t I2cBusEmulated::lseek(int fd, __off_t                                                 __offset, int __whence) {
+__off_t I2cBusEmulated::lseek(int fd, __off_t                                                  __offset, int __whence) {
   Logger logemu = Logger::getInstance(LOGEMULATOR);
   LOG4CPLUS_TRACE(logemu, "fd=" << fd << ",file=" << filedescriptors[fd]);
   return (0);
@@ -141,7 +151,7 @@ int SysFsEmulated::ioctl(int fd, unsigned long int request, ...) {
   return (-1);
 }
 
-__off_t SysFsEmulated::lseek(int fd, __off_t              __offset, int __whence) {
+__off_t SysFsEmulated::lseek(int fd, __off_t               __offset, int __whence) {
   Logger logemu = Logger::getInstance(LOGEMULATOR);
   LOG4CPLUS_TRACE(logemu, "fd=" << fd << ",file=" << filedescriptors[fd]);
   return (0);
@@ -173,7 +183,7 @@ int GpioPortEmulated::ioctl(int fd, unsigned long int request, ...) {
 //	cerr << endl;
   return (0);
 }
-__off_t GpioPortEmulated::lseek(int fd, __off_t                                                 __offset, int __whence) {
+__off_t GpioPortEmulated::lseek(int fd, __off_t                                                  __offset, int __whence) {
   return (0);
 }
 
