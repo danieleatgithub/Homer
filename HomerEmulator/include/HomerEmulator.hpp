@@ -20,42 +20,48 @@
 #define HOMEREMULATOR_HPP_
 #include <EmulatedHw.hpp>
 #include <GL/glut.h>
+#include <GLUTUtilities.hpp>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 #include <KeyEmulator.hpp>
 #include <Scheduler.hpp>
 #include <WinstarEmulator.hpp>
-#include "GLUTUtilities.h"
 
-#define HEMUL_REFRESHRATE 250 // milliseconds
+#define HEMUL_REFRESHRATE 250 // Refresh rate in milliseconds
 
 using namespace homerio;
 
 namespace homeremulator {
+
 class HomerEmulator;
 
+/**
+ * GLUT callbacks and pointer to emulators (one istance)
+ */
 struct GL_staticCall {
-  static void reshape(int w, int h);
-  static void keypress(unsigned char key, int x, int y);
-  static void keyrelease(unsigned char key, int x, int y);
+  static void reshape(const int w, const int h);
+  static void keypress(const unsigned char key, const int x, const int y);
+  static void keyrelease(const unsigned char key, const int x, const int y);
   static void display();
-  static void timer(int value);
+  static void timer(const int value);
   static void idle();
 
-  static GLuint LoadBMPTexture(const char *filename, unsigned int width,
-                               unsigned int height);
-  void setHomerEmulator(HomerEmulator* e) {
+  void setHomerEmulator(HomerEmulator* const e) {
     GL_staticCall::homerEmulator = e;
   }
-  void setDisplayEmulator(WinstarEmulator* d) {
+  void setDisplayEmulator(WinstarEmulator* const d) {
     GL_staticCall::displayEmulator = d;
   }
+  // TODO: refactor with singleton pattern
   static HomerEmulator *homerEmulator;
   static WinstarEmulator *displayEmulator;
 
 };
 
+/**
+ * The Emulator
+ */
 class HomerEmulator {
  private:
   char *myargv[1];
@@ -73,17 +79,34 @@ class HomerEmulator {
 
  public:
 
-  HomerEmulator(WinstarEmulator *emulatedDisplay);
-  virtual ~HomerEmulator() {
-  }
+  HomerEmulator(WinstarEmulator* const emulatedDisplay);
+  virtual ~HomerEmulator();
 
-  int start();
-  int stop();
+  /**
+   * Start the emulator
+   * @return
+   */
+  void start();
+  /*
+   * Stop the emulator
+   */
+  void stop();
+  /**
+   * GL main loop
+   */
   void mainLoop();
 
+  /**
+   * Window refresh rate in milliseconds
+   * @return
+   */
   unsigned int getRefreshRate() const {
     return refreshRate;
   }
+  /**
+   * Window refresh rate in milliseconds
+   * @param refreshRate
+   */
   void setRefreshRate(unsigned int refreshRate) {
     this->refreshRate = refreshRate;
   }

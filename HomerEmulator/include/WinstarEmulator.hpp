@@ -32,7 +32,7 @@ using namespace log4cplus;
 namespace homerio {
 
 class WinstarEmulator : public Winstar {
-  GLfloat *bg, *fg;
+  const GLfloat *bg, *fg;
   BoardEmulated& board;
   Registration light_reg, i2cwr_reg;
   bool ready;
@@ -48,7 +48,7 @@ class WinstarEmulator : public Winstar {
   WinstarEmulator(KeyPanel &kpnl, Scheduler &shd, BoardEmulated& board)
       : Winstar(kpnl, shd, board),
         board(board) {
-    bg = grey;
+    bg = homeremulator::grey;
     fg = black;
     cursor = &line1[0];
     ready = false;
@@ -140,7 +140,7 @@ class WinstarEmulator : public Winstar {
     printString(line2);
   }
 
-  void setColor(GLfloat *background, GLfloat *foreground) {
+  void setColor(const GLfloat *background, const GLfloat *foreground) {
     bg = background;
     fg = foreground;
   }

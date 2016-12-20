@@ -89,7 +89,7 @@ int main(int argc, char** argv) {
   pSens->setAltituteCalibration(354.0);
 
   // life spark ignition
-  emulatedDev->register_all_emulator();
+  emulatedDev->start();
   emulator->start();
   display->reset();
   keyPanel->setEventFilename(emulator->getKeyEventFilename().c_str());

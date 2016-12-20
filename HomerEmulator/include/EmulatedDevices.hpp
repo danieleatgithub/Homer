@@ -15,47 +15,38 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *******************************************************************************/
-#include <Menu.hpp>
-#include <iostream>
-#include <termios.h>
-#include <unistd.h>
-#include <string.h>
-#include <log4cplus/logger.h>
-#include <log4cplus/config.hxx>
-#include <log4cplus/configurator.h>
-#include <log4cplus/loggingmacros.h>
-#include <log4cplus/loglevel.h>
-#include <log4cplus/tchar.h>
-#include <KeyPanel.hpp>
-#include <SimpleMenuElement.hpp>
-#include <HomerMenu.hpp>
 #include <HwLayer.hpp>
-#include <Sensor.hpp>
 #include <EmulatedHw.hpp>
 #include <HomerEmulator.hpp>
-#include <WinstarEmulator.hpp>
-#include <KeyEmulator.hpp>
-#include <MenuDisplayVisitor.hpp>
-#include <MenuMoveVisitor.hpp>
-#include <Scheduler.hpp>
 
 #ifndef SRC_EMULATEDDEVICE_HPP_
 #define SRC_EMULATEDDEVICE_HPP_
 
 namespace homeremulator {
 
+/**
+ * Factory of all device emulation
+ */
 class EmulatedDevices {
  public:
   EmulatedDevices(BoardEmulated& _board);
   virtual ~EmulatedDevices();
-  void register_all_emulator();
+  /**
+   * start all emulation
+   */
+  void start();
+  /**
+   * stop all emulation
+   */
+  void stop();
 
  private:
   BoardEmulated& board;
-  Registration bar_panel_reg, temp_panel_reg;
+  Registration barometric_reg;
+  Registration temperature_reg;
 
-  void temp_panel_register();
-  void bar_panel_register();
+  void temperature_register();
+  void barometric_register();
 };
 
 }

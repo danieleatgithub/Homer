@@ -15,40 +15,25 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *******************************************************************************/
+#include <HomerEmulator.hpp>
 #include <GL/freeglut.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
-#include <memory>
-#include <log4cplus/logger.h>
-#include <log4cplus/loggingmacros.h>
-#include <log4cplus/loglevel.h>
-#include <HomerEmulator.hpp>
-#include <EmulatedHw.hpp>
-
-using namespace std;
-using namespace homerio;
-using namespace log4cplus;
 
 namespace homeremulator {
 
-GLuint fontOffset;
-GLuint texture;
-GLfloat white[3] = { 1.0, 1.0, 1.0 };
-GLfloat green[3] = { 0.0, 1.0, 0.0 };
-GLfloat black[3] = { 0.0, 0.0, 0.0 };
-GLfloat grey[3] = { 0.5, 0.5, 0.5 };
-GLfloat lightgrey[3] = { 0.9, 0.9, 0.9 };
 HomerEmulator* GL_staticCall::homerEmulator = nullptr;
 WinstarEmulator* GL_staticCall::displayEmulator = nullptr;
 
-void GL_staticCall::reshape(int w, int h) {
+void GL_staticCall::reshape(const int w, const int h) {
 }
 
-void GL_staticCall::keypress(unsigned char key, int x, int y) {
+void GL_staticCall::keypress(const unsigned char key, const int x,
+                             const int y) {
   homerEmulator->keyEmulator.gl_key_press(key, x, y);
 }
-void GL_staticCall::keyrelease(unsigned char key, int x, int y) {
+void GL_staticCall::keyrelease(const unsigned char key, const int x,
+                               const int y) {
   homerEmulator->keyEmulator.gl_key_release(key, x, y);
 }
 
@@ -65,6 +50,7 @@ void GL_staticCall::display(void) {
   GLfloat up;
   GLfloat down;
 
+  // Rectangle for the background texture
   glBegin (GL_POLYGON);
   left = -1.0f;
   right = 1.0f;
@@ -80,33 +66,47 @@ void GL_staticCall::display(void) {
   glVertex3f(left, up, 0.0f);  // up-sx
   glEnd();
   glDisable(GL_TEXTURE_2D);  //Disable the texture
-  displayEmulator->draw();
+  // Rectangle for the background texture
+
+  // TODO: Add a draw observer
+  displayEmulator->draw();  // Display emulator
+
   glFlush();
 
 }
 
-void GL_staticCall::timer(int value) {
+/**
+ * User timer for ciclic refresh
+ * @param value
+ */
+void GL_staticCall::timer(const int value) {
   glutPostRedisplay();
   glutTimerFunc(homerEmulator->getRefreshRate(), GL_staticCall::timer, value);
 }
 
-HomerEmulator::HomerEmulator(WinstarEmulator * emulatedDisplay) {
+HomerEmulator::HomerEmulator(WinstarEmulator* const emulatedDisplay) {
   myargc = 1;
   myargv[0] = strdup("Homer Emulator");
   this->refreshRate = HEMUL_REFRESHRATE;
   GL_calls.setHomerEmulator(this);
   GL_calls.setDisplayEmulator(emulatedDisplay);
 }
+HomerEmulator::~HomerEmulator() {
+  free (myargv[0]);
+}
 
-int HomerEmulator::start() {
+void HomerEmulator::start() {
+  unsigned int witdh = 800;
+  unsigned int height = 129;
+
   keyEmulator.gl_start();
 
   glutInit(&myargc, &myargv[0]);
   glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
-  glutInitWindowSize(800, 160);
-  glutInitWindowPosition(100, 100);
-  glutCreateWindow("Homer");
+  glutInitWindowSize(witdh, height);
+  glutInitWindowPosition(0, 0);
+  glutCreateWindow (myargv[0]);
   glEnable (GL_DEPTH_TEST);
   glDepthMask (GL_TRUE);
   glDepthFunc (GL_LEQUAL);
@@ -115,7 +115,7 @@ int HomerEmulator::start() {
 
   GLUTUtilities::LoadBMPTexture(
       "/wks/workspace/sandbox/GLUT-examples/resource/fpanel800x129x24b.bmp",
-      800, 129);
+      witdh, height);
 
   glutReshapeFunc(GL_staticCall::reshape);
   glutSetKeyRepeat (GLUT_KEY_REPEAT_OFF);
@@ -124,12 +124,10 @@ int HomerEmulator::start() {
   glutDisplayFunc(GL_staticCall::display);
   glutTimerFunc(0, GL_staticCall::timer, 0);
 
-  return 0;
 }
 
-int HomerEmulator::stop() {
+void HomerEmulator::stop() {
   keyEmulator.gl_stop();
-  return 0;
 }
 
 void HomerEmulator::mainLoop() {

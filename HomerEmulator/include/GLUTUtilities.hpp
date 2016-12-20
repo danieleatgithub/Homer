@@ -21,10 +21,23 @@
 #include <GL/freeglut.h>
 
 namespace homeremulator {
+/**
+ * Static utilities
+ */
 class GLUTUtilities {
  public:
-  static GLuint
-  LoadBMPTexture(const char *filename, unsigned int width, unsigned int height);
+  /**
+   * Load a bmp file as a texture and the two-dimensional texture image
+   * terminate on fail
+   * @param filename file to load
+   * @param width
+   * @param height
+   * @return texture ID loaded
+   */
+  const static GLuint
+  LoadBMPTexture(const char *filename, const unsigned int width,
+                 const unsigned int height);
 };
+
 }
 #endif /* GLUTUTILITIES_H_ */

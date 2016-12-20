@@ -15,22 +15,18 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *******************************************************************************/
-
-#ifndef EMUGLOBALS_H_
-#define EMUGLOBALS_H_
 #include <GL/freeglut.h>
+#include <EmuGlobals.h>
+using namespace std;
 
 namespace homeremulator {
 
-#define LOGEMULATOR   "homerd.emulator"
-
-// colors constant
-extern const GLfloat white[];
-extern const GLfloat green[];
-extern const GLfloat black[];
-extern const GLfloat grey[];
-extern const GLfloat lightgrey[];
+// GL Colors constant
+const GLfloat white[3] = { 1.0, 1.0, 1.0 };
+const GLfloat green[3] = { 0.0, 1.0, 0.0 };
+const GLfloat black[3] = { 0.0, 0.0, 0.0 };
+const GLfloat grey[3] = { 0.5, 0.5, 0.5 };
+const GLfloat lightgrey[3] = { 0.9, 0.9, 0.9 };
 
 }
 
-#endif /* EMUGLOBALS_H_ */

@@ -35,18 +35,22 @@ using namespace obs;
 
 namespace homerio {
 
+/**
+ * I2cBus emulation
+ * Used for:
+ *  Display emulator
+ */
 class I2cBusEmulated : public I2cBus {
  private:
-  unsigned int active_device;
+  unsigned int active_device;  // The last device selected with ioctl I2C_SLAVE
   map<int, string> filedescriptors;
-  // Observers
-  using WriteObserver = Subject<void (int filedes, const void *buffer, size_t size)>;
 
+  using WriteObserver = Subject<void (int filedes, const void *buffer, size_t size)>;
   map<unsigned int, WriteObserver> write_obs_map;  // Write Observer Map by device address
 
  public:
 
-  I2cBusEmulated(const char *bus)
+  I2cBusEmulated(const char* const bus)
       : I2cBus(bus) {
     active_device = 0;
   }
@@ -55,21 +59,34 @@ class I2cBusEmulated : public I2cBus {
   }
   ;
 
+  // Overloaded i2c function
   int open(const char *file, int flag);
   int read(int fd, void *buf, size_t nbyte);
   int write(int filedes, const void *buffer, size_t size);
   int ioctl(int fd, unsigned long int __request, ...);
-  __off_t lseek(int fd, __off_t     __offset, int __whence);
+  __off_t lseek(int fd, __off_t               __offset, int __whence);
   int close(int fd);
 
+  /**
+   * Register a write observer callback on a specific address
+   * @param reg Reference to registration
+   * @param address  Address example: WINSTAR_I2C_ADD
+   * @param f callback void(int filedes, const void *buffer, size_t size)
+   */
   void reg_write(
       Registration& reg, unsigned int address,
       std::function<void(int filedes, const void *buffer, size_t size)> f) {
     reg = write_obs_map[address].registerObserver(f);
   }
-
+  // TODO: reg_read
+  // TODO: copy from the sysemulaton the ret value
 };
 
+/**
+ * sys filesystem emulation
+ * Used for:
+ *    bmp85 sensor
+ */
 class SysFsEmulated : public SysFs {
  private:
   unsigned int active_device;
@@ -84,7 +101,7 @@ class SysFsEmulated : public SysFs {
 
  public:
 
-  SysFsEmulated(const char *root)
+  SysFsEmulated(const char * const root)
       : SysFs(root) {
     active_device = 0;
   }
@@ -97,9 +114,16 @@ class SysFsEmulated : public SysFs {
   int read(int fd, void *buf, size_t nbyte);
   int write(int filedes, const void *buffer, size_t size);
   int ioctl(int fd, unsigned long int __request, ...);
-  __off_t lseek(int fd, __off_t     __offset, int __whence);
+  __off_t lseek(int fd, __off_t               __offset, int __whence);
   int close(int fd);
 
+  /**
+   * Register a write observer callback on a specific file pattern
+   * @param reg Reference to registration
+   * @param filePattern regex pattern to trigger the observer
+   * @param f callback (int filedes, const void *buffer, size_t size, const char *fname,
+   int *ret) in ret the emulated return value
+   */
   void reg_write(
       Registration& reg,
       string filePattern,
@@ -137,7 +161,7 @@ class GpioPortEmulated : public GpioPort {
   int read(int fd, void *buf, size_t nbyte);
   int write(int filedes, const void *buffer, size_t size);
   int ioctl(int fd, unsigned long int __request, ...);
-  __off_t lseek(int fd, __off_t                                             __offset, int __whence);
+  __off_t lseek(int fd, __off_t                                                       __offset, int __whence);
   int close(int fd);
 
   void reg_write(
