@@ -42,9 +42,6 @@ class BarometricSensor : public Sensor, public MenuAble {
   double getPressure() const {
     return device.getPressure();
   }
-  const double getNumeric() const {
-    return device.getPressure();
-  }
   const double getAltitudeCalibration() const {
     return (device.getAltituteCalibration());
   }
@@ -62,12 +59,14 @@ class BarometricSensor : public Sensor, public MenuAble {
   const string getLabel() const {
     return label;
   }
-  const string get() const {
+  const string getString() const {
     ostringstream ostr;
-    ostr << device.getPressure() << " mBar";
+    ostr << device.getPressure();
     return ostr.str();
   }
-
+  const double getDouble() const {
+    return device.getPressure();
+  }
  private:
   BarometricDevice& device;
   string label;

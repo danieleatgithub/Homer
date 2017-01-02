@@ -43,9 +43,6 @@ class TemperatureSensor : public Sensor, public MenuAble {
   double getTemperature() const {
     return device.getTemperature();
   }
-  const double getNumeric() const {
-    return device.getTemperature();
-  }
   void update() {
     device.update();
   }
@@ -57,12 +54,14 @@ class TemperatureSensor : public Sensor, public MenuAble {
   const string getLabel() const {
     return label;
   }
-  const string get() const {
+  const string getString() const {
     ostringstream ostr;
-    ostr << device.getTemperature() << " C";
+    ostr << device.getTemperature();
     return ostr.str();
   }
-
+  const double getDouble() const {
+    return device.getTemperature();
+  }
  private:
   TemperatureDevice& device;
   string label;

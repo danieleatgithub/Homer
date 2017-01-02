@@ -33,9 +33,8 @@ class Sensor {
   virtual ~Sensor() {
   }
 
-//  virtual const double getNumeric() const = 0;
-  // Get a string ... for decorator
-  virtual const string get() const = 0;
+  virtual const string getString() const = 0;
+  virtual const double getDouble() const = 0;
 
 };
 

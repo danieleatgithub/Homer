@@ -25,11 +25,8 @@ class CsvSensorDecorator : public SensorDecorator {
   }
   ;
 
-//  const double getNumeric() {
-//    return (_sensor.getNumeric());
-//  }
-  const string get() const {
-    return (_sensor.get() + "X");
+  const string getString() const {
+    return (_sensor.getString() + ",");
   }
 
 };

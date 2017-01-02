@@ -92,6 +92,7 @@ int main(int argc, char** argv) {
   pSens->setAltituteCalibration(354.0);
 
   tCsv = new CsvSensorDecorator(*tSens);
+  pCsv = new CsvSensorDecorator(*pSens);
 
   // life spark ignition
   emulatedDev->start();
@@ -108,6 +109,9 @@ int main(int argc, char** argv) {
   LOG4CPLUS_INFO(logemu, "HomerEmulator ready ...");
   tSens->update();
   pSens->update();
+
+  cout << tCsv->getString();
+  cout << pCsv->getString() << endl;
 
   // wait for armageddon
   emulator->mainLoop();

@@ -27,11 +27,11 @@ class SensorDecorator : public Sensor {
   ;
   Sensor& _sensor;
 
-//  const double getNumeric() {
-//    return (_sensor.getNumeric());
-//  }
-  const string get() const {
-    return (_sensor.get());
+  const string getString() const {
+    return (_sensor.getString());
+  }
+  const double getDouble() const {
+    return (_sensor.getDouble());
   }
 };
 
