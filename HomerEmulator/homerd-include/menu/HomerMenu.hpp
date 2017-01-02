@@ -24,7 +24,8 @@
 #include <Sysinfo.h>
 #include <iostream>
 #include <string>
-#include <Sensor.hpp>
+#include <TemperatureSensor.hpp>
+#include <BarometricSensor.hpp>
 using namespace std;
 
 namespace homerio {

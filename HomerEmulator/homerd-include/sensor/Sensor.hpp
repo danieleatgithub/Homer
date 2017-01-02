@@ -16,49 +16,29 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *******************************************************************************/
 
-#ifndef SIMPLEMENUELEMENT_HPP_
-#define SIMPLEMENUELEMENT_HPP_
-
+#ifndef SENSOR_HPP_
+#define SENSOR_HPP_
 #include <MenuAble.hpp>
 
 using namespace std;
 
 namespace homerio {
 
-class SimpleMenuElement : public MenuAble {
- private:
-  string label;
-  string value;
+class Sensor {
+
  public:
-  SimpleMenuElement(string _label) {
-    this->label = _label;
-    this->value = "";
+
+  Sensor() {
   }
-  SimpleMenuElement(string _label, string _value) {
-    this->label = _label;
-    this->value = _value;
-  }
-  ~SimpleMenuElement() {
+  virtual ~Sensor() {
   }
 
-  const string getLabel() const {
-    return label;
-  }
-  const string getValue() const {
-    return value;
-  }
+//  virtual const double getNumeric() const = 0;
+  // Get a string ... for decorator
+  virtual const string get() const = 0;
 
-  void setLabel(const string& label) {
-    this->label = label;
-  }
-
-  void setValue(const string& value) {
-    this->value = value;
-  }
-  void update() {
-    return;
-  }
 };
 
 }
-#endif /* SIMPLEMENUELEMENT_HPP_ */
+
+#endif /* SENSOR_HPP_ */

@@ -29,8 +29,8 @@
 #include <KeyPanel.hpp>
 #include <HomerMenu.hpp>
 #include <HwLayer.hpp>
-#include <Sensor.hpp>
 #include <Scheduler.hpp>
+#include <sensor/CsvSensorDecorator.hpp>
 
 #include <EmulatedHw.hpp>
 #include <EmulatedDevices.hpp>
@@ -39,6 +39,7 @@
 #include <KeyEmulator.hpp>
 #include <MenuDisplayVisitor.hpp>
 #include <MenuMoveVisitor.hpp>
+#include <Bmp085Device.hpp>
 
 using namespace std;
 using namespace homerio;
@@ -66,6 +67,8 @@ int main(int argc, char** argv) {
   Bmp085Device *bmp085Device;
   TemperatureSensor *tSens;
   BarometricSensor *pSens;
+  CsvSensorDecorator *tCsv;
+  CsvSensorDecorator *pCsv;
 
   // Emulated stuff
   BoardEmulated *acquaA5;
@@ -87,6 +90,8 @@ int main(int argc, char** argv) {
   tSens = new TemperatureSensor(*bmp085Device, string("Temperature"));
   pSens = new BarometricSensor(*bmp085Device, string("Pressure"));
   pSens->setAltituteCalibration(354.0);
+
+  tCsv = new CsvSensorDecorator(*tSens);
 
   // life spark ignition
   emulatedDev->start();
