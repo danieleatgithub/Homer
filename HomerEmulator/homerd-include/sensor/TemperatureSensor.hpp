@@ -28,7 +28,7 @@ namespace homerio {
 class TemperatureSensor : public Sensor, public MenuAble {
  public:
   TemperatureSensor(TemperatureDevice& _device, string _label)
-      : Sensor(),
+      : Sensor(_label),
         device(_device),
         label(_label) {
 

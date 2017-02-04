@@ -18,6 +18,7 @@
 
 #define LOGDEVICE 	"homerd.device"
 #define LOGHOMERD 	"homerd"
+#define LOGSENSORS   "homerd.sensors"
 
 // TODO get from properties
 #define DAEMON_NAME "homerd"

@@ -20,7 +20,9 @@
 #define IDGENERATOR_H_
 #include <cstdint>
 #include <iostream>
-namespace shd {
+#include <mutex>
+
+namespace commodities {
 
 class IDGenerator {
  public:
@@ -29,14 +31,17 @@ class IDGenerator {
     return istance;
   }
   uint32_t getId() {
+    std::unique_lock < std::mutex > lock(mutex);
     return id++;
   }
 
  private:
   IDGenerator() {
+    std::unique_lock < std::mutex > lock(mutex);
     id = 0;
   }
   uint32_t id;
+  std::mutex mutex;
 };
 
 } /* namespace shd */

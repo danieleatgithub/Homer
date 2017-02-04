@@ -31,7 +31,7 @@
 #include <HwLayer.hpp>
 #include <Scheduler.hpp>
 #include <sensor/CsvSensorDecorator.hpp>
-
+#include <sensor/SensorManager.hpp>
 #include <EmulatedHw.hpp>
 #include <EmulatedDevices.hpp>
 #include <HomerEmulator.hpp>
@@ -43,7 +43,7 @@
 
 using namespace std;
 using namespace homerio;
-using namespace shd;
+using namespace commodities;
 using namespace log4cplus;
 using namespace homeremulator;
 
@@ -67,8 +67,7 @@ int main(int argc, char** argv) {
   Bmp085Device *bmp085Device;
   TemperatureSensor *tSens;
   BarometricSensor *pSens;
-  CsvSensorDecorator *tCsv;
-  CsvSensorDecorator *pCsv;
+  SensorManager *sensorManager;
 
   // Emulated stuff
   BoardEmulated *acquaA5;
@@ -81,22 +80,25 @@ int main(int argc, char** argv) {
   scheduler = new Scheduler();
   acquaA5 = new BoardEmulated();
   emulatedDev = new EmulatedDevices(*acquaA5);
+  sensorManager = new SensorManager(*scheduler);
 
   display = new WinstarEmulator(*keyPanel, *scheduler, *acquaA5);
   emulator = new HomerEmulator(display);
   shared_ptr < MenuActionVisitor > dw(new MenuDisplayVisitor(*display));
 
+  // Create sensors galaxy
   bmp085Device = new Bmp085Device(*acquaA5);
   tSens = new TemperatureSensor(*bmp085Device, string("Temperature"));
+  sensorManager->add(*tSens);
+
   pSens = new BarometricSensor(*bmp085Device, string("Pressure"));
   pSens->setAltituteCalibration(354.0);
-
-  tCsv = new CsvSensorDecorator(*tSens);
-  pCsv = new CsvSensorDecorator(*pSens);
+  sensorManager->add(*pSens);
 
   // life spark ignition
   emulatedDev->start();
   emulator->start();
+  sensorManager->start();
   display->reset();
   keyPanel->setEventFilename(emulator->getKeyEventFilename().c_str());
   keyPanel->start();
@@ -107,30 +109,30 @@ int main(int argc, char** argv) {
   display->set_backlight(true);
 
   LOG4CPLUS_INFO(logemu, "HomerEmulator ready ...");
-  tSens->update();
-  pSens->update();
 
-  cout << tCsv->getString();
-  cout << pCsv->getString() << endl;
-
-  // wait for armageddon
+  // waiting for armageddon
   emulator->mainLoop();
 
   // end of life
   keyPanel->stop();
+  sensorManager->stop();
   emulator->stop();
+  emulatedDev->stop();
 
   // one second silence for our threads
   sleep(1);
 
   // keep clear empty space
-  delete (emulator);
   delete (menu);
   delete (display);
-  delete (emulatedDev);
   delete (acquaA5);
   delete (scheduler);
   delete (keyPanel);
+  delete (tSens);
+  delete (pSens);
+  delete (sensorManager);
+  delete (emulatedDev);
+  delete (emulator);
 
   // give back power
   return 0;

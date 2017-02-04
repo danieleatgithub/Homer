@@ -40,10 +40,12 @@ class Bmp085Device : public TemperatureDevice, public BarometricDevice {
   SysFs& sysFs;
   char temperatureBuffer[100];
   char pressureBuffer[100];
+  Logger _logdev;
 
  public:
   Bmp085Device(Board& _board)
-      : sysFs(_board.getSysFs()) {
+      : sysFs(_board.getSysFs()),
+        _logdev(Logger::getInstance(LOGDEVICE)) {
   }
 
   virtual ~Bmp085Device() {
@@ -52,24 +54,22 @@ class Bmp085Device : public TemperatureDevice, public BarometricDevice {
 // FIXME: test file not found
   void readTemperature() {
     int nread;
-    Logger logdev = Logger::getInstance(LOGDEVICE);
     nread = sysFs.readBuffer(BMP085_TEMPERATURE, temperatureBuffer,
                              (sizeof(temperatureBuffer) - 1));
     temperature = atoi(temperatureBuffer) / 10.0;
     LOG4CPLUS_TRACE(
-        logdev,
+        _logdev,
         "Read " << BMP085_TEMPERATURE << " string(" << nread << ") ["
             << temperatureBuffer << "]");
   }
   void readPressure() {
     int nread;
-    Logger logdev = Logger::getInstance(LOGDEVICE);
     nread = sysFs.readBuffer(BMP085_PRESSURE, pressureBuffer,
                              (sizeof(pressureBuffer) - 1));
 
     pressure = atol(pressureBuffer) / 100.0;
     LOG4CPLUS_TRACE(
-        logdev,
+        _logdev,
         "Read " << BMP085_PRESSURE << " string(" << nread << ") ["
             << pressureBuffer << "]");
   }

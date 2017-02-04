@@ -33,6 +33,9 @@ class SensorDecorator : public Sensor {
   const double getDouble() const {
     return (_sensor.getDouble());
   }
+  void update() {
+    _sensor.update();
+  }
 };
 
 } /* namespace homerio */

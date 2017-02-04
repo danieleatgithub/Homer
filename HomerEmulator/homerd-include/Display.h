@@ -25,7 +25,7 @@
 #include <HwLayer.hpp>
 
 using namespace std;
-using namespace shd;
+using namespace commodities;
 
 namespace homerio {
 class GpioPin;
