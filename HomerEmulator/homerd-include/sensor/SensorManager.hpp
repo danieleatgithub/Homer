@@ -30,27 +30,25 @@ class SensorManager {
   Scheduler& _shd;
   map<uint32_t, Sensor&> sensors;
   std::mutex mutex_sensors;
+  Logger _csv;
   Task update_task;
   string last_update_csv;
-  Logger _csv;
 
   void update() {
-    CsvSensorDecorator *c;
     std::unique_lock < std::mutex > lock(mutex_sensors);
     last_update_csv.clear();
     for (auto s : sensors) {
       s.second.update();
-      c = new CsvSensorDecorator(s.second);
-      last_update_csv += c->getString();
-      delete (c);
+      last_update_csv += CsvSensorDecorator(s.second).getString();
     }
   }
 
  public:
-  SensorManager(Scheduler &shd)
+  SensorManager(Scheduler &shd, const chrono::system_clock::duration period =
+                    std::chrono::seconds(60))
       : _shd(shd),
         _csv(Logger::getInstance(LOGSENSORS)) {
-    update_task.setInterval(std::chrono::seconds(10));
+    update_task.setPeriod(period);
     update_task.setCallback([&]() {
       this->update();
       LOG4CPLUS_INFO(_csv, last_update_csv);
@@ -72,6 +70,14 @@ class SensorManager {
   }
   void stop() {
     _shd.ScheduleCancel(update_task);
+  }
+
+  const chrono::system_clock::duration& getUpdatePeriod() const {
+    return update_task.getPeriod();
+  }
+
+  void setUpdatePeriod(const chrono::system_clock::duration& updatePeriod) {
+    update_task.setPeriod(updatePeriod);
   }
 };
 

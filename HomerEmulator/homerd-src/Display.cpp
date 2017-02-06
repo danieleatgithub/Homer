@@ -59,7 +59,7 @@ Display::Display(KeyPanel &kpnl, Scheduler &shd, I2cBus& bus, GpioPort& rst,
   this->key_light_delay = 1000;
 
   timedLightOff.setCallback([&] () {this->set_backlight(false);});
-  timedLightOff.setInterval(10);
+  timedLightOff.setPeriod(10);
 
   reset_pin = new GpioPin(rst);
   reset_pin->pin_export();

@@ -80,7 +80,8 @@ int main(int argc, char** argv) {
   scheduler = new Scheduler();
   acquaA5 = new BoardEmulated();
   emulatedDev = new EmulatedDevices(*acquaA5);
-  sensorManager = new SensorManager(*scheduler);
+  sensorManager = new SensorManager(*scheduler, std::chrono::seconds(10));
+  // sensorManager = new SensorManager(*scheduler);
 
   display = new WinstarEmulator(*keyPanel, *scheduler, *acquaA5);
   emulator = new HomerEmulator(display);
