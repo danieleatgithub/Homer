@@ -1,6 +1,6 @@
 MenuLeaf.o: ../src/MenuLeaf.cpp \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/sysroot/usr/include/stdc-predef.h \
- ../include/MenuLeaf.hpp \
+ ../include/menu/MenuLeaf.hpp \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/memory \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/stl_algobase.h \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/arm-buildroot-linux-gnueabi/bits/c++config.h \
@@ -129,8 +129,8 @@ MenuLeaf.o: ../src/MenuLeaf.cpp \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/shared_ptr_base.h \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/ext/aligned_buffer.h \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/backward/auto_ptr.h \
- ../include/MenuComponent.hpp ../include/MenuAble.hpp \
- ../include/MenuActionVisitors.hpp ../include/KeyPanel.hpp \
+ ../include/menu/MenuComponent.hpp ../include/menu/MenuAble.hpp \
+ ../include/menu/MenuActionVisitors.hpp ../include/KeyPanel.hpp \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/chrono \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/ratio \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/limits \
@@ -208,11 +208,11 @@ MenuLeaf.o: ../src/MenuLeaf.cpp \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/stl_tree.h \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/stl_map.h \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/stl_multimap.h \
- ../include/KeyButton.hpp ../include/MenuNavigatorVisitor.hpp
+ ../include/KeyButton.hpp ../include/menu/MenuNavigatorVisitor.hpp
 
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/sysroot/usr/include/stdc-predef.h:
 
-../include/MenuLeaf.hpp:
+../include/menu/MenuLeaf.hpp:
 
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/memory:
 
@@ -470,11 +470,11 @@ MenuLeaf.o: ../src/MenuLeaf.cpp \
 
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/backward/auto_ptr.h:
 
-../include/MenuComponent.hpp:
+../include/menu/MenuComponent.hpp:
 
-../include/MenuAble.hpp:
+../include/menu/MenuAble.hpp:
 
-../include/MenuActionVisitors.hpp:
+../include/menu/MenuActionVisitors.hpp:
 
 ../include/KeyPanel.hpp:
 
@@ -634,4 +634,4 @@ MenuLeaf.o: ../src/MenuLeaf.cpp \
 
 ../include/KeyButton.hpp:
 
-../include/MenuNavigatorVisitor.hpp:
+../include/menu/MenuNavigatorVisitor.hpp:

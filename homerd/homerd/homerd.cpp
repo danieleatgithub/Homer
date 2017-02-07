@@ -52,6 +52,9 @@
 #include <HwLayer.hpp>
 #include <Winstar.h>
 #include <HwAcquaA5.hpp>
+#include <CsvSensorDecorator.hpp>
+#include <SensorManager.hpp>
+#include <Bmp085Device.hpp>
 
 using option::Option;
 using option::Descriptor;
@@ -62,7 +65,7 @@ using namespace std;
 using namespace log4cplus;
 using namespace homerio;
 using namespace obs;
-using namespace shd;
+using namespace commodities;
 
 #define no_argument 0
 #define required_argument 1
@@ -201,48 +204,58 @@ int main(int argc, char *argv[]) {
   string ip;
   bool run = true;
   Sysinfo sysinfo = Sysinfo::get_instance();
+
   initialize();
   PropertyConfigurator config(props_file);
   config.configure();
 
   Logger logger = Logger::getRoot();
+  LOG4CPLUS_INFO(logger, "Homer starting ...");
 
-  Display *display;
+  // Common stuff
   Scheduler *scheduler;
   KeyPanel *keyPanel;
   HomerMenu *menu;
-  BoardAcquaA5 *acquaA5;
   Bmp085Device *bmp085Device;
   TemperatureSensor *tSens;
   BarometricSensor *pSens;
+  SensorManager *sensorManager;
 
+  //  Real stuff
+  BoardAcquaA5 *acquaA5;
+  Display *display;
+
+  // Create Universe
   keyPanel = new KeyPanel();
   scheduler = new Scheduler();
   acquaA5 = new BoardAcquaA5();
+  sensorManager = new SensorManager(*scheduler);
   display = new Winstar(*keyPanel, *scheduler, *acquaA5);
 
   keyPanel->setEventFilename(KEY_EVENT_DEVICE);
 
   shared_ptr < MenuActionVisitor > dw(new MenuDisplayVisitor(*display));
 
-  display->reset();
-
+  // Create sensors galaxy
   bmp085Device = new Bmp085Device(*acquaA5);
   tSens = new TemperatureSensor(*bmp085Device, string("Temperature"));
+  sensorManager->add(*tSens);
   pSens = new BarometricSensor(*bmp085Device, string("Pressure"));
   pSens->setAltituteCalibration(354.0);
-
-  tSens->update();
-  pSens->update();
+  sensorManager->add(*pSens);
 
   sleep(1);
 
+  // life spark ignition
+  sensorManager->start();
+  display->reset();
   menu = new HomerMenu(*keyPanel, *scheduler, *tSens, *pSens);
   menu->addActionVisitor(dw);
-
   keyPanel->start();
 
-  LOG4CPLUS_INFO(logger, "homerd started");
+  LOG4CPLUS_INFO(logger, "homerd ready");
+
+  // waiting for armageddon
   while (true) {
     this_thread::sleep_for(std::chrono::seconds(10));
     // FIXME: condwait in sysinfo per exit
@@ -251,6 +264,7 @@ int main(int argc, char *argv[]) {
   }
 
   keyPanel->stop();
+  sensorManager->stop();
   sleep(1);
 
   delete (menu);
@@ -258,7 +272,11 @@ int main(int argc, char *argv[]) {
   delete (acquaA5);
   delete (scheduler);
   delete (keyPanel);
+  delete (tSens);
+  delete (pSens);
+  delete (sensorManager);
 
+  // ready for resurrection
   LOG4CPLUS_INFO(logger, "homerd exit");
   return 0;
 }

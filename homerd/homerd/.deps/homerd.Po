@@ -209,10 +209,10 @@ homerd.o: homerd.cpp \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/stl_multimap.h \
  ../include/KeyButton.hpp ../include/Scheduler.hpp \
  ../include/IDGenerator.h \
- /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/condition_variable \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/mutex \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/system_error \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/arm-buildroot-linux-gnueabi/bits/error_constants.h \
+ /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/condition_variable \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/cstdbool \
  /wks/buildroot-2016.11/output/host/usr/lib/gcc/arm-buildroot-linux-gnueabi/4.9.4/include/stdbool.h \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/set \
@@ -261,11 +261,13 @@ homerd.o: homerd.cpp \
  ../include/optionparser.h \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/sysroot/usr/include/sys/stat.h \
  ../include/Sysinfo.h ../include/homerd.h ../include/KeyPanel.hpp \
- ../include/Observer.h ../include/Scheduler.hpp ../include/HomerMenu.hpp \
- ../include/Menu.hpp ../include/MenuAble.hpp ../include/MenuComponent.hpp \
- ../include/MenuActionVisitors.hpp ../include/MenuNavigatorVisitor.hpp \
- ../include/MenuException.hpp ../include/MenuLeaf.hpp \
- ../include/SubMenu.hpp \
+ ../include/Observer.h ../include/Scheduler.hpp \
+ ../include/menu/HomerMenu.hpp ../include/menu/Menu.hpp \
+ ../include/menu/MenuAble.hpp ../include/menu/MenuComponent.hpp \
+ ../include/menu/MenuActionVisitors.hpp \
+ ../include/menu/MenuNavigatorVisitor.hpp \
+ ../include/menu/MenuException.hpp ../include/menu/MenuLeaf.hpp \
+ ../include/menu/SubMenu.hpp \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/iterator \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/stream_iterator.h \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/stack \
@@ -273,15 +275,24 @@ homerd.o: homerd.cpp \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/stl_deque.h \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/deque.tcc \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/stl_stack.h \
- ../include/SimpleMenuElement.hpp ../include/MenuDisplayVisitor.hpp \
- ../include/MenuMoveVisitor.hpp ../include/Sensor.hpp \
+ ../include/menu/SimpleMenuElement.hpp \
+ ../include/menu/MenuDisplayVisitor.hpp \
+ ../include/menu/MenuMoveVisitor.hpp \
+ ../include/sensor/TemperatureSensor.hpp ../include/sensor/Sensor.hpp \
+ ../include/sensor/TemperatureDevice.hpp \
+ ../include/sensor/BarometricSensor.hpp \
+ ../include/sensor/BarometricDevice.hpp ../include/Winstar.h \
+ ../include/Display.h ../include/GpioPin.h ../include/HwAcquaA5.hpp \
+ ../include/sensor/CsvSensorDecorator.hpp \
+ ../include/sensor/SensorDecorator.hpp ../include/sensor/Sensor.hpp \
+ ../include/sensor/SensorManager.hpp \
+ ../include/sensor/CsvSensorDecorator.hpp \
+ ../include/sensor/Bmp085Device.hpp \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/fstream \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/codecvt.h \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/arm-buildroot-linux-gnueabi/bits/basic_file.h \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/arm-buildroot-linux-gnueabi/bits/c++io.h \
- /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/fstream.tcc \
- ../include/Winstar.h ../include/Display.h ../include/GpioPin.h \
- ../include/HwAcquaA5.hpp
+ /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/fstream.tcc
 
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/sysroot/usr/include/stdc-predef.h:
 
@@ -705,13 +716,13 @@ homerd.o: homerd.cpp \
 
 ../include/IDGenerator.h:
 
-/wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/condition_variable:
-
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/mutex:
 
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/system_error:
 
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/arm-buildroot-linux-gnueabi/bits/error_constants.h:
+
+/wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/condition_variable:
 
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/cstdbool:
 
@@ -817,23 +828,23 @@ homerd.o: homerd.cpp \
 
 ../include/Scheduler.hpp:
 
-../include/HomerMenu.hpp:
+../include/menu/HomerMenu.hpp:
 
-../include/Menu.hpp:
+../include/menu/Menu.hpp:
 
-../include/MenuAble.hpp:
+../include/menu/MenuAble.hpp:
 
-../include/MenuComponent.hpp:
+../include/menu/MenuComponent.hpp:
 
-../include/MenuActionVisitors.hpp:
+../include/menu/MenuActionVisitors.hpp:
 
-../include/MenuNavigatorVisitor.hpp:
+../include/menu/MenuNavigatorVisitor.hpp:
 
-../include/MenuException.hpp:
+../include/menu/MenuException.hpp:
 
-../include/MenuLeaf.hpp:
+../include/menu/MenuLeaf.hpp:
 
-../include/SubMenu.hpp:
+../include/menu/SubMenu.hpp:
 
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/iterator:
 
@@ -849,13 +860,41 @@ homerd.o: homerd.cpp \
 
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/stl_stack.h:
 
-../include/SimpleMenuElement.hpp:
+../include/menu/SimpleMenuElement.hpp:
 
-../include/MenuDisplayVisitor.hpp:
+../include/menu/MenuDisplayVisitor.hpp:
 
-../include/MenuMoveVisitor.hpp:
+../include/menu/MenuMoveVisitor.hpp:
 
-../include/Sensor.hpp:
+../include/sensor/TemperatureSensor.hpp:
+
+../include/sensor/Sensor.hpp:
+
+../include/sensor/TemperatureDevice.hpp:
+
+../include/sensor/BarometricSensor.hpp:
+
+../include/sensor/BarometricDevice.hpp:
+
+../include/Winstar.h:
+
+../include/Display.h:
+
+../include/GpioPin.h:
+
+../include/HwAcquaA5.hpp:
+
+../include/sensor/CsvSensorDecorator.hpp:
+
+../include/sensor/SensorDecorator.hpp:
+
+../include/sensor/Sensor.hpp:
+
+../include/sensor/SensorManager.hpp:
+
+../include/sensor/CsvSensorDecorator.hpp:
+
+../include/sensor/Bmp085Device.hpp:
 
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/fstream:
 
@@ -866,11 +905,3 @@ homerd.o: homerd.cpp \
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/arm-buildroot-linux-gnueabi/bits/c++io.h:
 
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/fstream.tcc:
-
-../include/Winstar.h:
-
-../include/Display.h:
-
-../include/GpioPin.h:
-
-../include/HwAcquaA5.hpp:

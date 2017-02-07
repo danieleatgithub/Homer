@@ -16,68 +16,35 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *******************************************************************************/
 
-#ifndef GPIOPIN_H_
-#define GPIOPIN_H_
+#ifndef MOVEVISITOR_HPP_
+#define MOVEVISITOR_HPP_
 
-#include <string>
-#include <HwLayer.hpp>
-
-using namespace std;
-
-#define SYSFS_GPIO_DIR "/sys/class/gpio"
-#define MAX_BUF 64
+#include <MenuLeaf.hpp>
+#include <SubMenu.hpp>
+#include <MenuException.hpp>
+#include <stack>
 
 namespace homerio {
 
-enum State_e {
-  STATE_OFF = 0,
-  STATE_ON,
-  STATE_TOGGLE
-};
-enum Direction_e {
-  OUT = 0,
-  INP
-};
-
-enum Edge_e {
-  RISING = 0,
-  FALLING,
-  NONE,
-  BOTH
-};
-
-class GpioPin {
- private:
-  string kstr;
-  int kid;
-  int fd;
-  bool in_use;
-  string name;
-  Edge_e edge;
-  Direction_e direction;
-  bool last_value;
-  int write_value(bool value);
-  GpioPort& gpioPort;
+class MenuMoveVisitor : public MenuNavigatorVisitor {
+  stack<reference_wrapper<SubMenu>> history;
 
  public:
-  static struct pinmap_s* getPinDescriptor(const char *name);
-  GpioPin(GpioPort& port);
+  MenuMoveVisitor(shared_ptr<SubMenu> m);
 
-  virtual ~GpioPin();
-  int get_pin();
-  int pin_export();
-  int pin_unexport();
-  int set_direction(Direction_e dir);
-  int set_edge(Edge_e edge);
-  int setState(State_e state);
-  int flip(unsigned int us);
-  int get(bool *value);
-  int pin_open();
-  int pin_close();
-  int getfd();
-
+  virtual ~MenuMoveVisitor() {
+  }
+  ;
+  /**
+   * Reset history and jump back to home
+   * @return
+   * pointer to the first element in root menu
+   */
+  shared_ptr<MenuComponent> home();
+  virtual shared_ptr<MenuComponent> move(MenuLeaf& m, KeyButton& k);
+  virtual shared_ptr<MenuComponent> move(SubMenu& m, KeyButton& k);
 };
 
 }
 
-#endif /* GPIOPIN_H_ */
+#endif /* MOVEVISITOR_HPP_ */

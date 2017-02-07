@@ -1,5 +1,5 @@
 AM_LDFLAGS =  -llog4cplus -lpthread
-AM_CPPFLAGS = -std=c++11 -I$(top_srcdir)/include
+AM_CPPFLAGS = -std=c++11 -I$(top_srcdir)/include -I$(top_srcdir)/include/menu -I$(top_srcdir)/include/sensor
 
 bin_PROGRAMS=homerd
 

@@ -15,19 +15,30 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *******************************************************************************/
+/*
+ * Menu.hpp
+ *
+ * Reference:
+ * 		http://stackoverflow.com/questions/13634189/best-way-to-construct-a-console-menu-class-hierachy
+ * 		https://sourcemaking.com/design_patterns/composite
+ * 		https://sourcemaking.com/design_patterns/visitor
+ *
+ *  Created on: 18/lug/2016
+ *      Author: daniele
+ */
 
-#define LOGDEVICE 	"homerd.device"
-#define LOGHOMERD 	"homerd"
-#define LOGSENSORS   "homerd.sensors"
+#ifndef MENU_HPP_
+#define MENU_HPP_
 
-// TODO get from properties
-#define DAEMON_NAME "homerd"
-#define ONEWIRE_0_PIN "PA01"
-#define I2C_0_DAT_PIN "PA30"
-#define I2C_0_CLK_PIN "PA31"
-#define I2C_BUS "/dev/i2c-0"
-#define SYSFS_GPIO_DIR "/sys/class/gpio"
-#define LCD_BACKLIGHT_PIN "PA03"
-#define LCD_RESET_PIN "PA02"
-#define KEY_EVENT_DEVICE "/dev/input/event0"
-#define SYSFS_ROOT "/sys"
+#include <MenuAble.hpp>
+#include <MenuComponent.hpp>
+#include <MenuException.hpp>
+#include <MenuLeaf.hpp>
+#include <SubMenu.hpp>
+#include <MenuActionVisitors.hpp>
+#include <MenuNavigatorVisitor.hpp>
+#include <SimpleMenuElement.hpp>
+#include <MenuDisplayVisitor.hpp>
+#include <MenuMoveVisitor.hpp>
+
+#endif /* MENU_HPP_ */

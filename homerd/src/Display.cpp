@@ -1,3 +1,20 @@
+/*******************************************************************************
+ * Copyright (C) 2016  Daniele Colombo
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *******************************************************************************/
 #include <Display.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -23,52 +40,52 @@
 
 using namespace std;
 using namespace log4cplus;
-using namespace shd;
+using namespace commodities;
 
 namespace homerio {
 struct pinmap_s;
 
+Display::Display(KeyPanel &kpnl, Scheduler &shd, I2cBus& bus, GpioPort& rst,
+                 GpioPort& backlight)
+    : keyPanel(kpnl),
+      scheduler(shd),
+      i2cBus(bus) {
+  this->write_usleep = 100;
+  this->address = 0xff;
+  this->bus = string(i2cBus.getBus());
+  this->rst = string(rst.getName());
+  this->backlight = string(backlight.getName());
+  this->backlight_state = true;
+  this->key_light_delay = 1000;
 
-Display::Display(KeyPanel &kpnl, Scheduler &shd,I2cBus& bus, GpioPort& rst, GpioPort& backlight) : keyPanel(kpnl), scheduler(shd), i2cBus(bus) {
-    this->write_usleep = 100;
-    this->address = 0xff;
-    this->bus = string(i2cBus.getBus());
-    this->rst = string(rst.getName());
-    this->backlight = string(backlight.getName());
-    this->backlight_state = true;
-    this->key_light_delay = 1000;
+  timedLightOff.setCallback([&] () {this->set_backlight(false);});
+  timedLightOff.setPeriod(10);
 
-    timedLightOff.setCallback([&] () { this->set_backlight(false);});
-    timedLightOff.setInterval(10);
+  reset_pin = new GpioPin(rst);
+  reset_pin->pin_export();
+  reset_pin->set_direction(homerio::OUT);
+  reset_pin->pin_open();
+  reset_pin->setState(homerio::STATE_ON);
 
-    reset_pin = new GpioPin(rst);
-    reset_pin->pin_export();
-    reset_pin->set_direction(homerio::OUT);
-    reset_pin->pin_open();
-    reset_pin->setState(homerio::STATE_ON);
-
-    backlight_pin = new GpioPin(backlight);
-    backlight_pin->pin_export();
-    backlight_pin->set_direction(homerio::OUT);
-    backlight_pin->pin_open();
-	scheduler.ScheduleAfter(timedLightOff);
-	keyPanel.keyAttach(keyPanel_reg, [&] ( KeyButton& k ) {
-		if(!is_backlight_on()) {
-			 set_backlight(true);
-		}
-		scheduler.ScheduleRestart(timedLightOff);
-	});
+  backlight_pin = new GpioPin(backlight);
+  backlight_pin->pin_export();
+  backlight_pin->set_direction(homerio::OUT);
+  backlight_pin->pin_open();
+  scheduler.ScheduleAfter(timedLightOff);
+  keyPanel.keyAttach(keyPanel_reg, [&] ( KeyButton& k ) {
+    if(!is_backlight_on()) {
+      set_backlight(true);
+    }
+    scheduler.ScheduleRestart(timedLightOff);
+  });
 }
-
 
 Display::~Display() {
-    reset_pin->pin_close();
-    backlight_pin->pin_close();
-    delete (reset_pin);
-    delete (backlight_pin);
+  reset_pin->pin_close();
+  backlight_pin->pin_close();
+  delete (reset_pin);
+  delete (backlight_pin);
 }
-
-
 
 //int Display::dpy_init() {
 //
@@ -84,28 +101,26 @@ Display::~Display() {
 //    return (device_init());
 //}
 
-
-
-
 int Display::set_backlight(bool state) {
-	int ret;
-	ret = backlight_pin->setState(state ? STATE_ON : STATE_OFF);
-	if(ret >= 0) {
-		backlight_state = state;
-	}
-    return (ret);
+  int ret;
+  ret = backlight_pin->setState(state ? STATE_ON : STATE_OFF);
+  if (ret >= 0) {
+    backlight_state = state;
+  }
+  return (ret);
 }
 
 int Display::dpy_putchar(unsigned char ch) {
-    return (this->write_data(ch));
+  return (this->write_data(ch));
 }
 int Display::dpy_puts(const char *str) {
-    const char *p = str;
-    unsigned int ret = 0;
-    while (ret == 0 && p && *p) ret = write_data(*p++);
-    return ((p ? (p - str) : -1));
+  const char *p = str;
+  unsigned int ret = 0;
+  while (ret == 0 && p && *p)
+    ret = write_data(*p++);
+  return ((p ? (p - str) : -1));
 }
 bool Display::is_backlight_on() {
-    return (backlight_state);
+  return (backlight_state);
 }
 }

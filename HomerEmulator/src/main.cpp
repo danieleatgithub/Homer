@@ -30,8 +30,8 @@
 #include <HomerMenu.hpp>
 #include <HwLayer.hpp>
 #include <Scheduler.hpp>
-#include <sensor/CsvSensorDecorator.hpp>
-#include <sensor/SensorManager.hpp>
+#include <CsvSensorDecorator.hpp>
+#include <SensorManager.hpp>
 #include <EmulatedHw.hpp>
 #include <EmulatedDevices.hpp>
 #include <HomerEmulator.hpp>

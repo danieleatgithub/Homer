@@ -16,7 +16,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" description="" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924" name="Configuration_with_Autotools Buildroot ARM" parent="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" description="" id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924" name="Configuration_with_Autotools Buildroot ARM">
 					<folderInfo id="org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924." name="/" resourcePath="">
 						<toolChain id="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base.1728649084" name="Autotools Buildroot ARM (/wks/buildroot-2016.11/output)" superClass="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base">
 							<option id="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base.option.path.1889508747" name="Path" superClass="org.buildroot.wks.buildroot-2016.11.output..autotools.toolchain.base.option.path"/>
