@@ -52,15 +52,16 @@ struct termios t;
 int main(int argc, char** argv) {
 
   // Poperties load and init
+
   initialize();
   PropertyConfigurator config(
       "/wks/workspace/Homer/HomerEmulator/resources/homerd.properties");
   config.configure();
 
-  Logger logemu = Logger::getInstance(LOGEMULATOR);
-  LOG4CPLUS_INFO(logemu, "HomerEmulator starting ...");
+  Logger logger = Logger::getInstance(LOGEMULATOR);
+  LOG4CPLUS_INFO(logger, "HomerEmulator starting ...");
 
-  // Real stuff
+  // Common stuff
   Scheduler *scheduler;
   KeyPanel *keyPanel;
   HomerMenu *menu;
@@ -81,17 +82,16 @@ int main(int argc, char** argv) {
   acquaA5 = new BoardEmulated();
   emulatedDev = new EmulatedDevices(*acquaA5);
   sensorManager = new SensorManager(*scheduler, std::chrono::seconds(10));
-  // sensorManager = new SensorManager(*scheduler);
-
   display = new WinstarEmulator(*keyPanel, *scheduler, *acquaA5);
+
   emulator = new HomerEmulator(display);
+
   shared_ptr < MenuActionVisitor > dw(new MenuDisplayVisitor(*display));
 
   // Create sensors galaxy
   bmp085Device = new Bmp085Device(*acquaA5);
   tSens = new TemperatureSensor(*bmp085Device, string("Temperature"));
   sensorManager->add(*tSens);
-
   pSens = new BarometricSensor(*bmp085Device, string("Pressure"));
   pSens->setAltituteCalibration(354.0);
   sensorManager->add(*pSens);
@@ -109,7 +109,7 @@ int main(int argc, char** argv) {
   menu->addActionVisitor(dw);
   display->set_backlight(true);
 
-  LOG4CPLUS_INFO(logemu, "HomerEmulator ready ...");
+  LOG4CPLUS_INFO(logger, "HomerEmulator ready ...");
 
   // waiting for armageddon
   emulator->mainLoop();
@@ -135,6 +135,7 @@ int main(int argc, char** argv) {
   delete (emulatedDev);
   delete (emulator);
 
-  // give back power
+  // ready for resurrection
+  LOG4CPLUS_INFO(logger, "HomerEmulator exit");
   return 0;
 }
