@@ -9,12 +9,14 @@ The development enviroment is based on:
 - eclipse CDT Luna
 - buildroot-2016.11
 
+wiki at https://github.com/danieleatgithub/Homer/wiki
+
 The goals of Homer Idea are:
  1) Improve my C++11 and design pattern knowledege.
  2) Realize a working Home Automation Hub 
  3) Have enjoing with coding, soldering and discovering new ideas :)
 
-.... all in GPL, and if you need a context switch yoy could GOTO https://it.wikipedia.org/wiki/Tommaso_Salvini my old contribution in wikipedia
+.... all in GPL, and if you need a context switch you could GOTO https://it.wikipedia.org/wiki/Tommaso_Salvini my old contribution in wikipedia
 
 Codestyle:
  .hpp C++11 includes
