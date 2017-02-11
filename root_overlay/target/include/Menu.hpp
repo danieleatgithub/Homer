@@ -15,35 +15,30 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *******************************************************************************/
+/*
+ * Menu.hpp
+ *
+ * Reference:
+ * 		http://stackoverflow.com/questions/13634189/best-way-to-construct-a-console-menu-class-hierachy
+ * 		https://sourcemaking.com/design_patterns/composite
+ * 		https://sourcemaking.com/design_patterns/visitor
+ *
+ *  Created on: 18/lug/2016
+ *      Author: daniele
+ */
 
-#ifndef IDGENERATOR_H_
-#define IDGENERATOR_H_
-#include <cstdint>
-#include <iostream>
-#include <mutex>
+#ifndef MENU_HPP_
+#define MENU_HPP_
 
-namespace commodities {
+#include <MenuAble.hpp>
+#include <MenuComponent.hpp>
+#include <MenuException.hpp>
+#include <MenuLeaf.hpp>
+#include <SubMenu.hpp>
+#include <MenuActionVisitors.hpp>
+#include <MenuNavigatorVisitor.hpp>
+#include <SimpleMenuElement.hpp>
+#include <MenuDisplayVisitor.hpp>
+#include <MenuMoveVisitor.hpp>
 
-class IDGenerator {
- public:
-  static IDGenerator& get_istance() {
-    static IDGenerator istance;
-    return istance;
-  }
-  uint32_t getId() {
-    std::unique_lock < std::mutex > lock(mutex);
-    return id++;
-  }
-
- private:
-  IDGenerator() {
-    std::unique_lock < std::mutex > lock(mutex);
-    id = 0;
-  }
-  uint32_t id;
-  std::mutex mutex;
-};
-
-} /* namespace shd */
-
-#endif /* IDGENERATOR_H_ */
+#endif /* MENU_HPP_ */

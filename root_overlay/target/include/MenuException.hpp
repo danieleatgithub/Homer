@@ -16,68 +16,31 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *******************************************************************************/
 
-#ifndef GPIOPIN_H_
-#define GPIOPIN_H_
-
-#include <string>
-#include <HwLayer.hpp>
-
-using namespace std;
-
-#define SYSFS_GPIO_DIR "/sys/class/gpio"
-#define MAX_BUF 64
-
+#ifndef HOMERD_INCLUDE_MENUEXCEPTION_HPP_
+#define HOMERD_INCLUDE_MENUEXCEPTION_HPP_
 namespace homerio {
-
-enum State_e {
-  STATE_OFF = 0,
-  STATE_ON,
-  STATE_TOGGLE
-};
-enum Direction_e {
-  OUT = 0,
-  INP
-};
-
-enum Edge_e {
-  RISING = 0,
-  FALLING,
-  NONE,
-  BOTH
-};
-
-class GpioPin {
- private:
-  string kstr;
-  int kid;
-  int fd;
-  bool in_use;
-  string name;
-  Edge_e edge;
-  Direction_e direction;
-  bool last_value;
-  int write_value(bool value);
-  GpioPort& gpioPort;
-
+class MenuException : public std::exception, public std::nested_exception {
  public:
-  static struct pinmap_s* getPinDescriptor(const char *name);
-  GpioPin(GpioPort& port);
-
-  virtual ~GpioPin();
-  int get_pin();
-  int pin_export();
-  int pin_unexport();
-  int set_direction(Direction_e dir);
-  int set_edge(Edge_e edge);
-  int setState(State_e state);
-  int flip(unsigned int us);
-  int get(bool *value);
-  int pin_open();
-  int pin_close();
-  int getfd();
-
+  MenuException(const char* msg)
+      : mMsg(msg) {
+  }
+  virtual ~MenuException() noexcept {
+  }
+  virtual const char* what() const noexcept {
+    return mMsg.c_str();
+  }
+ protected:
+  std::string mMsg;
 };
 
+class MenuEmptyException : public MenuException {
+ public:
+  MenuEmptyException(const char* msg)
+      : MenuException(msg) {
+  }
+  virtual ~MenuEmptyException() noexcept {
+  }
+};
 }
 
-#endif /* GPIOPIN_H_ */
+#endif /* HOMERD_INCLUDE_MENUEXCEPTION_HPP_ */

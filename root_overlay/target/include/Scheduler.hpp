@@ -1,10 +1,20 @@
-/*
- * Scheduler.hpp
+/*******************************************************************************
+ * Copyright (C) 2016  Daniele Colombo
  *
- *  Created on: 27/mar/2016
- *      Author: daniele
- */
-
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *******************************************************************************/
 
 #ifndef SCHEDULER_HPP_
 #define SCHEDULER_HPP_
@@ -25,7 +35,7 @@
 
 using namespace std;
 
-namespace shd {
+namespace commodities {
 
 using cb_t = std::function<void()>;
 
@@ -37,161 +47,162 @@ class Scheduler;
  */
 
 class Task {
-    friend class Scheduler;
+  friend class Scheduler;
 
+ public:
+  /**
+   *
+   * @return Current deadline
+   */
+  const chrono::system_clock::time_point& getTime() const {
+    return time;
+  }
+  /**
+   * Set deadline
+   * @param time deadline
+   */
+  void setTime(const chrono::system_clock::time_point& time) {
+    this->time = time;
+  }
+  /**
+   * Get the callback function
+   * @return callback
+   */
+  const cb_t& getCallback() const {
+    return callback;
+  }
+  /**
+   * Set the callback function
+   * @param callback
+   */
+  void setCallback(const cb_t& callback) {
+    this->callback = callback;
+  }
+  /**
+   *
+   * @return unique ID
+   */
+  const uint32_t& getId() const {
+    return id;
+  }
+  /**
+   *
+   * @return interval
+   */
+  const chrono::system_clock::duration& getPeriod() const {
+    return period;
+  }
+  /**
+   *
+   * @param period
+   */
+  void setPeriod(const chrono::system_clock::duration period) {
+    this->period = period;
+  }
+  void setPeriod(unsigned int period) {
+    setPeriod(std::chrono::seconds(period));
+  }
 
-  public:
-    /**
-     *
-     * @return Current deadline
-     */
-    const chrono::system_clock::time_point& getTime() const {
-        return time;
-    }
-    /**
-     * Set deadline
-     * @param time deadline
-     */
-    void setTime(const chrono::system_clock::time_point& time) {
-        this->time = time;
-    }
-    /**
-     * Get the callback function
-     * @return callback
-     */
-    const cb_t& getCallback() const {
-        return callback;
-    }
-    /**
-     * Set the callback function
-     * @param callback
-     */
-    void setCallback(const cb_t& callback) {
-        this->callback = callback;
-    }
-    /**
-     *
-     * @return unique ID
-     */
-    const uint32_t& getId() const {
-        return id;
-    }
-    /**
-     *
-     * @return interval
-     */
-    const chrono::system_clock::duration& getInterval() const {
-        return interval;
-    }
-    /**
-     *
-     * @param interval
-     */
-    void setInterval(const chrono::system_clock::duration interval) {
-        this->interval = interval;
-    }
-    void setInterval(unsigned int interval) {
-    	setInterval(std::chrono::seconds(interval));
-     }
+  /**
+   * is task cancelled
+   * @return
+   */
+  bool isCancelled() const {
+    return cancelled;
+  }
+  /**
+   *
+   * Default constructor with a disabled task
+   *
+   */
+  Task() {
+    init();
+  }
+  /**
+   * Constructor with callback
+   * @param callback
+   */
+  Task(cb_t callback) {
+    init();
+    this->callback = callback;
+  }
+  /**
+   * Full parameter constructor
+   * @param interval
+   * @param callback
+   */
+  Task(chrono::system_clock::duration interval, cb_t callback) {
+    init();
+    this->time = chrono::system_clock::now() + interval;
+    this->period = interval;
+    this->callback = callback;
+  }
 
+  /**
+   * Same task has same id
+   * @param lhs
+   * @param rhs
+   * @return
+   */
+  friend bool operator==(const Task& lhs, const Task& rhs) {
+    return (lhs.id == rhs.id);
+  }
+  /**
+   * Ordered by deadline first is the earliest
+   * @param lhs
+   * @param rhs
+   * @return
+   */
+  friend bool operator<(const Task& lhs, const Task& rhs) {
+    return (lhs.time < rhs.time);
+  }
+  /**
+   * For debug
+   * @param strm
+   * @param task
+   * @return
+   */
+  friend std::ostream& operator<<(std::ostream &strm, const Task &task) {
+    return strm << "ID=" << task.id << ",TIME="
+        << chrono::system_clock::to_time_t(task.time) << ",INTERVAL=" << dec
+        << task.getPeriod().count();
+  }
 
-    /**
-     * is task cancelled
-     * @return
-     */
-    bool isCancelled() const {
-        return cancelled;
-    }
-   /**
-    *
-    * Default constructor with a disabled task
-    *
-    */
-    Task() { init(); }
-    /**
-     * Constructor with callback
-     * @param callback
-     */
-    Task(cb_t callback) {
-    	init();
-        this->callback = callback;
-    }
-    /**
-     * Full parameter constructor
-     * @param interval
-     * @param callback
-     */
-    Task(chrono::system_clock::duration interval,cb_t callback) {
-    	init();
-        this->time =  chrono::system_clock::now() + interval;
-        this->interval = interval;
-        this->callback = callback;
-    }
+ private:
+  cb_t callback;
+  chrono::system_clock::duration period;  // Repeat interval
+  chrono::system_clock::time_point time;	 // deadline
+  uint32_t id;	// Autogenerated task identifier
+  bool cancelled;  // Cancelled task
 
-    /**
-     * Same task has same id
-     * @param lhs
-     * @param rhs
-     * @return
-     */
-    friend bool operator==(const Task& lhs, const Task& rhs) {
-        return (lhs.id == rhs.id);
-    }
-    /**
-     * Ordered by deadline first is the earliest
-     * @param lhs
-     * @param rhs
-     * @return
-     */
-    friend bool operator<(const Task& lhs, const Task& rhs) {
-        return (lhs.time < rhs.time);
-    }
-    /**
-     * For debug
-     * @param strm
-     * @param task
-     * @return
-     */
-    friend std::ostream& operator<<(std::ostream &strm, const Task &task) {
-         return strm << "ID=" << task.id <<
-        		",TIME=" << chrono::system_clock::to_time_t(task.time) <<
-        		",INTERVAL=" << dec << task.getInterval().count();
-    }
+  /**
+   * Default initialization
+   */
+  void init() {
+    this->id = IDGenerator::get_istance().getId();
+    this->time = chrono::system_clock::now();
+    this->callback = nullptr;
+    this->period = chrono::seconds(0);
+    ;
+    this->cancelled = false;
+  }
+  /**
+   * Cancel task
+   * @param cancelled
+   */
+  void setCancelled(bool cancelled) {
+    this->cancelled = cancelled;
+  }
 
-  private:
-    cb_t callback;
-    chrono::system_clock::duration interval; // Repeat interval
-    chrono::system_clock::time_point time;	 // deadline
-    uint32_t id;	// Autogenerated task identifier
-    bool cancelled; // Cancelled task
-
-    /**
-     * Default initialization
-     */
-    void init() {
-        this->id =  IDGenerator::get_istance().getId();
-        this->time =  chrono::system_clock::now();
-        this->callback = nullptr;
-        this->interval = chrono::seconds(0);;
-        this->cancelled = false;
+  /**
+   * Thread launched in detached mode
+   */
+  void go() const {
+    if (callback && !cancelled) {
+      // TODO: Valgrind complains leaks on detached threads change to joinable
+      std::thread(callback).detach();
     }
-    /**
-     * Cancel task
-     * @param cancelled
-     */
-    void setCancelled(bool cancelled) {
-        this->cancelled = cancelled;
-    }
-
-    /**
-     * Thread launched in detached mode
-     */
-    void go() const {
-        if(callback && !cancelled) {
-        	// TODO: Valgrind complains leaks on detached threads change to joinable
-            std::thread( callback ).detach();
-        }
-    }
+  }
 };
 
 /**
@@ -201,260 +212,346 @@ class Task {
  *
  * Examples:
  *
- * 	 Scheduler sch;
  *
- *   Task t1(std::chrono::seconds(2),foo_task1);
- *   Task t2(bind_fun2);
- *   Task t3(bind_fun3);
- *   Task t4([] () {
- *       foo_task4();
- *   });
+ #include <Scheduler.hpp>
+ #include <cstdio>
+ #include <ctime>
+ #include <future>
+ #include <string>
+
+ #define MARKUSED(X)  ((void)(&(X)))
+
+ using namespace std;
+ using namespace shd;
+
+ void print_head() {
+ std::time_t result = std::time(nullptr);
+ string temp = std::asctime(std::localtime(&result));
+ cout << "TRACE [" << std::this_thread::get_id() << "] "<< temp.substr(0,temp.size()-1);
+ }
+ void foo_sleep(int p) {
+ print_head();
+ cout << __PRETTY_FUNCTION__  << "<" << p << ">" << endl;
+ if(p>0) this_thread::sleep_for(chrono::seconds(p));
+
+ }
+ void foo_promise(promise<int>& promise_r,int v) {
+ print_head();
+ cout << __PRETTY_FUNCTION__   << endl;
+ int value = v;
+ if(v > 0) this_thread::sleep_for(chrono::seconds(v));
+ promise_r.set_value(move(value));
+ }
+ void foo_task1() {
+ print_head();
+ cout << __PRETTY_FUNCTION__  << endl;
+ }
+ void foo_task2() {
+ print_head();
+ cout << __PRETTY_FUNCTION__  << endl;
+ }
+ void foo_task3() {
+ print_head();
+ cout << __PRETTY_FUNCTION__  << endl;
+ }
+ void foo_task4() {
+ print_head();
+ cout << __PRETTY_FUNCTION__  << endl;
+ }void foo_chain_task2(Scheduler & sch) {
+ auto now = std::chrono::system_clock::now();
+ print_head();
+ cout << __PRETTY_FUNCTION__   << endl;
+ sch.ScheduleAt(now + std::chrono::seconds(1), [] { foo_task2(); });
+ }
+
+ int main() {
+
+ Scheduler sch;
+ promise<int> promise_1;
+ future<int> future_1;
+ int value_1 = 0;
+ promise<int> promise_2;
+ future<int> future_2;
+
+ int value_2 = 0;
+ MARKUSED(value_2); // Suppress warning unused-variable
+
+ cb_t bind_fun2 = std::bind(foo_task2);
+ cb_t bind_fun3 = std::bind(foo_sleep,-3);
+
+ print_head();
+ cout << "START" << endl;
+
+
+ Task t1(std::chrono::seconds(2),foo_task1);
+ Task t2(bind_fun2);
+ Task t3(bind_fun3);
+ Task t4([] () {
+ foo_task4();
+ });
+
+
+ Task t5([&] { foo_promise(ref(promise_1),50); });
+ Task t6([&] { foo_promise(ref(promise_2),60); });
+ Task t7([&sch] { foo_sleep(7); });
+
+ auto now = std::chrono::system_clock::now();
+ sch.ScheduleEvery(t1);
+ sch.ScheduleEvery(std::chrono::seconds(1),t2);
+ sch.ScheduleEvery(std::chrono::seconds(4),t3);
+ sch.ScheduleCancel(t2);
+ sch.ScheduleAt(now + std::chrono::seconds(10), t4);
+ sch.ScheduleAt(now + std::chrono::seconds(6), t5);
+ sch.ScheduleAt(now + std::chrono::seconds(12), [&] { sch.ScheduleCancel(t3); });
+ sch.ScheduleAt(now + std::chrono::seconds(13), [&] {
+ cout << "TRACE RESCHEDULE" << endl;
+ sch.ScheduleEvery(std::chrono::seconds(4),t1);
+ });
+ sch.ScheduleAt(now + std::chrono::seconds(5), [&sch] { foo_chain_task2(sch); });
+ sch.ScheduleAfter(std::chrono::seconds(5), [] () { std::cout << "TRACE hello" << endl; });
+
+
+ print_head();
+ cout << "get future" << endl;
+ future_1 = promise_1.get_future();
+ print_head();
+ cout << "get value" << endl;
+ value_1 = future_1.get();
+ print_head();
+ cout << "value_1=" << value_1 << " wait=" << sch.getWaitingSize() << " running=" << sch.getRunningSize() <<endl;
+
+ getchar();
+
+ return 0;
+ }
  *
- *   Task t5([&] { foo_promise(ref(promise_1),50); });
- *   Task t6([&] { foo_promise(ref(promise_2),60); });
- *   Task t7([&sch] { foo_sleep(7); });
- *
- *   auto now = std::chrono::system_clock::now();
- *   sch.ScheduleEvery(t1);
- *   sch.ScheduleEvery(std::chrono::seconds(1),t2);
- *   sch.ScheduleEvery(std::chrono::seconds(4),t3);
- *   sch.ScheduleCancel(t2);
- *   sch.ScheduleAt(now + std::chrono::seconds(10), t4);
- *   sch.ScheduleAt(now + std::chrono::seconds(6), t5);
- *   sch.ScheduleAt(now + std::chrono::seconds(12), [&] { sch.ScheduleCancel(t3); });
- *   sch.ScheduleAt(now + std::chrono::seconds(13), [&] {
- *   	cout << "TRACE RESCHEDULE" << endl;
- *   	sch.ScheduleEvery(std::chrono::seconds(4),t1);
- *   });
- *   sch.ScheduleAt(now + std::chrono::seconds(5), [&sch] { foo_chain_task2(sch); });
- *   sch.ScheduleAfter(std::chrono::seconds(5), [] () { std::cout << "TRACE hello" << endl; });
-*/
+ */
 
 class Scheduler {
 
-  public:
-	/**
-	 * Default constructor
-	 * Start thread task manager
-	 */
-    Scheduler()
-        :go_on(true) {
-        loop_thread.reset(new std::thread([this]() {
-            this->ThreadLoop();
-        }));
-    }
-    /**
-     * Stop scheduler unlock task manager and join it
-     */
-    ~Scheduler() {
-        go_on = false;
-        ScheduleAt(chrono::system_clock::now(),[] () {});
-        loop_thread->join();
-    }
+ public:
+  /**
+   * Default constructor
+   * Start thread task manager
+   */
+  Scheduler()
+      : go_on(true) {
+    loop_thread.reset(new std::thread([this]() {
+      this->ThreadLoop();
+    }));
+  }
+  /**
+   * Stop scheduler unlock task manager and join it
+   */
+  ~Scheduler() {
+    go_on = false;
+    ScheduleAt(chrono::system_clock::now(), [] () {});
+    loop_thread->join();
+  }
 
+  Scheduler& operator=(const Scheduler& rhs) = delete;
+  Scheduler(const Scheduler& rhs) = delete;
 
-    Scheduler& operator=(const Scheduler& rhs) = delete;
-    Scheduler(const Scheduler& rhs) = delete;
-
-    /**
-     * for debug pourpose
-     * @param strm
-     * @param shd
-     * @return
-     */
-    friend std::ostream& operator<<(std::ostream &strm, const Scheduler &shd) {
-        for(auto it = shd.waiting_tasks.begin(); it != shd.waiting_tasks.end(); it++) strm << *it << ";";
-        return strm;
-    }
-    /**
-     *
-     * @return number of waiting tasks
-     */
-    unsigned int getWaitingSize() {
-        return waiting_tasks.size();
-    }
-    /**
-     *
-     * @return number of running tasks
-     */
-    unsigned int getRunningSize() {
-        return running_tasks.size();
-    }
-    /**
-     * Schedule a task at specific time, if the task is already present in waiting queue
-     * the task will be rescheduled at the new time point
-     * primary schedule method
-     * FIXME: if is in running queue
-     * @param time
-     * @param task
-     */
-    void ScheduleAt(chrono::system_clock::time_point time, Task& task) {
-        std::unique_lock<std::mutex> lock(mutex);
-        if(!task.isCancelled()) {
-            task.setTime(time);
-            task.setCancelled(true); // if is in running queue it will be not rescheduled
-            auto tasks_it = find_if (waiting_tasks.begin(), waiting_tasks.end(), [&] (const Task& element) {
-                return(task == element);
-            });
-            // erase the task in waiting queue
-            if(tasks_it != waiting_tasks.end()) {
-                if(tasks_it == waiting_tasks.begin()) {
-                    waiting_tasks.erase(*tasks_it);
-                    blocker.notify_one();
-                } else {
-                    waiting_tasks.erase(*tasks_it);
-                }
-            }
-            task.setCancelled(false); // Enable the task and add to the queue
-            waiting_tasks.insert(task);
-
-            // if task has the shortest deadline unlock the scheduler
-            if (*(waiting_tasks.begin()) == task)
-                blocker.notify_one();
+  /**
+   * for debug pourpose
+   * @param strm
+   * @param shd
+   * @return
+   */
+  friend std::ostream& operator<<(std::ostream &strm, const Scheduler &shd) {
+    for (auto it = shd.waiting_tasks.begin(); it != shd.waiting_tasks.end();
+        it++)
+      strm << *it << ";";
+    return strm;
+  }
+  /**
+   *
+   * @return number of waiting tasks
+   */
+  unsigned int getWaitingSize() {
+    return waiting_tasks.size();
+  }
+  /**
+   *
+   * @return number of running tasks
+   */
+  unsigned int getRunningSize() {
+    return running_tasks.size();
+  }
+  /**
+   * Schedule a task at specific time, if the task is already present in waiting queue
+   * the task will be rescheduled at the new time point
+   * primary schedule method
+   * FIXME: if is in running queue
+   * @param time
+   * @param task
+   */
+  void ScheduleAt(chrono::system_clock::time_point time, Task& task) {
+    std::unique_lock < std::mutex > lock(mutex);
+    if (!task.isCancelled()) {
+      task.setTime(time);
+      task.setCancelled(true);  // if is in running queue it will be not rescheduled
+      auto tasks_it = find_if(waiting_tasks.begin(), waiting_tasks.end(),
+                              [&] (const Task& element) {
+                                return(task == element);
+                              });
+      // erase the task in waiting queue
+      if (tasks_it != waiting_tasks.end()) {
+        if (tasks_it == waiting_tasks.begin()) {
+          waiting_tasks.erase(*tasks_it);
+          blocker.notify_one();
+        } else {
+          waiting_tasks.erase(*tasks_it);
         }
+      }
+      task.setCancelled(false);  // Enable the task and add to the queue
+      waiting_tasks.insert(task);
+
+      // if task has the shortest deadline unlock the scheduler
+      if (*(waiting_tasks.begin()) == task)
+        blocker.notify_one();
     }
-    /**
-     * Schedule an anonymous task, it will not be cancelled or rescheduled
-     * @param time
-     * @param callback
-     */
-    void ScheduleAt(chrono::system_clock::time_point time, cb_t callback) {
-        Task e(callback);
-        ScheduleAt(time,e);
+  }
+  /**
+   * Schedule an anonymous task, it will not be cancelled or rescheduled
+   * @param time
+   * @param callback
+   */
+  void ScheduleAt(chrono::system_clock::time_point time, cb_t callback) {
+    Task e(callback);
+    ScheduleAt(time, e);
+  }
+  /**
+   * Schedule a periodic task
+   * @param task
+   */
+  void ScheduleEvery(Task& task) {
+    cb_t callback = task.getCallback();
+    cb_t waitFunc = [this,callback,&task]() {
+      callback();
+      task.setCallback(callback);
+      this->ScheduleEvery(task);
+    };
+    task.setCallback(waitFunc);
+    ScheduleAt(chrono::system_clock::now() + task.getPeriod(), task);
+  }
+  /**
+   * Schedule a periodic task with a specific interval, the new interval will be not
+   * set in the task
+   * @param interval Ex: std::chrono::seconds(2)
+   * @param task
+   */
+  void ScheduleEvery(chrono::system_clock::duration interval, Task& task) {
+    cb_t callback = task.getCallback();
+    cb_t waitFunc = [this,interval,callback,&task]() {
+      callback();
+      task.setCallback(callback);
+      this->ScheduleEvery( interval, task);
+    };
+    task.setCallback(waitFunc);
+    ScheduleAt(chrono::system_clock::now() + interval, task);
+  }
+  /**
+   * Cancel a scheduled task, if no present no error occours
+   * FIXME: if running and periodic (return from cancel on job completed)???
+   * @param task
+   */
+  void ScheduleCancel(Task& task) {
+    std::unique_lock < std::mutex > lock(mutex);
+    task.setCancelled(true);
+    auto it = find_if(waiting_tasks.begin(), waiting_tasks.end(),
+                      [&] (const Task& element) {
+                        return(task == element);
+                      });
+    if (it != waiting_tasks.end()) {
+      if (it == waiting_tasks.begin()) {
+        waiting_tasks.erase(*it);
+        blocker.notify_one();
+      } else {
+        waiting_tasks.erase(*it);
+      }
     }
-    /**
-     * Schedule a periodic task
-     * @param task
-     */
-    void ScheduleEvery(Task& task) {
-        cb_t callback = task.getCallback();
-        cb_t waitFunc = [this,callback,&task]() {
-            callback();
-            task.setCallback(callback);
-            this->ScheduleEvery(task);
-        };
-        task.setCallback(waitFunc);
-        ScheduleAt(chrono::system_clock::now() + task.getInterval(),task);
-    }
-    /**
-     * Schedule a periodic task with a specific interval, the new interval will be not
-     * set in the task
-     * @param interval
-     * @param task
-     */
-    void ScheduleEvery(chrono::system_clock::duration interval, Task& task) {
-        cb_t callback = task.getCallback();
-        cb_t waitFunc = [this,interval,callback,&task]() {
-            callback();
-            task.setCallback(callback);
-            this->ScheduleEvery( interval, task);
-        };
-        task.setCallback(waitFunc);
-        ScheduleAt(chrono::system_clock::now() + interval,task);
-    }
-    /**
-     * Cancel a scheduled task, if no present no error occours
-     * FIXME: if running and periodic ???
-     * @param task
-     */
-    void ScheduleCancel(Task& task) {
-        std::unique_lock<std::mutex> lock(mutex);
-        task.setCancelled(true);
-        auto it = find_if (waiting_tasks.begin(), waiting_tasks.end(), [&] (const Task& element) {
-            return(task == element);
-        });
-        if(it != waiting_tasks.end()) {
-            if(it == waiting_tasks.begin()) {
-                waiting_tasks.erase(*it);
-                blocker.notify_one();
-            } else {
-                waiting_tasks.erase(*it);
-            }
+  }
+  /**
+   * Schedule a task after a specific interval
+   * @param interval
+   * @param task
+   */
+  void ScheduleAfter(chrono::system_clock::duration interval, Task& task) {
+    task.setCancelled(false);
+    this->ScheduleAt(chrono::system_clock::now() + interval, task);
+  }
+  /**
+   * Schedule a task
+   * @param task
+   */
+  void ScheduleAfter(Task& task) {
+    task.setCancelled(false);
+    this->ScheduleAt(chrono::system_clock::now() + task.getPeriod(), task);
+  }
+  /**
+   * Schedule an anonymous task after a specific interval
+   * @param interval
+   * @param callback
+   */
+  void ScheduleAfter(chrono::system_clock::duration interval, cb_t callback) {
+    Task e(callback);
+    this->ScheduleAt(chrono::system_clock::now() + interval, e);
+  }
+  /**
+   * Restart a task with the same interval
+   * @param task
+   */
+  void ScheduleRestart(Task& task) {
+    this->ScheduleCancel(task);
+    task.setCancelled(false);
+    this->ScheduleAt(chrono::system_clock::now() + task.getPeriod(), task);
+  }
+
+ private:
+  std::set<Task> waiting_tasks;
+  std::set<Task> running_tasks;
+  std::mutex mutex;
+  std::unique_ptr<std::thread> loop_thread;
+  std::condition_variable blocker;
+  bool go_on;
+
+  void ThreadLoop() {
+    while (go_on) {
+      {
+        std::unique_lock < std::mutex > lock(mutex);
+        auto now = std::chrono::system_clock::now();
+        auto cur = waiting_tasks.begin();
+        // Run a runnable task
+        if (waiting_tasks.empty() == false && (*cur).getTime() <= now
+            && (*cur).isCancelled() == false) {
+          auto ins = running_tasks.insert(*cur);
+          waiting_tasks.erase(*cur);
+          cur = ins.first;
+          (*cur).go();  // Callback will be launched in a detached thread
+          running_tasks.erase(*cur);
         }
-    }
-    /**
-     * Schedule a task after a specific interval
-     * @param interval
-     * @param task
-     */
-    void ScheduleAfter(chrono::system_clock::duration interval, Task& task) {
-        task.setCancelled(false);
-        this->ScheduleAt(chrono::system_clock::now() + interval,task);
-    }
-    /**
-     * Schedule a task
-     * @param task
-     */
-    void ScheduleAfter(Task& task) {
-        task.setCancelled(false);
-        this->ScheduleAt(chrono::system_clock::now() + task.getInterval(),task);
-    }
-    /**
-     * Schedule an anonymous task after a specific interval
-     * @param interval
-     * @param callback
-     */
-    void ScheduleAfter(chrono::system_clock::duration interval, cb_t callback) {
-        Task e(callback);
-        this->ScheduleAt(chrono::system_clock::now() + interval,e);
-    }
-    /**
-     * Restart a task with the same interval
-     * @param task
-     */
-    void ScheduleRestart(Task& task) {
-    	this->ScheduleCancel(task);
-        task.setCancelled(false);
-         this->ScheduleAt(chrono::system_clock::now() + task.getInterval(),task);
-    }
-
-
-
-  private:
-    std::set<Task> waiting_tasks;
-    std::set<Task> running_tasks;
-    std::mutex mutex;
-    std::unique_ptr<std::thread> loop_thread;
-    std::condition_variable blocker;
-    bool go_on;
-
-    void ThreadLoop() {
-        while(go_on) {
-            {
-                std::unique_lock<std::mutex> lock(mutex);
-                auto now = std::chrono::system_clock::now();
-                auto cur = waiting_tasks.begin();
-                // Run a runnable task
-                if ( waiting_tasks.empty()==false && (*cur).getTime() <= now && (*cur).isCancelled()== false) {
-                    auto ins = running_tasks.insert(*cur);
-                    waiting_tasks.erase(*cur);
-                    cur = ins.first;
-                    (*cur).go(); // Callback will be launched in a detached thread
-                    running_tasks.erase(*cur);
-                }
-                // waiting for the next event
-                if (waiting_tasks.empty()) {
-                    blocker.wait(lock);
-                } else {
-/*
- * 	Bad: Valgrind complains "invalid read of size 8"
- * 	http://stackoverflow.com/questions/9891767/valgrind-debug-log-invalid-read-of-size-8
- *
-                	blocker.wait_until(lock, (*cur).getTime());
-  *
- */
-                	auto nxt = waiting_tasks.begin();
-                	auto nxttime = (*nxt).getTime();
-                    blocker.wait_until(lock, nxttime);
-                }
-            }
+        // waiting for the next event
+        if (waiting_tasks.empty()) {
+          blocker.wait(lock);
+        } else {
+          /*
+           * 	Bad: Valgrind complains "invalid read of size 8"
+           * 	http://stackoverflow.com/questions/9891767/valgrind-debug-log-invalid-read-of-size-8
+           *
+           blocker.wait_until(lock, (*cur).getTime());
+           *
+           */
+          auto nxt = waiting_tasks.begin();
+          auto nxttime = (*nxt).getTime();
+          blocker.wait_until(lock, nxttime);
         }
+      }
     }
+  }
 
 };
 
 }
-
-
 
 #endif /* SCHEDULER_HPP_ */

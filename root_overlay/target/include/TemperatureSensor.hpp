@@ -16,37 +16,57 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *******************************************************************************/
 
-#ifndef DISPLAYPANEL_HPP_
-#define DISPLAYPANEL_HPP_
+#ifndef TEMPERATURESENSOR_HPP_
+#define TEMPERATURESENSOR_HPP_
+#include <Sensor.hpp>
+#include <TemperatureDevice.hpp>
 
-#include <string>
 using namespace std;
 
 namespace homerio {
 
-enum Line_e {
-  NOLINE = 0,
-  LINE_1 = 1,
-  LINE_2 = 2
-};
-
-class DisplayPanel {
+class TemperatureSensor : public Sensor, public MenuAble {
  public:
-  DisplayPanel() {
-  }
-  ;
-  virtual ~DisplayPanel() {
-  }
-  ;
+  TemperatureSensor(TemperatureDevice& _device, string _label)
+      : Sensor(_label),
+        device(_device),
+        label(_label) {
 
-  void write_line(Line_e l, string& s) {
   }
-  void clear_line(Line_e l = NOLINE);
-  void set_on(bool state);
-  void reset();
+  ~TemperatureSensor() {
+  }
+  ;
+  TemperatureDevice& getDevice() const {
+    return device;
+  }
+
+  double getTemperature() const {
+    return device.getTemperature();
+  }
+  void update() {
+    device.update();
+  }
+  const string getValue() const {
+    ostringstream ostr;
+    ostr << device.getTemperature() << " C";
+    return ostr.str();
+  }
+  const string getLabel() const {
+    return label;
+  }
+  const string getString() const {
+    ostringstream ostr;
+    ostr << device.getTemperature();
+    return ostr.str();
+  }
+  const double getDouble() const {
+    return device.getTemperature();
+  }
+ private:
+  TemperatureDevice& device;
+  string label;
 
 };
-
 }
 
-#endif /* DISPLAYPANEL_HPP_ */
+#endif /* TEMPERATURESENSOR_HPP_ */
