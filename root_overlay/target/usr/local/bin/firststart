@@ -17,6 +17,7 @@ logger "SYSINIT MACADDRESS FIXED"
 
 # Update data filesystem
 mkdir /data/logs
+mkdir /data/cores
 
 # ======== PATCH FIXME: Only for debug ==========
 touch /data/logs/hdevice.txt

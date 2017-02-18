@@ -40,6 +40,7 @@
 #include <MenuDisplayVisitor.hpp>
 #include <MenuMoveVisitor.hpp>
 #include <Bmp085Device.hpp>
+#include <IPAddressSensor.hpp>
 
 using namespace std;
 using namespace homerio;
@@ -68,6 +69,7 @@ int main(int argc, char** argv) {
   Bmp085Device *bmp085Device;
   TemperatureSensor *tSens;
   BarometricSensor *pSens;
+  IPAddressSensor *ipSens;
   SensorManager *sensorManager;
 
   // Emulated stuff
@@ -96,6 +98,9 @@ int main(int argc, char** argv) {
   pSens->setAltituteCalibration(354.0);
   sensorManager->add(*pSens);
 
+  ipSens = new IPAddressSensor(string("eth0"), string("IpAddress:"));
+  sensorManager->add(*ipSens);
+
   // life spark ignition
   emulatedDev->start();
   emulator->start();
@@ -105,7 +110,7 @@ int main(int argc, char** argv) {
   keyPanel->start();
 
   // Populating universe
-  menu = new HomerMenu(*keyPanel, *scheduler, *tSens, *pSens);
+  menu = new HomerMenu(*keyPanel, *scheduler, *tSens, *pSens, *ipSens);
   menu->addActionVisitor(dw);
   display->set_backlight(true);
 

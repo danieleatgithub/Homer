@@ -16,32 +16,48 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *******************************************************************************/
 
-#ifndef SYSINFO_H_
-#define SYSINFO_H_
-#include <string>
+#ifndef IPADDRESSSENSOR_HPP_
+#define IPADDRESSSENSOR_HPP_
+#include <Sensor.hpp>
+#include <Sysinfo.h>
 
 using namespace std;
 
-namespace commodities {
+namespace homerio {
 
-class Sysinfo {
- private:
-  Sysinfo() {
+class IPAddressSensor : public Sensor, public MenuAble {
+ public:
+  IPAddressSensor(string _interface, string _label)
+      : Sensor(_label),
+        phy_if(_interface),
+        label(_label) {
+
+  }
+  ~IPAddressSensor() {
   }
   ;
+
+  void update() {
+    ip = Sysinfo::get_instance().get_local_ip(phy_if.c_str());
+  }
+  const string getValue() const {
+    return ip;
+  }
+  const string getLabel() const {
+    return label;
+  }
+  const string getString() const {
+    return ip;
+  }
+  const double getDouble() const {
+    return 0.0;
+  }
+ private:
+  string phy_if;
+  string label;
   string ip;
 
- public:
-
-  static Sysinfo& get_instance() {
-    static Sysinfo instance;
-    return instance;
-  }
-
-  // FIXME: protect with mutex
-  string get_local_ip(const char *ifname);
 };
+}
 
-} /* namespace homerio */
-
-#endif /* SYSINFO_H_ */
+#endif /* TEMPERATURESENSOR_HPP_ */

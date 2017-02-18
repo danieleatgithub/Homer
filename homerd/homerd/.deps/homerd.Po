@@ -281,7 +281,8 @@ homerd.o: homerd.cpp \
  ../include/sensor/TemperatureSensor.hpp ../include/sensor/Sensor.hpp \
  ../include/sensor/TemperatureDevice.hpp \
  ../include/sensor/BarometricSensor.hpp \
- ../include/sensor/BarometricDevice.hpp ../include/Winstar.h \
+ ../include/sensor/BarometricDevice.hpp \
+ ../include/sensor/IPAddressSensor.hpp ../include/Winstar.h \
  ../include/Display.h ../include/GpioPin.h ../include/HwAcquaA5.hpp \
  ../include/sensor/CsvSensorDecorator.hpp \
  ../include/sensor/SensorDecorator.hpp ../include/sensor/Sensor.hpp \
@@ -875,6 +876,8 @@ homerd.o: homerd.cpp \
 ../include/sensor/BarometricSensor.hpp:
 
 ../include/sensor/BarometricDevice.hpp:
+
+../include/sensor/IPAddressSensor.hpp:
 
 ../include/Winstar.h:
 

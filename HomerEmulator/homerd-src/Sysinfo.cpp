@@ -26,14 +26,14 @@
 
 using namespace std;
 
-namespace homerio {
+namespace commodities {
 
 string Sysinfo::get_local_ip(const char *ifname) {
   struct ifaddrs * ifAddrStruct = NULL;
   struct ifaddrs * ifa = NULL;
   void * tmpAddrPtr = NULL;
 
-  ip = "No IP available";
+  ip = string("No IP available");
 
   getifaddrs(&ifAddrStruct);
 
@@ -55,7 +55,8 @@ string Sysinfo::get_local_ip(const char *ifname) {
   }
   if (ifAddrStruct != NULL)
     freeifaddrs(ifAddrStruct);         //remember to free ifAddrStruct
+
   return (ip);
 }
 
-} /* namespace homerio */
+} /* namespace commodities */

@@ -1,0 +1,32 @@
+#! /bin/sh
+
+NAME=sysctl
+
+# Silently exit if the kernel does not support modules.
+[ -f /etc/sysctl.conf ] || exit 0
+[ -x /sbin/sysctl  ] || exit 0
+
+# Read config file if it is present.
+if [ -r /etc/default/$NAME ]
+then
+  . /etc/default/$NAME
+fi
+
+PATH='/sbin:/bin:/usr/bin'
+
+case "$1" in
+  start)
+  ;;
+
+  stop|restart|reload|force-reload)
+  logger "sysctl: Action '$1' is meaningless for this init script"
+  exit 0
+  ;;
+
+  *)
+  logger "sysctl: Usage: $0 start"
+  exit 1
+esac
+
+
+/sbin/sysctl -p > /dev/null 2>&1

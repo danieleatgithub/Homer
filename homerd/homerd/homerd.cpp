@@ -55,6 +55,7 @@
 #include <CsvSensorDecorator.hpp>
 #include <SensorManager.hpp>
 #include <Bmp085Device.hpp>
+#include <IPAddressSensor.hpp>
 
 using option::Option;
 using option::Descriptor;
@@ -219,6 +220,7 @@ int main(int argc, char *argv[]) {
   Bmp085Device *bmp085Device;
   TemperatureSensor *tSens;
   BarometricSensor *pSens;
+  IPAddressSensor *ipSens;
   SensorManager *sensorManager;
 
   //  Real stuff
@@ -243,13 +245,15 @@ int main(int argc, char *argv[]) {
   pSens = new BarometricSensor(*bmp085Device, string("Pressure"));
   pSens->setAltituteCalibration(354.0);
   sensorManager->add(*pSens);
+  ipSens = new IPAddressSensor(string("eth0"), string("IpAddress:"));
+  sensorManager->add(*ipSens);
 
   sleep(1);
 
   // life spark ignition
   sensorManager->start();
   display->reset();
-  menu = new HomerMenu(*keyPanel, *scheduler, *tSens, *pSens);
+  menu = new HomerMenu(*keyPanel, *scheduler, *tSens, *pSens, *ipSens);
   menu->addActionVisitor(dw);
   keyPanel->start();
 

@@ -22,7 +22,7 @@
 
 using namespace std;
 
-namespace homerio {
+namespace commodities {
 
 class Sysinfo {
  private:
@@ -38,6 +38,7 @@ class Sysinfo {
     return instance;
   }
 
+  // FIXME: protect with mutex
   string get_local_ip(const char *ifname);
 };
 

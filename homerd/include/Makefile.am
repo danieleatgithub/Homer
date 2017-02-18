@@ -33,6 +33,7 @@ include_HEADERS = 	Display.h \
 					sensor/SensorManager.hpp \
 					sensor/TemperatureDevice.hpp \
 					sensor/TemperatureSensor.hpp \
+					sensor/IPAddressSensor.hpp \
 					Sysinfo.h \
 					Winstar.h
 					
