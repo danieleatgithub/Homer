@@ -16,12 +16,13 @@ sed -i "s/#_TAG_MAC_ADDRESS/	hwaddress ether $MACADDRESS/" $INTERFACES
 logger "SYSINIT MACADDRESS FIXED"
 
 # Update data filesystem
-mkdir /data/logs
-mkdir /data/cores
+mkdir -p /data/log/homerd
+mkdir -p /data/log/ntp
+mkdir -p /data/cores
 
 # ======== PATCH FIXME: Only for debug ==========
-touch /data/logs/hdevice.txt
-touch /data/logs/homerd.txt
+touch /data/log/hdevice.txt
+touch /data/log/homerd.txt
 chmod -R 777 /data
 ln -s /data /var/www/data 
 chmod -R 777 /var/www/data
@@ -35,7 +36,6 @@ if [[ $(vim --version | grep IMproved | awk '{print $5}') == "8.0" ]];then
    sed -i s/SlateBlue/LightBlue/g /usr/share/vim/vim80/syntax/syncolor.vim
 fi
 #====== PATCH END =========
-
 
 
 # Remove first start job
