@@ -1,13 +1,7 @@
-auto lo eth0 eth0.106 eth0.108 eth0.106 eth0.108
+auto lo eth0 
 iface lo inet loopback
 allow-hotplug eth0
 iface eth0 inet dhcp
 #_TAG_MAC_ADDRESS
 
-iface eth0.106 inet static
-        address 10.106.0.2
-        netmask 255.255.255.0
-        
-iface eth0.108 inet static
-        address 10.108.0.2
-        netmask 255.255.255.0
+
