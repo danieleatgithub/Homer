@@ -3,4 +3,5 @@
 #w1_therm
 bmp085
 bmp085_i2c
+ina2xx
 
