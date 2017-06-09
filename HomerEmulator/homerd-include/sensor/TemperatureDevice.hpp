@@ -23,21 +23,19 @@ using namespace std;
 namespace homerio {
 
 class TemperatureDevice {
+ protected:
+  double celsius;
  public:
-  double temperature;
   TemperatureDevice() {
-    temperature = 0;
+    celsius = 0;
   }
   virtual ~TemperatureDevice() {
   }
   ;
-  virtual void readTemperature() = 0;
-  double getTemperature() const {
-    return temperature;
+  double getCelsius() const {
+    return celsius;
   }
-  void update() {
-    readTemperature();
-  }
+  virtual void update() = 0;
 };
 
 }

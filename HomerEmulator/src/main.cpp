@@ -40,7 +40,11 @@
 #include <MenuDisplayVisitor.hpp>
 #include <MenuMoveVisitor.hpp>
 #include <Bmp085Device.hpp>
+#include <Ina219Device.hpp>
 #include <IPAddressSensor.hpp>
+#include <CurrentSensor.hpp>
+#include <PowerSensor.hpp>
+#include <VoltageSensor.hpp>
 
 using namespace std;
 using namespace homerio;
@@ -67,9 +71,15 @@ int main(int argc, char** argv) {
   KeyPanel *keyPanel;
   HomerMenu *menu;
   Bmp085Device *bmp085Device;
+  Ina219Device *ina219Device;
   TemperatureSensor *tSens;
   BarometricSensor *pSens;
   IPAddressSensor *ipSens;
+  CurrentSensor *aSens;
+  PowerSensor *wSens;
+  VoltageSensor *vSens;
+  VoltageSensor *rsSens;
+
   SensorManager *sensorManager;
 
   // Emulated stuff
@@ -92,11 +102,25 @@ int main(int argc, char** argv) {
 
   // Create sensors galaxy
   bmp085Device = new Bmp085Device(*acquaA5);
-  tSens = new TemperatureSensor(*bmp085Device, string("Temperature"));
+  ina219Device = new Ina219Device(*acquaA5);
+
+  tSens = new TemperatureSensor(bmp085Device->getThermometer(),
+                                string("Temperature"));
   sensorManager->add(*tSens);
-  pSens = new BarometricSensor(*bmp085Device, string("Pressure"));
+  pSens = new BarometricSensor(bmp085Device->getBarometer(),
+                               string("Pressure"));
   pSens->setAltituteCalibration(354.0);
   sensorManager->add(*pSens);
+
+  aSens = new CurrentSensor(ina219Device->getCurrent(), string("Current"));
+  sensorManager->add(*aSens);
+  wSens = new PowerSensor(ina219Device->getPower(), string("Power"));
+  sensorManager->add(*wSens);
+  rsSens = new VoltageSensor(ina219Device->getRsensVolts(),
+                             string("Shunt Voltage"));
+  sensorManager->add(*rsSens);
+  vSens = new VoltageSensor(ina219Device->getVoltage(), string("Voltage"));
+  sensorManager->add(*vSens);
 
   ipSens = new IPAddressSensor(string("eth0"), string("IpAddress:"));
   sensorManager->add(*ipSens);
@@ -110,7 +134,7 @@ int main(int argc, char** argv) {
   keyPanel->start();
 
   // Populating universe
-  menu = new HomerMenu(*keyPanel, *scheduler, *tSens, *pSens, *ipSens);
+  menu = new HomerMenu(*keyPanel, *scheduler, *tSens, *pSens, *ipSens, *aSens);
   menu->addActionVisitor(dw);
   display->set_backlight(true);
 

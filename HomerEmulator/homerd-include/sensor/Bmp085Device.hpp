@@ -34,50 +34,78 @@ using namespace std;
 
 namespace homerio {
 
-class Bmp085Device : public TemperatureDevice, public BarometricDevice {
+class Bmp085Device {
  private:
-  string sysPath;
+
+  class Bmp085Thermometer : public TemperatureDevice {
+    char temperatureBuffer[100];
+    SysFs& sysFs;
+    Logger _logdev;
+   public:
+    Bmp085Thermometer(SysFs& sysFs)
+        : sysFs(sysFs),
+          _logdev(Logger::getInstance(LOGDEVICE)) {
+    }
+
+    // FIXME: test file not found
+    void update() {
+      int nread;
+      nread = sysFs.readBuffer(BMP085_TEMPERATURE, temperatureBuffer,
+                               (sizeof(temperatureBuffer) - 1));
+      celsius = atoi(temperatureBuffer) / 10.0;
+      LOG4CPLUS_TRACE(
+          _logdev,
+          "Read " << BMP085_TEMPERATURE << " string(" << nread << ") ["
+              << temperatureBuffer << "]");
+    }
+
+  };
+
+  class Bmp085Barometer : public BarometricDevice {
+    char pressureBuffer[100];
+    SysFs& sysFs;
+    Logger _logdev;
+   public:
+    Bmp085Barometer(SysFs& sysFs)
+        : sysFs(sysFs),
+          _logdev(Logger::getInstance(LOGDEVICE)) {
+    }
+    void update() {
+      int nread;
+      nread = sysFs.readBuffer(BMP085_PRESSURE, pressureBuffer,
+                               (sizeof(pressureBuffer) - 1));
+      millibar = atol(pressureBuffer) / 100.0;
+      LOG4CPLUS_TRACE(
+          _logdev,
+          "Read " << BMP085_PRESSURE << " string(" << nread << ") ["
+              << pressureBuffer << "]");
+    }
+
+  };
   SysFs& sysFs;
-  char temperatureBuffer[100];
-  char pressureBuffer[100];
+  Bmp085Thermometer thermometer;
+  Bmp085Barometer barometer;
   Logger _logdev;
 
  public:
+
   Bmp085Device(Board& _board)
       : sysFs(_board.getSysFs()),
+        thermometer(_board.getSysFs()),
+        barometer(_board.getSysFs()),
         _logdev(Logger::getInstance(LOGDEVICE)) {
   }
 
   virtual ~Bmp085Device() {
-
-  }
-// FIXME: test file not found
-  void readTemperature() {
-    int nread;
-    nread = sysFs.readBuffer(BMP085_TEMPERATURE, temperatureBuffer,
-                             (sizeof(temperatureBuffer) - 1));
-    temperature = atoi(temperatureBuffer) / 10.0;
-    LOG4CPLUS_TRACE(
-        _logdev,
-        "Read " << BMP085_TEMPERATURE << " string(" << nread << ") ["
-            << temperatureBuffer << "]");
-  }
-  void readPressure() {
-    int nread;
-    nread = sysFs.readBuffer(BMP085_PRESSURE, pressureBuffer,
-                             (sizeof(pressureBuffer) - 1));
-
-    pressure = atol(pressureBuffer) / 100.0;
-    LOG4CPLUS_TRACE(
-        _logdev,
-        "Read " << BMP085_PRESSURE << " string(" << nread << ") ["
-            << pressureBuffer << "]");
   }
 
-  const string& getSysPath() const {
-    return sysPath;
+  BarometricDevice& getBarometer() {
+    return barometer;
   }
 
+  TemperatureDevice& getThermometer() {
+    return thermometer;
+  }
 };
 
 }

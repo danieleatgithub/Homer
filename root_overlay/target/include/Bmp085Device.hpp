@@ -34,7 +34,7 @@ using namespace std;
 
 namespace homerio {
 
-class Bmp085Device : public TemperatureDevice, public BarometricDevice {
+class Bmp085Device : public CurrentDevice, public BarometricDevice {
  private:
   string sysPath;
   SysFs& sysFs;
@@ -67,7 +67,7 @@ class Bmp085Device : public TemperatureDevice, public BarometricDevice {
     nread = sysFs.readBuffer(BMP085_PRESSURE, pressureBuffer,
                              (sizeof(pressureBuffer) - 1));
 
-    pressure = atol(pressureBuffer) / 100.0;
+    millibar = atol(pressureBuffer) / 100.0;
     LOG4CPLUS_TRACE(
         _logdev,
         "Read " << BMP085_PRESSURE << " string(" << nread << ") ["

@@ -16,30 +16,57 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *******************************************************************************/
 
-#ifndef TEMPERATUREDEVICE_HPP_
-#define TEMPERATUREDEVICE_HPP_
+#ifndef CURRENTSENSOR_HPP_
+#define CURRENTSENSOR_HPP_
+#include <Sensor.hpp>
+#include <CurrentDevice.hpp>
+
 using namespace std;
 
 namespace homerio {
 
-class CurrentDevice {
+class CurrentSensor : public Sensor, public MenuAble {
  public:
-  double temperature;
-  CurrentDevice() {
-    temperature = 0;
+  CurrentSensor(CurrentDevice& _device, string _label)
+      : Sensor(_label),
+        device(_device),
+        label(_label) {
+
   }
-  virtual ~CurrentDevice() {
+  ~CurrentSensor() {
   }
   ;
-  virtual void readTemperature() = 0;
-  double getTemperature() const {
-    return temperature;
+  CurrentDevice& getDevice() const {
+    return device;
+  }
+
+  double getVolts() const {
+    return device.getAmperes();
   }
   void update() {
-    readTemperature();
+    device.update();
   }
-};
+  const string getValue() const {
+    ostringstream ostr;
+    ostr << device.getAmperes() << " A";
+    return ostr.str();
+  }
+  const string getLabel() const {
+    return label;
+  }
+  const string getString() const {
+    ostringstream ostr;
+    ostr << device.getAmperes();
+    return ostr.str();
+  }
+  const double getDouble() const {
+    return device.getAmperes();
+  }
+ private:
+  CurrentDevice& device;
+  string label;
 
+};
 }
 
-#endif /* TEMPERATUREDEVICE_HPP_ */
+#endif /* VOLTAGESENSOR_HPP_ */

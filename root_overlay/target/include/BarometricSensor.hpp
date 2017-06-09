@@ -43,10 +43,10 @@ class BarometricSensor : public Sensor, public MenuAble {
     return device.getPressure();
   }
   const double getAltitudeCalibration() const {
-    return (device.getAltituteCalibration());
+    return (device.getLocalAltitudeMeters());
   }
   void setAltituteCalibration(double localAltitude) {
-    device.setAltituteCalibration(localAltitude);
+    device.setLocalAltitudeMeters(localAltitude);
   }
   const string getValue() const {
     ostringstream ostr;

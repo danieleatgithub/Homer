@@ -44,9 +44,11 @@ class EmulatedDevices {
   BoardEmulated& board;
   Registration barometric_reg;
   Registration temperature_reg;
+  Registration current_reg;
 
   void temperature_register();
   void barometric_register();
+  void current_register();
 };
 
 }

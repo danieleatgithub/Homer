@@ -27,7 +27,7 @@ namespace homerio {
 
 class TemperatureSensor : public Sensor, public MenuAble {
  public:
-  TemperatureSensor(TemperatureDevice& _device, string _label)
+  TemperatureSensor(CurrentDevice& _device, string _label)
       : Sensor(_label),
         device(_device),
         label(_label) {
@@ -36,7 +36,7 @@ class TemperatureSensor : public Sensor, public MenuAble {
   ~TemperatureSensor() {
   }
   ;
-  TemperatureDevice& getDevice() const {
+  CurrentDevice& getDevice() const {
     return device;
   }
 
@@ -63,7 +63,7 @@ class TemperatureSensor : public Sensor, public MenuAble {
     return device.getTemperature();
   }
  private:
-  TemperatureDevice& device;
+  CurrentDevice& device;
   string label;
 
 };

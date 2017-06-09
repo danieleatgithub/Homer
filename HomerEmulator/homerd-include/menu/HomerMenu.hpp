@@ -27,6 +27,7 @@
 #include <TemperatureSensor.hpp>
 #include <BarometricSensor.hpp>
 #include <IPAddressSensor.hpp>
+#include <CurrentSensor.hpp>
 using namespace std;
 
 namespace homerio {
@@ -46,6 +47,8 @@ class HomerMenu {
   TemperatureSensor& tsens;
   BarometricSensor& psens;
   IPAddressSensor& ipsens;
+  CurrentSensor& asens;
+
   obs::Registration rkeyPanel, rWrDisplay;
   Sysinfo sysinfo = Sysinfo::get_instance();
 
@@ -67,6 +70,7 @@ class HomerMenu {
   shared_ptr<SubMenu> sensors = std::make_shared < SubMenu > (subSens);
   shared_ptr<MenuLeaf> temperature;
   shared_ptr<MenuLeaf> pressure;
+  shared_ptr<MenuLeaf> current;
   shared_ptr<MenuLeaf> ipaddress;
   shared_ptr<SubMenu> alarms = std::make_shared < SubMenu > (subAlarm);
 
@@ -91,16 +95,19 @@ class HomerMenu {
 
  public:
   HomerMenu(KeyPanel& kpl, Scheduler& sch, TemperatureSensor& _tsens,
-            BarometricSensor& _psens, IPAddressSensor& _ipsens)
+            BarometricSensor& _psens, IPAddressSensor& _ipsens,
+            CurrentSensor& _asens)
       : keyPanel(kpl),
         scheduler(sch),
         tsens(_tsens),
         psens(_psens),
         ipsens(_ipsens),
+        asens(_asens),
         mv(root) {
     Logger loghomer = Logger::getInstance(LOGHOMERD);
 
     temperature = std::make_shared < MenuLeaf > (tsens);
+    current = std::make_shared < MenuLeaf > (asens);
     pressure = std::make_shared < MenuLeaf > (psens);
     ipaddress = std::make_shared < MenuLeaf > (ipsens);
 
@@ -108,6 +115,7 @@ class HomerMenu {
     sensors->add(temperature);
     sensors->add(pressure);
     sensors->add(ipaddress);
+    sensors->add(current);
     system->add(cpu);
     system->add(alarms);
     root->add(sensors);
