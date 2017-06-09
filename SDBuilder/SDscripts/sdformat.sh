@@ -1,13 +1,13 @@
 #!/bin/bash
 #######################################################
-#
 # MMC Formatter
-#
 #######################################################
+
 
 # source build enviroment
 SPATH=$(dirname $0)
 . $SPATH/../enviroment.sh
+. $SPATH/layouts.sh
 
 if [ $# -ne 0 ];then
 	echo "Usage: $(basename $0)"
@@ -15,92 +15,81 @@ if [ $# -ne 0 ];then
 	exit 1
 fi
 
-# Save partition layout
-# sfdisk -d /dev/mmcblk0 > sfdisk.8GB.layout
-#
-
-#
-# TODO: Fare layout per le 16GB
-#
-
-
-declare -A layout
-layout[7761920]=8
-layout[7838720]=8 # 8GB Samsung
-layout[3866624]=4 # 4GB 
-#Disk identifier: 0xc4814c7a
-#Device     Boot   Start     End Sectors  Size Id Type
-#/dev/sdd1          2048 1021952 1019905  498M  6 FAT16
-#/dev/sdd2       1024000 3121151 2097152    1G 83 Linux
-#/dev/sdd3       3121152 7315455 4194304    2G  c W95 FAT32 (LBA)
-#/dev/sdd4       7315456 7733247  417792  204M 82 Linux swap / Solaris
-
 # find layout
-echo -n "SD formatting prepare layout ..."
-SF_SIZE=$(sudo sfdisk -s $SDDEV)
-if ! [ ${layout[$SF_SIZE]+abcde} ];then
-	echo "Unknow geometry $SF_SIZE"
-	echo $RESULT
+echo -n "SD formatting prepare layout ..." >&2
+SF_SIZE=$(sfdisk -s $SDDEV)
+layout_found=$(get_layout $SF_SIZE)
+layout_template=${SDSCRIPTS}/"sfdisk.${layout_found}GB.layout"
+if [ ! -f "${layout_template}" ];then
+	echo "Layout error $SF_SIZE"
+	echo ${layout_found}
+	layouts_help
 	exit 1
 fi
-# prepare SD layout
-LAYOUT_FILE_TEMPLATE=${SDSCRIPTS}/"sfdisk.${layout[$SF_SIZE]}GB.layout"
-LAYOUT_FILE="/tmp/layout"
-cp $LAYOUT_FILE_TEMPLATE $LAYOUT_FILE
-sed -i "s/__DEVICE__/${DEVICE}/g" $LAYOUT_FILE
-echo "Done"
+echo -n " ${layout_found} GB " >&2
+layout_work_file="/tmp/layout"
+cp $layout_template $layout_work_file
+sed -i "s/__DEVICE__/${DEVICE}/g" $layout_work_file
+echo "Done" >&2
 
-# mount target devices
-umount $SDDEV1 &> /dev/null
-umount $SDDEV2 &> /dev/null
+echo -n "SD formatting umount partitions ..." >&2
+# unmount target devices ignore errors
+umount $SDDEV1 &> /dev/null 
+umount $SDDEV2 &> /dev/null 
 umount $SDDEV3 &> /dev/null
+echo "Done" >&2
 
-echo -n "SD formatting prepare clean boot partition  ..."
-dd if=/dev/zero of=$SDDEV bs=512 count=1 &> /dev/null
+echo -n "SD formatting clean boot partition  ..." >&2
+dd if=/dev/zero of=$SDDEV bs=512 count=1 &>> $LOG
 if [[ $? != "0" ]];then
 	echo "Unable to clean dos boot partition"
 	exit 1
 fi
-echo "Done"
+echo "Done" >&2
 
-echo -n "SD formatting prepare partitions  ..."
-RESULT=$(sudo sfdisk --force $SDDEV < $LAYOUT_FILE_TEMPLATE 2>&1)
+echo -n "SD formatting create partition ..." >&2
+RESULT=$(sudo sfdisk --force $SDDEV < $layout_template 2>&1)
 if [[ $? != "0" ]];then
-	echo "Unable to format disk"
+	echo "Unable to partition sd $SDDEV"
+	echo $RESULT >> $LOG
 	exit 1
 fi
-echo "Done"
+echo "Done" >&2
 
-echo -n "SD formatting prepare boot fs  ..."
+echo -n "SD formatting mkdosfs boot fs  ..." >&2
 RESULT=$(sudo mkdosfs -F16 -v -n "kernel" $SDDEV1 2>&1)
 if [[ $? != "0" ]];then
 	echo "Unable to make boot filesystem"
+	echo $RESULT >> $LOG
 	exit 1
 fi
-echo "Done"
+echo "Done" >&2
 
-echo -n "SD formatting prepare root fs  ..."
+echo -n "SD formatting mkfs.ext4 root fs  ..." >&2
 RESULT=$(sudo mkfs.ext4 -j -O extent -L "rootfs"  $SDDEV2 2>&1)
 if [[ $? != "0" ]];then
 	echo "Unable to make root filesystem"
+	echo $RESULT > $LOG
 	exit 1
 fi
-echo "Done"
+echo "Done" >&2
 
-echo -n "SD formatting prepare data fs  ..."
+echo -n "SD formatting mkdosfs data fs  ..." >&2
 RESULT=$(sudo mkdosfs -F32 -v -n "data" 	    	$SDDEV3 2>&1)
 if [[ $? != "0" ]];then
 	echo "Unable to make data filesystem"
+	echo $RESULT >> $LOG
 	exit 1
 fi
-echo "Done"
+echo "Done" >&2
 
-echo -n "SD formatting prepare swap fs  ..."
+echo -n "SD formatting make swap fs  ..." >&2
 RESULT=$(sudo mkswap $SDDEV4 2>&1)
 if [[ $? != "0" ]];then
 	echo "Unable to make swap partition"
+	echo $RESULT >> $LOG
 	exit 1
 fi
-echo "Done"
-
+echo "Done" >&2
+echo "SD Ready" >&2
 exit 0
