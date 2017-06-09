@@ -10,6 +10,9 @@ layouts[3866624]=4   #  4GB
 layouts[15558144]=16 # 16GB 
 
 # -----------------------------------------------------
+# input:  geometry obtained with sfdisk -s
+# output: size in GB
+# -----------------------------------------------------
 function get_layout {
 	geometry=$1
 	if ! [ ${layouts[$geometry]+abcde} ];then
@@ -19,6 +22,10 @@ function get_layout {
 	echo ${layouts[$geometry]}
 }
 
+# -----------------------------------------------------
+# help
+# How to add a new SD card with unknown geometry
+# -----------------------------------------------------
 function layouts_help  {
 	
 	cat << EOH
