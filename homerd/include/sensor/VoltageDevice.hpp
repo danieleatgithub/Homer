@@ -16,28 +16,23 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *******************************************************************************/
 
-#ifndef TEMPERATUREDEVICE_HPP_
-#define TEMPERATUREDEVICE_HPP_
+#ifndef VOLTAGEDEVICE_HPP_
+#define VOLTAGEDEVICE_HPP_
+
 using namespace std;
 
 namespace homerio {
 
-class TemperatureDevice {
+class VoltageDevice {
  protected:
-  double celsius;
+  double volts;
  public:
-  TemperatureDevice() {
-    celsius = 0;
-  }
-  virtual ~TemperatureDevice() {
-  }
-  ;
-  double getCelsius() const {
-    return celsius;
+  double getVolts() const {
+    return volts;
   }
   virtual void update() = 0;
 };
 
 }
 
-#endif /* TEMPERATUREDEVICE_HPP_ */
+#endif /* VOLTAGEDEVICE_HPP_ */

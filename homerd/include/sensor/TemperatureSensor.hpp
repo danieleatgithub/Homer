@@ -40,15 +40,15 @@ class TemperatureSensor : public Sensor, public MenuAble {
     return device;
   }
 
-  double getTemperature() const {
-    return device.getTemperature();
+  double getCelsius() const {
+    return device.getCelsius();
   }
   void update() {
     device.update();
   }
   const string getValue() const {
     ostringstream ostr;
-    ostr << device.getTemperature() << " C";
+    ostr << device.getCelsius() << " C";
     return ostr.str();
   }
   const string getLabel() const {
@@ -56,11 +56,11 @@ class TemperatureSensor : public Sensor, public MenuAble {
   }
   const string getString() const {
     ostringstream ostr;
-    ostr << device.getTemperature();
+    ostr << device.getCelsius();
     return ostr.str();
   }
   const double getDouble() const {
-    return device.getTemperature();
+    return device.getCelsius();
   }
  private:
   TemperatureDevice& device;

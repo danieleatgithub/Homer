@@ -27,6 +27,7 @@
 #include <TemperatureSensor.hpp>
 #include <BarometricSensor.hpp>
 #include <IPAddressSensor.hpp>
+#include <CurrentSensor.hpp>
 using namespace std;
 
 namespace homerio {
@@ -43,9 +44,7 @@ class HomerMenu {
   shared_ptr<MenuComponent> active_element;
   KeyPanel &keyPanel;
   Scheduler& scheduler;
-  TemperatureSensor& tsens;
-  BarometricSensor& psens;
-  IPAddressSensor& ipsens;
+
   obs::Registration rkeyPanel, rWrDisplay;
   Sysinfo sysinfo = Sysinfo::get_instance();
 
@@ -65,9 +64,6 @@ class HomerMenu {
   shared_ptr<SubMenu> system = std::make_shared < SubMenu > (subSys);
   shared_ptr<MenuLeaf> cpu = std::make_shared < MenuLeaf > (menuCpu);
   shared_ptr<SubMenu> sensors = std::make_shared < SubMenu > (subSens);
-  shared_ptr<MenuLeaf> temperature;
-  shared_ptr<MenuLeaf> pressure;
-  shared_ptr<MenuLeaf> ipaddress;
   shared_ptr<SubMenu> alarms = std::make_shared < SubMenu > (subAlarm);
 
   MenuMoveVisitor mv;
@@ -90,32 +86,27 @@ class HomerMenu {
   }
 
  public:
-  HomerMenu(KeyPanel& kpl, Scheduler& sch, TemperatureSensor& _tsens,
-            BarometricSensor& _psens, IPAddressSensor& _ipsens)
+  HomerMenu(KeyPanel& kpl, Scheduler& sch)
       : keyPanel(kpl),
         scheduler(sch),
-        tsens(_tsens),
-        psens(_psens),
-        ipsens(_ipsens),
         mv(root) {
     Logger loghomer = Logger::getInstance(LOGHOMERD);
 
-    temperature = std::make_shared < MenuLeaf > (tsens);
-    pressure = std::make_shared < MenuLeaf > (psens);
-    ipaddress = std::make_shared < MenuLeaf > (ipsens);
-
     root->add(welcome);
-    sensors->add(temperature);
-    sensors->add(pressure);
-    sensors->add(ipaddress);
     system->add(cpu);
     system->add(alarms);
     root->add(sensors);
     root->add(system);
-
     root->home();
     active_element = root->getActiveElement();
 
+  }
+  ~HomerMenu() {
+    stop();
+  }
+
+  void start() {
+    Logger loghomer = Logger::getInstance(LOGHOMERD);
     // Timer on no key press reset menu to Home
     timedHome.setCallback([&] () {
       leave(nokey);
@@ -157,11 +148,16 @@ class HomerMenu {
     scheduler.ScheduleAfter(std::chrono::milliseconds(100), timedHome);
 
   }
-  virtual ~HomerMenu() {
-  }
 
+  void stop() {
+    scheduler.ScheduleCancel(timedHome);
+  }
   void addActionVisitor(const shared_ptr<MenuActionVisitor>& visitor) {
     visitors.push_back(visitor);
+  }
+
+  void addSensor(MenuAble& tsens) {
+    sensors->add(std::make_shared < MenuLeaf > (tsens));
   }
 
 };
