@@ -63,11 +63,50 @@ void EmulatedDevices::current_register() {
         *ret = (int)strlen((char *)buffer);
       });
 }
-
+void EmulatedDevices::voltage_register() {
+  board.getEmulatedSysFs().reg_read(
+      voltage_reg,
+      string("/sys/class/i2c-adapter/i2c-0/0-([0-9]+)/hwmon/hwmon0/in1_input"),
+      [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
+        // TODO: Read emulation data from csv
+        static int va = 2222222;
+        va+=50;
+        sprintf((char *)buffer,"%d",va);
+        *ret = (int)strlen((char *)buffer);
+      });
+}
+void EmulatedDevices::power_register() {
+  board.getEmulatedSysFs().reg_read(
+      power_reg,
+      string(
+          "/sys/class/i2c-adapter/i2c-0/0-([0-9]+)/hwmon/hwmon0/power1_input"),
+      [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
+        // TODO: Read emulation data from csv
+        static int va = 55555555;
+        va+=50;
+        sprintf((char *)buffer,"%d",va);
+        *ret = (int)strlen((char *)buffer);
+      });
+}
+void EmulatedDevices::rsense_register() {
+  board.getEmulatedSysFs().reg_read(
+      rsense_reg,
+      string("/sys/class/i2c-adapter/i2c-0/0-([0-9]+)/hwmon/hwmon0/in0_input"),
+      [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
+        // TODO: Read emulation data from csv
+        static int va = 77;
+        va+=50;
+        sprintf((char *)buffer,"%d",va);
+        *ret = (int)strlen((char *)buffer);
+      });
+}
 void EmulatedDevices::start() {
   temperature_register();
   barometric_register();
   current_register();
+  voltage_register();
+  power_register();
+  rsense_register();
 }
 void EmulatedDevices::stop() {
   // Observers will be unregisterd in destructor

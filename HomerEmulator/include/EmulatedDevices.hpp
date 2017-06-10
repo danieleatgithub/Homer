@@ -45,10 +45,16 @@ class EmulatedDevices {
   Registration barometric_reg;
   Registration temperature_reg;
   Registration current_reg;
+  Registration voltage_reg;
+  Registration power_reg;
+  Registration rsense_reg;
 
   void temperature_register();
   void barometric_register();
   void current_register();
+  void voltage_register();
+  void power_register();
+  void rsense_register();
 };
 
 }

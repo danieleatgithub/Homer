@@ -100,30 +100,43 @@ int main(int argc, char** argv) {
 
   shared_ptr < MenuActionVisitor > dw(new MenuDisplayVisitor(*display));
 
-  // Create sensors galaxy
+  menu = new HomerMenu(*keyPanel, *scheduler);
+
+  // Create sensors Orion Nebula
   bmp085Device = new Bmp085Device(*acquaA5);
   ina219Device = new Ina219Device(*acquaA5);
 
   tSens = new TemperatureSensor(bmp085Device->getThermometer(),
                                 string("Temperature"));
   sensorManager->add(*tSens);
+  menu->addSensor(*tSens);
+
   pSens = new BarometricSensor(bmp085Device->getBarometer(),
                                string("Pressure"));
   pSens->setAltituteCalibration(354.0);
   sensorManager->add(*pSens);
+  menu->addSensor(*pSens);
 
   aSens = new CurrentSensor(ina219Device->getCurrent(), string("Current"));
   sensorManager->add(*aSens);
+  menu->addSensor(*aSens);
+
   wSens = new PowerSensor(ina219Device->getPower(), string("Power"));
   sensorManager->add(*wSens);
+  menu->addSensor(*wSens);
+
   rsSens = new VoltageSensor(ina219Device->getRsensVolts(),
                              string("Shunt Voltage"));
   sensorManager->add(*rsSens);
+  menu->addSensor(*rsSens);
+
   vSens = new VoltageSensor(ina219Device->getVoltage(), string("Voltage"));
   sensorManager->add(*vSens);
+  menu->addSensor(*vSens);
 
   ipSens = new IPAddressSensor(string("eth0"), string("IpAddress:"));
   sensorManager->add(*ipSens);
+  menu->addSensor(*ipSens);
 
   // life spark ignition
   emulatedDev->start();
@@ -132,9 +145,7 @@ int main(int argc, char** argv) {
   display->reset();
   keyPanel->setEventFilename(emulator->getKeyEventFilename().c_str());
   keyPanel->start();
-
-  // Populating universe
-  menu = new HomerMenu(*keyPanel, *scheduler, *tSens, *pSens, *ipSens, *aSens);
+  menu->start();
   menu->addActionVisitor(dw);
   display->set_backlight(true);
 
@@ -145,6 +156,7 @@ int main(int argc, char** argv) {
 
   // end of life
   keyPanel->stop();
+  menu->stop();
   sensorManager->stop();
   emulator->stop();
   emulatedDev->stop();
