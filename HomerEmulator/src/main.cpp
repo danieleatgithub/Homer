@@ -165,13 +165,16 @@ int main(int argc, char** argv) {
   sleep(1);
 
   // keep clear empty space
-  delete (menu);
   delete (display);
   delete (acquaA5);
   delete (scheduler);
   delete (keyPanel);
   delete (tSens);
-  delete (pSens);
+  delete (aSens);
+  delete (wSens);
+  delete (rsSens);
+  delete (vSens);
+  delete (menu);
   delete (sensorManager);
   delete (emulatedDev);
   delete (emulator);
