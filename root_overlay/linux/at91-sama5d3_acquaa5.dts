@@ -99,6 +99,11 @@
 					temp-measurement-period = <100>;
 					default-oversampling = <2>;
 				};
+				ina219@40 {
+					compatible = "ti,ina219";
+					reg = <0x40>;
+					shunt-resistor = <100000>;
+				};
 
 			};
 
