@@ -20,6 +20,10 @@
 #define CURRENTSENSOR_HPP_
 #include <Sensor.hpp>
 #include <CurrentDevice.hpp>
+#include <sstream>
+#include <map>
+#include <math.h>
+#include <iomanip>
 
 using namespace std;
 
@@ -31,7 +35,10 @@ class CurrentSensor : public Sensor, public MenuAble {
       : Sensor(_label),
         device(_device),
         label(_label) {
-
+    units[-3] = "m";
+    units[0] = "";
+    scale = 0;
+    precision = 4;
   }
   ~CurrentSensor() {
   }
@@ -40,7 +47,7 @@ class CurrentSensor : public Sensor, public MenuAble {
     return device;
   }
 
-  double getVolts() const {
+  double getAmperes() const {
     return device.getAmperes();
   }
   void update() {
@@ -48,24 +55,24 @@ class CurrentSensor : public Sensor, public MenuAble {
   }
   const string getValue() const {
     ostringstream ostr;
-    ostr << device.getAmperes() << " A";
+    ostr << std::setprecision(precision)
+        << (device.getAmperes() / pow(10.0, scale)) << " "
+        << units.find(scale)->second << "A";
     return ostr.str();
   }
   const string getLabel() const {
     return label;
   }
   const string getString() const {
-    ostringstream ostr;
-    ostr << device.getAmperes();
-    return ostr.str();
+    return getValue();
   }
   const double getDouble() const {
     return device.getAmperes();
   }
+
  private:
   CurrentDevice& device;
   string label;
-
 };
 }
 

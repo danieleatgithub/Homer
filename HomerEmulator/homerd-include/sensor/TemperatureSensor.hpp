@@ -20,6 +20,10 @@
 #define TEMPERATURESENSOR_HPP_
 #include <Sensor.hpp>
 #include <TemperatureDevice.hpp>
+#include <sstream>
+#include <map>
+#include <math.h>
+#include <iomanip>
 
 using namespace std;
 
@@ -31,6 +35,9 @@ class TemperatureSensor : public Sensor, public MenuAble {
       : Sensor(_label),
         device(_device),
         label(_label) {
+    precision = 4;
+    scale = 0;
+    units[0] = "";
 
   }
   ~TemperatureSensor() {
@@ -48,7 +55,9 @@ class TemperatureSensor : public Sensor, public MenuAble {
   }
   const string getValue() const {
     ostringstream ostr;
-    ostr << device.getCelsius() << " C";
+    ostr << std::setprecision(precision)
+        << (device.getCelsius() / pow(10.0, scale)) << " "
+        << units.find(scale)->second << "C";
     return ostr.str();
   }
   const string getLabel() const {

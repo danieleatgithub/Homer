@@ -20,6 +20,11 @@
 #define BAROMETRICSENSOR_HPP_
 #include <Sensor.hpp>
 #include <BarometricDevice.hpp>
+#include <sstream>
+#include <map>
+#include <math.h>
+#include <iomanip>
+
 using namespace std;
 
 namespace homerio {
@@ -30,7 +35,10 @@ class BarometricSensor : public Sensor, public MenuAble {
       : Sensor(_label),
         device(_device),
         label(_label) {
-
+    units[0] = "milli";
+    units[3] = "";
+    scale = 0;
+    precision = 6;
   }
   ~BarometricSensor() {
   }
@@ -50,7 +58,9 @@ class BarometricSensor : public Sensor, public MenuAble {
   }
   const string getValue() const {
     ostringstream ostr;
-    ostr << device.getMilliBar() << " mBar";
+    ostr << std::setprecision(precision)
+        << (device.getMilliBar() / pow(10.0, scale)) << " "
+        << units.find(scale)->second << "Bar";
     return ostr.str();
   }
   void update() {
@@ -70,6 +80,8 @@ class BarometricSensor : public Sensor, public MenuAble {
  private:
   BarometricDevice& device;
   string label;
+  static map<int, string> _barometricUnits;
+
 };
 
 }

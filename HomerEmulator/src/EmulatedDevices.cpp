@@ -57,7 +57,7 @@ void EmulatedDevices::current_register() {
           "/sys/class/i2c-adapter/i2c-0/0-([0-9]+)/hwmon/hwmon0/curr1_input"),
       [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
         // TODO: Read emulation data from csv
-        static int va = 123467;
+        static int va = 16550;
         va+=50;
         sprintf((char *)buffer,"%d",va);
         *ret = (int)strlen((char *)buffer);
@@ -69,7 +69,7 @@ void EmulatedDevices::voltage_register() {
       string("/sys/class/i2c-adapter/i2c-0/0-([0-9]+)/hwmon/hwmon0/in1_input"),
       [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
         // TODO: Read emulation data from csv
-        static int va = 2222222;
+        static int va = 4780;
         va+=50;
         sprintf((char *)buffer,"%d",va);
         *ret = (int)strlen((char *)buffer);
@@ -82,7 +82,7 @@ void EmulatedDevices::power_register() {
           "/sys/class/i2c-adapter/i2c-0/0-([0-9]+)/hwmon/hwmon0/power1_input"),
       [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
         // TODO: Read emulation data from csv
-        static int va = 55555555;
+        static int va = 81260000;
         va+=50;
         sprintf((char *)buffer,"%d",va);
         *ret = (int)strlen((char *)buffer);
@@ -94,7 +94,7 @@ void EmulatedDevices::rsense_register() {
       string("/sys/class/i2c-adapter/i2c-0/0-([0-9]+)/hwmon/hwmon0/in0_input"),
       [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
         // TODO: Read emulation data from csv
-        static int va = 77;
+        static int va = 17;
         va+=50;
         sprintf((char *)buffer,"%d",va);
         *ret = (int)strlen((char *)buffer);

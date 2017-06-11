@@ -25,10 +25,10 @@ namespace homerio {
 
 class PowerDevice {
  protected:
-  double watts;
+  double milliwatts;
  public:
-  double getWatts() const {
-    return watts;
+  double getMilliWatts() const {
+    return milliwatts;
   }
   virtual void update() = 0;
 };

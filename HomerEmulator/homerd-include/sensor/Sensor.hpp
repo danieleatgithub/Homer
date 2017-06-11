@@ -20,9 +20,14 @@
 #define SENSOR_HPP_
 #include <MenuAble.hpp>
 #include <IDGenerator.h>
+#include <log4cplus/logger.h>
+#include <log4cplus/loggingmacros.h>
+#include <log4cplus/loglevel.h>
+#include <map>
 
 using namespace std;
 using namespace commodities;
+using namespace log4cplus;
 
 namespace homerio {
 
@@ -30,11 +35,20 @@ class Sensor {
  protected:
   string name;
   uint32_t id;
+  int precision = 4;
+  int scale = 0;
+  map<int, string> units;
+  Logger _loghomer;
 
  public:
 
   Sensor() {
     id = IDGenerator::get_istance().getId();
+    Logger _loghomer = Logger::getInstance(LOGHOMERD);
+    // Initialization in derived class it's raccomanded
+    precision = 0;
+    scale = 0;
+    units[0] = "";
   }
   Sensor(const string& _name)
       : name(_name) {
@@ -78,6 +92,25 @@ class Sensor {
     return (lhs.id < rhs.id);
   }
 
+  int getPrecision() const {
+    return precision;
+  }
+
+  void setPrecision(int precision) {
+    this->precision = precision;
+  }
+
+  int getScale() const {
+    return scale;
+  }
+
+  void setScale(int scale) {
+    if (units.find(scale) == units.end()) {
+      LOG4CPLUS_WARN(_loghomer, "scale not in range (" << scale << ")");
+      return;
+    }
+    this->scale = scale;
+  }
 };
 
 }

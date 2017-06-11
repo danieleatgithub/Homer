@@ -20,6 +20,10 @@
 #define VOLTAGESENSOR_HPP_
 #include <Sensor.hpp>
 #include <VoltageDevice.hpp>
+#include <sstream>
+#include <map>
+#include <math.h>
+#include <iomanip>
 
 using namespace std;
 
@@ -31,7 +35,11 @@ class VoltageSensor : public Sensor, public MenuAble {
       : Sensor(_label),
         device(_device),
         label(_label) {
-
+    units[-3] = "m";
+    units[-6] = "u";
+    units[0] = "";
+    scale = 0;
+    precision = 4;
   }
   ~VoltageSensor() {
   }
@@ -48,7 +56,9 @@ class VoltageSensor : public Sensor, public MenuAble {
   }
   const string getValue() const {
     ostringstream ostr;
-    ostr << device.getVolts() << " V";
+    ostr << std::setprecision(precision)
+        << (device.getVolts() / pow(10.0, scale)) << " "
+        << units.find(scale)->second << "V";
     return ostr.str();
   }
   const string getLabel() const {

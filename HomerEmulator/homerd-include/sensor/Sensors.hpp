@@ -16,17 +16,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *******************************************************************************/
 
-#ifndef SENSORDEVICE_HPP_
-#define SENSORDEVICE_HPP_
-using namespace std;
+#ifndef SENSORS_HPP_
+#define SENSORS_HPP_
+#include <CurrentSensor.hpp>
+#include <BarometricSensor.hpp>
+#include <PowerSensor.hpp>
+#include <TemperatureSensor.hpp>
+#include <VoltageSensor.hpp>
+#include <IPAddressSensor.hpp>
 
-namespace homerio {
-
-class SensorDevice {
- public:
-  virtual void update(const char *name = NULL) = 0;
-};
-
-}
-
-#endif /* SENSORDEVICE_HPP_ */
+#endif /* SENSORS_HPP_ */

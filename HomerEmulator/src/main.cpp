@@ -118,6 +118,7 @@ int main(int argc, char** argv) {
   menu->addSensor(*pSens);
 
   aSens = new CurrentSensor(ina219Device->getCurrent(), string("Current"));
+  aSens->setScale(-3);
   sensorManager->add(*aSens);
   menu->addSensor(*aSens);
 

@@ -118,7 +118,7 @@ class Ina219Device {
     void update() {
       int nread;
       nread = sysFs.readBuffer(INA219_POWER, powerBuffer, (BUFSIZE - 1));
-      watts = atoi(powerBuffer) / 1000000.0;
+      milliwatts = atoi(powerBuffer) / 1000000.0;
       LOG4CPLUS_TRACE(
           _logdev,
           "Read " << INA219_POWER << " string(" << nread << ") [" << powerBuffer
