@@ -27,7 +27,7 @@ namespace homerio {
 
 class TemperatureSensor : public Sensor, public MenuAble {
  public:
-  TemperatureSensor(CurrentDevice& _device, string _label)
+  TemperatureSensor(TemperatureDevice& _device, string _label)
       : Sensor(_label),
         device(_device),
         label(_label) {
@@ -36,19 +36,19 @@ class TemperatureSensor : public Sensor, public MenuAble {
   ~TemperatureSensor() {
   }
   ;
-  CurrentDevice& getDevice() const {
+  TemperatureDevice& getDevice() const {
     return device;
   }
 
-  double getTemperature() const {
-    return device.getTemperature();
+  double getCelsius() const {
+    return device.getCelsius();
   }
   void update() {
     device.update();
   }
   const string getValue() const {
     ostringstream ostr;
-    ostr << device.getTemperature() << " C";
+    ostr << device.getCelsius() << " C";
     return ostr.str();
   }
   const string getLabel() const {
@@ -56,14 +56,14 @@ class TemperatureSensor : public Sensor, public MenuAble {
   }
   const string getString() const {
     ostringstream ostr;
-    ostr << device.getTemperature();
+    ostr << device.getCelsius();
     return ostr.str();
   }
   const double getDouble() const {
-    return device.getTemperature();
+    return device.getCelsius();
   }
  private:
-  CurrentDevice& device;
+  TemperatureDevice& device;
   string label;
 
 };

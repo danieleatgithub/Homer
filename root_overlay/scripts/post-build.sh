@@ -43,7 +43,7 @@ sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' $TARGET_DIR/
 
 
 BUILD_DATE=$(date +"%Y-%m-%d-%H%M%S")
-echo "99.99.1-build${BUILD_DATE}" > $TARGET_DIR/etc/homer.version
+echo "99.99.1-build_${BUILD_DATE}" > $TARGET_DIR/etc/homer.version
 echo " ******************* END PRE SCRIPT BUILD ${BUILD_DATE} ***************"
 exit
 

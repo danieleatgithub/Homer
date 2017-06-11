@@ -9,6 +9,7 @@
 MACADDRESS=$(/usr/local/bin/get_mac)
 if [[ $? -ne 0 ]];then
 	logger "firststart failed reading mac"
+	echo "=== WARNING === firststart failed reading mac" >> /etc/issue
 	exit 1
 fi
 INTERFACES="/etc/network/interfaces"
@@ -16,13 +17,12 @@ sed -i "s/#_TAG_MAC_ADDRESS/	hwaddress ether $MACADDRESS/" $INTERFACES
 logger "SYSINIT MACADDRESS FIXED"
 
 # Update data filesystem
-mkdir -p /data/log/homerd
-mkdir -p /data/log/ntp
+mkdir -p /data/logs/homerd
 mkdir -p /data/cores
 
 # ======== PATCH FIXME: Only for debug ==========
-touch /data/log/hdevice.txt
-touch /data/log/homerd.txt
+touch /data/logs/device.txt
+touch /data/logs/homerd.txt
 chmod -R 777 /data
 ln -s /data /var/www/data 
 chmod -R 777 /var/www/data
@@ -37,6 +37,6 @@ if [[ $(vim --version | grep IMproved | awk '{print $5}') == "8.0" ]];then
 fi
 #====== PATCH END =========
 
-
 # Remove first start job
 rm /etc/init.d/S00firststart
+cat /etc/homer.version >> /etc/issue

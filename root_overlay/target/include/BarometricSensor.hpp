@@ -39,18 +39,18 @@ class BarometricSensor : public Sensor, public MenuAble {
     return device;
   }
 
-  double getPressure() const {
-    return device.getPressure();
+  double getMilliBar() const {
+    return device.getMilliBar();
   }
   const double getAltitudeCalibration() const {
-    return (device.getLocalAltitudeMeters());
+    return (device.getAltituteCalibration());
   }
   void setAltituteCalibration(double localAltitude) {
-    device.setLocalAltitudeMeters(localAltitude);
+    device.setAltituteCalibration(localAltitude);
   }
   const string getValue() const {
     ostringstream ostr;
-    ostr << device.getPressure() << " mBar";
+    ostr << device.getMilliBar() << " mBar";
     return ostr.str();
   }
   void update() {
@@ -61,11 +61,11 @@ class BarometricSensor : public Sensor, public MenuAble {
   }
   const string getString() const {
     ostringstream ostr;
-    ostr << device.getPressure();
+    ostr << device.getMilliBar();
     return ostr.str();
   }
   const double getDouble() const {
-    return device.getPressure();
+    return device.getMilliBar();
   }
  private:
   BarometricDevice& device;

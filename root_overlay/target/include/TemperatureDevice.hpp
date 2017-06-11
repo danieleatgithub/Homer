@@ -22,22 +22,20 @@ using namespace std;
 
 namespace homerio {
 
-class CurrentDevice {
+class TemperatureDevice {
+ protected:
+  double celsius;
  public:
-  double temperature;
-  CurrentDevice() {
-    temperature = 0;
+  TemperatureDevice() {
+    celsius = 0;
   }
-  virtual ~CurrentDevice() {
+  virtual ~TemperatureDevice() {
   }
   ;
-  virtual void readTemperature() = 0;
-  double getTemperature() const {
-    return temperature;
+  double getCelsius() const {
+    return celsius;
   }
-  void update() {
-    readTemperature();
-  }
+  virtual void update() = 0;
 };
 
 }

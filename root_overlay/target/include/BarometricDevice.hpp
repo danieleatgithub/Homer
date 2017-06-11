@@ -24,24 +24,25 @@ using namespace std;
 namespace homerio {
 
 class BarometricDevice {
- public:
+ protected:
   double millibar;
-  double localAltitudeMeters;
+  double localAltitude;
+
+ public:
 
   BarometricDevice() {
     millibar = 0;
-    localAltitudeMeters = 0;
+    localAltitude = 0;
   }
   virtual ~BarometricDevice() {
   }
   ;
-  virtual void readPressure() = 0;
 
-  double getLocalAltitudeMeters() const {
-    return localAltitudeMeters;
+  double getAltituteCalibration() const {
+    return localAltitude;
   }
-  void setLocalAltitudeMeters(double localAltitude) {
-    this->localAltitudeMeters = localAltitude;
+  void setAltituteCalibration(double localAltitude) {
+    this->localAltitude = localAltitude;
   }
   /*
    LOCALPA=$(echo "scale=2;$ALTITUDE/100*12" | bc)
@@ -71,13 +72,11 @@ class BarometricDevice {
 
    */
 
-  double getPressure() const {
+  double getMilliBar() const {
     // Add 12 mBar each 100mt of altitude
-    return millibar + (localAltitudeMeters / 100.0) * 12.0;
+    return millibar + (localAltitude / 100.0) * 12.0;
   }
-  void update() {
-    readPressure();
-  }
+  virtual void update() = 0;
 };
 
 }
