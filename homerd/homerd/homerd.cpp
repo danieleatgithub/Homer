@@ -77,8 +77,8 @@ using namespace commodities;
 #define optional_argument 2
 
 #define HOMERD_DEF_PROPS  "/etc/default/homerd.properties"
-#define HOMERD_DEF_OUT_REDIR "/var/log/homerd_out.log"
-#define HOMERD_DEF_ERR_REDIR "/var/log/homerd_err.log"
+#define HOMERD_DEF_OUT_REDIR "/data/logs/homerd_out.log"
+#define HOMERD_DEF_ERR_REDIR "/data/logs/homerd_err.log"
 
 enum optionIndex {
   UNKNOWN,
