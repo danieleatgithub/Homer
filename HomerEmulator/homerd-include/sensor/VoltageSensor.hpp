@@ -35,6 +35,8 @@ class VoltageSensor : public Sensor, public MenuAble {
       : Sensor(_label),
         device(_device),
         label(_label) {
+    units[6] = "M";
+    units[3] = "K";
     units[-3] = "m";
     units[-6] = "u";
     units[0] = "";

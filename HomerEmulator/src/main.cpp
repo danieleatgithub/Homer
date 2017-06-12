@@ -128,6 +128,7 @@ int main(int argc, char** argv) {
 
   rsSens = new VoltageSensor(ina219Device->getRsensVolts(),
                              string("Shunt Voltage"));
+  rsSens->setScale(-3);
   sensorManager->add(*rsSens);
   menu->addSensor(*rsSens);
 

@@ -96,7 +96,7 @@ class Ina219Device {
     void update() {
       int nread;
       nread = sysFs.readBuffer(sysEntry, voltageBuffer, (BUFSIZE - 1));
-      volts = atoi(voltageBuffer) / 1000000.0;
+      volts = atoi(voltageBuffer) / 1000.0;
       LOG4CPLUS_TRACE(
           _logdev,
           "Read " << sysEntry << " string(" << nread << ") [" << voltageBuffer
