@@ -16,7 +16,7 @@ if [ ! -d $SRC ];then
 	exit 1
 fi
 
-.  $BKP_ROOT/variables
+.  $BKP_ROOT/variables.sh
 
 # Save current for undo
 DST=$BKP_ROOT/undo
