@@ -280,6 +280,14 @@ homerd.o: homerd.cpp \
  ../include/menu/MenuMoveVisitor.hpp \
  ../include/sensor/TemperatureSensor.hpp ../include/sensor/Sensor.hpp \
  ../include/sensor/TemperatureDevice.hpp \
+ /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/iomanip \
+ /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/locale \
+ /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/locale_facets_nonio.h \
+ /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/arm-buildroot-linux-gnueabi/bits/time_members.h \
+ /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/arm-buildroot-linux-gnueabi/bits/messages_members.h \
+ /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/sysroot/usr/include/libintl.h \
+ /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/codecvt.h \
+ /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/locale_facets_nonio.tcc \
  ../include/sensor/BarometricSensor.hpp \
  ../include/sensor/BarometricDevice.hpp \
  ../include/sensor/IPAddressSensor.hpp \
@@ -291,7 +299,6 @@ homerd.o: homerd.cpp \
  ../include/sensor/CsvSensorDecorator.hpp \
  ../include/sensor/Bmp085Device.hpp \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/fstream \
- /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/codecvt.h \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/arm-buildroot-linux-gnueabi/bits/basic_file.h \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/arm-buildroot-linux-gnueabi/bits/c++io.h \
  /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/fstream.tcc \
@@ -877,6 +884,22 @@ homerd.o: homerd.cpp \
 
 ../include/sensor/TemperatureDevice.hpp:
 
+/wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/iomanip:
+
+/wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/locale:
+
+/wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/locale_facets_nonio.h:
+
+/wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/arm-buildroot-linux-gnueabi/bits/time_members.h:
+
+/wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/arm-buildroot-linux-gnueabi/bits/messages_members.h:
+
+/wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/sysroot/usr/include/libintl.h:
+
+/wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/codecvt.h:
+
+/wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/locale_facets_nonio.tcc:
+
 ../include/sensor/BarometricSensor.hpp:
 
 ../include/sensor/BarometricDevice.hpp:
@@ -908,8 +931,6 @@ homerd.o: homerd.cpp \
 ../include/sensor/Bmp085Device.hpp:
 
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/fstream:
-
-/wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/bits/codecvt.h:
 
 /wks/buildroot-2016.11/output/host/usr/arm-buildroot-linux-gnueabi/include/c++/4.9.4/arm-buildroot-linux-gnueabi/bits/basic_file.h:
 

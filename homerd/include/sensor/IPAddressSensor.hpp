@@ -20,6 +20,10 @@
 #define IPADDRESSSENSOR_HPP_
 #include <Sensor.hpp>
 #include <Sysinfo.h>
+#include <sstream>
+#include <map>
+#include <math.h>
+#include <iomanip>
 
 using namespace std;
 

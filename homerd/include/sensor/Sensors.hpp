@@ -16,26 +16,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *******************************************************************************/
 
-#ifndef POWERDEVICE_HPP_
-#define POWERDEVICE_HPP_
+#ifndef SENSORS_HPP_
+#define SENSORS_HPP_
+#include <CurrentSensor.hpp>
+#include <BarometricSensor.hpp>
+#include <PowerSensor.hpp>
+#include <TemperatureSensor.hpp>
+#include <VoltageSensor.hpp>
+#include <IPAddressSensor.hpp>
 
-using namespace std;
-
-namespace homerio {
-
-class PowerDevice {
- protected:
-  double milliwatts;
- public:
-  virtual ~PowerDevice() {
-  }
-  ;
-  double getMilliWatts() const {
-    return milliwatts;
-  }
-  virtual void update() = 0;
-};
-
-}
-
-#endif /* CURRENTDEVICE_HPP_ */
+#endif /* SENSORS_HPP_ */

@@ -93,7 +93,7 @@ int I2cBusEmulated::ioctl(int fd, unsigned long int request, ...) {
   return (0);
 }
 
-__off_t I2cBusEmulated::lseek(int fd, __off_t                                                   __offset, int __whence) {
+__off_t I2cBusEmulated::lseek(int fd, __off_t                                                     __offset, int __whence) {
   Logger logemu = Logger::getInstance(LOGEMULATOR);
   LOG4CPLUS_TRACE(logemu, "fd=" << fd << ",file=" << filedescriptors[fd]);
   return (0);
@@ -126,6 +126,7 @@ int SysFsEmulated::read(int fd, void *buf, size_t nbyte) {
     regex rgx(obs.first);
     if (regex_match(filedescriptors[fd], rgx)) {
       obs.second(fd, buf, nbyte, filedescriptors[fd].c_str(), &ret);
+      break;
     }
   }
   LOG4CPLUS_DEBUG(
@@ -142,6 +143,7 @@ int SysFsEmulated::write(int fd, const void *buffer, size_t size) {
     regex rgx(obs.first);
     if (regex_match(filedescriptors[fd], rgx)) {
       obs.second(fd, buffer, size, filedescriptors[fd].c_str(), &ret);
+      break;
     }
   }
   LOG4CPLUS_DEBUG(
@@ -155,7 +157,7 @@ int SysFsEmulated::ioctl(int fd, unsigned long int request, ...) {
   return (-1);
 }
 
-__off_t SysFsEmulated::lseek(int fd, __off_t                __offset, int __whence) {
+__off_t SysFsEmulated::lseek(int fd, __off_t                  __offset, int __whence) {
   Logger logemu = Logger::getInstance(LOGEMULATOR);
   LOG4CPLUS_TRACE(logemu, "fd=" << fd << ",file=" << filedescriptors[fd]);
   return (0);
@@ -187,7 +189,7 @@ int GpioPortEmulated::ioctl(int fd, unsigned long int request, ...) {
 //	cerr << endl;
   return (0);
 }
-__off_t GpioPortEmulated::lseek(int fd, __off_t                                                   __offset, int __whence) {
+__off_t GpioPortEmulated::lseek(int fd, __off_t                                                     __offset, int __whence) {
   return (0);
 }
 

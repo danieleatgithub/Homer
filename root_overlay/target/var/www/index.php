@@ -16,9 +16,9 @@ echo "</table>";
 echo "<hr>LINK";
 echo "<table  border='1'>";
 echo "<td><a href=data/>DATA FS</a>";
-echo "<td><a href=data/logs/homerd/homer.txt>homer.txt</a>";
-echo "<td><a href=data/logs/homerd/device.txt>device.txt</a>";
-echo "<td><a href=data/logs/homerd/sensors.txt>sensors.txt</a>";
+echo "<td><a href=data/logs/homer.txt>homer.txt</a>";
+echo "<td><a href=data/logs/devices.txt>device.txt</a>";
+echo "<td><a href=data/logs/sensors.txt>sensors.txt</a>";
 echo "</table>";
 
 echo "<hr>NEXT TODO";

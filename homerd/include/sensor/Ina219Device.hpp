@@ -50,6 +50,7 @@
 #define INA219_RSENSE_VOLTS "/class/i2c-adapter/i2c-0/0-0040/hwmon/hwmon0/in0_input"
 #define INA219_VOLTAGE "/class/i2c-adapter/i2c-0/0-0040/hwmon/hwmon0/in1_input"
 #define INA219_POWER "/class/i2c-adapter/i2c-0/0-0040/hwmon/hwmon0/power1_input"
+#define INA219_SHUNT "/class/i2c-adapter/i2c-0/0-0040/hwmon/hwmon0/shunt_resistor"
 #define INA219_ "/class/i2c-adapter/i2c-0/0-0040/hwmon/hwmon0/"
 
 #define BUFSIZE 50
@@ -59,110 +60,116 @@ namespace homerio {
 
 class Ina219Device {
  private:
-
-  class Ina219Current : public CurrentDevice {
-    char currentBuffer[100];
-    SysFs& sysFs;
-    Logger _logdev;
-   public:
-    Ina219Current(SysFs& sysFs)
-        : sysFs(sysFs),
-          _logdev(Logger::getInstance(LOGDEVICE)) {
-    }
-    // FIXME: test file not found
-    void update() {
-      int nread;
-      nread = sysFs.readBuffer(INA219_CURRENT, currentBuffer, (BUFSIZE - 1));
-      amperes = atoi(currentBuffer) / 1000000.0;
-      LOG4CPLUS_TRACE(
-          _logdev,
-          "Read " << INA219_CURRENT << " string(" << nread << ") ["
-              << currentBuffer << "]");
-    }
-
-  };
-  class Ina219Voltage : public VoltageDevice {
-    char voltageBuffer[100];
-    SysFs& sysFs;
-    Logger _logdev;
-    const char *sysEntry;
-   public:
-    Ina219Voltage(SysFs& sysFs, const char *sysEntry)
-        : sysFs(sysFs),
-          _logdev(Logger::getInstance(LOGDEVICE)) {
-      this->sysEntry = sysEntry;
-    }
-    // FIXME: test file not found
-    void update() {
-      int nread;
-      nread = sysFs.readBuffer(sysEntry, voltageBuffer, (BUFSIZE - 1));
-      volts = atoi(voltageBuffer) / 1000000.0;
-      LOG4CPLUS_TRACE(
-          _logdev,
-          "Read " << sysEntry << " string(" << nread << ") [" << voltageBuffer
-              << "]");
-
-    }
-  }
-  ;
-  class Ina219Power : public PowerDevice {
-    char powerBuffer[100];
-    SysFs& sysFs;
-    Logger _logdev;
-   public:
-    Ina219Power(SysFs& sysFs)
-        : sysFs(sysFs),
-          _logdev(Logger::getInstance(LOGDEVICE)) {
-    }
-    // FIXME: test file not found
-    void update() {
-      int nread;
-      nread = sysFs.readBuffer(INA219_POWER, powerBuffer, (BUFSIZE - 1));
-      watts = atoi(powerBuffer) / 1000000.0;
-      LOG4CPLUS_TRACE(
-          _logdev,
-          "Read " << INA219_POWER << " string(" << nread << ") [" << powerBuffer
-              << "]");
-
-    }
-  };
-
   SysFs& sysFs;
-  Ina219Current current;
-  Ina219Power power;
-  Ina219Voltage voltage;
-  Ina219Voltage rsensVolts;
   Logger _logdev;
+  double shunt_resistor;
+  double shunt_scale_factor;
 
  public:
   Ina219Device(Board& _board)
       : sysFs(_board.getSysFs()),
-        current(_board.getSysFs()),
-        power(_board.getSysFs()),
-        voltage(_board.getSysFs(), INA219_VOLTAGE),
-        rsensVolts(_board.getSysFs(), INA219_RSENSE_VOLTS),
         _logdev(Logger::getInstance(LOGDEVICE)) {
+    shunt_resistor = (double) readSysFsInteger(INA219_SHUNT);
+    shunt_scale_factor = 10.0;
+  }
+
+  int readSysFsInteger(const char *entry) {
+    int nread = 0;
+    int value = 0;
+    char buffer[BUFSIZE];
+    nread = sysFs.readBuffer(entry, buffer, (BUFSIZE - 1));
+    if (nread > 0) {
+      value = atoi(buffer);
+      LOG4CPLUS_TRACE(
+          _logdev,
+          "Read " << entry << " string(" << nread << ") [" << buffer << "]");
+    } else {
+      LOG4CPLUS_ERROR(_logdev, "Read " << entry << " string(" << nread << ")");
+    }
+    return (value);
   }
 
   virtual ~Ina219Device() {
   }
 
-  CurrentDevice& getCurrent() {
-    return current;
+  double getShuntResistor() const {
+    return shunt_resistor;
   }
 
-  PowerDevice& getPower() {
-    return power;
+  double getShuntScaleFactor() const {
+    return shunt_scale_factor;
   }
 
-  VoltageDevice& getRsensVolts() {
-    return rsensVolts;
+  void setShuntScaleFactor(double shuntScaleFactor) {
+    shunt_scale_factor = shuntScaleFactor;
+  }
+};
+
+class Ina219Current : public CurrentDevice {
+  Ina219Device& ina219Device;
+  Logger _logdev;
+
+ public:
+  Ina219Current(Ina219Device& _ina219Device)
+      : ina219Device(_ina219Device),
+        _logdev(Logger::getInstance(LOGDEVICE)) {
+  }
+  void update() {
+    amperes =
+        ina219Device.readSysFsInteger(INA219_CURRENT)
+            / (ina219Device.getShuntResistor()
+                * ina219Device.getShuntScaleFactor());
+  }
+}
+;
+
+class Ina219Voltage : public VoltageDevice {
+  Ina219Device& ina219Device;
+  Logger _logdev;
+ public:
+  Ina219Voltage(Ina219Device& _ina219Device)
+      : ina219Device(_ina219Device),
+        _logdev(Logger::getInstance(LOGDEVICE)) {
+  }
+  virtual ~Ina219Voltage() {
   }
 
-  VoltageDevice& getVoltage() {
-    return voltage;
+  void update() {
+    volts = ina219Device.readSysFsInteger(INA219_VOLTAGE) / 1000.0;
+  }
+}
+;
+
+class Ina219Rsens : public VoltageDevice {
+  Ina219Device& ina219Device;
+  Logger _logdev;
+ public:
+  Ina219Rsens(Ina219Device& _ina219Device)
+      : ina219Device(_ina219Device),
+        _logdev(Logger::getInstance(LOGDEVICE)) {
+  }
+  virtual ~Ina219Rsens() {
   }
 
+  void update() {
+    volts = ina219Device.readSysFsInteger(INA219_RSENSE_VOLTS) / 1000.0;
+  }
+}
+;
+class Ina219Power : public PowerDevice {
+  Ina219Device& ina219Device;
+  Logger _logdev;
+ public:
+  Ina219Power(Ina219Device& _ina219Device)
+      : ina219Device(_ina219Device),
+        _logdev(Logger::getInstance(LOGDEVICE)) {
+  }
+  virtual ~Ina219Power() {
+  }
+
+  void update() {
+    milliwatts = (ina219Device.readSysFsInteger(INA219_POWER) / (100000.0));
+  }
 };
 
 }

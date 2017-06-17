@@ -21,6 +21,13 @@ namespace homeremulator {
 
 EmulatedDevices::EmulatedDevices(BoardEmulated& _board)
     : board(_board) {
+  temperature_register();
+  barometric_register();
+  current_register();
+  voltage_register();
+  power_register();
+  rsense_register();
+  shunt_register();
 }
 
 EmulatedDevices::~EmulatedDevices() {
@@ -57,7 +64,7 @@ void EmulatedDevices::current_register() {
           "/sys/class/i2c-adapter/i2c-0/0-([0-9]+)/hwmon/hwmon0/curr1_input"),
       [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
         // TODO: Read emulation data from csv
-        static int va = 16550;
+        static int va = 1655;
         va+=50;
         sprintf((char *)buffer,"%d",va);
         *ret = (int)strlen((char *)buffer);
@@ -82,8 +89,8 @@ void EmulatedDevices::power_register() {
           "/sys/class/i2c-adapter/i2c-0/0-([0-9]+)/hwmon/hwmon0/power1_input"),
       [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
         // TODO: Read emulation data from csv
-        static int va = 81260000;
-        va+=50;
+        static int va = 7860000;
+        va+=50000;
         sprintf((char *)buffer,"%d",va);
         *ret = (int)strlen((char *)buffer);
       });
@@ -95,18 +102,25 @@ void EmulatedDevices::rsense_register() {
       [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
         // TODO: Read emulation data from csv
         static int va = 17;
-        va+=50;
+        va+=5;
+        sprintf((char *)buffer,"%d",va);
+        *ret = (int)strlen((char *)buffer);
+      });
+}
+void EmulatedDevices::shunt_register() {
+  board.getEmulatedSysFs().reg_read(
+      shunt_reg,
+      string(
+          "/sys/class/i2c-adapter/i2c-0/0-([0-9]+)/hwmon/hwmon0/shunt_resistor"),
+      [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
+        // TODO: Read emulation data from csv
+        static int va = 10000;
+        va+=0;
         sprintf((char *)buffer,"%d",va);
         *ret = (int)strlen((char *)buffer);
       });
 }
 void EmulatedDevices::start() {
-  temperature_register();
-  barometric_register();
-  current_register();
-  voltage_register();
-  power_register();
-  rsense_register();
 }
 void EmulatedDevices::stop() {
   // Observers will be unregisterd in destructor

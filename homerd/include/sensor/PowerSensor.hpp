@@ -20,6 +20,10 @@
 #define POWERSENSOR_HPP_
 #include <Sensor.hpp>
 #include <PowerDevice.hpp>
+#include <sstream>
+#include <map>
+#include <math.h>
+#include <iomanip>
 
 using namespace std;
 
@@ -31,7 +35,11 @@ class PowerSensor : public Sensor, public MenuAble {
       : Sensor(_label),
         device(_device),
         label(_label) {
-
+    units[3] = "";
+    units[-6] = "u";
+    units[0] = "m";
+    scale = 0;
+    precision = 4;
   }
   ~PowerSensor() {
   }
@@ -40,15 +48,17 @@ class PowerSensor : public Sensor, public MenuAble {
     return device;
   }
 
-  double getWatts() const {
-    return device.getWatts();
+  double getMilliWatts() const {
+    return device.getMilliWatts();
   }
   void update() {
     device.update();
   }
   const string getValue() const {
     ostringstream ostr;
-    ostr << device.getWatts() << " W";
+    ostr << std::setprecision(precision)
+        << (device.getMilliWatts() / pow(10.0, scale)) << " "
+        << units.find(scale)->second << "W";
     return ostr.str();
   }
   const string getLabel() const {
@@ -56,11 +66,11 @@ class PowerSensor : public Sensor, public MenuAble {
   }
   const string getString() const {
     ostringstream ostr;
-    ostr << device.getWatts();
+    ostr << device.getMilliWatts();
     return ostr.str();
   }
   const double getDouble() const {
-    return device.getWatts();
+    return device.getMilliWatts();
   }
  private:
   PowerDevice& device;

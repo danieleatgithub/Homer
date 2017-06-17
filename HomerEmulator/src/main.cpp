@@ -71,7 +71,15 @@ int main(int argc, char** argv) {
   KeyPanel *keyPanel;
   HomerMenu *menu;
   Bmp085Device *bmp085Device;
+  Bmp085Thermometer *bmp085Thermometer;
+  Bmp085Barometer *bmp085Barometer;
+
   Ina219Device *ina219Device;
+  Ina219Current *ina219Current;
+  Ina219Voltage *ina219Voltage;
+  Ina219Rsens *ina219Rsens;
+  Ina219Power *ina219Power;
+
   TemperatureSensor *tSens;
   BarometricSensor *pSens;
   IPAddressSensor *ipSens;
@@ -104,35 +112,39 @@ int main(int argc, char** argv) {
 
   // Create sensors Orion Nebula
   bmp085Device = new Bmp085Device(*acquaA5);
-  ina219Device = new Ina219Device(*acquaA5);
+  bmp085Thermometer = new Bmp085Thermometer(*bmp085Device);
+  bmp085Barometer = new Bmp085Barometer(*bmp085Device);
 
-  tSens = new TemperatureSensor(bmp085Device->getThermometer(),
-                                string("Temperature"));
+  ina219Device = new Ina219Device(*acquaA5);
+  ina219Current = new Ina219Current(*ina219Device);
+  ina219Voltage = new Ina219Voltage(*ina219Device);
+  ina219Rsens = new Ina219Rsens(*ina219Device);
+  ina219Power = new Ina219Power(*ina219Device);
+
+  tSens = new TemperatureSensor(*bmp085Thermometer, string("Temperature"));
   sensorManager->add(*tSens);
   menu->addSensor(*tSens);
 
-  pSens = new BarometricSensor(bmp085Device->getBarometer(),
-                               string("Pressure"));
+  pSens = new BarometricSensor(*bmp085Barometer, string("Pressure"));
   pSens->setAltituteCalibration(354.0);
   sensorManager->add(*pSens);
   menu->addSensor(*pSens);
 
-  aSens = new CurrentSensor(ina219Device->getCurrent(), string("Current"));
+  aSens = new CurrentSensor(*ina219Current, string("Current"));
   aSens->setScale(-3);
   sensorManager->add(*aSens);
   menu->addSensor(*aSens);
 
-  wSens = new PowerSensor(ina219Device->getPower(), string("Power"));
+  wSens = new PowerSensor(*ina219Power, string("Power"));
   sensorManager->add(*wSens);
   menu->addSensor(*wSens);
 
-  rsSens = new VoltageSensor(ina219Device->getRsensVolts(),
-                             string("Shunt Voltage"));
+  rsSens = new VoltageSensor(*ina219Rsens, string("Shunt Voltage"));
   rsSens->setScale(-3);
   sensorManager->add(*rsSens);
   menu->addSensor(*rsSens);
 
-  vSens = new VoltageSensor(ina219Device->getVoltage(), string("Voltage"));
+  vSens = new VoltageSensor(*ina219Voltage, string("Voltage"));
   sensorManager->add(*vSens);
   menu->addSensor(*vSens);
 
@@ -167,19 +179,25 @@ int main(int argc, char** argv) {
   sleep(1);
 
   // keep clear empty space
-  delete (display);
-  delete (acquaA5);
-  delete (scheduler);
-  delete (keyPanel);
   delete (tSens);
   delete (aSens);
   delete (wSens);
   delete (rsSens);
   delete (vSens);
-  delete (menu);
+  delete (ina219Current);
+  delete (ina219Voltage);
+  delete (ina219Rsens);
+  delete (ina219Power);
+  delete (bmp085Device);
+  delete (ina219Device);
   delete (sensorManager);
-  delete (emulatedDev);
+  delete (menu);
   delete (emulator);
+  delete (display);
+  delete (acquaA5);
+  delete (scheduler);
+  delete (keyPanel);
+  delete (emulatedDev);
 
   // ready for resurrection
   LOG4CPLUS_INFO(logger, "HomerEmulator exit");

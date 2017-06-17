@@ -48,6 +48,7 @@ class EmulatedDevices {
   Registration voltage_reg;
   Registration power_reg;
   Registration rsense_reg;
+  Registration shunt_reg;
 
   void temperature_register();
   void barometric_register();
@@ -55,6 +56,7 @@ class EmulatedDevices {
   void voltage_register();
   void power_register();
   void rsense_register();
+  void shunt_register();
 };
 
 }
