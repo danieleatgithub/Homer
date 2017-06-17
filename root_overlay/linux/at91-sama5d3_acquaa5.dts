@@ -102,7 +102,8 @@
 				ina219@40 {
 					compatible = "ti,ina219";
 					reg = <0x40>;
-					shunt-resistor = <100000>;
+					/* Real value is 0.1 ohm 100000 microhm */
+					shunt-resistor = <10000>; 
 				};
 
 			};
@@ -215,7 +216,7 @@
 			};
 
 			adc0: adc@f8018000 {
-				status = "disabled";
+				status = "okay";
 				pinctrl-names = "default";
 				pinctrl-0 = <
 					&pinctrl_adc0_adtrg
