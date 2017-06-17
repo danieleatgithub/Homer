@@ -11,6 +11,13 @@ echo " ******************* START PRE SCRIPT ***************"
 # Executed in buildroot enviroment (Full Path)
 . /wks/workspace/Homer/root_overlay/enviroment.sh
 
+#
+# Setting SD Version
+#
+. /wks/workspace/Homer/SDBuilder/config_backups/variables.sh
+HOMER_MAJ=99
+HOMER_MIN=99
+HOMER_REV=$CURRENT
 
 echo "***Install linux ..."
 #
@@ -43,7 +50,7 @@ sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' $TARGET_DIR/
 
 
 BUILD_DATE=$(date +"%Y-%m-%d-%H%M%S")
-echo "99.99.1-build_${BUILD_DATE}" > $TARGET_DIR/etc/homer.version
+echo "${HOMER_MAJ}.${HOMER_MIN}.${HOMER_REV}-build_${BUILD_DATE}" > $TARGET_DIR/etc/homer.version
 echo " ******************* END PRE SCRIPT BUILD ${BUILD_DATE} ***************"
 exit
 
