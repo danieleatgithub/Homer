@@ -8,12 +8,10 @@
 
 BBOX_VER="none"
 
-#BUILDROOT_VER="buildroot-2015.11.1"
-#BUILDROOT_VER="buildroot-2016.05"
+
 BUILDROOT_VER="buildroot-2016.11"
 
-#LINUX_VER="linux-3.16.1"
-#LINUX_VER="linux-4.3.4"
+
 LINUX_VER="linux-4.4.16"
 
 GLIBC_VER="glibc-2.21"
