@@ -102,7 +102,7 @@
 				ina219@40 {
 					compatible = "ti,ina219";
 					reg = <0x40>;
-					/* Real value is 0.1 ohm 100000 microhm */
+					/* Real value is 0.1 ohm 100000 micro ohm */
 					shunt-resistor = <10000>; 
 				};
 
