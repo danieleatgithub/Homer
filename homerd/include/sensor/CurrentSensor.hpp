@@ -64,7 +64,9 @@ class CurrentSensor : public Sensor, public MenuAble {
     return label;
   }
   const string getString() const {
-    return getValue();
+    ostringstream ostr;
+    ostr << device.getAmperes();
+    return ostr.str();
   }
   const double getDouble() const {
     return device.getAmperes();
