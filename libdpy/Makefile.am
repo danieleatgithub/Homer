@@ -1,1 +1,0 @@
-SUBDIRS=libdpy include exampleProgram
