@@ -19,7 +19,7 @@
 #ifndef BAROMETRICDEVICE_HPP_
 #define BAROMETRICDEVICE_HPP_
 
-#define MILLIBAR_METER 0.12 // Millibar each meter good aproximation under 1000 mt
+#define MILLIBAR_METER 0.125 // Millibar each meter good aproximation under 1000 mt
 
 using namespace std;
 
