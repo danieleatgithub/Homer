@@ -19,6 +19,8 @@
 #ifndef BAROMETRICDEVICE_HPP_
 #define BAROMETRICDEVICE_HPP_
 
+#define MILLIBAR_METER 0.12 // Millibar each meter good aproximation under 1000 mt
+
 using namespace std;
 
 namespace homerio {
@@ -45,36 +47,31 @@ class BarometricDevice {
     this->localAltitude = localAltitude;
   }
   /*
-   LOCALPA=$(echo "scale=2;$ALTITUDE/100*12" | bc)
-   P=$(cat $DEV/pressure0_input)
-   PRESSURE=$(echo "scale=2;$P/100+$LOCALPA" | bc)
-   echo "Temp=$TEMP Pressure=$PRESSURE"
-
    [root@homer ~]# bash -x ./bmp085.sh
    + modprobe bmp085_i2c
-   + ALTITUDE=354
+   + ALTITUDE=330
    + DEV=/sys/class/i2c-adapter/i2c-0/0-0077
    ++ cat /sys/class/i2c-adapter/i2c-0/0-0077/temp0_input
-   + T=205
+   + T=216
    ++ bc
-   ++ echo 'scale=2;205/10'
-   + TEMP=20.50
-   ++ echo 'scale=2;354/100*12'
+   ++ echo 'scale=2;216/10'
+   + TEMP=21.60
    ++ bc
-   + LOCALPA=42.48
+   ++ echo 'scale=2;330/100*12'
+   + LOCALPA=39.60
    ++ cat /sys/class/i2c-adapter/i2c-0/0-0077/pressure0_input
-   + P=99614
+   + P=97052
    ++ bc
-   ++ echo 'scale=2;99614/100+42.48'
-   + PRESSURE=1038.628
-   + echo 'Temp=20.50 Pressure=1038.62'
-   Temp=20.50 Pressure=1038.62
+   ++ echo 'scale=2;97052/100+39.60'
+   + PRESSURE=1010.12
+   + echo 'Temp=21.60 Pressure=1010.12'
+   Temp=21.60 Pressure=1010.12
 
    */
 
   double getMilliBar() const {
     // Add 12 mBar each 100mt of altitude
-    return millibar + (localAltitude / 100.0) * 12.0;
+    return millibar + (localAltitude * MILLIBAR_METER);
   }
   virtual void update() = 0;
 };

@@ -31,3 +31,4 @@
 #define LCD_RESET_PIN "PA02"
 #define KEY_EVENT_DEVICE "/dev/input/event0"
 #define SYSFS_ROOT "/sys"
+#define LOCAL_ALTITUDE 330.0

@@ -51,7 +51,7 @@ void EmulatedDevices::barometric_register() {
       string("/sys/class/i2c-adapter/i2c-0/0-([0-9]+)/pressure0_input"),
       [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
         // TODO: Read emulation data from csv
-        static int vp = 99614-50;
+        static int vp = 97052-50;
         vp+=50;
         sprintf((char *)buffer,"%d",vp);
         *ret = (int)strlen((char *)buffer);

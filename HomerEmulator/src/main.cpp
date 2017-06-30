@@ -126,7 +126,7 @@ int main(int argc, char** argv) {
   menu->addSensor(*tSens);
 
   pSens = new BarometricSensor(*bmp085Barometer, string("Pressure"));
-  pSens->setAltituteCalibration(354.0);
+  pSens->setAltituteCalibration(LOCAL_ALTITUDE);
   sensorManager->add(*pSens);
   menu->addSensor(*pSens);
 
