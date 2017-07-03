@@ -35,9 +35,9 @@ class PowerSensor : public Sensor, public MenuAble {
       : Sensor(_label),
         device(_device),
         label(_label) {
-    units[3] = "";
+    units[0] = "";
+    units[-3] = "m";
     units[-6] = "u";
-    units[0] = "m";
     scale = 0;
     precision = 4;
   }
@@ -48,8 +48,8 @@ class PowerSensor : public Sensor, public MenuAble {
     return device;
   }
 
-  double getMilliWatts() const {
-    return device.getMilliWatts();
+  double getWatt() const {
+    return device.getWatt();
   }
   void update() {
     device.update();
@@ -57,7 +57,7 @@ class PowerSensor : public Sensor, public MenuAble {
   const string getValue() const {
     ostringstream ostr;
     ostr << std::setprecision(precision)
-        << (device.getMilliWatts() / pow(10.0, scale)) << " "
+        << (device.getWatt() / pow(10.0, scale)) << " "
         << units.find(scale)->second << "W";
     return ostr.str();
   }
@@ -66,11 +66,11 @@ class PowerSensor : public Sensor, public MenuAble {
   }
   const string getString() const {
     ostringstream ostr;
-    ostr << device.getMilliWatts();
+    ostr << device.getWatt();
     return ostr.str();
   }
   const double getDouble() const {
-    return device.getMilliWatts();
+    return device.getWatt();
   }
  private:
   PowerDevice& device;

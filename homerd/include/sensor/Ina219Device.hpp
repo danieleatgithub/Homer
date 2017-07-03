@@ -168,7 +168,7 @@ class Ina219Power : public PowerDevice {
   }
 
   void update() {
-    milliwatts = (ina219Device.readSysFsInteger(INA219_POWER) / (100000.0));
+    watt = (ina219Device.readSysFsInteger(INA219_POWER) / (100000000.0));
   }
 };
 

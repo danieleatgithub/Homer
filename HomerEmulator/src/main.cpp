@@ -136,6 +136,7 @@ int main(int argc, char** argv) {
   menu->addSensor(*aSens);
 
   wSens = new PowerSensor(*ina219Power, string("Power"));
+  wSens->setScale(-3);
   sensorManager->add(*wSens);
   menu->addSensor(*wSens);
 

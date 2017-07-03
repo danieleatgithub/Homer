@@ -20,10 +20,7 @@
  * homerd.cpp
  *
  *  FIXME: set altitude from properties
- *  FIXME: check coredump generation
- *  TODO: const fun const revision
  *  TODO: change altitude from key panel
- *  TODO: move to cmake or check valid target in autotools
  *
  *
  */
@@ -282,6 +279,7 @@ int main(int argc, char *argv[]) {
   menu->addSensor(*aSens);
 
   wSens = new PowerSensor(*ina219Power, string("Power"));
+  wSens->setScale(-3);
   sensorManager->add(*wSens);
   menu->addSensor(*wSens);
 
