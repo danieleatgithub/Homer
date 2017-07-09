@@ -27,7 +27,9 @@ cd $LINUX_ROOT
 rm -Rf $TARGET_DIR/lib/modules
 make modules_install INSTALL_MOD_PATH=$TARGET_DIR ARCH=arm
 echo "***Linux installed"
-
+cd $HS110LF
+make modules_install INSTALL_MOD_PATH=$TARGET_DIR ARCH=arm
+echo "***Custom modules installed"
 
 #
 # Setup FS

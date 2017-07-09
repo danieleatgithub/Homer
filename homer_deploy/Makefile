@@ -12,17 +12,18 @@ SD_BUILDER = /wks/workspace/Homer/SDBuilder/
 MAKEARCH := $(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE)
 
 homer:
-	$(MAKE) -C $(HS1101LF) 
 	$(MAKE) -C $(LINUX-DTS)
 	$(MAKE) -C $(ROOT_OVERLAY) homer
 	
 margie:
-	$(MAKE) -C $(HS1101LF) 
 	$(MAKE) -C $(LINUX-DTS)
 	$(MAKE) -C $(ROOT_OVERLAY) margie
 	
+burn_homer:
+	$(MAKE) -C $(SD_BUILDER)  homer	
 burn_margie:
 	$(MAKE) -C $(SD_BUILDER)  margie
+	
 all: homer
 
 

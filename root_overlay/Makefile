@@ -11,9 +11,11 @@ MAKEARCH := $(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE)
 
 homer:
 	echo "homer" >  $(TARGET_ROOT)/etc/hostname
+	chmod +x $(TARGET_ROOT)/etc/init.d/S98homerd
 	$(MAKE) -C $(BUILDROOT)
 margie:
 	echo "margie" >  $(TARGET_ROOT)/etc/hostname
+	chmod -x $(TARGET_ROOT)/etc/init.d/S98homerd
 	$(MAKE) -C $(BUILDROOT)
 all: homer
 	
