@@ -1,0 +1,2 @@
+rmmod hs1101lf
+modprobe hs1101lf

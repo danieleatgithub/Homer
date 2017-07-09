@@ -5,15 +5,13 @@ ARCH := arm
 CROSS_COMPILE := arm-buildroot-linux-gnueabi-
 obj-m := $(MODULES)
 BUILDROOT = /wks/buildroot-2016.11
-TARGET_ROOT = $(shell pwd)/target
+ROOT_OVERLAY = /wks/workspace/Homer/root_overlay
 
 MAKEARCH := $(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE)
 
 homer:
-	echo "homer" >  $(TARGET_ROOT)/etc/hostname
-	$(MAKE) -C $(BUILDROOT)
+	$(MAKE) -C $(ROOT_OVERLAY) homer
 margie:
-	echo "margie" >  $(TARGET_ROOT)/etc/hostname
-	$(MAKE) -C $(BUILDROOT)
+	$(MAKE) -C $(ROOT_OVERLAY) margie
 all: homer
 	
