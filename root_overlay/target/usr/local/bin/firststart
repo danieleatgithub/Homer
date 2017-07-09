@@ -38,4 +38,3 @@ fi
 
 # Remove first start job
 rm /etc/init.d/S00firststart
-cat /etc/homer.version >> /etc/issue
