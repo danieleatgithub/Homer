@@ -13,13 +13,11 @@ MAKEARCH := $(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE)
 
 homer:
 	$(MAKE) -C $(HS1101LF) 
-	$(MAKE) -C $(HS1101LF) modules_install
 	$(MAKE) -C $(LINUX-DTS)
 	$(MAKE) -C $(ROOT_OVERLAY) homer
 	
 margie:
 	$(MAKE) -C $(HS1101LF) 
-	$(MAKE) -C $(HS1101LF) modules_install
 	$(MAKE) -C $(LINUX-DTS)
 	$(MAKE) -C $(ROOT_OVERLAY) margie
 	
