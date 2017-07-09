@@ -10,6 +10,7 @@ MAKEARCH := $(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE)
 
 homer:
 	$(MAKE) -C $(ROOT_OVERLAY) homer
+	
 margie:
 	$(MAKE) -C $(ROOT_OVERLAY) margie
 	
