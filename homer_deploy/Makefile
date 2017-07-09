@@ -1,5 +1,4 @@
-#/wks/linux-4.4.16/arch/arm/boot/dts/at91-sama5d3_acquaa5.dts
-MODULES := issue
+MODULES := x
 
 ARCH := arm
 CROSS_COMPILE := arm-buildroot-linux-gnueabi-
