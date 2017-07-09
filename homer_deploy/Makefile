@@ -12,5 +12,6 @@ homer:
 	$(MAKE) -C $(ROOT_OVERLAY) homer
 margie:
 	$(MAKE) -C $(ROOT_OVERLAY) margie
+	
 all: homer
 	
