@@ -30,6 +30,10 @@ echo "***Linux installed"
 cd $HS110LF
 make modules_install INSTALL_MOD_PATH=$TARGET_DIR ARCH=arm
 echo "***Custom modules installed"
+cp $LINUX_ROOT/tools/iio/iio_event_monitor 	$TARGET_DIR/sbin/.
+cp $LINUX_ROOT/tools/iio/lsiio 				$TARGET_DIR/sbin/.
+cp $LINUX_ROOT/tools/iio/generic_buffer 	$TARGET_DIR/sbin/.
+echo "***Kernel tools installed"
 
 #
 # Setup FS
