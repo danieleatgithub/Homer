@@ -11,11 +11,20 @@ ROOT_OVERLAY = /wks/workspace/Homer/root_overlay
 SD_BUILDER = /wks/workspace/Homer/SDBuilder/
 
 MAKEARCH := $(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE)
-	
-margie:
-	$(SD_BUILDER)/BURN.sh margie
-		
 
+linux-dts:
+	cd ${LINUX-DTS} && make && cd -
+hs110lf:
+	cd ${HS1101LF} && make && cd -
+buildroot: linux-dts hs110lf
+	cd ${BUILDROOT} && make && cd -
+
+margie: buildroot
+	$(SD_BUILDER)/BURN.sh margie
+homer: buildroot
+	$(SD_BUILDER)/BURN.sh homer
+		
+all: homer
 
 
 	
