@@ -53,6 +53,8 @@ class EmulatedDevices {
   Registration hs11cycles_reg;
   Registration hs11frequency_reg;
   Registration hs11samplems_reg;
+  Registration hih5030rh_reg;
+  Registration hih5030scale_reg;
 
   void temperature_register();
   void barometric_register();
@@ -65,6 +67,8 @@ class EmulatedDevices {
   void hs11cycles_register();
   void hs11frequency_register();
   void hs11samplems_register();
+  void hih5030rh_register();
+  void hih5030scale_register();
 };
 
 }

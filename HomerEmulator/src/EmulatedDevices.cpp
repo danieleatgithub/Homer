@@ -32,7 +32,8 @@ EmulatedDevices::EmulatedDevices(BoardEmulated& _board)
   hs11cycles_register();
   hs11frequency_register();
   hs11samplems_register();
-
+  hih5030rh_register();
+  hih5030scale_register();
 }
 
 EmulatedDevices::~EmulatedDevices() {
@@ -171,6 +172,28 @@ void EmulatedDevices::hs11samplems_register() {
         static int vt = 200;
         vt+=0;
         sprintf((char *)buffer,"%d",vt);
+        *ret = (int)strlen((char *)buffer);
+      });
+}
+void EmulatedDevices::hih5030rh_register() {
+  board.getEmulatedSysFs().reg_read(
+      hih5030rh_reg,
+      string("/sys/bus/iio/devices/iio:device([0-9]+)/in_voltage0_raw"),
+      [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
+        // TODO: Read emulation data from csv
+        static int vt = 1781;
+        sprintf((char *)buffer,"%d",vt);
+        *ret = (int)strlen((char *)buffer);
+      });
+}
+void EmulatedDevices::hih5030scale_register() {
+  board.getEmulatedSysFs().reg_read(
+      hih5030scale_reg,
+      string("/sys/bus/iio/devices/iio:device([0-9]+)/in_voltage_scale"),
+      [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
+        // TODO: Read emulation data from csv
+        static double vt = 0.732421875;
+        sprintf((char *)buffer,"%f",vt);
         *ret = (int)strlen((char *)buffer);
       });
 }
