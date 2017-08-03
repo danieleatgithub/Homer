@@ -114,7 +114,10 @@ class Ina219Current : public CurrentDevice {
       : ina219Device(_ina219Device),
         _logdev(Logger::getInstance(LOGDEVICE)) {
   }
-  void update() {
+  void update(chrono::system_clock::time_point time_point) {
+    if (update_point == time_point)
+      return;
+    update_point = time_point;
     amperes =
         ina219Device.readSysFsInteger(INA219_CURRENT)
             / (ina219Device.getShuntResistor()
@@ -134,7 +137,10 @@ class Ina219Voltage : public VoltageDevice {
   virtual ~Ina219Voltage() {
   }
 
-  void update() {
+  void update(chrono::system_clock::time_point time_point) {
+    if (update_point == time_point)
+      return;
+    update_point = time_point;
     volts = ina219Device.readSysFsInteger(INA219_VOLTAGE) / 1000.0;
   }
 }
@@ -151,7 +157,10 @@ class Ina219Rsens : public VoltageDevice {
   virtual ~Ina219Rsens() {
   }
 
-  void update() {
+  void update(chrono::system_clock::time_point time_point) {
+    if (update_point == time_point)
+      return;
+    update_point = time_point;
     volts = ina219Device.readSysFsInteger(INA219_RSENSE_VOLTS) / 1000.0;
   }
 }
@@ -167,7 +176,10 @@ class Ina219Power : public PowerDevice {
   virtual ~Ina219Power() {
   }
 
-  void update() {
+  void update(chrono::system_clock::time_point time_point) {
+    if (update_point == time_point)
+      return;
+    update_point = time_point;
     watt = (ina219Device.readSysFsInteger(INA219_POWER) / (100000000.0));
   }
 };

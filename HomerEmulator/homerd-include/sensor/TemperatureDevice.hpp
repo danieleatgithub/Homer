@@ -25,6 +25,7 @@ namespace homerio {
 class TemperatureDevice {
  protected:
   double celsius;
+  chrono::system_clock::time_point update_point;
  public:
   TemperatureDevice() {
     celsius = 0;
@@ -35,7 +36,7 @@ class TemperatureDevice {
   double getCelsius() const {
     return celsius;
   }
-  virtual void update() = 0;
+  virtual void update(chrono::system_clock::time_point time_point) = 0;
 };
 
 }

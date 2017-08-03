@@ -28,6 +28,11 @@ EmulatedDevices::EmulatedDevices(BoardEmulated& _board)
   power_register();
   rsense_register();
   shunt_register();
+  hs11rh_register();
+  hs11cycles_register();
+  hs11frequency_register();
+  hs11samplems_register();
+
 }
 
 EmulatedDevices::~EmulatedDevices() {
@@ -117,6 +122,55 @@ void EmulatedDevices::shunt_register() {
         static int va = 10000;
         va+=0;
         sprintf((char *)buffer,"%d",va);
+        *ret = (int)strlen((char *)buffer);
+      });
+}
+
+void EmulatedDevices::hs11rh_register() {
+  board.getEmulatedSysFs().reg_read(
+      hs11rh_reg,
+      string("/sys/bus/iio/devices/iio:device([0-9]+)/in_humidityrelative_raw"),
+      [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
+        // TODO: Read emulation data from csv
+        static int vt = 5431;
+        vt+=45;
+        sprintf((char *)buffer,"%d",vt);
+        *ret = (int)strlen((char *)buffer);
+      });
+}
+
+void EmulatedDevices::hs11cycles_register() {
+  board.getEmulatedSysFs().reg_read(
+      hs11cycles_reg, string("/sys/bus/iio/devices/iio:device([0-9]+)/cycles"),
+      [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
+        // TODO: Read emulation data from csv
+      static int vt = 60;
+      vt+=5;
+      sprintf((char *)buffer,"%d",vt);
+      *ret = (int)strlen((char *)buffer);
+    });
+}
+void EmulatedDevices::hs11frequency_register() {
+  board.getEmulatedSysFs().reg_read(
+      hs11frequency_reg,
+      string("/sys/bus/iio/devices/iio:device([0-9]+)/frequency"),
+      [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
+        // TODO: Read emulation data from csv
+        static int vt = 6670;
+        vt+=45;
+        sprintf((char *)buffer,"%d",vt);
+        *ret = (int)strlen((char *)buffer);
+      });
+}
+void EmulatedDevices::hs11samplems_register() {
+  board.getEmulatedSysFs().reg_read(
+      hs11samplems_reg,
+      string("/sys/bus/iio/devices/iio:device([0-9]+)/sample_ms"),
+      [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
+        // TODO: Read emulation data from csv
+        static int vt = 200;
+        vt+=0;
+        sprintf((char *)buffer,"%d",vt);
         *ret = (int)strlen((char *)buffer);
       });
 }

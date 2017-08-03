@@ -16,47 +16,51 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *******************************************************************************/
 
-#ifndef BMP085DEVICE_HPP_
-#define BMP085DEVICE_HPP_
-#include <TemperatureDevice.hpp>
-#include <BarometricDevice.hpp>
+#ifndef HS1101LFDEVICE_HPP_
+#define HS1101LFDEVICE_HPP_
+#include <HumidityDevice.hpp>
 #include <string.h>
 #include <log4cplus/logger.h>
 #include <log4cplus/loggingmacros.h>
 #include <log4cplus/loglevel.h>
 #include <fstream>
+#include <cmath>
 #include <HwLayer.hpp>
 
-#define BMP085_TEMPERATURE "/class/i2c-adapter/i2c-0/0-0077/temp0_input"
-#define BMP085_PRESSURE "/class/i2c-adapter/i2c-0/0-0077/pressure0_input"
-#define BUFSIZE 50
+#define HS1101LF_RH "/bus/iio/devices/iio:device0/in_humidityrelative_raw"
+#define HS1101LF_CYCLES "/bus/iio/devices/iio:device0/cycles"
+#define HS1101LF_FREQUENCY "/bus/iio/devices/iio:device0/frequency"
+#define HS1101LF_SAMPLE_MS "/bus/iio/devices/iio:device0/sample_ms"
+#define HS1101LF_ "/bus/iio/devices/iio:device0/"
 
+#define BUFSIZE 50
 using namespace std;
 
 namespace homerio {
 
-class Bmp085Device {
+class Hs1101lfDevice {
  private:
   SysFs& sysFs;
   Logger _logdev;
+  int cycles;
+  int frequency;
+  int sample_ms;
 
  public:
-
-  Bmp085Device(Board& _board)
+  Hs1101lfDevice(Board& _board)
       : sysFs(_board.getSysFs()),
         _logdev(Logger::getInstance(LOGDEVICE)) {
+    sample_ms = (double) readSysFsInteger(HS1101LF_SAMPLE_MS);
+
   }
 
-  virtual ~Bmp085Device() {
-  }
-
-  long readSysFsLong(const char *entry) {
+  int readSysFsInteger(const char *entry) {
     int nread = 0;
-    long value = 0;
+    int value = 0;
     char buffer[BUFSIZE];
     nread = sysFs.readBuffer(entry, buffer, (BUFSIZE - 1));
     if (nread > 0) {
-      value = atol(buffer);
+      value = atoi(buffer);
       LOG4CPLUS_TRACE(
           _logdev,
           "Read " << entry << " string(" << nread << ") [" << buffer << "]");
@@ -65,48 +69,44 @@ class Bmp085Device {
     }
     return (value);
   }
-
-};
-
-class Bmp085Thermometer : public TemperatureDevice {
- private:
-  Bmp085Device& bmp085Device;
-  Logger _logdev;
-
- public:
-  Bmp085Thermometer(Bmp085Device& _bmp085Device)
-      : bmp085Device(_bmp085Device),
-        _logdev(Logger::getInstance(LOGDEVICE)) {
+  int getRH(double celsius) {
+    int rh;
+    rh = readSysFsInteger(HS1101LF_RH) / 100;
+    cycles = readSysFsInteger(HS1101LF_CYCLES);
+    frequency = readSysFsInteger(HS1101LF_FREQUENCY);
+    LOG4CPLUS_DEBUG(_logdev,
+                    "getRH rh=" << rh << " f=" << frequency << " c=" << cycles);
+    rh = round(rh / (1.0546 - 0.00216 * celsius));
+    return (rh);
   }
 
-  void update(chrono::system_clock::time_point time_point) {
-    if (update_point == time_point)
-      return;
-    update_point = time_point;
-    celsius = bmp085Device.readSysFsLong(BMP085_TEMPERATURE) / 10.0;
+  virtual ~Hs1101lfDevice() {
   }
 
 };
 
-class Bmp085Barometer : public BarometricDevice {
- private:
-  Bmp085Device& bmp085Device;
+class Hs1101lfHumidity : public HumidityDevice {
+  Hs1101lfDevice& hs1101lfDevice;
+  TemperatureDevice& temperatureDevice;
   Logger _logdev;
 
  public:
-  Bmp085Barometer(Bmp085Device& _bmp085Device)
-      : bmp085Device(_bmp085Device),
+  Hs1101lfHumidity(Hs1101lfDevice& _hs1101lfDevice,
+                   TemperatureDevice& _temperatureDevice)
+      : hs1101lfDevice(_hs1101lfDevice),
+        temperatureDevice(_temperatureDevice),
         _logdev(Logger::getInstance(LOGDEVICE)) {
   }
   void update(chrono::system_clock::time_point time_point) {
     if (update_point == time_point)
       return;
+    temperatureDevice.update(time_point);
     update_point = time_point;
-    millibar = bmp085Device.readSysFsLong(BMP085_PRESSURE) / 100.0;
+    rh = hs1101lfDevice.getRH(temperatureDevice.getCelsius());
   }
 }
 ;
 
 }
 
-#endif /* BMP085DEVICE_HPP_ */
+#endif /* HS1101LFDEVICE_HPP_ */

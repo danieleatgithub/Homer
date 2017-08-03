@@ -33,12 +33,13 @@ class SensorManager {
   Logger _csv;
   Task update_task;
   string last_update_csv;
-
+  chrono::system_clock::time_point now;
   void update() {
     std::unique_lock < std::mutex > lock(mutex_sensors);
     last_update_csv.clear();
+    now = chrono::system_clock::now();
     for (auto s : sensors) {
-      s.second.update();
+      s.second.update(now);
       last_update_csv += CsvSensorDecorator(s.second).getString();
     }
   }

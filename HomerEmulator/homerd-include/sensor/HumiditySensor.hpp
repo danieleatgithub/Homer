@@ -16,10 +16,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *******************************************************************************/
 
-#ifndef VOLTAGESENSOR_HPP_
-#define VOLTAGESENSOR_HPP_
+#ifndef HUMIDITYSENSOR_HPP_
+#define HUMIDITYSENSOR_HPP_
 #include <Sensor.hpp>
-#include <VoltageDevice.hpp>
+#include <HumidityDevice.hpp>
 #include <sstream>
 #include <map>
 #include <math.h>
@@ -29,29 +29,31 @@ using namespace std;
 
 namespace homerio {
 
-class VoltageSensor : public Sensor, public MenuAble {
+class HumiditySensor : public Sensor, public MenuAble {
  public:
-  VoltageSensor(VoltageDevice& _device, string _label)
+  HumiditySensor(HumidityDevice& _device, string _label)
       : Sensor(_label),
         device(_device),
         label(_label) {
-    units[6] = "M";
-    units[3] = "K";
-    units[-3] = "m";
-    units[-6] = "u";
     units[0] = "";
-    scale = 0;
-    precision = 4;
   }
-  ~VoltageSensor() {
+  ~HumiditySensor() {
   }
   ;
-  VoltageDevice& getDevice() const {
+  HumidityDevice& getDevice() const {
     return device;
   }
 
-  double getVolts() const {
-    return device.getVolts();
+  double getRH() const {
+    return device.getRH();
+  }
+  const string getLabel() const {
+    return label;
+  }
+  const string getValue() const {
+    ostringstream ostr;
+    ostr << std::setprecision(2) << device.getRH() << "%";
+    return ostr.str();
   }
   void update(chrono::system_clock::time_point time_point) {
     device.update(time_point);
@@ -59,29 +61,19 @@ class VoltageSensor : public Sensor, public MenuAble {
   void refresh(chrono::system_clock::time_point time_point) {
     update(time_point);
   }
-  const string getValue() const {
-    ostringstream ostr;
-    ostr << std::setprecision(precision)
-        << (device.getVolts() / pow(10.0, scale)) << " "
-        << units.find(scale)->second << "V";
-    return ostr.str();
-  }
-  const string getLabel() const {
-    return label;
-  }
   const string getString() const {
     ostringstream ostr;
-    ostr << device.getVolts();
+    ostr << device.getRH();
     return ostr.str();
   }
   const double getDouble() const {
-    return device.getVolts();
+    return device.getRH();
   }
  private:
-  VoltageDevice& device;
+  HumidityDevice& device;
   string label;
-
 };
+
 }
 
-#endif /* VOLTAGESENSOR_HPP_ */
+#endif /* HUMIDITYSENSOR_HPP_ */

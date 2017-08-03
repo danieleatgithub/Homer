@@ -26,6 +26,7 @@ namespace homerio {
 class CurrentDevice {
  protected:
   double amperes;
+  chrono::system_clock::time_point update_point;
  public:
   CurrentDevice() {
     amperes = 0;
@@ -37,7 +38,7 @@ class CurrentDevice {
   double getAmperes() const {
     return amperes;
   }
-  virtual void update() = 0;
+  virtual void update(chrono::system_clock::time_point time_point) = 0;
 };
 
 }

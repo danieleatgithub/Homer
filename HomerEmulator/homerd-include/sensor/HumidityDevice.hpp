@@ -16,24 +16,30 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *******************************************************************************/
 
-#ifndef VOLTAGEDEVICE_HPP_
-#define VOLTAGEDEVICE_HPP_
+#ifndef HUMIDITYDEVICE_HPP_
+#define HUMIDITYDEVICE_HPP_
 
 using namespace std;
 
 namespace homerio {
 
-class VoltageDevice {
+class HumidityDevice {
  protected:
-  double volts;
+  double rh;
   chrono::system_clock::time_point update_point;
  public:
-  double getVolts() const {
-    return volts;
+  HumidityDevice() {
+    rh = 0;
+  }
+  virtual ~HumidityDevice() {
+  }
+  ;
+
+  double getRH() const {
+    return rh;
   }
   virtual void update(chrono::system_clock::time_point time_point) = 0;
 };
 
 }
-
-#endif /* VOLTAGEDEVICE_HPP_ */
+#endif /* HUMIDITYDEVICE_HPP_ */

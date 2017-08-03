@@ -49,6 +49,10 @@ class EmulatedDevices {
   Registration power_reg;
   Registration rsense_reg;
   Registration shunt_reg;
+  Registration hs11rh_reg;
+  Registration hs11cycles_reg;
+  Registration hs11frequency_reg;
+  Registration hs11samplems_reg;
 
   void temperature_register();
   void barometric_register();
@@ -57,6 +61,10 @@ class EmulatedDevices {
   void power_register();
   void rsense_register();
   void shunt_register();
+  void hs11rh_register();
+  void hs11cycles_register();
+  void hs11frequency_register();
+  void hs11samplems_register();
 };
 
 }

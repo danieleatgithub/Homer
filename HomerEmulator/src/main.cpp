@@ -41,10 +41,12 @@
 #include <MenuMoveVisitor.hpp>
 #include <Bmp085Device.hpp>
 #include <Ina219Device.hpp>
+#include <Hs1101lfDevice.hpp>
 #include <IPAddressSensor.hpp>
 #include <CurrentSensor.hpp>
 #include <PowerSensor.hpp>
 #include <VoltageSensor.hpp>
+#include <HumiditySensor.hpp>
 
 using namespace std;
 using namespace homerio;
@@ -70,6 +72,7 @@ int main(int argc, char** argv) {
   Scheduler *scheduler;
   KeyPanel *keyPanel;
   HomerMenu *menu;
+
   Bmp085Device *bmp085Device;
   Bmp085Thermometer *bmp085Thermometer;
   Bmp085Barometer *bmp085Barometer;
@@ -80,6 +83,9 @@ int main(int argc, char** argv) {
   Ina219Rsens *ina219Rsens;
   Ina219Power *ina219Power;
 
+  Hs1101lfDevice *hs1101lfDevice;
+  Hs1101lfHumidity *hs1101lfHumidity;
+
   TemperatureSensor *tSens;
   BarometricSensor *pSens;
   IPAddressSensor *ipSens;
@@ -87,6 +93,7 @@ int main(int argc, char** argv) {
   PowerSensor *wSens;
   VoltageSensor *vSens;
   VoltageSensor *rsSens;
+  HumiditySensor *rhSens;
 
   SensorManager *sensorManager;
 
@@ -121,6 +128,9 @@ int main(int argc, char** argv) {
   ina219Rsens = new Ina219Rsens(*ina219Device);
   ina219Power = new Ina219Power(*ina219Device);
 
+  hs1101lfDevice = new Hs1101lfDevice(*acquaA5);
+  hs1101lfHumidity = new Hs1101lfHumidity(*hs1101lfDevice, *bmp085Thermometer);
+
   tSens = new TemperatureSensor(*bmp085Thermometer, string("Temperature"));
   sensorManager->add(*tSens);
   menu->addSensor(*tSens);
@@ -148,6 +158,10 @@ int main(int argc, char** argv) {
   vSens = new VoltageSensor(*ina219Voltage, string("Voltage"));
   sensorManager->add(*vSens);
   menu->addSensor(*vSens);
+
+  rhSens = new HumiditySensor(*hs1101lfHumidity, string("Humidity"));
+  sensorManager->add(*rhSens);
+  menu->addSensor(*rhSens);
 
   ipSens = new IPAddressSensor(string("eth0"), string("IpAddress:"));
   sensorManager->add(*ipSens);

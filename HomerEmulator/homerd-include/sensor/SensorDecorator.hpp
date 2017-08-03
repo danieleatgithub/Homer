@@ -33,9 +33,10 @@ class SensorDecorator : public Sensor {
   const double getDouble() const {
     return (_sensor.getDouble());
   }
-  void update() {
-    _sensor.update();
+  void update(chrono::system_clock::time_point time_point) {
+    _sensor.update(time_point);
   }
+
 };
 
 } /* namespace homerio */

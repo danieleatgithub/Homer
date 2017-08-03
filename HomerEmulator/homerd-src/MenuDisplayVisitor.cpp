@@ -38,7 +38,7 @@ void MenuDisplayVisitor::leave(MenuLeaf& l, KeyButton& k) {
   dp.clear();
 }
 void MenuDisplayVisitor::click(MenuLeaf& l, KeyButton& k) {
-  l.getElement().update();
+  l.getElement().refresh(chrono::system_clock::now());
   dp.clear();
   dp.dpy_puts(l.getElement().getLabel().c_str());
   dp.line2_home();

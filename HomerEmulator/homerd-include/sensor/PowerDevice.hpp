@@ -26,6 +26,7 @@ namespace homerio {
 class PowerDevice {
  protected:
   double watt;
+  chrono::system_clock::time_point update_point;
  public:
   virtual ~PowerDevice() {
   }
@@ -33,7 +34,7 @@ class PowerDevice {
   double getWatt() const {
     return watt;
   }
-  virtual void update() = 0;
+  virtual void update(chrono::system_clock::time_point time_point) = 0;
 };
 
 }
