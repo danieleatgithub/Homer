@@ -87,8 +87,8 @@ NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = x86_64-unknown-linux-gnu
-host_triplet = arm-buildroot-linux-gnueabihf
-target_triplet = arm-buildroot-linux-gnueabihf
+host_triplet = arm-buildroot-linux-gnueabi
+target_triplet = arm-buildroot-linux-gnueabi
 bin_PROGRAMS = homerd$(EXEEXT)
 subdir = homerd
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -101,12 +101,14 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
+am__dirstamp = $(am__leading_dot)dirstamp
 am_homerd_OBJECTS = homerd.$(OBJEXT) HwAcquaA5.$(OBJEXT) \
-	Display.$(OBJEXT) GpioPin.$(OBJEXT) KeyButton.$(OBJEXT) \
-	KeyPanel.$(OBJEXT) MenuDisplayVisitor.$(OBJEXT) \
-	MenuLeaf.$(OBJEXT) MenuMoveVisitor.$(OBJEXT) \
-	Observer.$(OBJEXT) SubMenu.$(OBJEXT) Sysinfo.$(OBJEXT) \
-	Winstar.$(OBJEXT)
+	../src/Display.$(OBJEXT) ../src/GpioPin.$(OBJEXT) \
+	../src/KeyButton.$(OBJEXT) ../src/KeyPanel.$(OBJEXT) \
+	../src/MenuDisplayVisitor.$(OBJEXT) ../src/MenuLeaf.$(OBJEXT) \
+	../src/MenuMoveVisitor.$(OBJEXT) ../src/Observer.$(OBJEXT) \
+	../src/SubMenu.$(OBJEXT) ../src/Sysinfo.$(OBJEXT) \
+	../src/Winstar.$(OBJEXT)
 homerd_OBJECTS = $(am_homerd_OBJECTS)
 homerd_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_$(V))
@@ -125,10 +127,6 @@ DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 am__mv = mv -f
-AM_V_lt = $(am__v_lt_$(V))
-am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
-am__v_lt_0 = --silent
-am__v_lt_1 = 
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 AM_V_CXX = $(am__v_CXX_$(V))
@@ -180,7 +178,7 @@ AWK = gawk
 CPPFLAGS = 
 CXX = arm-buildroot-linux-gnueabi-g++
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -g -pg
+CXXFLAGS = -g -O2
 CYGPATH_W = echo
 DEFS = -DPACKAGE_NAME=\"homerd\" -DPACKAGE_TARNAME=\"homerd\" -DPACKAGE_VERSION=\"1.0\" -DPACKAGE_STRING=\"homerd\ 1.0\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"homerd\" -DVERSION=\"1.0\"
 DEPDIR = .deps
@@ -210,7 +208,7 @@ PACKAGE_VERSION = 1.0
 PATH_SEPARATOR = :
 SET_MAKE = 
 SHELL = /bin/bash
-STRIP = strip
+STRIP = arm-buildroot-linux-gnueabi-strip
 VERSION = 1.0
 abs_builddir = /wks/workspace/Homer/homerd/homerd
 abs_srcdir = /wks/workspace/Homer/homerd/homerd
@@ -234,10 +232,10 @@ datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
-host = arm-buildroot-linux-gnueabihf
-host_alias = arm-buildroot-linux-gnueabihf
+host = arm-buildroot-linux-gnueabi
+host_alias = arm-buildroot-linux-gnueabi
 host_cpu = arm
-host_os = linux-gnueabihf
+host_os = linux-gnueabi
 host_vendor = buildroot
 htmldir = ${docdir}
 includedir = ${prefix}/include
@@ -251,17 +249,17 @@ mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /wks/workspace/Homer/root_overlay/target
+prefix = /usr/local
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 srcdir = .
 sysconfdir = ${prefix}/etc
-target = arm-buildroot-linux-gnueabihf
+target = arm-buildroot-linux-gnueabi
 target_alias = 
 target_cpu = arm
-target_os = linux-gnueabihf
+target_os = linux-gnueabi
 target_vendor = buildroot
 top_build_prefix = ../
 top_builddir = ..
@@ -357,6 +355,34 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+../src/$(am__dirstamp):
+	@$(MKDIR_P) ../src
+	@: > ../src/$(am__dirstamp)
+../src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) ../src/$(DEPDIR)
+	@: > ../src/$(DEPDIR)/$(am__dirstamp)
+../src/Display.$(OBJEXT): ../src/$(am__dirstamp) \
+	../src/$(DEPDIR)/$(am__dirstamp)
+../src/GpioPin.$(OBJEXT): ../src/$(am__dirstamp) \
+	../src/$(DEPDIR)/$(am__dirstamp)
+../src/KeyButton.$(OBJEXT): ../src/$(am__dirstamp) \
+	../src/$(DEPDIR)/$(am__dirstamp)
+../src/KeyPanel.$(OBJEXT): ../src/$(am__dirstamp) \
+	../src/$(DEPDIR)/$(am__dirstamp)
+../src/MenuDisplayVisitor.$(OBJEXT): ../src/$(am__dirstamp) \
+	../src/$(DEPDIR)/$(am__dirstamp)
+../src/MenuLeaf.$(OBJEXT): ../src/$(am__dirstamp) \
+	../src/$(DEPDIR)/$(am__dirstamp)
+../src/MenuMoveVisitor.$(OBJEXT): ../src/$(am__dirstamp) \
+	../src/$(DEPDIR)/$(am__dirstamp)
+../src/Observer.$(OBJEXT): ../src/$(am__dirstamp) \
+	../src/$(DEPDIR)/$(am__dirstamp)
+../src/SubMenu.$(OBJEXT): ../src/$(am__dirstamp) \
+	../src/$(DEPDIR)/$(am__dirstamp)
+../src/Sysinfo.$(OBJEXT): ../src/$(am__dirstamp) \
+	../src/$(DEPDIR)/$(am__dirstamp)
+../src/Winstar.$(OBJEXT): ../src/$(am__dirstamp) \
+	../src/$(DEPDIR)/$(am__dirstamp)
 
 homerd$(EXEEXT): $(homerd_OBJECTS) $(homerd_DEPENDENCIES) $(EXTRA_homerd_DEPENDENCIES) 
 	@rm -f homerd$(EXEEXT)
@@ -364,191 +390,40 @@ homerd$(EXEEXT): $(homerd_OBJECTS) $(homerd_DEPENDENCIES) $(EXTRA_homerd_DEPENDE
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
+	-rm -f ../src/*.$(OBJEXT)
 
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/Display.Po
-include ./$(DEPDIR)/GpioPin.Po
+include ../src/$(DEPDIR)/Display.Po
+include ../src/$(DEPDIR)/GpioPin.Po
+include ../src/$(DEPDIR)/KeyButton.Po
+include ../src/$(DEPDIR)/KeyPanel.Po
+include ../src/$(DEPDIR)/MenuDisplayVisitor.Po
+include ../src/$(DEPDIR)/MenuLeaf.Po
+include ../src/$(DEPDIR)/MenuMoveVisitor.Po
+include ../src/$(DEPDIR)/Observer.Po
+include ../src/$(DEPDIR)/SubMenu.Po
+include ../src/$(DEPDIR)/Sysinfo.Po
+include ../src/$(DEPDIR)/Winstar.Po
 include ./$(DEPDIR)/HwAcquaA5.Po
-include ./$(DEPDIR)/KeyButton.Po
-include ./$(DEPDIR)/KeyPanel.Po
-include ./$(DEPDIR)/MenuDisplayVisitor.Po
-include ./$(DEPDIR)/MenuLeaf.Po
-include ./$(DEPDIR)/MenuMoveVisitor.Po
-include ./$(DEPDIR)/Observer.Po
-include ./$(DEPDIR)/SubMenu.Po
-include ./$(DEPDIR)/Sysinfo.Po
-include ./$(DEPDIR)/Winstar.Po
 include ./$(DEPDIR)/homerd.Po
 
 .cpp.o:
-	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
+	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
+	$(am__mv) $$depbase.Tpo $$depbase.Po
 #	$(AM_V_CXX)source='$<' object='$@' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ $<
 
 .cpp.obj:
-	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
+	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
+	$(am__mv) $$depbase.Tpo $$depbase.Po
 #	$(AM_V_CXX)source='$<' object='$@' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
-
-Display.o: ../src/Display.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Display.o -MD -MP -MF $(DEPDIR)/Display.Tpo -c -o Display.o `test -f '../src/Display.cpp' || echo '$(srcdir)/'`../src/Display.cpp
-	$(AM_V_at)$(am__mv) $(DEPDIR)/Display.Tpo $(DEPDIR)/Display.Po
-#	$(AM_V_CXX)source='../src/Display.cpp' object='Display.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Display.o `test -f '../src/Display.cpp' || echo '$(srcdir)/'`../src/Display.cpp
-
-Display.obj: ../src/Display.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Display.obj -MD -MP -MF $(DEPDIR)/Display.Tpo -c -o Display.obj `if test -f '../src/Display.cpp'; then $(CYGPATH_W) '../src/Display.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/Display.cpp'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/Display.Tpo $(DEPDIR)/Display.Po
-#	$(AM_V_CXX)source='../src/Display.cpp' object='Display.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Display.obj `if test -f '../src/Display.cpp'; then $(CYGPATH_W) '../src/Display.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/Display.cpp'; fi`
-
-GpioPin.o: ../src/GpioPin.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT GpioPin.o -MD -MP -MF $(DEPDIR)/GpioPin.Tpo -c -o GpioPin.o `test -f '../src/GpioPin.cpp' || echo '$(srcdir)/'`../src/GpioPin.cpp
-	$(AM_V_at)$(am__mv) $(DEPDIR)/GpioPin.Tpo $(DEPDIR)/GpioPin.Po
-#	$(AM_V_CXX)source='../src/GpioPin.cpp' object='GpioPin.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o GpioPin.o `test -f '../src/GpioPin.cpp' || echo '$(srcdir)/'`../src/GpioPin.cpp
-
-GpioPin.obj: ../src/GpioPin.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT GpioPin.obj -MD -MP -MF $(DEPDIR)/GpioPin.Tpo -c -o GpioPin.obj `if test -f '../src/GpioPin.cpp'; then $(CYGPATH_W) '../src/GpioPin.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/GpioPin.cpp'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/GpioPin.Tpo $(DEPDIR)/GpioPin.Po
-#	$(AM_V_CXX)source='../src/GpioPin.cpp' object='GpioPin.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o GpioPin.obj `if test -f '../src/GpioPin.cpp'; then $(CYGPATH_W) '../src/GpioPin.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/GpioPin.cpp'; fi`
-
-KeyButton.o: ../src/KeyButton.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT KeyButton.o -MD -MP -MF $(DEPDIR)/KeyButton.Tpo -c -o KeyButton.o `test -f '../src/KeyButton.cpp' || echo '$(srcdir)/'`../src/KeyButton.cpp
-	$(AM_V_at)$(am__mv) $(DEPDIR)/KeyButton.Tpo $(DEPDIR)/KeyButton.Po
-#	$(AM_V_CXX)source='../src/KeyButton.cpp' object='KeyButton.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o KeyButton.o `test -f '../src/KeyButton.cpp' || echo '$(srcdir)/'`../src/KeyButton.cpp
-
-KeyButton.obj: ../src/KeyButton.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT KeyButton.obj -MD -MP -MF $(DEPDIR)/KeyButton.Tpo -c -o KeyButton.obj `if test -f '../src/KeyButton.cpp'; then $(CYGPATH_W) '../src/KeyButton.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/KeyButton.cpp'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/KeyButton.Tpo $(DEPDIR)/KeyButton.Po
-#	$(AM_V_CXX)source='../src/KeyButton.cpp' object='KeyButton.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o KeyButton.obj `if test -f '../src/KeyButton.cpp'; then $(CYGPATH_W) '../src/KeyButton.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/KeyButton.cpp'; fi`
-
-KeyPanel.o: ../src/KeyPanel.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT KeyPanel.o -MD -MP -MF $(DEPDIR)/KeyPanel.Tpo -c -o KeyPanel.o `test -f '../src/KeyPanel.cpp' || echo '$(srcdir)/'`../src/KeyPanel.cpp
-	$(AM_V_at)$(am__mv) $(DEPDIR)/KeyPanel.Tpo $(DEPDIR)/KeyPanel.Po
-#	$(AM_V_CXX)source='../src/KeyPanel.cpp' object='KeyPanel.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o KeyPanel.o `test -f '../src/KeyPanel.cpp' || echo '$(srcdir)/'`../src/KeyPanel.cpp
-
-KeyPanel.obj: ../src/KeyPanel.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT KeyPanel.obj -MD -MP -MF $(DEPDIR)/KeyPanel.Tpo -c -o KeyPanel.obj `if test -f '../src/KeyPanel.cpp'; then $(CYGPATH_W) '../src/KeyPanel.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/KeyPanel.cpp'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/KeyPanel.Tpo $(DEPDIR)/KeyPanel.Po
-#	$(AM_V_CXX)source='../src/KeyPanel.cpp' object='KeyPanel.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o KeyPanel.obj `if test -f '../src/KeyPanel.cpp'; then $(CYGPATH_W) '../src/KeyPanel.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/KeyPanel.cpp'; fi`
-
-MenuDisplayVisitor.o: ../src/MenuDisplayVisitor.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT MenuDisplayVisitor.o -MD -MP -MF $(DEPDIR)/MenuDisplayVisitor.Tpo -c -o MenuDisplayVisitor.o `test -f '../src/MenuDisplayVisitor.cpp' || echo '$(srcdir)/'`../src/MenuDisplayVisitor.cpp
-	$(AM_V_at)$(am__mv) $(DEPDIR)/MenuDisplayVisitor.Tpo $(DEPDIR)/MenuDisplayVisitor.Po
-#	$(AM_V_CXX)source='../src/MenuDisplayVisitor.cpp' object='MenuDisplayVisitor.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o MenuDisplayVisitor.o `test -f '../src/MenuDisplayVisitor.cpp' || echo '$(srcdir)/'`../src/MenuDisplayVisitor.cpp
-
-MenuDisplayVisitor.obj: ../src/MenuDisplayVisitor.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT MenuDisplayVisitor.obj -MD -MP -MF $(DEPDIR)/MenuDisplayVisitor.Tpo -c -o MenuDisplayVisitor.obj `if test -f '../src/MenuDisplayVisitor.cpp'; then $(CYGPATH_W) '../src/MenuDisplayVisitor.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/MenuDisplayVisitor.cpp'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/MenuDisplayVisitor.Tpo $(DEPDIR)/MenuDisplayVisitor.Po
-#	$(AM_V_CXX)source='../src/MenuDisplayVisitor.cpp' object='MenuDisplayVisitor.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o MenuDisplayVisitor.obj `if test -f '../src/MenuDisplayVisitor.cpp'; then $(CYGPATH_W) '../src/MenuDisplayVisitor.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/MenuDisplayVisitor.cpp'; fi`
-
-MenuLeaf.o: ../src/MenuLeaf.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT MenuLeaf.o -MD -MP -MF $(DEPDIR)/MenuLeaf.Tpo -c -o MenuLeaf.o `test -f '../src/MenuLeaf.cpp' || echo '$(srcdir)/'`../src/MenuLeaf.cpp
-	$(AM_V_at)$(am__mv) $(DEPDIR)/MenuLeaf.Tpo $(DEPDIR)/MenuLeaf.Po
-#	$(AM_V_CXX)source='../src/MenuLeaf.cpp' object='MenuLeaf.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o MenuLeaf.o `test -f '../src/MenuLeaf.cpp' || echo '$(srcdir)/'`../src/MenuLeaf.cpp
-
-MenuLeaf.obj: ../src/MenuLeaf.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT MenuLeaf.obj -MD -MP -MF $(DEPDIR)/MenuLeaf.Tpo -c -o MenuLeaf.obj `if test -f '../src/MenuLeaf.cpp'; then $(CYGPATH_W) '../src/MenuLeaf.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/MenuLeaf.cpp'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/MenuLeaf.Tpo $(DEPDIR)/MenuLeaf.Po
-#	$(AM_V_CXX)source='../src/MenuLeaf.cpp' object='MenuLeaf.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o MenuLeaf.obj `if test -f '../src/MenuLeaf.cpp'; then $(CYGPATH_W) '../src/MenuLeaf.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/MenuLeaf.cpp'; fi`
-
-MenuMoveVisitor.o: ../src/MenuMoveVisitor.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT MenuMoveVisitor.o -MD -MP -MF $(DEPDIR)/MenuMoveVisitor.Tpo -c -o MenuMoveVisitor.o `test -f '../src/MenuMoveVisitor.cpp' || echo '$(srcdir)/'`../src/MenuMoveVisitor.cpp
-	$(AM_V_at)$(am__mv) $(DEPDIR)/MenuMoveVisitor.Tpo $(DEPDIR)/MenuMoveVisitor.Po
-#	$(AM_V_CXX)source='../src/MenuMoveVisitor.cpp' object='MenuMoveVisitor.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o MenuMoveVisitor.o `test -f '../src/MenuMoveVisitor.cpp' || echo '$(srcdir)/'`../src/MenuMoveVisitor.cpp
-
-MenuMoveVisitor.obj: ../src/MenuMoveVisitor.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT MenuMoveVisitor.obj -MD -MP -MF $(DEPDIR)/MenuMoveVisitor.Tpo -c -o MenuMoveVisitor.obj `if test -f '../src/MenuMoveVisitor.cpp'; then $(CYGPATH_W) '../src/MenuMoveVisitor.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/MenuMoveVisitor.cpp'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/MenuMoveVisitor.Tpo $(DEPDIR)/MenuMoveVisitor.Po
-#	$(AM_V_CXX)source='../src/MenuMoveVisitor.cpp' object='MenuMoveVisitor.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o MenuMoveVisitor.obj `if test -f '../src/MenuMoveVisitor.cpp'; then $(CYGPATH_W) '../src/MenuMoveVisitor.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/MenuMoveVisitor.cpp'; fi`
-
-Observer.o: ../src/Observer.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Observer.o -MD -MP -MF $(DEPDIR)/Observer.Tpo -c -o Observer.o `test -f '../src/Observer.cpp' || echo '$(srcdir)/'`../src/Observer.cpp
-	$(AM_V_at)$(am__mv) $(DEPDIR)/Observer.Tpo $(DEPDIR)/Observer.Po
-#	$(AM_V_CXX)source='../src/Observer.cpp' object='Observer.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Observer.o `test -f '../src/Observer.cpp' || echo '$(srcdir)/'`../src/Observer.cpp
-
-Observer.obj: ../src/Observer.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Observer.obj -MD -MP -MF $(DEPDIR)/Observer.Tpo -c -o Observer.obj `if test -f '../src/Observer.cpp'; then $(CYGPATH_W) '../src/Observer.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/Observer.cpp'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/Observer.Tpo $(DEPDIR)/Observer.Po
-#	$(AM_V_CXX)source='../src/Observer.cpp' object='Observer.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Observer.obj `if test -f '../src/Observer.cpp'; then $(CYGPATH_W) '../src/Observer.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/Observer.cpp'; fi`
-
-SubMenu.o: ../src/SubMenu.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT SubMenu.o -MD -MP -MF $(DEPDIR)/SubMenu.Tpo -c -o SubMenu.o `test -f '../src/SubMenu.cpp' || echo '$(srcdir)/'`../src/SubMenu.cpp
-	$(AM_V_at)$(am__mv) $(DEPDIR)/SubMenu.Tpo $(DEPDIR)/SubMenu.Po
-#	$(AM_V_CXX)source='../src/SubMenu.cpp' object='SubMenu.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o SubMenu.o `test -f '../src/SubMenu.cpp' || echo '$(srcdir)/'`../src/SubMenu.cpp
-
-SubMenu.obj: ../src/SubMenu.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT SubMenu.obj -MD -MP -MF $(DEPDIR)/SubMenu.Tpo -c -o SubMenu.obj `if test -f '../src/SubMenu.cpp'; then $(CYGPATH_W) '../src/SubMenu.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/SubMenu.cpp'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/SubMenu.Tpo $(DEPDIR)/SubMenu.Po
-#	$(AM_V_CXX)source='../src/SubMenu.cpp' object='SubMenu.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o SubMenu.obj `if test -f '../src/SubMenu.cpp'; then $(CYGPATH_W) '../src/SubMenu.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/SubMenu.cpp'; fi`
-
-Sysinfo.o: ../src/Sysinfo.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Sysinfo.o -MD -MP -MF $(DEPDIR)/Sysinfo.Tpo -c -o Sysinfo.o `test -f '../src/Sysinfo.cpp' || echo '$(srcdir)/'`../src/Sysinfo.cpp
-	$(AM_V_at)$(am__mv) $(DEPDIR)/Sysinfo.Tpo $(DEPDIR)/Sysinfo.Po
-#	$(AM_V_CXX)source='../src/Sysinfo.cpp' object='Sysinfo.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Sysinfo.o `test -f '../src/Sysinfo.cpp' || echo '$(srcdir)/'`../src/Sysinfo.cpp
-
-Sysinfo.obj: ../src/Sysinfo.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Sysinfo.obj -MD -MP -MF $(DEPDIR)/Sysinfo.Tpo -c -o Sysinfo.obj `if test -f '../src/Sysinfo.cpp'; then $(CYGPATH_W) '../src/Sysinfo.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/Sysinfo.cpp'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/Sysinfo.Tpo $(DEPDIR)/Sysinfo.Po
-#	$(AM_V_CXX)source='../src/Sysinfo.cpp' object='Sysinfo.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Sysinfo.obj `if test -f '../src/Sysinfo.cpp'; then $(CYGPATH_W) '../src/Sysinfo.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/Sysinfo.cpp'; fi`
-
-Winstar.o: ../src/Winstar.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Winstar.o -MD -MP -MF $(DEPDIR)/Winstar.Tpo -c -o Winstar.o `test -f '../src/Winstar.cpp' || echo '$(srcdir)/'`../src/Winstar.cpp
-	$(AM_V_at)$(am__mv) $(DEPDIR)/Winstar.Tpo $(DEPDIR)/Winstar.Po
-#	$(AM_V_CXX)source='../src/Winstar.cpp' object='Winstar.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Winstar.o `test -f '../src/Winstar.cpp' || echo '$(srcdir)/'`../src/Winstar.cpp
-
-Winstar.obj: ../src/Winstar.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Winstar.obj -MD -MP -MF $(DEPDIR)/Winstar.Tpo -c -o Winstar.obj `if test -f '../src/Winstar.cpp'; then $(CYGPATH_W) '../src/Winstar.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/Winstar.cpp'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/Winstar.Tpo $(DEPDIR)/Winstar.Po
-#	$(AM_V_CXX)source='../src/Winstar.cpp' object='Winstar.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Winstar.obj `if test -f '../src/Winstar.cpp'; then $(CYGPATH_W) '../src/Winstar.cpp'; else $(CYGPATH_W) '$(srcdir)/../src/Winstar.cpp'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -665,6 +540,8 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-rm -f ../src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f ../src/$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -674,7 +551,7 @@ clean: clean-am
 clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
 
 distclean: distclean-am
-	-rm -rf ./$(DEPDIR)
+	-rm -rf ../src/$(DEPDIR) ./$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -720,7 +597,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-	-rm -rf ./$(DEPDIR)
+	-rm -rf ../src/$(DEPDIR) ./$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

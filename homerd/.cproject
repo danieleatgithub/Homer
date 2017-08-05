@@ -133,7 +133,7 @@
 		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-		<project id="homerd.org.buildroot.wks.buildroot-2015.11.1.output.autotools.803509268" name="GNU Autotools"/>
+		<project id="zzz.org.buildroot.wks.buildroot-2017.02.5.output.autotools.67461050" name="GNU Autotools" projectType="org.buildroot.wks.buildroot-2017.02.5.output.autotools"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
