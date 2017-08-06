@@ -113,6 +113,7 @@ int main(int argc, char** argv) {
   scheduler = new Scheduler();
   acquaA5 = new BoardEmulated();
   emulatedDev = new EmulatedDevices(*acquaA5);
+  // 10 seconds only for emulation
   sensorManager = new SensorManager(*scheduler, std::chrono::seconds(10));
   display = new WinstarEmulator(*keyPanel, *scheduler, *acquaA5);
 
@@ -211,12 +212,18 @@ int main(int argc, char** argv) {
   delete (wSens);
   delete (rsSens);
   delete (vSens);
+  delete (rh2Sens);
+  delete (rhSens);
   delete (ina219Current);
   delete (ina219Voltage);
   delete (ina219Rsens);
   delete (ina219Power);
+  delete (hs1101lfHumidity);
+  delete (hih5030fHumidity);
   delete (bmp085Device);
   delete (ina219Device);
+  delete (hs1101lfDevice);
+  delete (hih5030Device);
   delete (sensorManager);
   delete (menu);
   delete (emulator);
