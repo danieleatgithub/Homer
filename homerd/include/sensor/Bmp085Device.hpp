@@ -79,7 +79,10 @@ class Bmp085Thermometer : public TemperatureDevice {
         _logdev(Logger::getInstance(LOGDEVICE)) {
   }
 
-  void update() {
+  void update(chrono::system_clock::time_point time_point) {
+    if (update_point == time_point)
+      return;
+    update_point = time_point;
     celsius = bmp085Device.readSysFsLong(BMP085_TEMPERATURE) / 10.0;
   }
 
@@ -95,7 +98,10 @@ class Bmp085Barometer : public BarometricDevice {
       : bmp085Device(_bmp085Device),
         _logdev(Logger::getInstance(LOGDEVICE)) {
   }
-  void update() {
+  void update(chrono::system_clock::time_point time_point) {
+    if (update_point == time_point)
+      return;
+    update_point = time_point;
     millibar = bmp085Device.readSysFsLong(BMP085_PRESSURE) / 100.0;
   }
 }

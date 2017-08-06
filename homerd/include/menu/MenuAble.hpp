@@ -20,6 +20,7 @@
 #define MENUABLE_HPP_
 
 #include <string>
+#include <chrono>
 using namespace std;
 
 namespace homerio {
@@ -30,7 +31,7 @@ class MenuAble {
   ;
   virtual const string getLabel() const = 0;
   virtual const string getValue() const = 0;
-  virtual void update() = 0;
+  virtual void refresh(chrono::system_clock::time_point time_point) = 0;
 };
 }
 #endif /* MENUABLE_HPP_ */

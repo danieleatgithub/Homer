@@ -4,4 +4,5 @@
 bmp085
 bmp085_i2c
 ina2xx
-
+at91_adc
+hs1101lf

@@ -53,10 +53,14 @@
 #include <SensorManager.hpp>
 #include <Bmp085Device.hpp>
 #include <Ina219Device.hpp>
+#include <Hs1101lfDevice.hpp>
+#include <Hih5030Device.hpp>
 #include <IPAddressSensor.hpp>
 #include <CurrentSensor.hpp>
 #include <PowerSensor.hpp>
 #include <VoltageSensor.hpp>
+#include <VoltageSensor.hpp>
+#include <HumiditySensor.hpp>
 
 using option::Option;
 using option::Descriptor;
@@ -212,7 +216,7 @@ int main(int argc, char *argv[]) {
   config.configure();
 
   Logger logger = Logger::getRoot();
-  LOG4CPLUS_INFO(logger, "Homer starting ... ");
+  LOG4CPLUS_INFO(logger, "Homerd is starting ... ");
 
   // Common stuff
   Scheduler *scheduler;
@@ -226,6 +230,11 @@ int main(int argc, char *argv[]) {
   Ina219Voltage *ina219Voltage;
   Ina219Rsens *ina219Rsens;
   Ina219Power *ina219Power;
+  Hs1101lfDevice *hs1101lfDevice;
+  Hs1101lfHumidity *hs1101lfHumidity;
+  Hih5030Device *hih5030Device;
+  Hih5030fHumidity *hih5030fHumidity;
+
   TemperatureSensor *tSens;
   BarometricSensor *pSens;
   IPAddressSensor *ipSens;
@@ -233,6 +242,8 @@ int main(int argc, char *argv[]) {
   PowerSensor *wSens;
   VoltageSensor *vSens;
   VoltageSensor *rsSens;
+  HumiditySensor *rhSens;
+  HumiditySensor *rh2Sens;
 
   SensorManager *sensorManager;
 
@@ -264,6 +275,12 @@ int main(int argc, char *argv[]) {
   ina219Rsens = new Ina219Rsens(*ina219Device);
   ina219Power = new Ina219Power(*ina219Device);
 
+  hs1101lfDevice = new Hs1101lfDevice(*acquaA5);
+  hs1101lfHumidity = new Hs1101lfHumidity(*hs1101lfDevice, *bmp085Thermometer);
+
+  hih5030Device = new Hih5030Device(*acquaA5);
+  hih5030fHumidity = new Hih5030fHumidity(*hih5030Device, *bmp085Thermometer);
+
   tSens = new TemperatureSensor(*bmp085Thermometer, string("Temperature"));
   sensorManager->add(*tSens);
   menu->addSensor(*tSens);
@@ -291,6 +308,14 @@ int main(int argc, char *argv[]) {
   vSens = new VoltageSensor(*ina219Voltage, string("Voltage"));
   sensorManager->add(*vSens);
   menu->addSensor(*vSens);
+
+  rhSens = new HumiditySensor(*hs1101lfHumidity, string("Humidity 1"));
+  sensorManager->add(*rhSens);
+  menu->addSensor(*rhSens);
+
+  rh2Sens = new HumiditySensor(*hih5030fHumidity, string("Humidity 2"));
+  sensorManager->add(*rh2Sens);
+  menu->addSensor(*rh2Sens);
 
   ipSens = new IPAddressSensor(string("eth0"), string("IpAddress:"));
   sensorManager->add(*ipSens);
@@ -325,12 +350,18 @@ int main(int argc, char *argv[]) {
   delete (wSens);
   delete (rsSens);
   delete (vSens);
+  delete (rh2Sens);
+  delete (rhSens);
   delete (ina219Current);
   delete (ina219Voltage);
   delete (ina219Rsens);
   delete (ina219Power);
+  delete (hs1101lfHumidity);
+  delete (hih5030fHumidity);
   delete (bmp085Device);
   delete (ina219Device);
+  delete (hs1101lfDevice);
+  delete (hih5030Device);
   delete (sensorManager);
   delete (menu);
   delete (display);

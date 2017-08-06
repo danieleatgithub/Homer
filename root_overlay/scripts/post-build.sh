@@ -9,7 +9,7 @@
 echo " ******************* START PRE SCRIPT ***************"
 
 # Executed in buildroot enviroment (Full Path)
-. /wks/workspace/Homer/root_overlay/enviroment.sh
+. /wks/workspace/Homer/homer_deploy/environment.sh
 
 #
 # Setting SD Version
@@ -18,22 +18,6 @@ echo " ******************* START PRE SCRIPT ***************"
 HOMER_MAJ=99
 HOMER_MIN=99
 HOMER_REV=$CURRENT
-
-echo "***Install linux ..."
-#
-# Install kernel modules
-#
-cd $LINUX_ROOT
-rm -Rf $TARGET_DIR/lib/modules
-make modules_install INSTALL_MOD_PATH=$TARGET_DIR ARCH=arm
-echo "***Linux installed"
-cd $HS110LF
-make modules_install INSTALL_MOD_PATH=$TARGET_DIR ARCH=arm
-echo "***Custom modules installed"
-cp $LINUX_ROOT/tools/iio/iio_event_monitor 	$TARGET_DIR/sbin/.
-cp $LINUX_ROOT/tools/iio/lsiio 				$TARGET_DIR/sbin/.
-cp $LINUX_ROOT/tools/iio/generic_buffer 	$TARGET_DIR/sbin/.
-echo "***Kernel tools installed"
 
 #
 # Setup FS
@@ -48,7 +32,9 @@ EOT1
 
 chmod 700 $TARGET_DIR/var/empty
 chmod 777 $TARGET_DIR/root/*
+cp /wks/workspace/Homer/homerd/homerd/homerd $TARGET_DIR/bin/.
 
+make -C ${HS1101LF} modules_install
 #
 # SSHD Enable root on ssh
 #

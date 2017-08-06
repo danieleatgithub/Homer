@@ -1,6 +1,3 @@
 This project contains
  - SD burner scripts
  - Backup/Restore scripts for dts/buildroot/linux config files
- - link to linux dts
-
-After target modification rerun make of buildroot before BURN.sh

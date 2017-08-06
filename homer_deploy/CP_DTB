@@ -1,0 +1,29 @@
+#!/bin/bash
+# 
+# at91-sama5d3_acquaa5.dts is an HARD LINK to kernel source
+# 
+
+#daniele@debian64-devel:/wks/workspace/Homer/root_overlay/linux$ ls -i
+#6176290 at91-sama5d3_acquaa5.dts
+#daniele@debian64-devel:/wks/workspace/Homer/root_overlay/linux$ find /wks/linux-4.4.16/ -inum 6176290
+#/wks/linux-4.4.16/arch/arm/boot/dts/at91-sama5d3_acquaa5.dts
+#daniele@debian64-devel:/wks/workspace/Homer/root_overlay/linux$
+
+. /wks/workspace/Homer/homer_deploy/environment.sh
+
+IP=192.168.1.201
+DTB=
+if [ $# -ne 0 ]; then
+	if [ $1 == "margie" ]; then
+		IP=192.168.1.201
+	fi
+	if [ $1 == "homer" ]; then
+		IP=192.168.1.200
+	fi
+fi
+echo "setup dts on $IP boot is required"
+ssh root@${IP} "md5sum ${TARGET_DTB} && mv ${TARGET_DTB} ${TARGET_DTB}.old"
+scp ${BUILDROOT}/output/build/linux-${LINUX_VER}/arch/arm/boot/dts/${DEVTREE}.dtb root@${IP}:${TARGET_DTB}
+ssh root@${IP} "md5sum ${TARGET_DTB}"
+
+

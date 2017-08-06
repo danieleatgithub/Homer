@@ -59,7 +59,10 @@ class Sensor {
 
   virtual const string getString() const = 0;
   virtual const double getDouble() const = 0;
-  virtual void update() = 0;
+  virtual void update(chrono::system_clock::time_point time_point) = 0;
+  virtual void refresh(chrono::system_clock::time_point time_point) {
+    update(time_point);
+  }
 
   const string& getName() const {
     return name;

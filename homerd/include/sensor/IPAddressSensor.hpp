@@ -41,8 +41,11 @@ class IPAddressSensor : public Sensor, public MenuAble {
   }
   ;
 
-  void update() {
+  void update(chrono::system_clock::time_point time_point) {
     ip = Sysinfo::get_instance().get_local_ip(phy_if.c_str());
+  }
+  void refresh(chrono::system_clock::time_point time_point) {
+    update(time_point);
   }
   const string getValue() const {
     return ip;

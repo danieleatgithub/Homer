@@ -1,30 +1,44 @@
-MODULES := x
 
-ARCH := arm
-CROSS_COMPILE := arm-buildroot-linux-gnueabi-
-obj-m := $(MODULES)
-HS1101LF = /wks/workspace/KernelModules/hs1101lf
-LINUX-DTS = /wks/workspace/KernelModules/linux-dts
-BUILDROOT = /wks/buildroot-2016.11
-ROOT_OVERLAY = /wks/workspace/Homer/root_overlay
-SD_BUILDER = /wks/workspace/Homer/SDBuilder/
+include /wks/workspace/Homer/homer_deploy/environment.sh	
+	
+# Rebuild kernel and device tree
+linux:
+	$(MAKE) -C $(BUILDROOT) linux-rebuild
 
-MAKEARCH := $(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE)
-
+# Prepare rootfs, buildroot and burn SD for production 
 homer:
-	$(MAKE) -C $(LINUX-DTS)
+	$(MAKE) -C $(HS1101LF)
 	$(MAKE) -C $(ROOT_OVERLAY) homer
+	$(MAKE) -C $(BUILDROOT)
 	
+# Prepare rootfs, buildroot and burn SD for tests 
 margie:
-	$(MAKE) -C $(LINUX-DTS)
+	$(MAKE) -C $(HS1101LF)
 	$(MAKE) -C $(ROOT_OVERLAY) margie
+	$(MAKE) -C $(BUILDROOT)
 	
-burn_homer:
-	$(MAKE) -C $(SD_BUILDER)  homer	
-burn_margie:
-	$(MAKE) -C $(SD_BUILDER)  margie
+# Prepare rootfs, buildroot and burn SD for production 
+burn_homer: 
+	$(MAKE) -C $(SD_BUILDER)   homer	
 	
-all: homer
+# Prepare rootfs, buildroot and burn SD for tests 
+burn_margie: 
+	$(MAKE) -C $(SD_BUILDER)  margie	
+	
+# Config and dts backups 	
+backup: 
+	$(SD_BUILDER)/SAVE.sh
+
+#
+# Copy DTB on target
+# 
+debug_margie:
+	$(shell pwd)/CP_DTB margie
+debug_homer:
+	$(shell pwd)/CP_DTB homer
+
+# default target burn SD for production
+all: burn_homer
 
 
 	

@@ -29,7 +29,7 @@ class BarometricDevice {
  protected:
   double millibar;
   double localAltitude;
-
+  chrono::system_clock::time_point update_point;
  public:
 
   BarometricDevice() {
@@ -73,7 +73,7 @@ class BarometricDevice {
     // Add 12 mBar each 100mt of altitude
     return millibar + (localAltitude * MILLIBAR_METER);
   }
-  virtual void update() = 0;
+  virtual void update(chrono::system_clock::time_point time_point) = 0;
 };
 
 }

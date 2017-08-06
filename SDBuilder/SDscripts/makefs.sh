@@ -37,8 +37,9 @@ fi
 echo "Done"
 
 #Setup source stuff of my build
-SOURCE_ZIMAGE="$LINUX_ROOT/arch/arm/boot/zImage"
-SOURCE_DEVTREE="$LINUX_ROOT/arch/arm/boot/dts/$DTB"
+
+SOURCE_ZIMAGE="/wks/buildroot-2017.02.5/output/build/linux-4.9.40/arch/arm/boot/zImage"
+SOURCE_DEVTREE="/wks/buildroot-2017.02.5/output/build/linux-4.9.40/arch/arm/boot/dts/at91-sama5d3_acquaa5.dtb"
 SOURCE_ROOTFS=$BR_ROOT/output/images/rootfs.tar
 
 echo "Make FS - Start formatting" >&2
@@ -69,14 +70,6 @@ SOURCE_BOOT="$AT91BINARY/sama5d3_acqua-sdcardboot-linux-zimage-dt-3.7.bin"
 cp $SOURCE_BOOT $TARGET_KERNEL_DIR/linux-boot.bin
 echo "Done" >&2
 
-# Copy at91 linux loader 
-#SOURCE_BOOT=/wks/workspace/at91bootstrap/binaries/sama5d3_acqua-sdcardboot-uboot-3.7.bin
-#SOURCE_UBOOT=/wks/workspace/u-boot-at91/
-#cp $SOURCE_UBOOT/boot.bin $TARGET_KERNEL_DIR/uboot-boot.bin
-#cp $SOURCE_UBOOT/u-boot.bin $TARGET_KERNEL_DIR/u-boot.bin
-#cp $SOURCE_UBOOT/u-boot.img $TARGET_KERNEL_DIR/u-boot.img
-#cp $SOURCE_UBOOT/u-boot.map $TARGET_KERNEL_DIR/u-boot.map
-#cp ./uboot.env $TARGET_KERNEL_DIR/.
 
 if [[ $MODE != "uboot" ]]; then
 	echo -n "Make FS - Prepare for booting directly to linux ..." >&2

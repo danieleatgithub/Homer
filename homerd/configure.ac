@@ -8,7 +8,7 @@ AM_INIT_AUTOMAKE([subdir-objects])
 
 AC_LANG([C++])
 AC_PROG_CXX
-
+AC_PREFIX_DEFAULT (/wks/workspace/Homer/root_overlay/target)
 AC_CONFIG_FILES(Makefile src/Makefile homerd/Makefile include/Makefile)
 AC_OUTPUT
 

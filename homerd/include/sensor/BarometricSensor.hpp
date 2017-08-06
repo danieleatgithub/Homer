@@ -63,8 +63,11 @@ class BarometricSensor : public Sensor, public MenuAble {
         << units.find(scale)->second << "Bar";
     return ostr.str();
   }
-  void update() {
-    device.update();
+  void update(chrono::system_clock::time_point time_point) {
+    device.update(time_point);
+  }
+  void refresh(chrono::system_clock::time_point time_point) {
+    update(time_point);
   }
   const string getLabel() const {
     return label;

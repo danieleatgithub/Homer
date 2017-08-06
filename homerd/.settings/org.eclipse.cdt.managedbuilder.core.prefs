@@ -23,6 +23,14 @@ environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2015.11.1.output
 environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924/C_INCLUDE_PATH/operation=remove
 environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924/append=true
 environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2015.11.1.output.autotools.default.1876453924/appendContributed=true
+environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2017.02.5.output.autotools.default.1542890219/CPATH/delimiter=\:
+environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2017.02.5.output.autotools.default.1542890219/CPATH/operation=remove
+environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2017.02.5.output.autotools.default.1542890219/CPLUS_INCLUDE_PATH/delimiter=\:
+environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2017.02.5.output.autotools.default.1542890219/CPLUS_INCLUDE_PATH/operation=remove
+environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2017.02.5.output.autotools.default.1542890219/C_INCLUDE_PATH/delimiter=\:
+environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2017.02.5.output.autotools.default.1542890219/C_INCLUDE_PATH/operation=remove
+environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2017.02.5.output.autotools.default.1542890219/append=true
+environment/buildEnvironmentInclude/org.buildroot.wks.buildroot-2017.02.5.output.autotools.default.1542890219/appendContributed=true
 environment/buildEnvironmentLibrary/cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.1051227896/LIBRARY_PATH/delimiter=\:
 environment/buildEnvironmentLibrary/cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.1051227896/LIBRARY_PATH/operation=remove
 environment/buildEnvironmentLibrary/cdt.managedbuild.config.gnu.cross.exe.debug.1882377809.1051227896/append=true

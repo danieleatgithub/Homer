@@ -55,7 +55,7 @@ class SimpleMenuElement : public MenuAble {
   void setValue(const string& value) {
     this->value = value;
   }
-  void update() {
+  void refresh(chrono::system_clock::time_point time_point) {
   }
 };
 

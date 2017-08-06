@@ -53,8 +53,11 @@ class VoltageSensor : public Sensor, public MenuAble {
   double getVolts() const {
     return device.getVolts();
   }
-  void update() {
-    device.update();
+  void update(chrono::system_clock::time_point time_point) {
+    device.update(time_point);
+  }
+  void refresh(chrono::system_clock::time_point time_point) {
+    update(time_point);
   }
   const string getValue() const {
     ostringstream ostr;

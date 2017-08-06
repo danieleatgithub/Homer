@@ -581,6 +581,7 @@ PACKAGE_STRING='homerd 1.0'
 PACKAGE_BUGREPORT=''
 PACKAGE_URL=''
 
+ac_default_prefix=
 ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
@@ -3223,7 +3224,7 @@ else
 fi
 
 
-
+ (/wks/workspace/Homer/root_overlay/target)
 ac_config_files="$ac_config_files Makefile src/Makefile homerd/Makefile include/Makefile"
 
 cat >confcache <<\_ACEOF

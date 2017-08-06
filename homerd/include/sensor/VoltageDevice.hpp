@@ -26,11 +26,12 @@ namespace homerio {
 class VoltageDevice {
  protected:
   double volts;
+  chrono::system_clock::time_point update_point;
  public:
   double getVolts() const {
     return volts;
   }
-  virtual void update() = 0;
+  virtual void update(chrono::system_clock::time_point time_point) = 0;
 };
 
 }
