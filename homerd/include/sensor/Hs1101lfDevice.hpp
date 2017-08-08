@@ -27,11 +27,11 @@
 #include <cmath>
 #include <HwLayer.hpp>
 
-#define HS1101LF_RH "/bus/iio/devices/iio:device0/in_humidityrelative_raw"
-#define HS1101LF_CYCLES "/bus/iio/devices/iio:device0/cycles"
-#define HS1101LF_FREQUENCY "/bus/iio/devices/iio:device0/frequency"
-#define HS1101LF_SAMPLE_MS "/bus/iio/devices/iio:device0/sample_ms"
-#define HS1101LF_ "/bus/iio/devices/iio:device0/"
+#define HS1101LF_ "/bus/iio/devices/iio:device2/"
+#define HS1101LF_RH (HS1101LF_ "/in_humidityrelative_raw")
+#define HS1101LF_CYCLES (HS1101LF_ "/cycles" )
+#define HS1101LF_FREQUENCY (HS1101LF_ "/frequency" )
+#define HS1101LF_SAMPLE_MS (HS1101LF_ "/sample_ms" )
 
 #define BUFSIZE 50
 using namespace std;
@@ -74,6 +74,9 @@ class Hs1101lfDevice {
     rh = readSysFsInteger(HS1101LF_RH) / 100;
     cycles = readSysFsInteger(HS1101LF_CYCLES);
     frequency = readSysFsInteger(HS1101LF_FREQUENCY);
+    if (rh == 0 || cycles == 0)
+      return (0);
+
     LOG4CPLUS_DEBUG(_logdev,
                     "getRH rh=" << rh << " f=" << frequency << " c=" << cycles);
     rh = round(rh / (1.0546 - 0.00216 * celsius));

@@ -93,7 +93,7 @@
 			i2c0: i2c@f0014000 {
 				status = "okay";
 				pressure@77 {
-					compatible = "bosch,bmp085";
+					compatible = "bosch,bmp280";
 					reg = <0x77>;
 					chip-id = <85>;
 					temp-measurement-period = <100>;

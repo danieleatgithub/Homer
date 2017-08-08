@@ -10,8 +10,14 @@ _backup:
 _linux:
 	$(MAKE) -C $(BUILDROOT) linux-rebuild
 
+_linux-xconfig:
+	$(MAKE) -C $(BUILDROOT) linux-xconfig
+
+_buildroot-xconfig:
+	$(MAKE) -C $(BUILDROOT) xconfig
+
 # Prepare rootfs, buildroot and burn SD for production 
-_homer:
+homer:
 	$(MAKE) -C $(HS1101LF)
 	$(MAKE) -C $(ROOT_OVERLAY) homer
 	$(MAKE) -C $(BUILDROOT)

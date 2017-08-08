@@ -27,9 +27,9 @@
 #include <cmath>
 #include <HwLayer.hpp>
 
-#define HIH5030_RH "/bus/iio/devices/iio:device0/in_voltage0_raw"
-#define HIH5030_SCALE "/bus/iio/devices/iio:device0/in_voltage_scale"
-#define HIH5030_ "/bus/iio/devices/iio:device0/"
+#define HIH5030_ "/bus/iio/devices/iio:device1/"
+#define HIH5030_RH (HIH5030_ "/in_voltage0_raw")
+#define HIH5030_SCALE (HIH5030_ "/in_voltage_scale" )
 
 #define BUFSIZE 50
 using namespace std;
@@ -84,6 +84,8 @@ class Hih5030Device {
     double scale;
     raw_rh = readSysFsInteger(HIH5030_RH);
     scale = readSysFsDouble(HIH5030_SCALE);
+    if (raw_rh == 0 || scale == 0)
+      return (0);
     rh = round(
         (((raw_rh / 1000.0) * scale) / (1.0546 - 0.00216 * celsius)) * 100);
     LOG4CPLUS_DEBUG(

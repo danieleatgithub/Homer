@@ -1,8 +1,8 @@
 #8021q
 #w1_gpio
 #w1_therm
-bmp085
-bmp085_i2c
+bmp280
+bmp280_i2c
 ina2xx
 at91_adc
 hs1101lf

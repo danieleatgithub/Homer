@@ -22,7 +22,7 @@ HOMER_REV=$CURRENT
 #
 # Setup FS
 #
-cat <<EOT1 > $TARGET_DIR/etc/fstab.add
+cat <<EOT1 >> ${TARGET_DIR}/etc/fstab
 /dev/mmcblk0p1	/boot  				vfat   		rw,defaults     0	1
 /dev/mmcblk0p3	/data  				vfat   		rw,defaults     0	1
 /dev/mmcblk0p4	none   				swap   		sw        0	0
@@ -30,8 +30,8 @@ nodev 			/sys/kernel/debug	debugfs   	defaults   		0	0
 EOT1
 
 
-chmod 700 $TARGET_DIR/var/empty
-chmod 777 $TARGET_DIR/root/*
+chmod 700 ${TARGET_DIR}/var/empty
+chmod 777 ${TARGET_DIR}/root/*
 cp /wks/workspace/Homer/homerd/homerd/homerd $TARGET_DIR/bin/.
 
 make -C ${HS1101LF} modules_install

@@ -22,14 +22,14 @@ ROOTFS=/media/rootfs
 BOOT=/media/boot
 DATA=/media/data
 
-rm -Rf /wks/data/logs &>> $LOG 
-mkdir  /wks/data/logs &>> $LOG 
 ping -c 1 -W 1 192.168.1.200 &>> $LOG 
 if (( $? == 0 )); then
 	echo "BURN: Copy data from live homer" >&2
-	scp -p root@192.168.1.200:/data/logs/* /wks/data/logs &>> $LOG
+    rm -Rf /wks/data/logs &>> $LOG 
+    mkdir  /wks/data/logs &>> $LOG 
+	scp -p root@192.168.1.200:/data/logs/sensors.* /wks/data/logs &>> $LOG
 else
-	echo "offline burning" >&2
+	echo "offline burning keep last logs" >&2
 fi
 
 echo "Start Burning Homer" >> $LOG
