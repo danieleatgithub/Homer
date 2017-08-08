@@ -7,6 +7,7 @@
 
 SCRIPT_PATH=$(dirname ${BASH_SOURCE[0]})
 . /wks/workspace/Homer/homer_deploy/environment.sh
+. ${SCRIPT_PATH}/devices.sh
 
 if [ $# -ne 1 ];then
 	echo "Usage: $(basename $0) <index to restore>"

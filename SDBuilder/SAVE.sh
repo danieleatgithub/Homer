@@ -5,9 +5,8 @@
 #
 #######################################################
 
-SCRIPT_PATH=$(dirname ${BASH_SOURCE[0]})
 . /wks/workspace/Homer/homer_deploy/environment.sh
-. ${SCRIPT_PATH}/devices.sh
+. ${SD_BUILDER}/SDscripts/devices.sh
 
 if [ -z ${BUILDROOT} ]; then
 	echo "${BUILDROOT} not exist"
@@ -15,7 +14,7 @@ if [ -z ${BUILDROOT} ]; then
 fi
 
 
-VARIABLES=${SCRIPT_PATH}/config_backups/variables.sh
+VARIABLES=${SD_BUILDER}/config_backups/variables.sh
 .  $VARIABLES
 
 (( CURRENT +=1 ))
@@ -28,7 +27,7 @@ fi
 
 
 
-DST=${SCRIPT_PATH}/config_backups/${SAVE_NAME}
+DST=${SD_BUILDER}/config_backups/${SAVE_NAME}
 mkdir $DST
 
 cp ${BUILDROOT}/.config $DST/buildroot_.config

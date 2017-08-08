@@ -3,11 +3,9 @@
 # MMC Formatter
 #######################################################
 
-
-# source build enviroment
-SPATH=$(dirname $0)
-. $SPATH/../enviroment.sh
-. $SPATH/layouts.sh
+. /wks/workspace/Homer/homer_deploy/environment.sh
+. ${SD_BUILDER}/SDscripts/layouts.sh
+. ${SD_BUILDER}/SDscripts/devices.sh
 
 if [ $# -ne 0 ];then
 	echo "Usage: $(basename $0)"
@@ -19,7 +17,7 @@ fi
 echo -n "SD formatting prepare layout ..." >&2
 SF_SIZE=$(sfdisk -s $SDDEV)
 layout_found=$(get_layout $SF_SIZE)
-layout_template=${SDSCRIPTS}/"sfdisk.${layout_found}GB.layout"
+layout_template=${SD_BUILDER}/SDscripts/"sfdisk.${layout_found}GB.layout"
 if [ ! -f "${layout_template}" ];then
 	echo "Layout error $SF_SIZE"
 	echo ${layout_found}

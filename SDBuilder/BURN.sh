@@ -4,7 +4,9 @@
 # SD burner
 #
 #######################################################
-. ./enviroment.sh
+
+. /wks/workspace/Homer/homer_deploy/environment.sh
+. ${SD_BUILDER}/SDscripts/devices.sh
  
 if [ -z ${SUDO+x} ]; then
 	echo "BURN: password for sudo is unset"
@@ -15,6 +17,10 @@ export LOG="/var/www/html/logs/burn.log"
 echo "BURN: logs in http://debian-devel/logs/burn.log"
 
 date > $LOG
+
+ROOTFS=/media/rootfs
+BOOT=/media/boot
+DATA=/media/data
 
 rm -Rf /wks/data/logs &>> $LOG 
 mkdir  /wks/data/logs &>> $LOG 
@@ -27,21 +33,21 @@ else
 fi
 
 echo "Start Burning Homer" >> $LOG
-echo $SUDO | sudo -S -E $SDSCRIPTS/makefs.sh Homer
+echo $SUDO | sudo -S -E ${SD_BUILDER}/SDscripts/makefs.sh Homer
 
 echo "BURN: copy data in sd" >&2
-echo $SUDO | sudo -S -E mount $SDDEV3 $TARGET_DATA_DIR
+echo $SUDO | sudo -S -E mount $SDDEV3 $DATA
 if [[ $? !=  "0" ]];then
 	echo "BURN: Failed to mount data partition" >&2
 	exit 1
 fi
-ls -l $TARGET_DATA_DIR >&2
-echo $SUDO | sudo -S -E mkdir -p $TARGET_DATA_DIR/logs 
-echo $SUDO | sudo -S -E chmod -R 777 $TARGET_DATA_DIR/logs
-echo $SUDO | sudo -S -E cp /wks/data/logs/* $TARGET_DATA_DIR/logs/.
+ls -l $DATA >&2
+echo $SUDO | sudo -S -E mkdir -p $DATA/logs 
+echo $SUDO | sudo -S -E chmod -R 777 $DATA/logs
+echo $SUDO | sudo -S -E cp /wks/data/logs/* $DATA/logs/.
 echo "BURN: Logs copied" >&2
-ls -l $TARGET_DATA_DIR/logs >&2
-echo $SUDO | sudo -S -E umount $TARGET_DATA_DIR
+ls -l $DATA/logs >&2
+echo $SUDO | sudo -S -E umount $DATA
 
 
 echo "____________________________________" >&2

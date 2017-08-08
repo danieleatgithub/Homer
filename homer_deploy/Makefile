@@ -1,12 +1,17 @@
 
 include /wks/workspace/Homer/homer_deploy/environment.sh	
+
+
+# Config and dts backups 	
+_backup: 
+	$(SD_BUILDER)/SAVE.sh
 	
 # Rebuild kernel and device tree
-linux:
+_linux:
 	$(MAKE) -C $(BUILDROOT) linux-rebuild
 
 # Prepare rootfs, buildroot and burn SD for production 
-homer:
+_homer:
 	$(MAKE) -C $(HS1101LF)
 	$(MAKE) -C $(ROOT_OVERLAY) homer
 	$(MAKE) -C $(BUILDROOT)
@@ -17,17 +22,12 @@ margie:
 	$(MAKE) -C $(ROOT_OVERLAY) margie
 	$(MAKE) -C $(BUILDROOT)
 	
-# Prepare rootfs, buildroot and burn SD for production 
-burn_homer: 
-	$(MAKE) -C $(SD_BUILDER)   homer	
+# Prepare  burn SD 
+burn: 
+	$(SD_BUILDER)/BURN.sh
 	
-# Prepare rootfs, buildroot and burn SD for tests 
-burn_margie: 
-	$(MAKE) -C $(SD_BUILDER)  margie	
 	
-# Config and dts backups 	
-backup: 
-	$(SD_BUILDER)/SAVE.sh
+
 
 #
 # Copy DTB on target
