@@ -27,8 +27,8 @@
 #include <fstream>
 #include <HwLayer.hpp>
 
-#define BMP085_TEMPERATURE "/class/i2c-adapter/i2c-0/0-0077/temp0_input"
-#define BMP085_PRESSURE "/class/i2c-adapter/i2c-0/0-0077/pressure0_input"
+#define BMP085_TEMPERATURE "/class/i2c-dev/i2c-0/device/0-0077/iio:device0/in_temp_input"
+#define BMP085_PRESSURE "/class/i2c-dev/i2c-0/device/0-0077/iio:device0/in_pressure_input"
 #define BUFSIZE 50
 
 using namespace std;
@@ -65,7 +65,22 @@ class Bmp085Device {
     }
     return (value);
   }
-
+  double readSysFsDouble(const char *entry) {
+    int nread = 0;
+    double value = 0;
+    char buffer[BUFSIZE];
+    nread = sysFs.readBuffer(entry, buffer, (BUFSIZE - 1));
+    if (nread > 0) {
+      value = strtod(buffer, NULL);
+      LOG4CPLUS_TRACE(
+          _logdev,
+          "Read " << entry << " string(" << nread << ") [" << buffer
+              << "] value=" << value);
+    } else {
+      LOG4CPLUS_ERROR(_logdev, "Read " << entry << " string(" << nread << ")");
+    }
+    return (value);
+  }
 };
 
 class Bmp085Thermometer : public TemperatureDevice {
@@ -83,7 +98,7 @@ class Bmp085Thermometer : public TemperatureDevice {
     if (update_point == time_point)
       return;
     update_point = time_point;
-    celsius = bmp085Device.readSysFsLong(BMP085_TEMPERATURE) / 10.0;
+    celsius = bmp085Device.readSysFsLong(BMP085_TEMPERATURE) / 1000.0;
   }
 
 };
@@ -102,7 +117,7 @@ class Bmp085Barometer : public BarometricDevice {
     if (update_point == time_point)
       return;
     update_point = time_point;
-    millibar = bmp085Device.readSysFsLong(BMP085_PRESSURE) / 100.0;
+    millibar = bmp085Device.readSysFsDouble(BMP085_PRESSURE) * 10.0;
   }
 }
 ;

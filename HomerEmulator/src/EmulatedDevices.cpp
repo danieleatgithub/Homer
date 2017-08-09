@@ -42,11 +42,12 @@ EmulatedDevices::~EmulatedDevices() {
 void EmulatedDevices::temperature_register() {
   board.getEmulatedSysFs().reg_read(
       temperature_reg,
-      string("/sys/class/i2c-adapter/i2c-0/0-([0-9]+)/temp0_input"),
+      string(
+          "/sys/class/i2c-dev/i2c-0/device/0-0077/iio:device([0-9]+)/in_temp_input"),
       [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
         // TODO: Read emulation data from csv
-        static int vt = 200;
-        vt+=5;
+        static int vt = 22430;
+        vt+=500;
         sprintf((char *)buffer,"%d",vt);
         *ret = (int)strlen((char *)buffer);
       });
@@ -54,11 +55,12 @@ void EmulatedDevices::temperature_register() {
 void EmulatedDevices::barometric_register() {
   board.getEmulatedSysFs().reg_read(
       barometric_reg,
-      string("/sys/class/i2c-adapter/i2c-0/0-([0-9]+)/pressure0_input"),
+      string(
+          "/sys/class/i2c-dev/i2c-0/device/0-0077/iio:device([0-9]+)/in_pressure_input"),
       [&] (int filedes,void *buffer, size_t size, const char *fname, int *ret) {
         // TODO: Read emulation data from csv
-        static int vp = 97052-50;
-        vp+=50;
+        static int vp = 97.0520;
+        vp+=1;
         sprintf((char *)buffer,"%d",vp);
         *ret = (int)strlen((char *)buffer);
       });
