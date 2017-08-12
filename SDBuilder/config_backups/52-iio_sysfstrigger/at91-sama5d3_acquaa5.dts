@@ -93,7 +93,7 @@
 			i2c0: i2c@f0014000 {
 				status = "okay";
 				pressure@77 {
-					compatible = "bosch,bmp085";
+					compatible = "bosch,bmp280";
 					reg = <0x77>;
 					chip-id = <85>;
 					temp-measurement-period = <100>;
@@ -102,7 +102,8 @@
 				ina219@40 {
 					compatible = "ti,ina219";
 					reg = <0x40>;
-					shunt-resistor = <100000>;
+					/* Real value is 0.1 ohm 100000 micro ohm */
+					shunt-resistor = <10000>; 
 				};
 
 			};
@@ -133,6 +134,7 @@
 			
 			gpio_keys {
 					compatible = "gpio-keys";
+					debounce-interval = <5>; /* same as default */
 					#address-cells = <1>;
 					#size-cells = <0>;
 					#autorepeat;
@@ -163,6 +165,7 @@
 					};
 			};
 
+			
 			/* Giga Ethernet */
 			macb0: ethernet@f0028000 {
 				phy-mode = "rgmii";
@@ -215,7 +218,7 @@
 			};
 
 			adc0: adc@f8018000 {
-				status = "disabled";
+				status = "okay";
 				pinctrl-names = "default";
 				pinctrl-0 = <
 					&pinctrl_adc0_adtrg
@@ -257,6 +260,14 @@
 					pinctrl_w1_0: w1_0-0 {
 						/* pull up on */
 						atmel,pins = <AT91_PIOA 1 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
+					};
+					pinctrl_hs1101lf_0: hs1101lf_0-0 {
+							/* pull up on */
+						atmel,pins = <AT91_PIOA 10 AT91_PERIPH_GPIO AT91_PINCTRL_MULTI_DRIVE>;				
+					};
+					pinctrl_hs1101lf_1: hs1101lf_1-0 {
+							/* pull up on */
+						atmel,pins = <AT91_PIOA 11 AT91_PERIPH_GPIO AT91_PINCTRL_MULTI_DRIVE>;				
 					};
 				};
 			};
@@ -350,12 +361,23 @@
 		};
 
 	};
+	
 	w1@0 {
 		compatible = "w1-gpio";
 		gpios = <&pioA 1 GPIO_ACTIVE_LOW>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_w1_0>;
 		status = "okay";
+	};
+	/* humidity sensor */
+	hs1101lf@0 {
+		compatible = "hs1101lf";
+		data = 			<&pioA 10 GPIO_ACTIVE_LOW>;
+		power-save = 	<&pioA 11 GPIO_ACTIVE_LOW>; /* optional turn of device */
+		pinctrl-names = "data","power";
+		pinctrl-0 = <&pinctrl_hs1101lf_0>;
+		pinctrl-1 = <&pinctrl_hs1101lf_1>;
+		status = "okay";			
 	};
 	sound {
 		status = "disabled";
