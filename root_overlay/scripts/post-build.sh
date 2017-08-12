@@ -21,8 +21,16 @@ HOMER_REV=$CURRENT
 
 #
 # Setup FS
-#
-cat <<EOT1 >> ${TARGET_DIR}/etc/fstab
+# FIXME: buildroot overwrited
+cat <<EOT1 > ${TARGET_DIR}/etc/fstab
+# <file system> <mount pt>      <type>  <options>       <dump>  <pass>
+/dev/root       /               ext2    rw,noauto       0       1
+proc            /proc           proc    defaults        0       0
+devpts          /dev/pts        devpts  defaults,gid=5,mode=620,ptmxmode=0666   0       0
+tmpfs           /dev/shm        tmpfs   mode=0777       0       0
+tmpfs           /tmp            tmpfs   mode=1777       0       0
+tmpfs           /run            tmpfs   mode=0755,nosuid,nodev  0       0
+sysfs           /sys            sysfs   defaults        0       0
 /dev/mmcblk0p1	/boot  				vfat   		rw,defaults     0	1
 /dev/mmcblk0p3	/data  				vfat   		rw,defaults     0	1
 /dev/mmcblk0p4	none   				swap   		sw        0	0
