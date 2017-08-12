@@ -38,9 +38,9 @@ burn:
 #
 # Copy DTB on target
 # 
-debug_margie:
+try_dtb_margie:
 	$(shell pwd)/CP_DTB margie
-debug_homer:
+try_dtb_homer:
 	$(shell pwd)/CP_DTB homer
 
 # default target burn SD for production
