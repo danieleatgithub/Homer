@@ -5,8 +5,9 @@
 # request
 #
 ################################################
+. /usr/local/bin/utilities.sh
 
-MACADDRESS=$(/usr/local/bin/get_mac)
+MACADDRESS=$(getMac)
 if [[ $? -ne 0 ]];then
 	logger "firststart failed reading mac"
 	echo "=== WARNING === firststart failed reading mac" >> /etc/issue

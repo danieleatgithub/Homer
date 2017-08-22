@@ -1,14 +1,7 @@
 #!/bin/bash
-I2CGET=/usr/sbin/i2cget
-I2CDUMP=/usr/sbin/i2cdump
-X=$($I2CDUMP -y -r 0x80-0x8f 3 0x58 2>&1 | tail -n 1)
+. /usr/local/bin/utilities.sh
 
-#80: 0a 70 08 00 64 10 08 41 70 76 a0 00 a0 00 01 00 ?p?.d??Apv?.?.?.
-A=${X:4:48}
-B=$(echo $A | tr '[:lower:]' '[:upper:]' | tr -d ' ' )
-if [[ ${#B} -ne 32 ]];then
-	echo '00000000000000000000000000000000'
-	exit 1
-fi
-echo $B
+SER=$(getSerial)
+echo $SER
 exit 0
+

@@ -1,12 +1,6 @@
 #!/bin/bash
-I2CGET=/usr/sbin/i2cget
-I2CDUMP=/usr/sbin/i2cdump
-X=$($I2CDUMP -y -r 0x9a-0x9f 3 0x58 2>&1 | tail -n 1 )
-A=${X:30:24}
-B=$(echo $A | tr ' ' ':')
-if [[ ${#B} -ne 17 ]];then
-	echo 'ff:ff:ff:ff:ff:ff'
-	exit 1
-fi
-echo $B
+. /usr/local/bin/utilities.sh
+
+MAC=$(getMac)
+echo $MAC
 exit 0
