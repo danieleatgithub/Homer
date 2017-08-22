@@ -9,6 +9,7 @@ BUILDROOT_VER="buildroot-2017.02.5"
 LINUX_VER="4.9.40"
 DEVTREE="at91-sama5d3_acquaa5"
 TARGET_DTB="/boot/at91-sama5d3_acqua.dtb"
+TARGET_DOCS="/data/docs"
 
 ARCH=arm
 CROSS_COMPILE=arm-buildroot-linux-gnueabi-

@@ -1,0 +1,32 @@
+#!/bin/bash
+# 
+# 
+# 
+
+. /wks/workspace/Homer/homer_deploy/environment.sh
+
+IP=192.168.1.201
+DTB=
+if [ $# -ne 0 ]; then
+	if [ $1 == "margie" ]; then
+		IP=192.168.1.201
+	fi
+	if [ $1 == "homer" ]; then
+		IP=192.168.1.200
+	fi
+fi
+echo "copy sheet on $IP "
+ssh root@${IP} "rm -Rf ${TARGET_DOCS} && mkdir -p ${TARGET_DOCS}/sheet"
+scp /wks/workspace/Hardware/humidity/humidity.pdf root@${IP}:${TARGET_DOCS}/sheet/.
+scp /wks/workspace/Hardware/front-panel/front-panel.pdf root@${IP}:${TARGET_DOCS}/sheet/.
+scp /wks/workspace/Hardware/base-power/base-power.pdf root@${IP}:${TARGET_DOCS}/sheet/.
+scp /wks/workspace/Hardware/Homer-base/homer-base1.pdf root@${IP}:${TARGET_DOCS}/sheet/.
+
+/usr/bin/ps2pdf /wks/workspace/Hardware/base-power/base-power-F_SilkS.ps /wks/workspace/Hardware/base-power/base-power-F_SilkS.pdf
+/usr/bin/ps2pdf /wks/workspace/Hardware/Homer-base/homer-base1-F_SilkS.ps /wks/workspace/Hardware/Homer-base/homer-base1-F_SilkS.pdf
+
+scp /wks/workspace/Hardware/base-power/base-power-F_SilkS.pdf root@${IP}:${TARGET_DOCS}/sheet/.
+scp /wks/workspace/Hardware/Homer-base/homer-base1-F_SilkS.pdf root@${IP}:${TARGET_DOCS}/sheet/.
+
+
+

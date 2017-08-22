@@ -15,7 +15,8 @@ _linux-xconfig:
 
 _buildroot-xconfig:
 	$(MAKE) -C $(BUILDROOT) xconfig
-
+_docs:
+	$(shell pwd)/CP_DOCS homer
 # Prepare rootfs, buildroot and burn SD for production 
 homer:
 	$(MAKE) -C $(HS1101LF)
