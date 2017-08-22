@@ -123,12 +123,12 @@
 				gpios = <&pioE 1 0 /* SDA */
 						 &pioE 2 0 /* SCK */
 						>;
-
 				/*i2c-gpio,sda-open-drain;*/
 				/*i2c-gpio,scl-open-drain;*/
 				i2c-gpio,delay-us = <4>;	/* ~178 kHz */
 				#address-cells = <1>;
 				#size-cells = <0>;
+				status = "okay";
 			};
 			
 			
