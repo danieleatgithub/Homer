@@ -69,17 +69,19 @@ class Hs1101lfDevice {
     }
     return (value);
   }
-  int getRH(double celsius) {
-    int rh;
-    rh = readSysFsInteger(HS1101LF_RH) / 100;
+  double getRH(double celsius) {
+    double rh, rh1;
+    rh1 = readSysFsInteger(HS1101LF_RH) / 100.0;
     cycles = readSysFsInteger(HS1101LF_CYCLES);
     frequency = readSysFsInteger(HS1101LF_FREQUENCY);
-    if (rh == 0 || cycles == 0)
+    if (rh1 == 0 || cycles == 0)
       return (0);
 
-    LOG4CPLUS_DEBUG(_logdev,
-                    "getRH rh=" << rh << " f=" << frequency << " c=" << cycles);
-    rh = round(rh / (1.0546 - 0.00216 * celsius));
+    rh = rh1 / (1.0546 - 0.00216 * celsius);
+    LOG4CPLUS_DEBUG(
+        _logdev,
+        "getRH c=" << cycles << " f=" << frequency << " rh1=" << rh1 << " T="
+            << celsius << " RH=" << rh);
     return (rh);
   }
 

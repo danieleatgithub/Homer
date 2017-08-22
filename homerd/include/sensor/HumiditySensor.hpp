@@ -36,6 +36,7 @@ class HumiditySensor : public Sensor, public MenuAble {
         device(_device),
         label(_label) {
     units[0] = "";
+    precision = 2;
   }
   ~HumiditySensor() {
   }
@@ -52,7 +53,7 @@ class HumiditySensor : public Sensor, public MenuAble {
   }
   const string getValue() const {
     ostringstream ostr;
-    ostr << std::setprecision(2) << device.getRH() << "%";
+    ostr << std::setprecision(precision) << device.getRH() << "%";
     return ostr.str();
   }
   void update(chrono::system_clock::time_point time_point) {

@@ -28,24 +28,6 @@
 #include <fstream>
 #include <HwLayer.hpp>
 
-/*
- * DEV="/sys/class/i2c-adapter/i2c-0/0-0040/hwmon/hwmon0"
- # curr1_input :: current through Rsens
- I=$(cat $DEV/curr1_input)
- I_RSENSE=$(echo "scale=2;$I/1000" | bc)
- # in0_input :: voltage across Rsens
- V0=$(cat $DEV/in0_input)
- V_RSENSE=$(echo "scale=2;$V0/1000" | bc)
- # in1_input :: voltage from Bus to Gnd
- V1=$(cat $DEV/in1_input)
- V_BUS=$(echo "scale=2;$V1/1000" | bc)
- # power1_input:: power through Rsens
- P=$(cat $DEV/power1_input)
- P_RSENSE=$(echo "scale=2;$P/1000000" | bc)
- #echo "Rsens: $P_RSENSE mW - $V_RSENSE mV $I_RSENSE mA (Bus Voltage $V_BUS V) "
- echo "Current energy usage: $P_RSENSE mW $I_RSENSE mA $V_BUS V"
- */
-
 #define INA219_CURRENT "/class/i2c-adapter/i2c-0/0-0040/hwmon/hwmon0/curr1_input"
 #define INA219_RSENSE_VOLTS "/class/i2c-adapter/i2c-0/0-0040/hwmon/hwmon0/in0_input"
 #define INA219_VOLTAGE "/class/i2c-adapter/i2c-0/0-0040/hwmon/hwmon0/in1_input"
@@ -62,14 +44,14 @@ class Ina219Device {
  private:
   SysFs& sysFs;
   Logger _logdev;
-  double shunt_resistor;
+  double shunt_micro_ohms;
   double shunt_scale_factor;
 
  public:
   Ina219Device(Board& _board)
       : sysFs(_board.getSysFs()),
         _logdev(Logger::getInstance(LOGDEVICE)) {
-    shunt_resistor = (double) readSysFsInteger(INA219_SHUNT);
+    shunt_micro_ohms = (double) readSysFsInteger(INA219_SHUNT);
     shunt_scale_factor = 10.0;
   }
 
@@ -92,8 +74,8 @@ class Ina219Device {
   virtual ~Ina219Device() {
   }
 
-  double getShuntResistor() const {
-    return shunt_resistor;
+  double getShuntMicroOhms() const {
+    return shunt_micro_ohms;
   }
 
   double getShuntScaleFactor() const {
@@ -118,10 +100,8 @@ class Ina219Current : public CurrentDevice {
     if (update_point == time_point)
       return;
     update_point = time_point;
-    amperes =
-        ina219Device.readSysFsInteger(INA219_CURRENT)
-            / (ina219Device.getShuntResistor()
-                * ina219Device.getShuntScaleFactor());
+    amperes = (ina219Device.readSysFsInteger(INA219_CURRENT)
+        / ina219Device.getShuntScaleFactor()) / 1000.0;
   }
 }
 ;
@@ -180,7 +160,7 @@ class Ina219Power : public PowerDevice {
     if (update_point == time_point)
       return;
     update_point = time_point;
-    watt = (ina219Device.readSysFsInteger(INA219_POWER) / (100000000.0));
+    watt = ((ina219Device.readSysFsInteger(INA219_POWER) / (10000.0))) / 1000.0;
   }
 };
 
