@@ -3,7 +3,7 @@
 #
 modprobe hs1101lf
 
-DEV="/sys/bus/iio/devices/iio:device1"
+DEV="/sys/bus/iio/devices/iio:device2"
 if [[ ! -e ${DEV}/in_humidityrelative_raw ]]; then
         echo "device ${DEV}/in_humidityrelative_raw not exist"
         exit 1

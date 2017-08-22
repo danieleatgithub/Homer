@@ -1,6 +1,6 @@
 modprobe at91_adc
 
-DEV="/sys/bus/iio/devices/iio:device0"
+DEV="/sys/bus/iio/devices/iio:device1"
 if [[ ! -e ${DEV}/in_voltage0_raw ]]; then
         echo "device ${DEV}/in_voltage0_raw not exist"
         exit 1
