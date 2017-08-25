@@ -35,8 +35,8 @@ class Sensor {
  protected:
   string name;
   uint32_t id;
-  int precision = 4;
-  int scale = 0;
+  int precision;
+  int scale;
   map<int, string> units;
   Logger _loghomer;
 
@@ -46,13 +46,16 @@ class Sensor {
     id = IDGenerator::get_istance().getId();
     Logger _loghomer = Logger::getInstance(LOGHOMERD);
     // Initialization in derived class it's raccomanded
-    precision = 0;
+    precision = 2;
     scale = 0;
     units[0] = "";
   }
   Sensor(const string& _name)
       : name(_name) {
     id = IDGenerator::get_istance().getId();
+    precision = 2;
+    scale = 0;
+    units[0] = "";
   }
   virtual ~Sensor() {
   }

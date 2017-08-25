@@ -39,9 +39,6 @@ class VoltageSensor : public Sensor, public MenuAble {
     units[3] = "K";
     units[-3] = "m";
     units[-6] = "u";
-    units[0] = "";
-    scale = 0;
-    precision = 4;
   }
   ~VoltageSensor() {
   }
@@ -61,7 +58,7 @@ class VoltageSensor : public Sensor, public MenuAble {
   }
   const string getValue() const {
     ostringstream ostr;
-    ostr << std::setprecision(precision)
+    ostr << fixed << showpoint << setprecision(precision)
         << (device.getVolts() / pow(10.0, scale)) << " "
         << units.find(scale)->second << "V";
     return ostr.str();

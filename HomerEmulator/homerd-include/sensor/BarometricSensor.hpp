@@ -37,8 +37,6 @@ class BarometricSensor : public Sensor, public MenuAble {
         label(_label) {
     units[0] = "milli";
     units[3] = "";
-    scale = 0;
-    precision = 6;
   }
   ~BarometricSensor() {
   }
@@ -58,7 +56,7 @@ class BarometricSensor : public Sensor, public MenuAble {
   }
   const string getValue() const {
     ostringstream ostr;
-    ostr << std::setprecision(precision)
+    ostr << fixed << showpoint << setprecision(precision)
         << (device.getMilliBar() / pow(10.0, scale)) << " "
         << units.find(scale)->second << "Bar";
     return ostr.str();

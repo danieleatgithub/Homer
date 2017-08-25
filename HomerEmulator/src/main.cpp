@@ -168,11 +168,11 @@ int main(int argc, char** argv) {
   sensorManager->add(*vSens);
   menu->addSensor(*vSens);
 
-  rhSens = new HumiditySensor(*hs1101lfHumidity, string("Humidity 1"));
+  rhSens = new HumiditySensor(*hs1101lfHumidity, string("HS1101LF"));
   sensorManager->add(*rhSens);
   menu->addSensor(*rhSens);
 
-  rh2Sens = new HumiditySensor(*hih5030fHumidity, string("Humidity 2"));
+  rh2Sens = new HumiditySensor(*hih5030fHumidity, string("HIH5030"));
   sensorManager->add(*rh2Sens);
   menu->addSensor(*rh2Sens);
 

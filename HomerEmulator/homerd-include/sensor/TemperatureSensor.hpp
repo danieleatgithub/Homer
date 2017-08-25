@@ -35,9 +35,6 @@ class TemperatureSensor : public Sensor, public MenuAble {
       : Sensor(_label),
         device(_device),
         label(_label) {
-    precision = 4;
-    scale = 0;
-    units[0] = "";
 
   }
   ~TemperatureSensor() {
@@ -58,7 +55,7 @@ class TemperatureSensor : public Sensor, public MenuAble {
   }
   const string getValue() const {
     ostringstream ostr;
-    ostr << std::setprecision(precision)
+    ostr << fixed << showpoint << setprecision(precision)
         << (device.getCelsius() / pow(10.0, scale)) << " "
         << units.find(scale)->second << "C";
     return ostr.str();

@@ -27,8 +27,9 @@
 #include <fstream>
 #include <HwLayer.hpp>
 
-#define BMP085_TEMPERATURE "/class/i2c-dev/i2c-0/device/0-0077/iio:device0/in_temp_input"
-#define BMP085_PRESSURE "/class/i2c-dev/i2c-0/device/0-0077/iio:device0/in_pressure_input"
+#define BMP085_ "/class/i2c-dev/i2c-0/device/0-0077/iio:device0/"
+#define BMP085_TEMPERATURE BMP085_ "in_temp_input"
+#define BMP085_PRESSURE BMP085_ "in_pressure_input"
 #define BUFSIZE 50
 
 using namespace std;

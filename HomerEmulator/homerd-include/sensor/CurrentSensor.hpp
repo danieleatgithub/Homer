@@ -36,9 +36,6 @@ class CurrentSensor : public Sensor, public MenuAble {
         device(_device),
         label(_label) {
     units[-3] = "m";
-    units[0] = "";
-    scale = 0;
-    precision = 4;
   }
   ~CurrentSensor() {
   }
@@ -58,7 +55,7 @@ class CurrentSensor : public Sensor, public MenuAble {
   }
   const string getValue() const {
     ostringstream ostr;
-    ostr << std::setprecision(precision)
+    ostr << fixed << showpoint << setprecision(precision)
         << (device.getAmperes() / pow(10.0, scale)) << " "
         << units.find(scale)->second << "A";
     return ostr.str();

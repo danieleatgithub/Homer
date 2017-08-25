@@ -28,8 +28,8 @@
 #include <HwLayer.hpp>
 
 #define HIH5030_ "/bus/iio/devices/iio:device1/"
-#define HIH5030_RH (HIH5030_ "/in_voltage0_raw")
-#define HIH5030_SCALE (HIH5030_ "/in_voltage_scale" )
+#define HIH5030_RH (HIH5030_ "in_voltage0_raw")
+#define HIH5030_SCALE (HIH5030_ "in_voltage_scale" )
 
 #define BUFSIZE 50
 using namespace std;
@@ -79,18 +79,24 @@ class Hih5030Device {
     }
     return (value);
   }
-  int getRH(double celsius) {
-    int raw_rh, rh;
+
+  // Honeywell HIH-5030 Datasheet Table 1
+  // https://sensing.honeywell.com/honeywell-sensing-hih5030-5031-series-product-sheet-009050-2-en.pdf
+  //  Performance Specifications (At 3.3 Vdc supply and 25 C [77 F] unless otherwise noted.)
+  double getRH(double celsius) {
+    double raw_rh, rh1, rh, volt;
     double scale;
-    raw_rh = readSysFsInteger(HIH5030_RH);
+    raw_rh = readSysFsInteger(HIH5030_RH) * 1.0;
     scale = readSysFsDouble(HIH5030_SCALE);
     if (raw_rh == 0 || scale == 0)
       return (0);
-    rh = round(
-        (((raw_rh / 1000.0) * scale) / (1.0546 - 0.00216 * celsius)) * 100);
-    LOG4CPLUS_DEBUG(
+    volt = (raw_rh * scale) / 1000;
+    rh1 = ((volt / 3.1) - 0.1515) / 0.00636;
+    rh = rh1 / (1.0546 - 0.00216 * celsius);
+    LOG4CPLUS_TRACE(
         _logdev,
-        "getRH rh=" << rh << " raw_rh=" << raw_rh << " scale=" << scale);
+        "getRH raw_rh=" << raw_rh << "S=" << scale << " V=" << volt << " rh1="
+            << rh1 << " T=" << celsius << " RH=" << rh);
     return (rh);
   }
 

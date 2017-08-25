@@ -25,10 +25,11 @@
 #define ONEWIRE_0_PIN "PA01"
 #define I2C_0_DAT_PIN "PA30"
 #define I2C_0_CLK_PIN "PA31"
-#define I2C_BUS "/dev/i2c-0"
+#define I2C_BUS_0 "/dev/i2c-0"
+#define I2C_BUS_3 "/dev/i2c-3"
 #define SYSFS_GPIO_DIR "/sys/class/gpio"
 #define LCD_BACKLIGHT_PIN "PA03"
 #define LCD_RESET_PIN "PA02"
 #define KEY_EVENT_DEVICE "/dev/input/event0"
 #define SYSFS_ROOT "/sys"
-#define LOCAL_ALTITUDE 330.0
+#define LOCAL_ALTITUDE 315.0
