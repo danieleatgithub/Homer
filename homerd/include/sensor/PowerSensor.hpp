@@ -35,11 +35,8 @@ class PowerSensor : public Sensor, public MenuAble {
       : Sensor(_label),
         device(_device),
         label(_label) {
-    units[0] = "";
     units[-3] = "m";
     units[-6] = "u";
-    scale = 0;
-    precision = 4;
   }
   ~PowerSensor() {
   }
@@ -59,7 +56,7 @@ class PowerSensor : public Sensor, public MenuAble {
   }
   const string getValue() const {
     ostringstream ostr;
-    ostr << std::setprecision(precision)
+    ostr << fixed << showpoint << setprecision(precision)
         << (device.getWatt() / pow(10.0, scale)) << " "
         << units.find(scale)->second << "W";
     return ostr.str();

@@ -28,8 +28,8 @@
 #include <HwLayer.hpp>
 
 #define HIH5030_ "/bus/iio/devices/iio:device1/"
-#define HIH5030_RH (HIH5030_ "/in_voltage0_raw")
-#define HIH5030_SCALE (HIH5030_ "/in_voltage_scale" )
+#define HIH5030_RH (HIH5030_ "in_voltage0_raw")
+#define HIH5030_SCALE (HIH5030_ "in_voltage_scale" )
 
 #define BUFSIZE 50
 using namespace std;
@@ -93,7 +93,7 @@ class Hih5030Device {
     volt = (raw_rh * scale) / 1000;
     rh1 = ((volt / 3.1) - 0.1515) / 0.00636;
     rh = rh1 / (1.0546 - 0.00216 * celsius);
-    LOG4CPLUS_DEBUG(
+    LOG4CPLUS_TRACE(
         _logdev,
         "getRH raw_rh=" << raw_rh << "S=" << scale << " V=" << volt << " rh1="
             << rh1 << " T=" << celsius << " RH=" << rh);

@@ -28,12 +28,12 @@
 #include <fstream>
 #include <HwLayer.hpp>
 
-#define INA219_CURRENT "/class/i2c-adapter/i2c-0/0-0040/hwmon/hwmon0/curr1_input"
-#define INA219_RSENSE_VOLTS "/class/i2c-adapter/i2c-0/0-0040/hwmon/hwmon0/in0_input"
-#define INA219_VOLTAGE "/class/i2c-adapter/i2c-0/0-0040/hwmon/hwmon0/in1_input"
-#define INA219_POWER "/class/i2c-adapter/i2c-0/0-0040/hwmon/hwmon0/power1_input"
-#define INA219_SHUNT "/class/i2c-adapter/i2c-0/0-0040/hwmon/hwmon0/shunt_resistor"
 #define INA219_ "/class/i2c-adapter/i2c-0/0-0040/hwmon/hwmon0/"
+#define INA219_CURRENT INA219_ "curr1_input"
+#define INA219_RSENSE_VOLTS INA219_ "in0_input"
+#define INA219_VOLTAGE INA219_ "in1_input"
+#define INA219_POWER INA219_ "power1_input"
+#define INA219_SHUNT INA219_ "shunt_resistor"
 
 #define BUFSIZE 50
 using namespace std;

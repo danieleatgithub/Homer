@@ -56,7 +56,7 @@ class I2cBus {
   virtual int write(int filedes, const void *buffer, size_t size) = 0;
   virtual int close(int fd) = 0;
   virtual int ioctl(int fd, unsigned long int __request, ...) = 0;
-  virtual __off_t lseek(int fd, __off_t                                          __offset, int __whence) = 0;
+  virtual __off_t lseek(int fd, __off_t                                           __offset, int __whence) = 0;
 
   const char* getBus() const {
     return bus;
@@ -82,7 +82,7 @@ class SysFs {
   virtual int write(int filedes, const void *buffer, size_t size) = 0;
   virtual int close(int fd) = 0;
   virtual int ioctl(int fd, unsigned long int __request, ...) = 0;
-  virtual __off_t lseek(int fd, __off_t                                          __offset, int __whence) = 0;
+  virtual __off_t lseek(int fd, __off_t                                           __offset, int __whence) = 0;
   const char* getRoot() {
     return root;
   }
@@ -136,7 +136,7 @@ class GpioPort {
   virtual int write(int filedes, const void *buffer, size_t size) = 0;
   virtual int close(int fd) = 0;
   virtual int ioctl(int fd, unsigned long int __request, ...) = 0;
-  virtual __off_t lseek(int fd, __off_t                                          __offset, int __whence) = 0;
+  virtual __off_t lseek(int fd, __off_t                                           __offset, int __whence) = 0;
   const char* getName() const {
     return name;
   }
@@ -151,6 +151,7 @@ class Board {
   }
   ;
   virtual I2cBus& getI2c0() = 0;
+  virtual I2cBus& getI2c3() = 0;
   virtual GpioPort& getLcdBacklight() = 0;
   virtual GpioPort& getLcdReset() = 0;
   virtual SysFs& getSysFs() = 0;
