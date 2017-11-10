@@ -1,0 +1,133 @@
+92   [3069436448] int homerio::GpioPin::pin_export() DEBUG homerd.device  - echo /sys/class/gpio/export 2
+95   [3069436448] int homerio::GpioPin::set_direction(homerio::Direction_e) DEBUG homerd.device  - echo /sys/class/gpio/pioA2/direction out
+96   [3069436448] int homerio::GpioPin::write_value(bool) DEBUG homerd.device  - echo /sys/class/gpio/pioA2/value 1
+96   [3069436448] int homerio::GpioPin::pin_export() DEBUG homerd.device  - echo /sys/class/gpio/export 3
+99   [3069436448] int homerio::GpioPin::set_direction(homerio::Direction_e) DEBUG homerd.device  - echo /sys/class/gpio/pioA3/direction out
+1448 [3069436448] int homerio::GpioPin::write_value(bool) DEBUG homerd.device  - echo /sys/class/gpio/pioA2/value 0
+1451 [3069436448] int homerio::GpioPin::write_value(bool) DEBUG homerd.device  - echo /sys/class/gpio/pioA2/value 1
+1633 [3069436448] int homerio::KeyPanel::start() DEBUG homerd.device  - key reader started
+10115 [3046110288] int homerio::GpioPin::write_value(bool) DEBUG homerd.device  - echo /sys/class/gpio/pioA3/value 0
+338546 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) PRESSED ms=0 isLong=N
+338547 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (1) Key=108 (BUTTON_DOWN) PRESSED ms=0 isLong=N
+338636 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) RELEASED ms=0 isLong=N
+338636 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (2) Key=108 (BUTTON_DOWN) RELEASED ms=89 isLong=N
+338636 [3057763408] int homerio::GpioPin::write_value(bool) DEBUG homerd.device  - echo /sys/class/gpio/pioA3/value 1
+339437 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=106 (BUTTON_RIGHT) PRESSED ms=89 isLong=N
+339437 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (3) Key=106 (BUTTON_RIGHT) PRESSED ms=89 isLong=N
+339637 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=106 (BUTTON_RIGHT) RELEASED ms=89 isLong=N
+339637 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (4) Key=106 (BUTTON_RIGHT) RELEASED ms=200 isLong=N
+340778 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) PRESSED ms=200 isLong=N
+340778 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (5) Key=108 (BUTTON_DOWN) PRESSED ms=200 isLong=N
+340898 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) RELEASED ms=200 isLong=N
+340898 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (6) Key=108 (BUTTON_DOWN) RELEASED ms=120 isLong=N
+341899 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) PRESSED ms=120 isLong=N
+341899 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (7) Key=108 (BUTTON_DOWN) PRESSED ms=120 isLong=N
+342019 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) RELEASED ms=120 isLong=N
+342019 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (8) Key=108 (BUTTON_DOWN) RELEASED ms=121 isLong=N
+343020 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) PRESSED ms=121 isLong=N
+343020 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (9) Key=108 (BUTTON_DOWN) PRESSED ms=121 isLong=N
+343160 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) RELEASED ms=121 isLong=N
+343160 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (10) Key=108 (BUTTON_DOWN) RELEASED ms=140 isLong=N
+344061 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) PRESSED ms=140 isLong=N
+344062 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (11) Key=108 (BUTTON_DOWN) PRESSED ms=140 isLong=N
+344161 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) RELEASED ms=140 isLong=N
+344161 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (12) Key=108 (BUTTON_DOWN) RELEASED ms=99 isLong=N
+344962 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) PRESSED ms=99 isLong=N
+344962 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (13) Key=108 (BUTTON_DOWN) PRESSED ms=99 isLong=N
+345082 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) RELEASED ms=99 isLong=N
+345082 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (14) Key=108 (BUTTON_DOWN) RELEASED ms=120 isLong=N
+345873 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) PRESSED ms=120 isLong=N
+345873 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (15) Key=108 (BUTTON_DOWN) PRESSED ms=120 isLong=N
+345993 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) RELEASED ms=120 isLong=N
+345993 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (16) Key=108 (BUTTON_DOWN) RELEASED ms=121 isLong=N
+348035 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=28 (BUTTON_ENTER) PRESSED ms=121 isLong=N
+348035 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (17) Key=28 (BUTTON_ENTER) PRESSED ms=121 isLong=N
+348175 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=28 (BUTTON_ENTER) RELEASED ms=121 isLong=N
+348175 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (18) Key=28 (BUTTON_ENTER) RELEASED ms=140 isLong=N
+349246 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) PRESSED ms=140 isLong=N
+349246 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (19) Key=108 (BUTTON_DOWN) PRESSED ms=140 isLong=N
+349376 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) RELEASED ms=140 isLong=N
+349377 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (20) Key=108 (BUTTON_DOWN) RELEASED ms=130 isLong=N
+350127 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=28 (BUTTON_ENTER) PRESSED ms=130 isLong=N
+350127 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (21) Key=28 (BUTTON_ENTER) PRESSED ms=130 isLong=N
+350267 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=28 (BUTTON_ENTER) RELEASED ms=130 isLong=N
+350267 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (22) Key=28 (BUTTON_ENTER) RELEASED ms=140 isLong=N
+360277 [3046110288] int homerio::GpioPin::write_value(bool) DEBUG homerd.device  - echo /sys/class/gpio/pioA3/value 0
+59746734 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) PRESSED ms=140 isLong=N
+59746734 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (23) Key=108 (BUTTON_DOWN) PRESSED ms=140 isLong=N
+59746784 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) RELEASED ms=140 isLong=N
+59746784 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (24) Key=108 (BUTTON_DOWN) RELEASED ms=50 isLong=N
+59746784 [3057763408] int homerio::GpioPin::write_value(bool) DEBUG homerd.device  - echo /sys/class/gpio/pioA3/value 1
+59747775 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=106 (BUTTON_RIGHT) PRESSED ms=50 isLong=N
+59747775 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (25) Key=106 (BUTTON_RIGHT) PRESSED ms=50 isLong=N
+59747955 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=106 (BUTTON_RIGHT) RELEASED ms=50 isLong=N
+59747955 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (26) Key=106 (BUTTON_RIGHT) RELEASED ms=181 isLong=N
+59757965 [3046110288] int homerio::GpioPin::write_value(bool) DEBUG homerd.device  - echo /sys/class/gpio/pioA3/value 0
+90614305 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) PRESSED ms=181 isLong=N
+90614305 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (27) Key=108 (BUTTON_DOWN) PRESSED ms=181 isLong=N
+90614415 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) RELEASED ms=181 isLong=N
+90614415 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (28) Key=108 (BUTTON_DOWN) RELEASED ms=110 isLong=N
+90614415 [3057763408] int homerio::GpioPin::write_value(bool) DEBUG homerd.device  - echo /sys/class/gpio/pioA3/value 1
+90615206 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=106 (BUTTON_RIGHT) PRESSED ms=110 isLong=N
+90615206 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (29) Key=106 (BUTTON_RIGHT) PRESSED ms=110 isLong=N
+90615466 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=106 (BUTTON_RIGHT) RELEASED ms=110 isLong=N
+90615466 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (30) Key=106 (BUTTON_RIGHT) RELEASED ms=260 isLong=N
+90618469 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=28 (BUTTON_ENTER) PRESSED ms=260 isLong=N
+90618469 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (31) Key=28 (BUTTON_ENTER) PRESSED ms=260 isLong=N
+90618649 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=28 (BUTTON_ENTER) RELEASED ms=260 isLong=N
+90618649 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (32) Key=28 (BUTTON_ENTER) RELEASED ms=180 isLong=N
+90619920 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) PRESSED ms=180 isLong=N
+90619921 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (33) Key=108 (BUTTON_DOWN) PRESSED ms=180 isLong=N
+90620010 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) RELEASED ms=180 isLong=N
+90620011 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (34) Key=108 (BUTTON_DOWN) RELEASED ms=91 isLong=N
+90621642 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=28 (BUTTON_ENTER) PRESSED ms=91 isLong=N
+90621642 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (35) Key=28 (BUTTON_ENTER) PRESSED ms=91 isLong=N
+90621822 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=28 (BUTTON_ENTER) RELEASED ms=91 isLong=N
+90621822 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (36) Key=28 (BUTTON_ENTER) RELEASED ms=180 isLong=N
+90622833 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) PRESSED ms=180 isLong=N
+90622834 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (37) Key=108 (BUTTON_DOWN) PRESSED ms=180 isLong=N
+90622913 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) RELEASED ms=180 isLong=N
+90622914 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (38) Key=108 (BUTTON_DOWN) RELEASED ms=80 isLong=N
+90624925 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) PRESSED ms=80 isLong=N
+90624926 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (39) Key=108 (BUTTON_DOWN) PRESSED ms=80 isLong=N
+90625045 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) RELEASED ms=80 isLong=N
+90625046 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (40) Key=108 (BUTTON_DOWN) RELEASED ms=121 isLong=N
+90625956 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) PRESSED ms=121 isLong=N
+90625957 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (41) Key=108 (BUTTON_DOWN) PRESSED ms=121 isLong=N
+90626086 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) RELEASED ms=121 isLong=N
+90626087 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (42) Key=108 (BUTTON_DOWN) RELEASED ms=130 isLong=N
+90627538 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) PRESSED ms=130 isLong=N
+90627538 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (43) Key=108 (BUTTON_DOWN) PRESSED ms=130 isLong=N
+90627638 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) RELEASED ms=130 isLong=N
+90627638 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (44) Key=108 (BUTTON_DOWN) RELEASED ms=99 isLong=N
+90628969 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) PRESSED ms=99 isLong=N
+90628970 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (45) Key=108 (BUTTON_DOWN) PRESSED ms=99 isLong=N
+90629079 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) RELEASED ms=99 isLong=N
+90629080 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (46) Key=108 (BUTTON_DOWN) RELEASED ms=110 isLong=N
+90630371 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=28 (BUTTON_ENTER) PRESSED ms=110 isLong=N
+90630371 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (47) Key=28 (BUTTON_ENTER) PRESSED ms=110 isLong=N
+90630561 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=28 (BUTTON_ENTER) RELEASED ms=110 isLong=N
+90630561 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (48) Key=28 (BUTTON_ENTER) RELEASED ms=190 isLong=N
+90630664 [3046110288] int homerio::SysFs::readBuffer(const char*, char*, int) ERROR homerd.device  - read error /sys/bus/iio/devices/iio:device2/in_humidityrelative_raw errno:Resource temporarily unavailable
+90630665 [3046110288] int homerio::Hs1101lfDevice::readSysFsInteger(const char*) ERROR homerd.device  - Read /bus/iio/devices/iio:device2/in_humidityrelative_raw string(-1)
+90633013 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) PRESSED ms=190 isLong=N
+90633014 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (49) Key=108 (BUTTON_DOWN) PRESSED ms=190 isLong=N
+90633133 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=108 (BUTTON_DOWN) RELEASED ms=190 isLong=N
+90633134 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (50) Key=108 (BUTTON_DOWN) RELEASED ms=120 isLong=N
+90633814 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=28 (BUTTON_ENTER) PRESSED ms=120 isLong=N
+90633814 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (51) Key=28 (BUTTON_ENTER) PRESSED ms=120 isLong=N
+90634014 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=28 (BUTTON_ENTER) RELEASED ms=120 isLong=N
+90634014 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (52) Key=28 (BUTTON_ENTER) RELEASED ms=201 isLong=N
+90635225 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=103 (BUTTON_UP) PRESSED ms=201 isLong=N
+90635226 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (53) Key=103 (BUTTON_UP) PRESSED ms=201 isLong=N
+90635436 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=103 (BUTTON_UP) RELEASED ms=201 isLong=N
+90635436 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (54) Key=103 (BUTTON_UP) RELEASED ms=210 isLong=N
+90636066 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=28 (BUTTON_ENTER) PRESSED ms=210 isLong=N
+90636067 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (55) Key=28 (BUTTON_ENTER) PRESSED ms=210 isLong=N
+90636256 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=28 (BUTTON_ENTER) RELEASED ms=210 isLong=N
+90636257 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (56) Key=28 (BUTTON_ENTER) RELEASED ms=190 isLong=N
+90637568 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=28 (BUTTON_ENTER) PRESSED ms=190 isLong=N
+90637568 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (57) Key=28 (BUTTON_ENTER) PRESSED ms=190 isLong=N
+90637748 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_KEY Key=28 (BUTTON_ENTER) RELEASED ms=190 isLong=N
+90637748 [3057763408] void homerio::KeyPanel::keyThreadReader() DEBUG homerd.device  - EV_SYN (58) Key=28 (BUTTON_ENTER) RELEASED ms=180 isLong=N
+90647758 [3046110288] int homerio::GpioPin::write_value(bool) DEBUG homerd.device  - echo /sys/class/gpio/pioA3/value 0
