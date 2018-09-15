@@ -3,6 +3,8 @@ $hostname = gethostname ();
 $uname = php_uname ();
 $chrony_tracking=shell_exec("chronyc tracking"); 
 $date=shell_exec("date"); 
+$buildroot=shell_exec('source /etc/os-release; echo $PRETTY_NAME'); 
+$homer=shell_exec("cat /etc/homer.version"); 
 
 echo "<center><h1>Welcome to $hostname</h1>";
 echo "$uname<br>";
@@ -10,6 +12,8 @@ echo "<big>";
 
 echo "<hr>";
 echo "<table  border='1'>";
+echo "<td>Homer: ".$homer."</td><tr>";
+echo "<td>Buildroot: ".$buildroot."</td><tr>";
 echo "<td><pre>".$chrony_tracking."Local Date      : ".$date."</pre>";
 echo "</table>";
 
