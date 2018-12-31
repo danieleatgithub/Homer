@@ -11,8 +11,8 @@
 
 . /wks/workspace/Homer/homer_deploy/environment.sh
 
-IP=192.168.1.201
-DTB=
+IP=192.168.1.200
+
 if [ $# -ne 0 ]; then
 	if [ $1 == "margie" ]; then
 		IP=192.168.1.201
@@ -23,6 +23,7 @@ if [ $# -ne 0 ]; then
 fi
 echo "setup dts on $IP boot is required"
 ssh root@${IP} "md5sum ${TARGET_DTB} && mv ${TARGET_DTB} ${TARGET_DTB}.old"
+ls -l ${BUILDROOT}/output/build/linux-${LINUX_VER}/arch/arm/boot/dts/${DEVTREE}.dtb
 scp ${BUILDROOT}/output/build/linux-${LINUX_VER}/arch/arm/boot/dts/${DEVTREE}.dtb root@${IP}:${TARGET_DTB}
 ssh root@${IP} "md5sum ${TARGET_DTB}"
 

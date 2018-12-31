@@ -19,22 +19,24 @@
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.linuxtools.cdt.autotools.core.buildArtefactType.autotools" description="" id="org.buildroot.wks.buildroot-2017.02.5.output.autotools.default.1542890219" name="Configuration" parent="org.buildroot.wks.buildroot-2017.02.5.output.autotools.default">
 					<folderInfo id="org.buildroot.wks.buildroot-2017.02.5.output.autotools.default.1542890219." name="/" resourcePath="">
-						<toolChain id="org.buildroot.wks.buildroot-2017.02.5.output.autotools.default.172002547" name="Autotools Buildroot ARM (/wks/buildroot-2017.02.5/output)" superClass="org.buildroot.wks.buildroot-2017.02.5.output.autotools.default">
-							<targetPlatform id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform.826039434" isAbstract="false" name="GNU Autotools Target Platform" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform"/>
-							<builder id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.builder.94969107" keepEnvironmentInBuildfile="false" managedBuildOn="true" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.builder"/>
-							<tool id="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure.1972745620" name="configure" superClass="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure">
-								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.1991930004" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2017.02.5.output.autotools.default.1542890219" valueType="string"/>
+						<toolChain id="org.buildroot.wks.buildroot-2018.02.9.output..autotools.toolchain.base.127186635" name="Autotools Buildroot ARM (/wks/buildroot-2018.02.9/output)" superClass="org.buildroot.wks.buildroot-2018.02.9.output..autotools.toolchain.base">
+							<option id="org.buildroot.wks.buildroot-2018.02.9.output..autotools.toolchain.base.option.path.1929142201" name="Path" superClass="org.buildroot.wks.buildroot-2018.02.9.output..autotools.toolchain.base.option.path"/>
+							<option id="org.buildroot.wks.buildroot-2018.02.9.output..autotools.toolchain.base.option.prefix.739846811" name="Prefix" superClass="org.buildroot.wks.buildroot-2018.02.9.output..autotools.toolchain.base.option.prefix"/>
+							<targetPlatform id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform.1624024809" isAbstract="false" name="GNU Autotools Target Platform" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.targetPlatform"/>
+							<builder id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.builder.2044103578" name="null.Configuration" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.builder"/>
+							<tool id="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure.1174980762" name="configure" superClass="org.eclipse.linuxtools.cdt.autotools.core.gnu.toolchain.tool.configure">
+								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.1366485752" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2017.02.5.output.autotools.default.1542890219" valueType="string"/>
 							</tool>
-							<tool id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen.1304685078" name="autogen.sh" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen"/>
-							<tool id="org.buildroot.wks.buildroot-2017.02.5.output.autotools.c.compiler.1180802220" name="Autotools Buildroot ARM C Compiler (/wks/buildroot-2017.02.5/output)" superClass="org.buildroot.wks.buildroot-2017.02.5.output.autotools.c.compiler">
-								<inputType id="org.buildroot.wks.buildroot-2017.02.5.output.c_compiler.input.1191102503" superClass="org.buildroot.wks.buildroot-2017.02.5.output.c_compiler.input"/>
+							<tool id="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen.483911808" name="autogen.sh" superClass="org.eclipse.linuxtools.cdt.autotools.core.toolchain.tool.autogen"/>
+							<tool id="org.buildroot.wks.buildroot-2018.02.9.output.autotools.c.compiler.382943029" name="Autotools Buildroot ARM C Compiler (/wks/buildroot-2018.02.9/output)" superClass="org.buildroot.wks.buildroot-2018.02.9.output.autotools.c.compiler">
+								<inputType id="org.buildroot.wks.buildroot-2018.02.9.output.c_compiler.input.1492512684" superClass="org.buildroot.wks.buildroot-2018.02.9.output.c_compiler.input"/>
 							</tool>
-							<tool id="org.buildroot.wks.buildroot-2017.02.5.output.autotools.cc.compiler.93071858" name="Autotools Buildroot ARM C++ Compiler (/wks/buildroot-2017.02.5/output)" superClass="org.buildroot.wks.buildroot-2017.02.5.output.autotools.cc.compiler">
-								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.935987243" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
-								<inputType id="org.buildroot.wks.buildroot-2017.02.5.output.cc_compiler.input.1884444930" superClass="org.buildroot.wks.buildroot-2017.02.5.output.cc_compiler.input"/>
+							<tool id="org.buildroot.wks.buildroot-2018.02.9.output.autotools.cc.compiler.752155413" name="Autotools Buildroot ARM C++ Compiler (/wks/buildroot-2018.02.9/output)" superClass="org.buildroot.wks.buildroot-2018.02.9.output.autotools.cc.compiler">
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.223881593" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+								<inputType id="org.buildroot.wks.buildroot-2018.02.9.output.cc_compiler.input.962304934" superClass="org.buildroot.wks.buildroot-2018.02.9.output.cc_compiler.input"/>
 							</tool>
-							<tool id="org.buildroot.wks.buildroot-2017.02.5.output.autotools.tool.configure.1995212262" name="configure" superClass="org.buildroot.wks.buildroot-2017.02.5.output.autotools.tool.configure">
-								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.76136476" name="Name" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2017.02.5.output.autotools.default.1542890219" valueType="string"/>
+							<tool id="org.buildroot.wks.buildroot-2018.02.9.output.autotools.tool.configure.1730545784" name="configure" superClass="org.buildroot.wks.buildroot-2018.02.9.output.autotools.tool.configure">
+								<option id="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name.1987390751" superClass="org.eclipse.linuxtools.cdt.autotools.core.option.configure.name" value="org.buildroot.wks.buildroot-2017.02.5.output.autotools.default.1542890219" valueType="string"/>
 							</tool>
 						</toolChain>
 					</folderInfo>
@@ -46,6 +48,7 @@
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+			<storageModule moduleId="packages"/>
 		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
@@ -457,4 +460,5 @@
 			</target>
 		</buildTargets>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>

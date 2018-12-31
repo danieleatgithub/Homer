@@ -5,8 +5,8 @@
 #
 #######################################################
 
-BUILDROOT_VER="buildroot-2017.02.5"
-LINUX_VER="4.9.40"
+BUILDROOT_VER="buildroot-2018.02.9"
+LINUX_VER="4.9.118"
 DEVTREE="at91-sama5d3_acquaa5"
 TARGET_DTB="/boot/at91-sama5d3_acqua.dtb"
 TARGET_DOCS="/data/docs"
